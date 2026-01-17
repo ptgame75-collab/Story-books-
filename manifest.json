@@ -1,0 +1,16 @@
+{
+  "name": "अधिराज डायरी",
+  "short_name": "अधिराज",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#f9f7f2",
+  "description": "अधिराजका सुन्दर कथाहरू",
+  "icons": [
+    {
+      "src": "logo.jpg",
+      "sizes": "512x512",
+      "type": "image/jpeg"
+    }
+  ]
+}
+
