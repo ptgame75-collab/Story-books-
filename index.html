@@ -10,109 +10,120 @@
             --red: #e74c3c; --green: #2ecc71; --yellow: #f1c40f; --blue: #3498db;
             --white: #ffffff; --black: #2c3e50;
         }
-        body { font-family: sans-serif; display: flex; flex-direction: column; align-items: center; background: #fcecd5; margin: 0; }
+        body { font-family: sans-serif; display: flex; flex-direction: column; align-items: center; background: #fcecd5; margin: 0; overflow-x: hidden; }
         
-        .logo-box { width: 60px; height: 60px; border-radius: 50%; border: 2px solid #000; margin: 10px; overflow: hidden; }
+        .logo-box { width: 80px; height: 80px; border-radius: 15px; border: 2px solid #000; margin: 10px; overflow: hidden; box-shadow: 0 4px 10px rgba(0,0,0,0.3); }
         .logo-box img { width: 100%; height: 100%; object-fit: cover; }
 
+        /* Ludo Board Layout */
         .ludo-board {
             display: grid; grid-template-columns: repeat(15, 1fr); grid-template-rows: repeat(15, 1fr);
             width: 95vw; max-width: 400px; height: 95vw; max-height: 400px;
-            border: 4px solid #000; background: white;
+            border: 4px solid #000; background: white; position: relative;
         }
 
-        .cell { border: 0.1px solid #999; position: relative; }
-        .base { grid-column: span 6; grid-row: span 6; position: relative; border: 1px solid #000; }
+        .cell { border: 0.1px solid #ccc; position: relative; display: flex; justify-content: center; align-items: center; font-size: 8px; }
+        .base { grid-column: span 6; grid-row: span 6; border: 1px solid #000; display: flex; justify-content: center; align-items: center; }
         .red { background: var(--red); } .green { background: var(--green); }
         .blue { background: var(--blue); } .yellow { background: var(--yellow); }
-        
-        /* कोटीहरूको डिजाइन (Tokens) */
-        .token {
-            width: 80%; height: 80%; border-radius: 50%;
-            border: 2px solid white; position: absolute;
-            top: 10%; left: 10%; cursor: pointer;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.5);
-            z-index: 10; transition: all 0.3s ease;
-        }
-        .token.red-t { background: darkred; }
-        .token.green-t { background: darkgreen; }
-        .token.blue-t { background: darkblue; }
-        .token.yellow-t { background: #b8860b; }
+        .center { grid-column: 7/10; grid-row: 7/10; background: #eee; border: 1px solid #000; }
 
-        /* पासा (Dice) */
-        #dice-box {
+        /* Token Design */
+        .token {
+            width: 22px; height: 22px; border-radius: 50%; border: 2px solid white;
+            position: absolute; z-index: 100; cursor: pointer;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.5); transition: all 0.2s ease;
+        }
+        .token-green { background: #006400; }
+        .token-red { background: #8b0000; }
+
+        /* Dice */
+        #dice-container {
             width: 70px; height: 70px; background: white; border: 3px solid #000;
-            border-radius: 12px; margin: 20px auto; display: flex;
+            border-radius: 12px; margin: 15px auto; display: flex;
             justify-content: center; align-items: center; font-size: 2.5rem;
-            cursor: pointer; font-weight: bold;
+            cursor: pointer; font-weight: bold; transition: transform 0.1s;
         }
         .rolling { animation: shake 0.2s infinite; }
-        @keyframes shake { 0% {transform: rotate(0)} 50% {transform: rotate(15deg)} 100% {transform: rotate(-15deg)} }
+        @keyframes shake { 0% {transform:rotate(0)} 50% {transform:rotate(15deg)} 100% {transform:rotate(-15deg)} }
         
-        .btn-install { background: #27ae60; color: white; border: none; padding: 10px 20px; border-radius: 20px; display: none; cursor: pointer; }
+        .controls { text-align: center; padding-bottom: 20px; }
+        .btn-install { background: #27ae60; color: white; border: none; padding: 10px 20px; border-radius: 20px; cursor: pointer; display: none; margin-top: 10px; }
     </style>
 </head>
 <body>
 
-    <div class="logo-box"><img src="logo.png" onerror="this.src='https://via.placeholder.com/60'" alt="Logo"></div>
+    <div class="logo-box">
+        <img src="logo.png" onerror="this.src='https://via.placeholder.com/80?text=LUDO'" alt="Logo">
+    </div>
 
     <div class="ludo-board" id="board">
         </div>
 
     <div class="controls">
         <div id="status">पालो: <b id="player-display" style="color:var(--green)">GREEN</b></div>
-        <div id="dice-box" onclick="rollDice()">?</div>
-        <p id="msg">पासा फाल्नुहोस्!</p>
+        <div id="dice-container" onclick="handleRoll()">?</div>
+        <p id="msg">पासा फाल्नुहोस् र गोटी छान्नुहोस्!</p>
         <button id="installBtn" class="btn-install">Install App</button>
     </div>
 
     <script>
         let turn = 'green';
-        let seq = [6, 6, 1, 6]; // Prank: 6, 6, 1, 6
-        let step = 0;
+        let diceValue = 0;
+        let canRoll = true;
+        let greenSeq = [6, 6, 1, 6]; 
+        let seqIndex = 0;
 
-        function rollDice() {
-            const dice = document.getElementById('dice-box');
-            const msg = document.getElementById('msg');
-            dice.classList.add('rolling');
+        // Simulation of Movement (Simple Logic)
+        function handleRoll() {
+            if (!canRoll) return;
             
+            const dice = document.getElementById('dice-container');
+            dice.classList.add('rolling');
+            canRoll = false;
+
             setTimeout(() => {
                 dice.classList.remove('rolling');
-                let res;
-
-                // Green Cheat Logic
-                if (turn === 'green' && step < seq.length) {
-                    res = seq[step];
-                    step++;
+                
+                // Prank Logic
+                if (turn === 'green' && seqIndex < greenSeq.length) {
+                    diceValue = greenSeq[seqIndex];
+                    seqIndex++;
                 } else {
-                    res = Math.floor(Math.random() * 6) + 1;
+                    diceValue = Math.floor(Math.random() * 6) + 1;
                 }
 
-                dice.innerText = res;
+                dice.innerText = diceValue;
 
-                // ६ वा १ पर्दा पालो दोहोरिने
-                if (res === 6 || res === 1) {
-                    msg.innerText = "फेरि पासा फाल्नुहोस्!";
+                // Rule: If 6 or 1, same player plays again
+                if (diceValue === 6 || diceValue === 1) {
+                    document.getElementById('msg').innerText = "बधाई छ! फेरि फाल्नुहोस्।";
+                    canRoll = true;
                 } else {
-                    changeTurn();
-                    msg.innerText = "कोटी सार्नुहोस्!";
+                    document.getElementById('msg').innerText = "अर्को खेलाडीको पालो!";
+                    setTimeout(changeTurn, 1000);
                 }
-            }, 500);
+            }, 600);
         }
 
         function changeTurn() {
-            const players = ['green', 'red', 'blue', 'yellow'];
-            let idx = (players.indexOf(turn) + 1) % 4;
-            turn = players[idx];
-            step = 0; // Reset prank for next turn
+            turn = (turn === 'green') ? 'red' : 'green';
+            seqIndex = 0; // Reset prank for next cycle
             document.getElementById('player-display').innerText = turn.toUpperCase();
             document.getElementById('player-display').style.color = `var(--${turn})`;
+            canRoll = true;
         }
 
-        // PWA Installation
-        if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register('sw.js');
-        }
+        // PWA Install logic
+        let deferredPrompt;
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault(); deferredPrompt = e;
+            document.getElementById('installBtn').style.display = 'inline-block';
+        });
+
+        document.getElementById('installBtn').addEventListener('click', () => {
+            if (deferredPrompt) deferredPrompt.prompt();
+        });
     </script>
 </body>
 </html>
