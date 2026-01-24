@@ -1,138 +1,46 @@
 <!DOCTYPE html>
-<html lang="ne">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>अधिराज डायरी</title>
-    
-    <link rel="manifest" href="manifest.json">
-    <meta name="theme-color" content="#f9f7f2">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    
-    <style>
-        :root {
-            --bg-color: #f9f7f2;
-            --text-dark: #2d2d2d;
-            --accent-brown: #a68b6d;
-        }
-
-        body { background-color: var(--bg-color); margin: 0; font-family: 'Georgia', serif; color: var(--text-dark); }
-
-        /* Loader */
-        #loader {
-            position: fixed; inset: 0; background: #fff; 
-            display: flex; flex-direction: column; justify-content: center; 
-            align-items: center; z-index: 9999;
-        }
-        .logo-circle {
-            width: 100px; height: 100px; border-radius: 50%;
-            border: 3px solid var(--accent-brown);
-            background-image: url('logo.jpg'); /* यहाँ आफ्नो फोटोको नाम राख्नुहोला */
-            background-size: cover; background-position: center;
-            animation: pulse 2s infinite;
-        }
-        @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.1); } 100% { transform: scale(1); } }
-
-        /* Header & Logo */
-        header { 
-            display: flex; justify-content: space-between; align-items: center; 
-            padding: 10px 5%; background: #fff; position: sticky; top: 0; z-index: 1000;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-        }
-        .app-logo { width: 40px; height: 40px; border-radius: 50%; object-fit: cover; border: 1px solid #ddd; }
-        
-        /* Install Button */
-        #installBtn {
-            display: none; background: var(--text-dark); color: #fff;
-            border: none; padding: 8px 15px; border-radius: 20px; font-size: 12px; cursor: pointer;
-        }
-
-        /* Lists */
-        .story-list { padding: 20px; }
-        .story-card {
-            background: #fff; padding: 20px; border-radius: 15px;
-            margin-bottom: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-            cursor: pointer;
-        }
-        .story-title { font-size: 20px; margin: 0 0 5px 0; color: #1a1a1a; }
-        .story-meta { font-size: 12px; color: var(--accent-brown); font-weight: bold; }
-
-        /* Modal */
-        #storyModal {
-            position: fixed; inset: 0; background: var(--bg-color);
-            z-index: 2000; display: none; overflow-y: auto; padding: 25px;
-        }
-        .close-bar { position: sticky; top: 0; background: var(--bg-color); padding: 10px 0; }
-        .story-body { font-size: 18px; line-height: 1.8; white-space: pre-line; margin-top: 20px; }
-    </style>
+    <title>अधिराज ३डी गेम प्रोजेक्ट</title>
+    <style> body { margin: 0; } canvas { width: 100%; height: 100% } </style>
 </head>
 <body>
-
-    <div id="loader">
-        <div class="logo-circle"></div>
-        <p>अधिराज डायरी...</p>
-    </div>
-
-    <header>
-        <div style="display: flex; align-items: center; gap: 10px;">
-            <img src="logo.jpg" class="app-logo" alt="Logo">
-            <span style="font-weight: bold;">अधिराज</span>
-        </div>
-        <button id="installBtn">App Install गर्नुहोस्</button>
-    </header>
-
-    <div class="story-list">
-        <div class="story-card" onclick="openStory('s1')">
-            <span class="story-meta">HINDI STORY</span>
-            <h2 class="story-title">स्वार्थी भाई</h2>
-            <p style="margin:0; font-size:14px; color:#666;">बलिदान र स्वार्थको कथा</p>
-        </div>
-        </div>
-
-    <div id="storyModal">
-        <div class="close-bar">
-            <button onclick="closeStory()" style="border:none; background:none; font-size:20px;">✕</button>
-        </div>
-        <div id="modalInner"></div>
-    </div>
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script>
-        // Loader
-        window.addEventListener('load', () => {
-            setTimeout(() => document.getElementById('loader').style.display = 'none', 1500);
+        // १. सीन र क्यामरा सेटअप
+        const scene = new THREE.Scene();
+        scene.background = new THREE.Color(0x87ceeb); // आकाशको रङ
+
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 5000);
+        const renderer = new THREE.WebGLRenderer();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        document.body.appendChild(renderer.domElement);
+
+        // २. तपाईंको डेटा (नमुनाको रूपमा केही भाग)
+        const gameData = [
+            {"name":"Cube8", "pos":{"x":711, "y":47, "z":-2187}, "scale":{"x":0.3, "y":2, "z":17}},
+            {"name":"T7", "pos":{"x":767, "y":52, "z":-2202}, "scale":{"x":1.8, "y":1.8, "z":1.8}}
+            // यहाँ अरू डेटा पनि थप्न सकिन्छ
+        ];
+
+        // ३. डेटा अनुसार वस्तुहरू बनाउने
+        gameData.forEach(obj => {
+            const geometry = new THREE.BoxGeometry(obj.scale.x, obj.scale.y, obj.scale.z);
+            const material = new THREE.MeshBasicMaterial({ color: 0xff4500 }); // सुन्तला रङ
+            const mesh = new THREE.Mesh(geometry, material);
+            
+            mesh.position.set(obj.pos.x, obj.pos.y, obj.pos.z);
+            scene.add(mesh);
         });
 
-        // PWA Install Logic
-        let deferredPrompt;
-        window.addEventListener('beforeinstallprompt', (e) => {
-            e.preventDefault();
-            deferredPrompt = e;
-            document.getElementById('installBtn').style.display = 'block';
-        });
+        camera.position.set(750, 60, -2100); // क्यामरालाई डेटा भएको ठाउँतिर सोझ्याउने
+        camera.lookAt(750, 50, -2200);
 
-        document.getElementById('installBtn').addEventListener('click', async () => {
-            if (deferredPrompt) {
-                deferredPrompt.prompt();
-                const { outcome } = await deferredPrompt.userChoice;
-                if (outcome === 'accepted') {
-                    document.getElementById('installBtn').style.display = 'none';
-                }
-                deferredPrompt = null;
-            }
-        });
-
-        // Story Data & Functions
-        const stories = {
-            s1: { title: "स्वार्थी भाई", body: "गरीबी और सपनों की नींव...\n(कथाको पूर्ण भाग यहाँ राख्नुहोला)" }
-        };
-
-        function openStory(id) {
-            const s = stories[id];
-            document.getElementById('modalInner').innerHTML = `<h1>${s.title}</h1><div class="story-body">${s.body}</div>`;
-            document.getElementById('storyModal').style.display = 'block';
+        function animate() {
+            requestAnimationFrame(animate);
+            renderer.render(scene, camera);
         }
-
-        function closeStory() { document.getElementById('storyModal').style.display = 'none'; }
+        animate();
     </script>
 </body>
 </html>
