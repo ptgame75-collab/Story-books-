@@ -3,144 +3,131 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ludo Pro Master</title>
-    <link rel="manifest" href="manifest.json">
+    <title>Ludo Prank Pro</title>
     <style>
-        :root {
-            --red: #e74c3c; --green: #2ecc71; --yellow: #f1c40f; --blue: #3498db;
-            --white: #ffffff; --black: #000000;
-        }
-        body { 
-            margin: 0; background: #f3e5ab; 
-            display: flex; flex-direction: column; align-items: center; 
-            font-family: 'Arial', sans-serif; padding: 20px;
-        }
-
-        /* Wood Background Wrapper */
-        .game-area {
-            position: relative; padding: 40px;
-            background: #8d6e63; border-radius: 15px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
-        }
-
-        /* Professional Ludo Board Grid (15x15) */
-        .board {
-            display: grid; grid-template-columns: repeat(15, 1fr); grid-template-rows: repeat(15, 1fr);
-            width: 90vw; max-width: 450px; height: 90vw; max-height: 450px;
-            background: white; border: 4px solid var(--black);
-        }
-
-        .cell { border: 1px solid var(--black); box-sizing: border-box; position: relative; display: flex; align-items: center; justify-content: center; }
+        :root { --red: #e74c3c; --green: #2ecc71; --yellow: #f1c40f; --blue: #3498db; --black: #000; }
+        body { margin: 0; background: #deb887; display: flex; flex-direction: column; align-items: center; font-family: sans-serif; }
         
-        /* Star Safe Zones as in 4249.jpg */
-        .safe-zone::after { content: '★'; color: rgba(0,0,0,0.2); font-size: 1.2rem; }
+        .game-container { position: relative; margin-top: 40px; padding: 30px; background: #5d4037; border-radius: 10px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+        
+        /* 15x15 Grid to match 4249.jpg */
+        .board { display: grid; grid-template-columns: repeat(15, 1fr); grid-template-rows: repeat(15, 1fr); width: 90vw; max-width: 450px; height: 90vw; max-height: 450px; background: white; border: 3px solid var(--black); }
+        
+        .cell { border: 0.5px solid #000; box-sizing: border-box; display: flex; align-items: center; justify-content: center; position: relative; }
+        
+        /* Bases */
+        .base { grid-column: span 6; grid-row: span 6; border: 1px solid #000; position: relative; }
+        .red-b { background: var(--red); } .green-b { background: var(--green); }
+        .blue-b { background: var(--blue); } .yellow-b { background: var(--yellow); }
+        
+        .center-home { grid-column: 7/10; grid-row: 7/10; background: #eee; border: 1px solid #000; display: grid; grid-template: 1fr 1fr / 1fr 1fr; }
+        .h-r { background: var(--red); clip-path: polygon(0 0, 100% 50%, 0 100%); }
+        .h-g { background: var(--green); clip-path: polygon(0 50%, 100% 0, 100% 100%); }
 
-        /* Bases and Home Paths */
-        .base { grid-column: span 6; grid-row: span 6; border: 2px solid var(--black); position: relative; }
-        .red-base { background: var(--red); }
-        .green-base { background: var(--green); }
-        .blue-base { background: var(--blue); }
-        .yellow-base { background: var(--yellow); }
+        /* Individual Dice */
+        .dice { position: absolute; width: 50px; height: 50px; background: #fff; border: 3px solid #333; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 1.8rem; font-weight: bold; cursor: pointer; z-index: 10; box-shadow: 0 4px 10px rgba(0,0,0,0.4); opacity: 0.2; pointer-events: none; transition: 0.2s; }
+        .active-dice { opacity: 1; pointer-events: auto; transform: scale(1.1); border-color: gold; box-shadow: 0 0 15px gold; }
+        #d-red { top: -20px; left: -20px; } #d-green { top: -20px; right: -20px; }
+        #d-blue { bottom: -20px; left: -20px; } #d-yellow { bottom: -20px; right: -20px; }
 
-        /* Dice Boxes near Bases */
-        .dice-btn {
-            position: absolute; width: 50px; height: 50px; background: white;
-            border: 3px solid #333; border-radius: 10px; cursor: pointer;
-            display: flex; align-items: center; justify-content: center;
-            font-size: 1.8rem; font-weight: bold; z-index: 50;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.3); opacity: 0.2; pointer-events: none;
-            transition: 0.3s ease;
-        }
-        .active-dice { opacity: 1; pointer-events: auto; transform: scale(1.15); border-color: gold; box-shadow: 0 0 20px gold; }
+        .path-red { background: var(--red); } .path-green { background: var(--green); }
+        .path-yellow { background: var(--yellow); } .path-blue { background: var(--blue); }
+        .star::after { content: '★'; color: rgba(0,0,0,0.3); font-size: 1.2rem; }
 
-        #dice-red { top: -15px; left: -15px; }
-        #dice-green { top: -15px; right: -15px; }
-        #dice-blue { bottom: -15px; left: -15px; }
-        #dice-yellow { bottom: -15px; right: -15px; }
-
-        .center-home { grid-column: 7/10; grid-row: 7/10; background: #eee; border: 2px solid black; }
-
-        #status { margin-top: 30px; font-size: 1.3rem; font-weight: bold; color: #3e2723; text-shadow: 1px 1px white; }
+        #status { margin-top: 25px; padding: 10px 20px; background: white; border-radius: 20px; font-weight: bold; box-shadow: 0 4px 10px rgba(0,0,0,0.2); }
     </style>
 </head>
 <body>
 
-    <div class="game-area">
-        <div id="dice-red" class="dice-btn" onclick="roll('red')">?</div>
-        <div id="dice-green" class="dice-btn active-dice" onclick="roll('green')">?</div>
-        <div id="dice-blue" class="dice-btn" onclick="roll('blue')">?</div>
-        <div id="dice-yellow" class="dice-btn" onclick="roll('yellow')">?</div>
+<div class="game-container">
+    <div id="d-red" class="dice" onclick="roll('red')">?</div>
+    <div id="d-green" class="dice active-dice" onclick="roll('green')">?</div>
+    <div id="d-blue" class="dice" onclick="roll('blue')">?</div>
+    <div id="d-yellow" class="dice" onclick="roll('yellow')">?</div>
 
-        <div class="board" id="game-board">
-            </div>
-    </div>
+    <div class="board" id="ludo-board">
+        </div>
+</div>
 
-    <div id="status">पालो: <span id="p-name" style="color:var(--green)">GREEN</span></div>
+<div id="status">पालो: <span id="p-name" style="color:var(--green)">GREEN</span></div>
 
-    <script>
-        const boardEl = document.getElementById('game-board');
-        let turn = 'green';
-        let prankValues = [6, 6, 1, 6];
-        let prankCounter = 0;
-        let isRolling = false;
+<script>
+    const board = document.getElementById('ludo-board');
+    let turn = 'green';
+    let pSeq = [6, 6, 1, 6]; // Prank logic: 6, 6, 1, 6
+    let sIdx = 0;
+    let canRoll = true;
 
-        // Initialize Board to match 4249.jpg logic
-        function initBoard() {
-            for (let i = 0; i < 225; i++) {
-                const cell = document.createElement('div');
+    // Generate full 15x15 board cells
+    function createBoard() {
+        for (let r = 0; r < 15; r++) {
+            for (let c = 0; c < 15; c++) {
+                let cell = document.createElement('div');
                 cell.className = 'cell';
-                // Add specific coloring logic for paths later
-                boardEl.appendChild(cell);
+                
+                // Color paths to match 4249.jpg
+                if (r < 6 && c < 6) { if (r==0 && c==0) cell.classList.add('red-b'); }
+                else if (r == 7 && c > 0 && c < 6) cell.classList.add('path-red');
+                else if (c == 7 && r > 0 && r < 6) cell.classList.add('path-green');
+                else if (r == 7 && c > 8 && c < 14) cell.classList.add('path-yellow');
+                else if (c == 7 && r > 8 && r < 14) cell.classList.add('path-blue');
+                
+                // Safe zone stars
+                if ((r==6 && c==1) || (r==1 && c==8) || (r==8 && c==13) || (r==13 && c==6)) cell.classList.add('star');
+
+                board.appendChild(cell);
             }
         }
-        initBoard();
+    }
+    createBoard();
 
-        const diceSet = {
-            red: document.getElementById('dice-red'),
-            green: document.getElementById('dice-green'),
-            blue: document.getElementById('dice-blue'),
-            yellow: document.getElementById('dice-yellow')
-        };
+    const diceList = {
+        red: document.getElementById('d-red'),
+        green: document.getElementById('d-green'),
+        blue: document.getElementById('d-blue'),
+        yellow: document.getElementById('d-yellow')
+    };
 
-        function roll(color) {
-            if (isRolling || turn !== color) return;
-            isRolling = true;
-            const d = diceSet[color];
-            d.style.transform = "rotate(720deg)";
+    function roll(color) {
+        if (!canRoll || turn !== color) return;
+        canRoll = false;
+        const d = diceList[color];
+        d.innerText = "...";
 
-            setTimeout(() => {
-                let val;
-                if (turn === 'green' && prankCounter < prankValues.length) {
-                    val = prankValues[prankCounter];
-                    prankCounter++;
-                } else {
-                    val = Math.floor(Math.random() * 6) + 1;
-                }
+        setTimeout(() => {
+            let res;
+            // Apply prank logic only for green
+            if (turn === 'green' && sIdx < pSeq.length) {
+                res = pSeq[sIdx];
+                sIdx++;
+            } else {
+                res = Math.floor(Math.random() * 6) + 1;
+            }
 
-                d.innerText = val;
-                d.style.transform = "rotate(0deg)";
+            d.innerText = res;
 
-                if (val === 6 || val === 1) {
-                    isRolling = false; // Extra turn for 6 or 1
-                } else {
-                    setTimeout(switchTurn, 1000);
-                }
-            }, 600);
-        }
+            // Rule: Extra turn on 6 or 1 (Pore)
+            if (res === 6 || res === 1) {
+                canRoll = true;
+            } else {
+                setTimeout(changeTurn, 800);
+            }
+        }, 500);
+    }
 
-        function switchTurn() {
-            const list = ['green', 'red', 'blue', 'yellow'];
-            diceSet[turn].classList.remove('active-dice');
-            diceSet[turn].innerText = "?";
-            
-            turn = list[(list.indexOf(turn) + 1) % 4];
-            prankCounter = 0;
+    function changeTurn() {
+        const p = ['green', 'red', 'blue', 'yellow'];
+        diceList[turn].classList.remove('active-dice');
+        diceList[turn].innerText = "?";
+        
+        turn = p[(p.indexOf(turn) + 1) % 4];
+        sIdx = 0; // Reset prank for green's next turn
 
-            diceSet[turn].classList.add('active-dice');
-            document.getElementById('p-name').innerText = turn.toUpperCase();
-            document.getElementById('p-name').style.color = `var(--${turn})`;
-            isRolling = false;
-        }
-    </script>
+        diceList[turn].classList.add('active-dice');
+        document.getElementById('p-name').innerText = turn.toUpperCase();
+        document.getElementById('p-name').style.color = `var(--${turn})`;
+        canRoll = true;
+    }
+</script>
 </body>
 </html>
