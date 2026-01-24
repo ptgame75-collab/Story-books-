@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="ne">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ludo Prank Pro</title>
+    <link rel="manifest" href="manifest.json">
+    <style>
+        :root {
+            --red: #e74c3c; --green: #2ecc71; --yellow: #f1c40f; --blue: #3498db;
+            --white: #ffffff; --black: #2c3e50;
+        }
+        body { font-family: sans-serif; display: flex; flex-direction: column; align-items: center; background: #fcecd5; margin: 0; }
+        
+        .logo-box { width: 60px; height: 60px; border-radius: 50%; border: 2px solid #000; margin: 10px; overflow: hidden; }
+        .logo-box img { width: 100%; height: 100%; object-fit: cover; }
+
+        .ludo-board {
+            display: grid; grid-template-columns: repeat(15, 1fr); grid-template-rows: repeat(15, 1fr);
+            width: 95vw; max-width: 400px; height: 95vw; max-height: 400px;
+            border: 4px solid #000; background: white;
+        }
+
+        .cell { border: 0.1px solid #999; position: relative; }
+        .base { grid-column: span 6; grid-row: span 6; position: relative; border: 1px solid #000; }
+        .red { background: var(--red); } .green { background: var(--green); }
+        .blue { background: var(--blue); } .yellow { background: var(--yellow); }
+        
+        /* कोटीहरूको डिजाइन (Tokens) */
+        .token {
+            width: 80%; height: 80%; border-radius: 50%;
+            border: 2px solid white; position: absolute;
+            top: 10%; left: 10%; cursor: pointer;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.5);
+            z-index: 10; transition: all 0.3s ease;
+        }
+        .token.red-t { background: darkred; }
+        .token.green-t { background: darkgreen; }
+        .token.blue-t { background: darkblue; }
+        .token.yellow-t { background: #b8860b; }
+
+        /* पासा (Dice) */
+        #dice-box {
+            width: 70px; height: 70px; background: white; border: 3px solid #000;
+            border-radius: 12px; margin: 20px auto; display: flex;
+            justify-content: center; align-items: center; font-size: 2.5rem;
+            cursor: pointer; font-weight: bold;
+        }
+        .rolling { animation: shake 0.2s infinite; }
+        @keyframes shake { 0% {transform: rotate(0)} 50% {transform: rotate(15deg)} 100% {transform: rotate(-15deg)} }
+        
+        .btn-install { background: #27ae60; color: white; border: none; padding: 10px 20px; border-radius: 20px; display: none; cursor: pointer; }
+    </style>
+</head>
+<body>
+
+    <div class="logo-box"><img src="logo.png" onerror="this.src='https://via.placeholder.com/60'" alt="Logo"></div>
+
+    <div class="ludo-board" id="board">
+        </div>
+
+    <div class="controls">
+        <div id="status">पालो: <b id="player-display" style="color:var(--green)">GREEN</b></div>
+        <div id="dice-box" onclick="rollDice()">?</div>
+        <p id="msg">पासा फाल्नुहोस्!</p>
+        <button id="installBtn" class="btn-install">Install App</button>
+    </div>
+
+    <script>
+        let turn = 'green';
+        let seq = [6, 6, 1, 6]; // Prank: 6, 6, 1, 6
+        let step = 0;
+
+        function rollDice() {
+            const dice = document.getElementById('dice-box');
+            const msg = document.getElementById('msg');
+            dice.classList.add('rolling');
+            
+            setTimeout(() => {
+                dice.classList.remove('rolling');
+                let res;
+
+                // Green Cheat Logic
+                if (turn === 'green' && step < seq.length) {
+                    res = seq[step];
+                    step++;
+                } else {
+                    res = Math.floor(Math.random() * 6) + 1;
+                }
+
+                dice.innerText = res;
+
+                // ६ वा १ पर्दा पालो दोहोरिने
+                if (res === 6 || res === 1) {
+                    msg.innerText = "फेरि पासा फाल्नुहोस्!";
+                } else {
+                    changeTurn();
+                    msg.innerText = "कोटी सार्नुहोस्!";
+                }
+            }, 500);
+        }
+
+        function changeTurn() {
+            const players = ['green', 'red', 'blue', 'yellow'];
+            let idx = (players.indexOf(turn) + 1) % 4;
+            turn = players[idx];
+            step = 0; // Reset prank for next turn
+            document.getElementById('player-display').innerText = turn.toUpperCase();
+            document.getElementById('player-display').style.color = `var(--${turn})`;
+        }
+
+        // PWA Installation
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('sw.js');
+        }
+    </script>
+</body>
+</html>
+          
