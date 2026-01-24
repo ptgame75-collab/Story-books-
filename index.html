@@ -1,46 +1,19 @@
 <!DOCTYPE html>
-<html>
+<html lang="ne">
 <head>
-    <title>अधिराज ३डी गेम प्रोजेक्ट</title>
-    <style> body { margin: 0; } canvas { width: 100%; height: 100% } </style>
+    <meta charset="UTF-8">
+    <title>अधिराज युद्ध - डायरी 068</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <div id="game-ui">
+        <div class="health-container">
+            <div id="player-health" class="health-bar"></div>
+        </div>
+        <div id="score">शत्रु पराजित: 0</div>
+    </div>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    <script>
-        // १. सीन र क्यामरा सेटअप
-        const scene = new THREE.Scene();
-        scene.background = new THREE.Color(0x87ceeb); // आकाशको रङ
-
-        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 5000);
-        const renderer = new THREE.WebGLRenderer();
-        renderer.setSize(window.innerWidth, window.innerHeight);
-        document.body.appendChild(renderer.domElement);
-
-        // २. तपाईंको डेटा (नमुनाको रूपमा केही भाग)
-        const gameData = [
-            {"name":"Cube8", "pos":{"x":711, "y":47, "z":-2187}, "scale":{"x":0.3, "y":2, "z":17}},
-            {"name":"T7", "pos":{"x":767, "y":52, "z":-2202}, "scale":{"x":1.8, "y":1.8, "z":1.8}}
-            // यहाँ अरू डेटा पनि थप्न सकिन्छ
-        ];
-
-        // ३. डेटा अनुसार वस्तुहरू बनाउने
-        gameData.forEach(obj => {
-            const geometry = new THREE.BoxGeometry(obj.scale.x, obj.scale.y, obj.scale.z);
-            const material = new THREE.MeshBasicMaterial({ color: 0xff4500 }); // सुन्तला रङ
-            const mesh = new THREE.Mesh(geometry, material);
-            
-            mesh.position.set(obj.pos.x, obj.pos.y, obj.pos.z);
-            scene.add(mesh);
-        });
-
-        camera.position.set(750, 60, -2100); // क्यामरालाई डेटा भएको ठाउँतिर सोझ्याउने
-        camera.lookAt(750, 50, -2200);
-
-        function animate() {
-            requestAnimationFrame(animate);
-            renderer.render(scene, camera);
-        }
-        animate();
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
