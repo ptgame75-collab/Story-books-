@@ -1,15 +1,46 @@
-<div class="bhawana-container">
-    <header>
-        <h1>मनको भावना</h1>
-    </header>
+<!DOCTYPE html>
+<html lang="ne">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>मनको भावना</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="manifest" href="manifest.json">
+    <link rel="icon" href="4870.png"> </head>
+<body>
 
-    <div class="title-card" onclick="showBhawana()">
-        <h3>मेरो एउटा अधुरो कथा... (यहाँ ट्याप गर्नुहोस्)</h3>
+    <div class="app-wrapper">
+        <header class="main-header">
+            <h1>अधिराज डायरी: मनको भावना</h1>
+        </header>
+
+        <main class="content-area">
+            <div class="bhawana-card" onclick="openBhawana()">
+                <div class="card-title">
+                    <span>नयाँ शीर्षक</span>
+                    <h2>आजको अधुरो भावना...</h2>
+                </div>
+                <div class="tap-hint">पढ्नको लागि यहाँ ट्याप गर्नुहोस्</div>
+            </div>
+
+            <div id="fullBhawana" class="bhawana-detail hidden">
+                <div class="quote-box">
+                    <p id="bhawanaText">
+                        "यहाँ तपाईँको मनको असाध्यै लामो र गहिरो भावना हुनेछ। 
+                        यसलाई हामीले ४८७१.jpg जस्तै रातो किनारा भएको विशेष बक्समा सजाएका छौँ।"
+                    </p>
+                </div>
+                <div class="footer-msg">♡︎ भावना महसुस गर्नुभएकोमा धन्यवाद ♡︎</div>
+            </div>
+        </main>
     </div>
 
-    <div id="messageSection" class="hidden-section">
-        <div class="quote-box">
-            <p>"यहाँ तपाईँको मनको असाध्यै लामो भावना हुनेछ। यसलाई हामीले विशेष डिजाइनमा राखेका छौँ ताकि पढ्ने मान्छेलाई यो विशेष महसुस होस्।"</p>
-        </div>
-    </div>
-</div>
+    <script>
+        function openBhawana() {
+            const detail = document.getElementById('fullBhawana');
+            detail.classList.remove('hidden');
+            detail.scrollIntoView({ behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>
