@@ -3,44 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>मनको भावना</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="manifest" href="manifest.json">
-    <link rel="icon" href="4870.png"> </head>
-<body>
-
-    <div class="app-wrapper">
-        <header class="main-header">
-            <h1>अधिराज डायरी: मनको भावना</h1>
-        </header>
-
-        <main class="content-area">
-            <div class="bhawana-card" onclick="openBhawana()">
-                <div class="card-title">
-                    <span>नयाँ शीर्षक</span>
-                    <h2>आजको अधुरो भावना...</h2>
-                </div>
-                <div class="tap-hint">पढ्नको लागि यहाँ ट्याप गर्नुहोस्</div>
-            </div>
-
-            <div id="fullBhawana" class="bhawana-detail hidden">
-                <div class="quote-box">
-                    <p id="bhawanaText">
-                        "यहाँ तपाईँको मनको असाध्यै लामो र गहिरो भावना हुनेछ। 
-                        यसलाई हामीले ४८७१.jpg जस्तै रातो किनारा भएको विशेष बक्समा सजाएका छौँ।"
-                    </p>
-                </div>
-                <div class="footer-msg">♡︎ भावना महसुस गर्नुभएकोमा धन्यवाद ♡︎</div>
-            </div>
-        </main>
-    </div>
-
-    <script>
-        function openBhawana() {
-            const detail = document.getElementById('fullBhawana');
-            detail.classList.remove('hidden');
-            detail.scrollIntoView({ behavior: 'smooth' });
+    <title>मनको भावना - गृहपृष्ठ</title>
+    <link rel="icon" href="4870.png">
+    <style>
+        body { background: #fcfbf7; font-family: serif; display: flex; justify-content: center; padding: 20px; }
+        .list-container { width: 100%; max-width: 400px; text-align: center; }
+        h1 { color: #4a3728; border-bottom: 2px solid #ddd; padding-bottom: 10px; }
+        .title-card { 
+            background: white; padding: 25px; margin-top: 20px; border-radius: 15px; 
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05); cursor: pointer; text-decoration: none; display: block;
+            border: 1px solid #eee; transition: 0.3s;
         }
-    </script>
+        .title-card:hover { transform: translateY(-5px); }
+        .title-card h2 { margin: 0; color: #2c3e50; font-size: 18px; }
+        .hint { color: #d32f2f; font-size: 12px; font-weight: bold; margin-top: 10px; }
+    </style>
+</head>
+<body>
+    <div class="list-container">
+        <h1>मनको भावना</h1>
+        <a href="message.html" class="title-card">
+            <h2>मेरो एउटा अधुरो सपना...</h2>
+            <div class="hint">सन्देश पढ्न यहाँ ट्याप गर्नुहोस्</div>
+        </a>
+    </div>
 </body>
 </html>
