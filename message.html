@@ -2,31 +2,54 @@
 <html lang="ne">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>सन्देश - मनको भावना</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>अधिराजको डायरी - अनुष्ठान</title>
     <style>
-        :root { --bg: #fcfbf7; --text: #333; --card: #fff; }
-        .dark-mode { --bg: #1a1a1a; --text: #f0f0f0; --card: #2d2d2d; }
+        :root { --bg: #fcfbf7; --text: #333; --card: #fff; --red: #d32f2f; }
+        .dark-mode { --bg: #1a1a1a; --text: #f0f0f0; --card: #2d2d2d; --red: #ff5252; }
 
-        body { background: var(--bg); color: var(--text); font-family: serif; transition: 0.3s; margin: 0; padding: 20px; }
-        
+        body { background: var(--bg); color: var(--text); font-family: 'Georgia', serif; transition: 0.3s; margin: 0; padding: 15px; }
+
+        /* Toolbar */
         .toolbar { 
             position: sticky; top: 0; display: flex; justify-content: space-between; 
-            padding: 10px; background: var(--bg); z-index: 10; border-bottom: 1px solid #ddd;
+            padding: 10px; background: var(--bg); z-index: 100; border-bottom: 1px solid #ddd;
         }
+        .btn { padding: 8px 12px; cursor: pointer; border: 1px solid #ccc; border-radius: 5px; background: var(--card); color: var(--text); font-size: 14px; }
+
+        .container { max-width: 600px; margin: 20px auto; }
+
+        /* सुरुको सन्देश */
+        .intro-text { 
+            font-style: italic; line-height: 1.8; margin-bottom: 40px; padding: 15px; 
+            background: rgba(211, 47, 47, 0.05); border-radius: 10px; font-size: 17px;
+        }
+
+        /* प्रत्येक दिनको लागि रातो बक्स (४८७१.jpg भाइब) */
+        .day-box { 
+            background: var(--card); 
+            border-left: 5px solid var(--red); 
+            padding: 20px; 
+            margin-bottom: 25px; 
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05); 
+            border-radius: 4px;
+            animation: fadeIn 0.8s ease;
+        }
+
+        .day-title { 
+            color: var(--red); 
+            font-weight: bold; 
+            font-size: 15px; 
+            margin-bottom: 8px; 
+            display: block;
+            text-transform: uppercase;
+        }
+
+        .day-content { font-size: 18px; line-height: 1.7; margin: 0; }
         
-        .btn { padding: 8px 12px; cursor: pointer; border: 1px solid #ccc; border-radius: 5px; background: var(--card); color: var(--text); }
+        .footer { text-align: center; margin-top: 50px; padding-bottom: 30px; color: #888; font-size: 14px; }
 
-        .message-wrapper { max-width: 500px; margin: 40px auto; }
-
-        /* ४८७१.jpg डिजाइन */
-        .quote-box { 
-            background: var(--card); border-left: 6px solid #d32f2f; 
-            padding: 30px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); border-radius: 4px; 
-        }
-
-        #textContainer { font-size: 18px; line-height: 1.8; font-style: italic; }
-        .footer { text-align: center; margin-top: 40px; color: #888; font-size: 14px; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
     </style>
 </head>
 <body>
@@ -34,33 +57,49 @@
     <div class="toolbar">
         <button class="btn" onclick="history.back()">← पछाडि</button>
         <div>
-            <button class="btn" onclick="changeFont(2)">A+</button>
-            <button class="btn" onclick="changeFont(-2)">A-</button>
+            <button class="btn" onclick="changeFont(1)">A+</button>
             <button class="btn" onclick="toggleNight()">🌓 मोड</button>
         </div>
     </div>
 
-    <div class="message-wrapper">
-        <div class="quote-box">
-            <p id="textContainer">
-                "यहाँ तपाईँको त्यो असाध्यै लामो सन्देश हुनेछ। यहाँ ट्याप गरेर वा पढेर मान्छेले छुट्टै संसारको अनुभव गर्नेछन्। यसमा अरू कुनै विज्ञापन वा लिंकहरू देखिने छैनन्।"
-            </p>
+    <div class="container">
+        <div class="intro-text" id="mainBody">
+            थाहा छैन आज नै म यो सन्देश किन लेख्दैछु। आज २५ January हो, घडीले रातको साढे ३ बजेको संकेत गर्दैछ। कोठामा शान्ति यस्तो छ कि मलाई मेरै मुटुको धड्कन कुनै बाजा जस्तै सुनिरहेको छ... <br><br>
+            यदि म मरेँ भने तिम्रो बारेमा अन्तिमचोटि लेख्न पाऊँ। तर यदि यो सन्देश १३ जुलाईमा तिम्रो मोबाइलको स्क्रिनमा झल्कियो भने सम्झिनु म यो धर्तीमा कतै अझै जीवितै छु।
         </div>
-        <div class="footer">♡︎ अधिराज डायरी ♡︎</div>
+
+        <div class="day-box">
+            <span class="day-title">Day 1. 25 January - सुजना श्रेष्ठ</span>
+            <p class="day-content">आजदेखि यो मौन अनुष्ठान सुरु गर्दैछु। रातको साढे ३ बजे, जहाँ सारा संसार निदाएको छ, म तिम्रो नामको पहिलो अक्षर कोर्दैछु। थाहा छैन, यो १६९ दिनको यात्रा पूरा हुनेछ कि बीचैमा मेरो सासको धागो टुट्नेछ।</p>
+        </div>
+
+        <div class="day-box">
+            <span class="day-title">Day 2. 26 January - सुजना श्रेष्ठ</span>
+            <p class="day-content">तिम्रो फोटोले दिनभरिको काम र थकान मेटादिन्छ। म पागल जस्तै कहिले फोटो हेरेर हाँस्छु भने कहिले आँसु झर्छ। तिम्रो मुस्कान मेरो लागि एउटा यस्तो ऐना हो, जहाँ म आफ्नो बाँकी रहेको जीवन देख्ने गर्छु।</p>
+        </div>
+
+        <div class="day-box">
+            <span class="day-title">Day 3. 27 January - सुजना श्रेष्ठ</span>
+            <p class="day-content">आज मनले नमानेर तिम्रो पुराना Tiktok हेर्दै थिएँ। त्यहाँ तिमीले अरू कसैलाई dedicate गरेको मायाको शब्दहरूले मलाई यस्तो लाग्दै थियो कि कसैले तातो छुराले छियाछिया पारेर मेरो मुटु बाहिर निकाल्ने प्रयास गर्दैछ।</p>
+        </div>
+
+        <div class="day-box">
+            <span class="day-title">Day 23. 16 February - सुजना श्रेष्ठ</span>
+            <p class="day-content">आजबाट मैले चुरोट धेरै कम गरेको छु। तिम्रो लागि स्वस्थ हुने इच्छा जागेको छ। अब दिनमा केवल २-३ वटा मात्र चुरोट पिउनेछु। मेरो फोक्सोभन्दा तिम्रो यादको मूल्य धेरै छ।</p>
+        </div>
+
+        <div class="footer">♡︎ अधिराज डायरी - अनुष्ठान ♡︎</div>
     </div>
 
     <script>
-        function changeFont(size) {
-            let el = document.getElementById('textContainer');
-            let style = window.getComputedStyle(el, null).getPropertyValue('font-size');
-            let currentSize = parseFloat(style);
-            el.style.fontSize = (currentSize + size) + 'px';
+        function changeFont(s) {
+            let divs = document.querySelectorAll('.day-content, .intro-text');
+            divs.forEach(d => {
+                let size = window.getComputedStyle(d).fontSize;
+                d.style.fontSize = (parseFloat(size) + s) + 'px';
+            });
         }
-
-        function toggleNight() {
-            document.body.classList.toggle('dark-mode');
-        }
+        function toggleNight() { document.body.classList.toggle('dark-mode'); }
     </script>
 </body>
 </html>
-
