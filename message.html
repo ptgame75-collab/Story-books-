@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ne">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>सन्देश - मनको भावना</title>
+    <style>
+        :root { --bg: #fcfbf7; --text: #333; --card: #fff; }
+        .dark-mode { --bg: #1a1a1a; --text: #f0f0f0; --card: #2d2d2d; }
+
+        body { background: var(--bg); color: var(--text); font-family: serif; transition: 0.3s; margin: 0; padding: 20px; }
+        
+        .toolbar { 
+            position: sticky; top: 0; display: flex; justify-content: space-between; 
+            padding: 10px; background: var(--bg); z-index: 10; border-bottom: 1px solid #ddd;
+        }
+        
+        .btn { padding: 8px 12px; cursor: pointer; border: 1px solid #ccc; border-radius: 5px; background: var(--card); color: var(--text); }
+
+        .message-wrapper { max-width: 500px; margin: 40px auto; }
+
+        /* ४८७१.jpg डिजाइन */
+        .quote-box { 
+            background: var(--card); border-left: 6px solid #d32f2f; 
+            padding: 30px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); border-radius: 4px; 
+        }
+
+        #textContainer { font-size: 18px; line-height: 1.8; font-style: italic; }
+        .footer { text-align: center; margin-top: 40px; color: #888; font-size: 14px; }
+    </style>
+</head>
+<body>
+
+    <div class="toolbar">
+        <button class="btn" onclick="history.back()">← पछाडि</button>
+        <div>
+            <button class="btn" onclick="changeFont(2)">A+</button>
+            <button class="btn" onclick="changeFont(-2)">A-</button>
+            <button class="btn" onclick="toggleNight()">🌓 मोड</button>
+        </div>
+    </div>
+
+    <div class="message-wrapper">
+        <div class="quote-box">
+            <p id="textContainer">
+                "यहाँ तपाईँको त्यो असाध्यै लामो सन्देश हुनेछ। यहाँ ट्याप गरेर वा पढेर मान्छेले छुट्टै संसारको अनुभव गर्नेछन्। यसमा अरू कुनै विज्ञापन वा लिंकहरू देखिने छैनन्।"
+            </p>
+        </div>
+        <div class="footer">♡︎ अधिराज डायरी ♡︎</div>
+    </div>
+
+    <script>
+        function changeFont(size) {
+            let el = document.getElementById('textContainer');
+            let style = window.getComputedStyle(el, null).getPropertyValue('font-size');
+            let currentSize = parseFloat(style);
+            el.style.fontSize = (currentSize + size) + 'px';
+        }
+
+        function toggleNight() {
+            document.body.classList.toggle('dark-mode');
+        }
+    </script>
+</body>
+</html>
+
