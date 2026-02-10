@@ -2,12 +2,74 @@
 <html lang="ne">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>मनको भावना - गृहपृष्ठ</title>
     <link rel="icon" href="4870.png">
     <style>
-        body { background: #fcfbf7; font-family: serif; display: flex; justify-content: center; padding: 20px; }
-        .list-container { width: 100%; max-width: 400px; text-align: center; }
+        /* Loading Screen Styles */
+        #loadingScreen {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-color: #fcfbf7; /* App's background color */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease-out;
+        }
+
+        .loading-content {
+            text-align: center;
+        }
+
+        .loading-content h1 {
+            color: #4a3728;
+            font-size: 28px;
+            margin-bottom: 20px;
+            font-family: serif;
+        }
+
+        .progress-container {
+            width: 80px; /* Smaller width for a subtle loader */
+            height: 4px;
+            background-color: #e0e0e0;
+            border-radius: 2px;
+            overflow: hidden;
+            margin: auto;
+        }
+
+        .progress-bar {
+            width: 0%;
+            height: 100%;
+            background-color: #d32f2f; /* Red progress bar */
+            border-radius: 2px;
+            animation: loading 2s infinite forwards;
+        }
+
+        @keyframes loading {
+            0% { width: 0%; }
+            50% { width: 100%; }
+            100% { width: 0%; opacity: 0; } /* Disappear at 100% */
+        }
+
+        /* Main Page Styles */
+        body { 
+            background: #fcfbf7; 
+            font-family: serif; 
+            display: flex; 
+            justify-content: center; 
+            padding: 20px;
+            min-height: 100vh; /* Ensure body takes full height */
+            opacity: 0; /* Hide body initially */
+            transition: opacity 0.5s ease-in;
+        }
+        body.loaded { opacity: 1; } /* Show body when loaded */
+
+        .list-container { 
+            width: 100%; 
+            max-width: 400px; 
+            text-align: center; 
+        }
         h1 { color: #4a3728; border-bottom: 2px solid #ddd; padding-bottom: 10px; }
         .title-card { 
             background: white; padding: 25px; margin-top: 20px; border-radius: 15px; 
@@ -20,6 +82,15 @@
     </style>
 </head>
 <body>
+    <div id="loadingScreen">
+        <div class="loading-content">
+            <h1>मनको भावना</h1>
+            <div class="progress-container">
+                <div class="progress-bar"></div>
+            </div>
+        </div>
+    </div>
+
     <div class="list-container">
         <h1>मनको भावना</h1>
         <a href="message.html" class="title-card">
@@ -27,5 +98,19 @@
             <div class="hint">सन्देश पढ्न यहाँ ट्याप गर्नुहोस्</div>
         </a>
     </div>
+
+    <script>
+        window.addEventListener('load', () => {
+            const loadingScreen = document.getElementById('loadingScreen');
+            const body = document.body;
+
+            // Hide loading screen
+            loadingScreen.style.opacity = '0';
+            setTimeout(() => {
+                loadingScreen.style.display = 'none';
+                body.classList.add('loaded'); // Show body content
+            }, 500); // Wait for fade-out transition
+        });
+    </script>
 </body>
 </html>
