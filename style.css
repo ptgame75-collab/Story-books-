@@ -1,46 +1,64 @@
-/* मुख्य कन्टेनर */
-.bhawana-container {
-    max-width: 400px;
+body {
+    background-color: #fcfbf7;
+    font-family: 'Georgia', serif;
+    margin: 0;
+    color: #333;
+}
+
+.app-wrapper {
+    max-width: 500px;
     margin: auto;
     padding: 20px;
-    font-family: 'serif';
 }
 
-/* शीर्षक कार्डको स्टाइल */
-.title-card {
-    background: #fdfdfd;
-    padding: 15px;
-    border-radius: 10px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-    cursor: pointer;
+.main-header h1 {
     text-align: center;
-    border: 1px solid #eee;
+    font-size: 22px;
+    color: #5d4037;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 15px;
 }
 
-/* सुरुमा लुकेको सेक्सन */
-.hidden-section {
-    display: none;
-    margin-top: 30px;
-    animation: fadeIn 0.8s ease;
+/* ट्याप गर्ने कार्ड */
+.bhawana-card {
+    background: white;
+    padding: 30px 20px;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+    text-align: center;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    border: 1px solid #f0f0f0;
 }
 
-/* ४८७१.jpg जस्तै कोट बक्स स्टाइल */
+.bhawana-card:active { transform: scale(0.98); }
+
+.card-title span { color: #d32f2f; font-weight: bold; font-size: 14px; }
+
+.tap-hint { margin-top: 15px; font-size: 12px; color: #999; font-style: italic; }
+
+/* ४८७१.jpg जस्तै कोटेसन बक्स */
 .quote-box {
     background: #fff;
-    border-left: 5px solid #d32f2f; /* रातो किनारा */
+    border-left: 6px solid #d32f2f; /* रातो किनारा */
     padding: 25px;
-    border-radius: 5px;
-    box-shadow: 2px 2px 20px rgba(0,0,0,0.05);
+    margin-top: 30px;
+    box-shadow: 2px 5px 25px rgba(0,0,0,0.08);
+    border-radius: 4px;
 }
 
-.quote-box p {
-    font-style: italic;
-    font-size: 18px;
-    color: #444;
+#bhawanaText {
+    font-size: 19px;
     line-height: 1.8;
+    color: #2c3e50;
+    font-style: italic;
 }
 
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
+.hidden { display: none; }
+
+.footer-msg {
+    text-align: center;
+    margin-top: 40px;
+    font-size: 14px;
+    color: #888;
 }
