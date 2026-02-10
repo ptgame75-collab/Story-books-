@@ -1,41 +1,46 @@
-:root {
-    --red: #e74c3c; --green: #2ecc71; --yellow: #f1c40f; --blue: #3498db;
-    --wood: #8d6e63;
+/* मुख्य कन्टेनर */
+.bhawana-container {
+    max-width: 400px;
+    margin: auto;
+    padding: 20px;
+    font-family: 'serif';
 }
 
-body {
-    background: #f3e5ab; display: flex; flex-direction: column;
-    align-items: center; justify-content: center; min-height: 100vh; margin: 0;
+/* शीर्षक कार्डको स्टाइल */
+.title-card {
+    background: #fdfdfd;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    cursor: pointer;
+    text-align: center;
+    border: 1px solid #eee;
 }
 
-.game-container {
-    position: relative; padding: 30px; background: var(--wood);
-    border-radius: 15px; box-shadow: 0 20px 50px rgba(0,0,0,0.4);
+/* सुरुमा लुकेको सेक्सन */
+.hidden-section {
+    display: none;
+    margin-top: 30px;
+    animation: fadeIn 0.8s ease;
 }
 
-.board {
-    display: grid; grid-template-columns: repeat(15, 1fr);
-    grid-template-rows: repeat(15, 1fr); width: 90vw; max-width: 450px;
-    height: 90vw; max-height: 450px; background: white; border: 4px solid #000;
+/* ४८७१.jpg जस्तै कोट बक्स स्टाइल */
+.quote-box {
+    background: #fff;
+    border-left: 5px solid #d32f2f; /* रातो किनारा */
+    padding: 25px;
+    border-radius: 5px;
+    box-shadow: 2px 2px 20px rgba(0,0,0,0.05);
 }
 
-.cell { border: 0.5px solid #000; position: relative; }
-
-/* पासाको डिजाइन */
-.dice {
-    position: absolute; width: 55px; height: 55px; background: #fff;
-    border: 3px solid #333; border-radius: 12px; display: flex;
-    align-items: center; justify-content: center; font-size: 2rem;
-    font-weight: bold; cursor: pointer; z-index: 100; opacity: 0.2;
-    pointer-events: none; transition: 0.3s;
+.quote-box p {
+    font-style: italic;
+    font-size: 18px;
+    color: #444;
+    line-height: 1.8;
 }
 
-.dice.active { opacity: 1; pointer-events: auto; transform: scale(1.1); box-shadow: 0 0 20px gold; border-color: gold; }
-
-#dice-red { top: -20px; left: -20px; }
-#dice-green { top: -20px; right: -20px; }
-#dice-blue { bottom: -20px; left: -20px; }
-#dice-yellow { bottom: -20px; right: -20px; }
-
-#status-box { margin-top: 20px; font-size: 1.5rem; font-weight: bold; background: white; padding: 10px 30px; border-radius: 50px; }
-
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
