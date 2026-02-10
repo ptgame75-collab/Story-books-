@@ -3,113 +3,122 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>मनको भावना - गृहपृष्ठ</title>
-    <link rel="icon" href="4870.png">
+    <title>अधिराजको डायरी</title>
+    <link rel="icon" type="image/png" href="4870.png">
+    <link rel="apple-touch-icon" href="4870.png">
+    
     <style>
-        /* Loading Screen Styles */
+        /* लोडिङ स्क्रिन */
         #loadingScreen {
             position: fixed;
             top: 0; left: 0; right: 0; bottom: 0;
-            background-color: #fcfbf7; /* App's background color */
+            background: #fcfbf7;
             display: flex;
             justify-content: center;
             align-items: center;
             z-index: 9999;
-            transition: opacity 0.5s ease-out;
+            transition: 0.5s;
         }
+        .loader {
+            text-align: center;
+            font-family: 'Georgia', serif;
+        }
+        .loader h2 { color: #d32f2f; letter-spacing: 2px; }
+        .bar { width: 100px; height: 3px; background: #ddd; margin: 10px auto; position: relative; overflow: hidden; }
+        .bar::after { content: ''; width: 50px; height: 3px; background: #d32f2f; position: absolute; left: -50px; animation: load 1.5s infinite; }
+        @keyframes load { 100% { left: 100px; } }
 
-        .loading-content {
+        /* मुख्य पेज डिजाइन */
+        body {
+            background-color: #fcfbf7;
+            font-family: 'Georgia', serif;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            opacity: 0;
+            transition: 1s;
+        }
+        body.visible { opacity: 1; }
+
+        .header {
+            margin-top: 50px;
             text-align: center;
         }
-
-        .loading-content h1 {
-            color: #4a3728;
-            font-size: 28px;
-            margin-bottom: 20px;
-            font-family: serif;
+        .header img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            border: 3px solid #fff;
         }
+        .header h1 { color: #4a3728; font-size: 24px; margin-top: 15px; }
 
-        .progress-container {
-            width: 80px; /* Smaller width for a subtle loader */
-            height: 4px;
-            background-color: #e0e0e0;
-            border-radius: 2px;
-            overflow: hidden;
-            margin: auto;
+        .main-content {
+            width: 90%;
+            max-width: 400px;
+            margin-top: 40px;
         }
 
-        .progress-bar {
-            width: 0%;
-            height: 100%;
-            background-color: #d32f2f; /* Red progress bar */
-            border-radius: 2px;
-            animation: loading 2s infinite forwards;
+        /* शीर्षक कार्ड - ४८७१.jpg भाइब */
+        .diary-card {
+            background: white;
+            padding: 30px 20px;
+            border-radius: 20px;
+            text-decoration: none;
+            display: block;
+            border-left: 8px solid #d32f2f;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+            transition: 0.3s;
+            text-align: center;
         }
+        .diary-card:active { transform: scale(0.95); }
+        .diary-card h2 { color: #2c3e50; font-size: 19px; margin: 0; }
+        .diary-card p { color: #d32f2f; font-weight: bold; font-size: 13px; margin-top: 10px; text-transform: uppercase; }
 
-        @keyframes loading {
-            0% { width: 0%; }
-            50% { width: 100%; }
-            100% { width: 0%; opacity: 0; } /* Disappear at 100% */
+        .footer {
+            margin-top: auto;
+            padding: 30px;
+            color: #999;
+            font-size: 12px;
         }
-
-        /* Main Page Styles */
-        body { 
-            background: #fcfbf7; 
-            font-family: serif; 
-            display: flex; 
-            justify-content: center; 
-            padding: 20px;
-            min-height: 100vh; /* Ensure body takes full height */
-            opacity: 0; /* Hide body initially */
-            transition: opacity 0.5s ease-in;
-        }
-        body.loaded { opacity: 1; } /* Show body when loaded */
-
-        .list-container { 
-            width: 100%; 
-            max-width: 400px; 
-            text-align: center; 
-        }
-        h1 { color: #4a3728; border-bottom: 2px solid #ddd; padding-bottom: 10px; }
-        .title-card { 
-            background: white; padding: 25px; margin-top: 20px; border-radius: 15px; 
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05); cursor: pointer; text-decoration: none; display: block;
-            border: 1px solid #eee; transition: 0.3s;
-        }
-        .title-card:hover { transform: translateY(-5px); }
-        .title-card h2 { margin: 0; color: #2c3e50; font-size: 18px; }
-        .hint { color: #d32f2f; font-size: 12px; font-weight: bold; margin-top: 10px; }
     </style>
 </head>
 <body>
+
     <div id="loadingScreen">
-        <div class="loading-content">
-            <h1>मनको भावना</h1>
-            <div class="progress-container">
-                <div class="progress-bar"></div>
-            </div>
+        <div class="loader">
+            <h2>अधिराज</h2>
+            <div class="bar"></div>
         </div>
     </div>
 
-    <div class="list-container">
+    <div class="header">
+        <img src="4870.png" alt="Logo">
         <h1>मनको भावना</h1>
-        <a href="message.html" class="title-card">
-            <h2>मेरो एउटा अधुरो सपना...</h2>
-            <div class="hint">सन्देश पढ्न यहाँ ट्याप गर्नुहोस्</div>
+    </div>
+
+    <div class="main-content">
+        <a href="message.html" class="diary-card">
+            <h2>एक मौन अनुष्ठान: १६९ दिनको यात्रा</h2>
+            <p>पढ्नको लागि यहाँ ट्याप गर्नुहोस्</p>
         </a>
+    </div>
+
+    <div class="footer">
+        © २०२६ अधिराज | सुजना श्रेष्ठको लागि
     </div>
 
     <script>
         window.addEventListener('load', () => {
-            const loadingScreen = document.getElementById('loadingScreen');
-            const body = document.body;
-
-            // Hide loading screen
-            loadingScreen.style.opacity = '0';
             setTimeout(() => {
-                loadingScreen.style.display = 'none';
-                body.classList.add('loaded'); // Show body content
-            }, 500); // Wait for fade-out transition
+                document.getElementById('loadingScreen').style.opacity = '0';
+                setTimeout(() => {
+                    document.getElementById('loadingScreen').style.display = 'none';
+                    document.body.classList.add('visible');
+                }, 500);
+            }, 1500); // १.५ सेकेन्ड लोडिङ देखाउने
         });
     </script>
 </body>
