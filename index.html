@@ -3,126 +3,62 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>अनुष्ठान - अधिराज डायरी</title>
+    <title>अधिराजको डायरी</title>
+    <link rel="icon" type="image/png" href="4870.png">
+    
     <style>
-        :root { --bg: #fcfbf7; --text: #333; --card: #fff; --red: #d32f2f; }
-        .dark-mode { --bg: #1a1a1a; --text: #f0f0f0; --card: #2d2d2d; --red: #ff5252; }
+        /* तपाईँको पुरानो सिस्टमको डिजाइन यहाँ छ */
+        #loadingScreen { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: #fcfbf7; display: flex; justify-content: center; align-items: center; z-index: 9999; transition: 0.5s; }
+        .loader { text-align: center; font-family: 'Georgia', serif; }
+        .loader h2 { color: #d32f2f; letter-spacing: 2px; }
+        .bar { width: 100px; height: 3px; background: #ddd; margin: 10px auto; position: relative; overflow: hidden; }
+        .bar::after { content: ''; width: 50px; height: 3px; background: #d32f2f; position: absolute; left: -50px; animation: load 1.5s infinite; }
+        @keyframes load { 100% { left: 100px; } }
 
-        body { background: var(--bg); color: var(--text); font-family: 'Georgia', serif; transition: 0.3s; margin: 0; padding: 15px; }
+        body { background-color: #fcfbf7; font-family: 'Georgia', serif; margin: 0; display: flex; flex-direction: column; align-items: center; min-height: 100vh; opacity: 0; transition: 1s; }
+        body.visible { opacity: 1; }
 
-        .toolbar { 
-            position: sticky; top: 0; display: flex; justify-content: space-between; 
-            padding: 10px; background: var(--bg); z-index: 100; border-bottom: 1px solid #ddd;
-        }
-        .btn { padding: 8px 12px; cursor: pointer; border: 1px solid #ccc; border-radius: 5px; background: var(--card); color: var(--text); font-size: 14px; }
+        .header { margin-top: 50px; text-align: center; }
+        .header img { width: 120px; height: 120px; border-radius: 50%; box-shadow: 0 5px 15px rgba(0,0,0,0.1); border: 3px solid #fff; }
+        .header h1 { color: #4a3728; font-size: 24px; margin-top: 15px; }
 
-        .container { max-width: 600px; margin: 20px auto; }
-
-        .intro-text { 
-            font-style: italic; line-height: 1.8; margin-bottom: 40px; padding: 20px; 
-            background: rgba(211, 47, 47, 0.05); border-radius: 10px; font-size: 18px;
-            border: 1px dashed var(--red);
-        }
-
-        .day-box { 
-            background: var(--card); border-left: 5px solid var(--red); 
-            padding: 20px; margin-bottom: 25px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); 
-            border-radius: 4px; animation: fadeIn 0.8s ease;
-        }
-
-        .day-title { color: var(--red); font-weight: bold; font-size: 14px; margin-bottom: 8px; display: block; }
-        .day-content { font-size: 18px; line-height: 1.7; margin: 0; }
-        
-        .footer { text-align: center; margin-top: 50px; padding: 40px 0; color: #888; font-size: 14px; border-top: 1px solid #eee; }
-
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .main-content { width: 90%; max-width: 400px; margin-top: 40px; }
+        .diary-card { background: white; padding: 30px 20px; border-radius: 20px; text-decoration: none; display: block; border-left: 8px solid #d32f2f; box-shadow: 0 10px 25px rgba(0,0,0,0.05); text-align: center; }
+        .diary-card h2 { color: #2c3e50; font-size: 19px; margin: 0; }
+        .diary-card p { color: #d32f2f; font-weight: bold; font-size: 13px; margin-top: 10px; }
+        .footer { margin-top: auto; padding: 30px; color: #999; font-size: 12px; }
     </style>
 </head>
 <body>
 
-    <div class="toolbar">
-        <button class="btn" onclick="history.back()">← गृहपृष्ठ</button>
-        <div>
-            <button class="btn" onclick="changeFont(1)">A+</button>
-            <button class="btn" onclick="changeFont(-1)">A-</button>
-            <button class="btn" onclick="toggleNight()">🌓 मोड</button>
-        </div>
+    <div id="loadingScreen">
+        <div class="loader"><h2>अधिराज</h2><div class="bar"></div></div>
     </div>
 
-    <div class="container">
-        <div class="intro-text">
-    <p>थाहा छैन आज नै म यो सन्देश किन लेख्दैछु। आज २५ January हो, घडीले रातको साढे ३ बजेको संकेत गर्दैछ। कोठामा शान्ति यस्तो छ कि मलाई मेरै मुटुको धड्कन कुनै बाजा जस्तै सुनिरहेको छ। हिजोआज मेरो स्वास्थ्य धेरै नै खराब चल्दैछ, र थाहा छैन भोलिको सूर्य मेरो लागि कस्तो हुनेछ।</p>
-
-    <p>यदि म मरेँ भने तिम्रो बारेमा अन्तिमचोटि लेख्न पाऊँ। तर यदि यो सन्देश १३ जुलाईमा तिम्रो मोबाइलको स्क्रिनमा झल्कियो भने सम्झिनु म यो धर्तीमा कतै अझै जीवितै छु।</p>
-
-    <p>मलाई त त्यही केटी याद आउँछ, जसको मलाई नाम पनि थाहा थिएन, न त राम्रोसँग पुरै अनुहार नै देखेको थिएँ। त्यही ०३:३७ वाला केटी... जसको आधा अनुहारको मुस्कान देख्दा मात्रै पनि मेरो बाँझो मनमा पहिलोपटक प्रेमको बिउ रोपिएको थियो।</p>
-
-    <p><strong>नोट:-</strong> यो सन्देश तिमीले सोचेको भन्दा निकै लामो हुनेछ। तर केही छैन यसलाई पढ्न तिमीसँग लगभग ४०/४१ वर्ष छ। तबसम्म तिमीलाई कुनै पनि message गर्दिन। तर सँगै यो बाचा गर्छु, तिम्रो ६० औँ जन्मदिनमा यदि म जीवित भयो भने तिम्रो सामु उपस्थित हुन्छु यो अधिराजको बाधा भयो।</p>
-</div>
-
-
-        <div class="day-box"><span class="day-title">Day 1. 25 January</span><p class="day-content">आजदेखि यो मौन अनुष्ठान सुरु गर्दैछु। रातको साढे ३ बजे, जहाँ सारा संसार निदाएको छ, म तिम्रो नामको पहिलो अक्षर कोर्दैछु। थाहा छैन, यो १६९ दिनको यात्रा पूरा हुनेछ कि बीचैमा मेरो सासको धागो टुट्नेछ।</p></div>
-
-        <div class="day-box"><span class="day-title">Day 2. 26 January</span><p class="day-content">तिम्रो फोटोले दिनभरिको काम र थकान मेटादिन्छ। म पागल जस्तै कहिले फोटो हेरेर हाँस्छु भने कहिले आँसु झर्छ। तिम्रो मुस्कान मेरो लागि एउटा यस्तो ऐना हो, जहाँ म आफ्नो बाँकी रहेको जीवन देख्ने गर्छु।</p></div>
-
-        <div class="day-box"><span class="day-title">Day 3. 27 January</span><p class="day-content">आज मनले नमानेर तिम्रो पुराना Tiktok हेर्दै थिएँ। त्यहाँ तिमीले अरू कसैलाई dedicate गरेको मायाको शब्दहरूले मलाई यस्तो लाग्दै थियो कि कसैले तातो छुराले छियाछिया पारेर मेरो मुटु बाहिर निकाल्ने प्रयास गर्दैछ। ओठमा चुरोटको ठुटो च्याप्दै यही भन्ठानेँ—उसको खुसीमा म खुसी हुनु नै मेरो प्रेम हो।</p></div>
-
-        <div class="day-box"><span class="day-title">Day 4. 28 January</span><p class="day-content">चौथो दिन। सदा झैँ म मेरो fake id बाट तिम्रो प्रोफाइल view गर्न गएको तर id private छ। तिम्रो संसारमा मेरो लागि कुनै झ्याल खुला छैन, तर मेरो संसारको त ढोका नै तिम्रो नाममा अडिएको छ।</p></div>
-
-        <div class="day-box"><span class="day-title">Day 5. 29 January</span><p class="day-content">I can't explain my feelings... शब्दहरू हराएका छन्। मन भारी छ, शरीर गल्दैछ। भावनाहरू यति धेरै छन् कि यो सानो डायरीको पानामा अटाउनै सकेनन्।</p></div>
-
-        <div class="day-box"><span class="day-title">Day 6. 30 January</span><p class="day-content">३:३७—फेरि त्यही समय। मलाई लाग्छ, यो समय मेरो र तिम्रो बीचको एउटा अदृश्य साँघु हो। जब म तिमीलाई पहिलोपटक देख्दाको त्यो आधा मुस्कान सम्झिन्छु, मलाई मेरो रोग र मृत्युसँग डर लाग्न छोड्छ।</p></div>
-
-        <div class="day-box"><span class="day-title">Day 7. 31 January</span><p class="day-content">जनवरीको अन्तिम बिदाइ। बाहिरको जाडोभन्दा मेरो कोठाको शून्यता बढी चिसो छ। आज ऐनामा आफूलाई हेरेँ—आँखा गाडिएका छन्, तर मेरो आँखाको नानीमा अझै तिम्रो तस्बिर उस्तै चमकका साथ कैद छ।</p></div>
-
-        <div class="day-box"><span class="day-title">Day 8. 01 February</span><p class="day-content">फेब्रुअरीको पहिलो किरण। मान्छेहरू भन्छन् यो प्रेमको महिना हो। तर मेरो लागि त हरेक महिना तिम्रै हो।</p></div>
-
-        <div class="day-box"><span class="day-title">Day 9. 02 February</span><p class="day-content">आज स्वास्थ्यले परीक्षा लियो। सास फेर्न गाह्रो हुँदा पनि तिम्रो नामको 'अनुष्ठान' छुटाउन सकिनँ। मेरो आयु बरु तिमीलाई नै लागोस्।</p></div>
-
-        <div class="day-box"><span class="day-title">Day 10. 03 February</span><p class="day-content">दशौँ दिन। आज मनले तिम्रो आवाज सुन्न निकै खोज्यो। तर मलाई थाहा छ, मेरो एक कलले तिम्रो खुसीमा बाधा पुग्न सक्छ। त्यसैले यो डायरीलाई नै आफ्नो साथी बनाएको छु।</p></div>
-
-        <div class="day-box"><span class="day-title">Day 11. 04 February</span><p class="day-content">भोलि १२ औँ दिन—जसलाई म 'अनलकी' मान्छु। आज रातभरि एउटा डरले सताइरहेको छ। ए भगवान, मलाई अझै केही समय देऊ, ताकि म उसको नाम अझै केही पटक लेख्न सकूँ।</p></div>
-
-        <div class="day-box"><span class="day-title">Day 12. 05 February</span><p class="day-content">अन्ततः त्यही भयो, जसको डर थियो। आज तिम्रो पोस्ट देखेर मुटु नै निकालिएको जस्तो भयो: "उसको मनमा म अटेन मेरो मनबाट उ हटेन 😣😔"। ए भगवान, यो दुख्नुभन्दा पहिला मलाई किन बोलाएनौ?</p></div>
-
-        <div class="day-box"><span class="day-title">Day 13. 06 February</span><p class="day-content">हिजोको चोटपछि रातभरि सुत्न सकिनँ। तिम्रो आँखामा आँसु आउनु मेरो लागि मृत्युभन्दा कम छैन। तिमीलाई संसारको सारा खुसी मिल्नुपर्छ।</p></div>
-
-        <div class="day-box"><span class="day-title">Day 14. 07 February (Rose Day)</span><p class="day-content">आज गुलाबको दिन। २०७७ सालदेखि सुरु भएको यो यात्रामा उपहार दिन सकिनँ होला, तर मेरो हरेक प्रार्थनाको थुँगामा तिम्रो नाम सधैँ ताजा रहनेछ।</p></div>
-
-        <div class="day-box"><span class="day-title">Day 15. 08 February (Propose Day)</span><p class="day-content">६ वर्षअघि नै मैले आफ्नो सारा अस्तित्व तिम्रो नाममा सुम्पिसकेको थिएँ। "म रहूँ या नरहूँ, तिम्रो ओठको यो मुस्कान कहिल्यै फिक्का नहोस्।"</p></div>
-
-        <div class="day-box"><span class="day-title">Day 16. 09 February (Chocolate Day)</span><p class="day-content">जब तिम्रो '०३:३७ वाला मुस्कान' को याद आउँछ, सारा संसार फेरि गुलियो लाग्न थाल्छ। सुजना, तिम्रो खुसी नै मेरो जीवनको सबैभन्दा ठुलो मिठास हो।</p></div>
-
-        <div class="day-box"><span class="day-title">Day 17. 10 February (Teddy Day)</span><p class="day-content">एउटा अबोध र निस्वार्थ समर्पण। कुनै गुनासो छैन, कुनै अपेक्षा छैन—बस, यो मनले २०७७ देखि तिमीलाई नै आफ्नो संसार मानेको छ।</p></div>
-
-        <div class="day-box"><span class="day-title">Day 18. 11 February (Promise Day)</span><p class="day-content">म बाचा गर्छु—समयको अन्तिम विन्दुसम्म मेरो मनमा तिम्रो लागि एउटा पवित्र ठाउँ सुरक्षित रहनेछ। यो 'अनुष्ठान' कहिल्यै बदलिने छैन।</p></div>
-
-        <div class="day-box"><span class="day-title">Day 19. 12 February (Hug Day)</span><p class="day-content">दूरी जतिसुकै होस्, मेरो विचार र साहित्यले तिमीलाई सधैँ एउटा न्यानो घेरामा राखिरहनेछ।</p></div>
-
-        <div class="day-box"><span class="day-title">Day 20. 13 February (Kiss Day)</span><p class="day-content">शब्दहरूले भावनालाई के व्यक्त गर्थे र! तिम्रो अनुहारको त्यो चमक नै मेरो लागि ६ वर्षदेखिको हरेक बिहानीको सूर्योदय हो।</p></div>
-
-        <div class="day-box"><span class="day-title">Day 21. 14 February (Valentine's Day)</span><p class="day-content">आज २१ औँ दिन। मनोवैज्ञानिकहरू भन्छन् कुनै पनि काम लगातार २१ दिन गर्यो भने त्यो 'बानी' बन्छ। अब त मेरो हातलाई तिम्रो नाम लेख्न मस्तिष्कको आदेश पनि चाहिँदैन। तिमी मेरो अस्तित्वको अनिवार्य बानी हौ।</p></div>
-
-        <div class="day-box"><span class="day-title">Day 22. 15 February</span><p class="day-content">आज स्वास्थ्यमा केही सुधार महसुस गर्दैछु। २१ दिनको बानी पछि आज २२ औँ दिनमा शरीर अलि तन्दुरुस्त भएको छ। म बाँच्न चाहन्छु सुजना, तिम्रो लागि र यो अनुष्ठान पुरा गर्नका लागि।</p></div>
-
-        <div class="day-box"><span class="day-title">Day 23. 16 February</span><p class="day-content">आजबाट मैले चुरोट धेरै कम गरेको छु। तिम्रो लागि स्वस्थ हुने इच्छा जागेको छ। अब दिनमा केवल २-३ वटा मात्र चुरोट पिउनेछु। मेरो फोक्सोभन्दा तिम्रो यादको मूल्य धेरै छ।</p></div>
-
-        <div class="footer">
-            <p>© २०२६ अधिराजको अनुष्ठान</p>
-            <p>♡︎ सुजना श्रेष्ठको लागि ♡︎</p>
-        </div>
+    <div class="header">
+        <img src="4870.png" alt="Logo">
+        <h1>मनको भावना</h1>
     </div>
+
+    <div class="main-content">
+        <a href="message.html" class="diary-card">
+            <h2>एक मौन अनुष्ठान: १६९ दिनको यात्रा</h2>
+            <p>पढ्नको लागि यहाँ ट्याप गर्नुहोस्</p>
+        </a>
+    </div>
+
+    <div class="footer">© २०२६ अधिराज | सुजना श्रेष्ठको लागि</div>
 
     <script>
-        function changeFont(s) {
-            let divs = document.querySelectorAll('.day-content, .intro-text');
-            divs.forEach(d => {
-                let size = window.getComputedStyle(d).fontSize;
-                d.style.fontSize = (parseFloat(size) + s) + 'px';
-            });
-        }
-        function toggleNight() { document.body.classList.toggle('dark-mode'); }
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                document.getElementById('loadingScreen').style.opacity = '0';
+                setTimeout(() => {
+                    document.getElementById('loadingScreen').style.display = 'none';
+                    document.body.classList.add('visible');
+                }, 500);
+            }, 1500);
+        });
     </script>
 </body>
 </html>
-  
