@@ -4,6 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>अधिराजको डायरी</title>
+    
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#d32f2f">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <link rel="apple-touch-icon" href="4870.png">
+    
     <link rel="icon" type="image/png" href="4870.png">
     
     <style>
@@ -19,7 +26,7 @@
         body.visible { opacity: 1; }
 
         .header { margin-top: 50px; text-align: center; }
-        .header img { width: 120px; height: 120px; border-radius: 50%; box-shadow: 0 5px 15px rgba(0,0,0,0.1); border: 3px solid #fff; }
+        .header img { width: 120px; height: 120px; border-radius: 50%; box-shadow: 0 5px 15px rgba(0,0,0,0.1); border: 3px solid #fff; object-fit: cover; }
         .header h1 { color: #4a3728; font-size: 24px; margin-top: 15px; }
 
         .main-content { width: 90%; max-width: 400px; margin-top: 40px; }
@@ -50,6 +57,15 @@
     <div class="footer">© २०२६ अधिराज | सुजना श्रेष्ठको लागि</div>
 
     <script>
+        // PWA Service Worker Register (अपडेट ढिला नहुने गरी)
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('sw.js').then(reg => {
+                    reg.update(); // सधैँ नयाँ अपडेट खोज्ने
+                });
+            });
+        }
+
         window.addEventListener('load', () => {
             setTimeout(() => {
                 document.getElementById('loadingScreen').style.opacity = '0';
