@@ -6,22 +6,42 @@
     <title>अधिराजको डायरी</title>
     
     <link rel="manifest" href="manifest.json">
-    <meta name="theme-color" content="#d32f2f">
+    <meta name="theme-color" content="#ffffff">
     <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
     <link rel="apple-touch-icon" href="4870.png">
     
     <link rel="icon" type="image/png" href="4870.png">
     
     <style>
-        /* तपाईँको पुरानो सिस्टमको डिजाइन यहाँ छ */
-        #loadingScreen { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: #fcfbf7; display: flex; justify-content: center; align-items: center; z-index: 9999; transition: 0.5s; }
+        /* लोडिङ स्क्रिन - शुद्ध सेतो र नयाँ एनिमेसन */
+        #loadingScreen { 
+            position: fixed; top: 0; left: 0; right: 0; bottom: 0; 
+            background: #ffffff; /* शुद्ध सेतो */
+            display: flex; justify-content: center; align-items: center; 
+            z-index: 9999; transition: 0.8s ease-in-out; 
+        }
+        
         .loader { text-align: center; font-family: 'Georgia', serif; }
-        .loader h2 { color: #d32f2f; letter-spacing: 2px; }
-        .bar { width: 100px; height: 3px; background: #ddd; margin: 10px auto; position: relative; overflow: hidden; }
-        .bar::after { content: ''; width: 50px; height: 3px; background: #d32f2f; position: absolute; left: -50px; animation: load 1.5s infinite; }
-        @keyframes load { 100% { left: 100px; } }
+        
+        /* लोगोलाई सास फेरे जस्तो (Breathing) एनिमेसन */
+        .loader img { 
+            width: 80px; height: 80px; border-radius: 50%; 
+            margin-bottom: 20px;
+            animation: breathe 2.5s ease-in-out infinite;
+        }
 
+        @keyframes breathe {
+            0%, 100% { opacity: 0.5; transform: scale(0.95); }
+            50% { opacity: 1; transform: scale(1.05); }
+        }
+
+        .loader h2 { 
+            color: #333; /* शुद्ध र गम्भीर खैरो/कालो */
+            letter-spacing: 4px; font-weight: lighter; margin: 0; font-size: 20px;
+        }
+
+        /* तपाईँको साविकको बडी डिजाइन */
         body { background-color: #fcfbf7; font-family: 'Georgia', serif; margin: 0; display: flex; flex-direction: column; align-items: center; min-height: 100vh; opacity: 0; transition: 1s; }
         body.visible { opacity: 1; }
 
@@ -39,7 +59,10 @@
 <body>
 
     <div id="loadingScreen">
-        <div class="loader"><h2>अधिराज</h2><div class="bar"></div></div>
+        <div class="loader">
+            <img src="4870.png" alt="अधिराज">
+            <h2>अधिराज</h2>
+        </div>
     </div>
 
     <div class="header">
@@ -49,31 +72,32 @@
 
     <div class="main-content">
         <a href="message.html" class="diary-card">
-            <h2>एक मौन अनुष्ठान: १६९ दिनको यात्रा</h2>
+            <h2>एक मौन अनुष्ठान: 169 दिनको यात्रा</h2>
             <p>पढ्नको लागि यहाँ ट्याप गर्नुहोस्</p>
         </a>
     </div>
 
-    <div class="footer">© २०२६ अधिराज | सुजना श्रेष्ठको लागि</div>
+    <div class="footer"> 2026 अधिराज | सुजना श्रेष्ठको लागि</div>
 
     <script>
-        // PWA Service Worker Register (अपडेट ढिला नहुने गरी)
+        // PWA Service Worker (तुरुन्तै अपडेट हुने गरी)
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
                 navigator.serviceWorker.register('sw.js').then(reg => {
-                    reg.update(); // सधैँ नयाँ अपडेट खोज्ने
+                    reg.update();
                 });
             });
         }
 
+        // लोडिङ स्क्रिन हटाउने समय
         window.addEventListener('load', () => {
             setTimeout(() => {
                 document.getElementById('loadingScreen').style.opacity = '0';
                 setTimeout(() => {
                     document.getElementById('loadingScreen').style.display = 'none';
                     document.body.classList.add('visible');
-                }, 500);
-            }, 1500);
+                }, 800);
+            }, 2000); // २ सेकेन्डसम्म लोडिङ देखाउने
         });
     </script>
 </body>
