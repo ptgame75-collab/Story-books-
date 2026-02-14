@@ -56,7 +56,7 @@
         .diary-card h2 { color: #2c3e50; font-size: 19px; margin: 0; }
         .diary-card p { color: #d32f2f; font-weight: bold; font-size: 13px; margin-top: 10px; }
         
-        .footer { margin-top: auto; padding: 30px; color: #999; font-size: 12px; text-align: center; }
+        .footer { margin-top: auto; padding: 30px; color: #999; font-size: 12px; }
     </style>
 </head>
 <body>
@@ -79,16 +79,15 @@
             <p>पढ्नको लागि यहाँ ट्याप गर्नुहोस्</p>
         </a>
 
-        <a href="adhura.html" class="diary-card">
+        <a href="#" class="diary-card">
             <h2>मेरो अधूरा शब्दहरू</h2>
-            <p>पढ्नको लागि यहाँ ट्याप गर्नुहोस्</p>
+            <p>क्रमशः आउँदैछ...</p>
         </a>
     </div>
 
     <div class="footer"> 2026 अधिराज | सुजना श्रेष्ठको लागि</div>
 
     <script>
-        // Service Worker दर्ता
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
                 navigator.serviceWorker.register('sw.js').then(reg => {
@@ -97,7 +96,6 @@
             });
         }
 
-        // लोडिङ स्क्रिन हटाउने लजिक
         window.addEventListener('load', () => {
             setTimeout(() => {
                 document.getElementById('loadingScreen').style.opacity = '0';
