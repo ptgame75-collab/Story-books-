@@ -5,63 +5,71 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>दस्ताबेज - अधिराज</title>
     <style>
-        :root { --bg: #fcfbf7; --text: #333; --red: #d32f2f; --card-bg: #ffffff; }
-        .dark-mode { --bg: #121212; --text: #e0e0e0; --red: #ff5252; --card-bg: #1e1e1e; }
+        :root { --bg: #fcfbf7; --text: #333; --red: #d32f2f; --card-bg: #ffffff; --line: #ccc; }
+        .dark-mode { --bg: #121212; --text: #e0e0e0; --red: #ff5252; --card-bg: #1e1e1e; --line: #444; }
 
         body { 
             background: var(--bg); color: var(--text); font-family: 'Georgia', serif; 
-            padding: 15px; margin: 0; -webkit-user-select: none; user-select: none; 
-            transition: opacity 1.2s ease; 
+            padding: 20px; margin: 0; -webkit-user-select: none; user-select: none; 
+            transition: opacity 1.2s ease, background 0.4s; line-height: 1.8;
         }
         
         .fade-out { opacity: 0; }
 
         .toolbar { 
             position: sticky; top: 0; background: var(--bg); padding: 10px 0; 
-            display: flex; justify-content: space-between; border-bottom: 1px solid #ccc; 
-            z-index: 100; margin-bottom: 20px;
+            display: flex; justify-content: space-between; border-bottom: 1px solid var(--line); 
+            z-index: 100; margin-bottom: 30px;
         }
 
         .btn { 
-            padding: 6px 15px; border: 1px solid #999; 
-            background: var(--card-bg); cursor: pointer; border-radius: 4px; 
-            text-decoration: none; color: var(--text); font-size: 13px; font-weight: bold;
+            padding: 7px 18px; border: 1px solid var(--line); 
+            background: var(--card-bg); cursor: pointer; border-radius: 5px; 
+            text-decoration: none; color: var(--text); font-size: 14px; font-weight: bold;
         }
 
-        .section { display: none; max-width: 600px; margin: 0 auto; animation: fadeIn 0.4s; }
+        .section { display: none; max-width: 650px; margin: 0 auto; animation: fadeIn 0.6s ease-out; }
         .section:target { display: block; } 
 
-        .title-anusthan { color: #d32f2f; text-align: center; font-size: 28px; font-weight: bold; margin: 20px 0; }
-        
+        .title-container { text-align: center; margin-bottom: 35px; }
+        .main-title { font-size: 32px; font-weight: bold; margin-bottom: 10px; display: block; }
+        .straight-line { width: 100%; height: 1.5px; background: var(--line); border: none; margin-bottom: 25px; }
+
         .intro-text { 
-            font-style: italic; line-height: 1.8; margin-bottom: 30px; font-size: 18px; 
-            color: var(--text); border-bottom: 1px dashed var(--red); padding-bottom: 15px;
-            text-align: left;
+            font-style: italic; font-size: 19px; margin-bottom: 40px; 
+            padding: 0 15px; text-align: justify; border-left: 4px solid var(--red); padding-left: 15px;
         }
 
-        .day-box { background: var(--card-bg); border-left: 5px solid var(--red); padding: 15px; margin-bottom: 15px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
-        .day-title { color: var(--red); font-weight: normal; display: block; margin-bottom: 5px; font-size: 14px; }
-        .bold-name { font-weight: 900; font-size: 15px; } 
-        .day-content { font-size: 17px; line-height: 1.6; margin: 0; }
+        .day-box { 
+            background: var(--card-bg); border-left: 6px solid var(--red); 
+            padding: 18px; margin-bottom: 20px; 
+            box-shadow: 0 4px 12px rgba(0,0,0,0.06); border-radius: 0 8px 8px 0;
+        }
+        .day-title { color: var(--red); display: block; margin-bottom: 8px; font-size: 15px; }
+        .bold-name { font-weight: 900; font-size: 16px; color: var(--text); } 
+        .day-content { font-size: 18px; margin: 0; }
 
-        .bold-feeling p { font-weight: 900; font-size: 20px; line-height: 1.8; margin-bottom: 25px; }
+        .bold-feeling p { font-weight: 900; font-size: 22px; line-height: 1.8; margin-bottom: 35px; }
 
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
     </style>
 </head>
 <body oncontextmenu="return false;">
 
     <div class="toolbar">
-        <a href="javascript:void(0)" class="btn" onclick="goBack()">← पछाडि</a>
-        <button class="btn" onclick="toggleNightMode()" id="nightBtn">🌙 नाइट मोड</button>
+        <a href="javascript:void(0)" class="btn" onclick="goBack()">← back</a>
+        <button class="btn" onclick="toggleNightMode()" id="nightBtn">🌙 night mode</button>
     </div>
 
     <div id="anusthan" class="section">
-        <div class="title-anusthan">१६९ अनुष्ठान लेख</div>
+        <div class="title-container">
+            <span class="main-title" style="color: var(--red);">१६९ अनुष्ठान लेख</span>
+            <hr class="straight-line">
+        </div>
         
         <div class="intro-text">
-            <p>थाहा छैन आज नै म यो सन्देश किन लेख्दैछु। म आज बल्ल २५ January हुँदैछु, घडीले रातको साढे ३ बजेको संकेत गर्दैछ।</p>
-            <p>यदि १३ जुलाईमा यो सन्देश तिम्रो मोबाइलमा झल्कियो भने सम्झिनु म अझै जीवितै छु र तिमीलाई पर्खिरहेको छु।</p>
+            थाहा छैन आज नै म यो सन्देश किन लेख्दैछु। म आज बल्ल २५ January हुँदैछु, घडीले रातको साढे ३ बजेको संकेत गर्दैछ। 
+            यदि १३ जुलाईमा यो सन्देश तिम्रो मोबाइलमा झल्कियो भने सम्झिनु म अझै जीवितै छु र तिमीलाई पर्खिरहेको छु।
         </div>
 
         <div class="day-box"><span class="day-title">Day 1. 25 January - <span class="bold-name">सुजना श्रेष्ठ</span></span><p class="day-content">आजदेखि यो मौन अनुष्ठान सुरु गर्दैछु। रातको साढे ३ बजे म तिम्रो नामको पहिलो अक्षर कोर्दैछु।</p></div>
@@ -101,11 +109,13 @@
     </div>
 
     <div id="adhura" class="section">
-        <div style="color:#1a1a1a; text-align:center; font-size:26px; font-weight:bold; margin:20px 0;">मेरा ती अधुरा शब्दहरू...!</div>
+        <div class="title-container">
+            <span class="main-title" style="color: var(--text);">मेरा ती अधुरा शब्दहरू...!</span>
+            <hr class="straight-line">
+        </div>
         <div class="bold-feeling">
-            <p>"मेरा ती अधुरा शब्दहरू....! जो सायद यो जुनीमा तिम्रो सामुन्ने कहिल्यै पोखिन पाउने छैनन्। म तिमीलाई कति माया गर्छु भन्ने कुरा सायद मेरो मौनतामै बिलाएर जानेछ। म अलमलमा छु— यो प्रेम हो कि पागलपन, म आफैँलाई थाहा छैन।"</p>
-            <p>"केही शब्दहरू अधुरै रहनुमा सायद एउटा बेग्लै अर्थ लुकेको हुन्छ। तिमीप्रतिको यो लगाव प्रेमको पराकाष्ठा हो या मेरो उन्माद, म शब्दमा व्यक्त गर्न असमर्थ छु।"</p>
-            <p>"सायद समयले हाम्रो संवादको पानामा 'अपूर्णता' नै लेखिदिएको छ। यो मेरो प्रेम हो, पागलपन हो, या एउटा कहिल्यै नसुल्झिने अल्झन— म आफैँ पनि यसको उत्तर खोजिरहेको छु।"</p>
+            <p>"मेरा ती अधुरा शब्दहरू....! जो सायद यो जुनीमा तिम्रो सामुन्ने कहिल्यै पोखिन पाउने छैनन्। म तिमीलाई कति माया गर्छु भन्ने कुरा सायद मेरो मौनतामै बिलाएर जानेछ।"</p>
+            <p>"केही शब्दहरू अधुरै रहनुमा सायद एउटा बेग्लै अर्थ लुकेको हुन्छ। यो मेरो प्रेम हो, पागलपन हो, या एउटा कहिल्यै नसुल्झिने अल्झन— म आफैँ पनि यसको उत्तर खोजिरहेको छु।"</p>
         </div>
     </div>
 
@@ -122,7 +132,5 @@
             btn.innerHTML = body.classList.contains('dark-mode') ? "☀️ डे मोड" : "🌙 नाइट मोड";
         }
     </script>
-</body>
-</html>
 </body>
 </html>
