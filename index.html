@@ -3,107 +3,64 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>अधिराजको डायरी</title>
-    
-    <link rel="manifest" href="manifest.json">
-    <meta name="theme-color" content="#ffffff">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="default">
-    <link rel="apple-touch-icon" href="4870.png">
-    
-    <link rel="icon" type="image/png" href="4870.png">
-    
+    <title>अधिराज - मनको भावना</title>
     <style>
-        /* लोडिङ स्क्रिन - शुद्ध सेतो र नयाँ एनिमेसन */
+        /* लोडिङ स्क्रिन */
         #loadingScreen { 
             position: fixed; top: 0; left: 0; right: 0; bottom: 0; 
-            background: #ffffff; 
-            display: flex; justify-content: center; align-items: center; 
-            z-index: 9999; transition: 0.8s ease-in-out; 
+            background: #000; display: flex; flex-direction: column; justify-content: center; align-items: center; z-index: 9999; 
         }
-        
-        .loader { text-align: center; font-family: 'Georgia', serif; }
-        
-        .loader img { 
-            width: 80px; height: 80px; border-radius: 50%; 
-            margin-bottom: 20px;
-            animation: breathe 2.5s ease-in-out infinite;
-        }
+        .loader-text { color: #fff; font-family: serif; font-size: 20px; margin-bottom: 20px; }
+        .progress-bar { width: 200px; height: 3px; background: #333; }
+        .progress-fill { width: 0%; height: 100%; background: #d32f2f; animation: fillBar 2s forwards; }
+        @keyframes fillBar { 100% { width: 100%; } }
 
-        @keyframes breathe {
-            0%, 100% { opacity: 0.5; transform: scale(0.95); }
-            50% { opacity: 1; transform: scale(1.05); }
-        }
-
-        .loader h2 { 
-            color: #333; 
-            letter-spacing: 4px; font-weight: lighter; margin: 0; font-size: 20px;
-        }
-
-        body { background-color: #fcfbf7; font-family: 'Georgia', serif; margin: 0; display: flex; flex-direction: column; align-items: center; min-height: 100vh; opacity: 0; transition: 1s; }
+        body { background: #fcfbf7; font-family: 'Georgia', serif; margin: 0; display: flex; flex-direction: column; align-items: center; opacity: 0; transition: 1s; -webkit-user-select: none; user-select: none; }
         body.visible { opacity: 1; }
-
         .header { margin-top: 50px; text-align: center; }
-        .header img { width: 120px; height: 120px; border-radius: 50%; box-shadow: 0 5px 15px rgba(0,0,0,0.1); border: 3px solid #fff; object-fit: cover; }
-        .header h1 { color: #4a3728; font-size: 24px; margin-top: 15px; }
+        .header h1 { color: #4a3728; font-size: 24px; }
 
-        /* कार्डहरूका लागि मुख्य सेक्सन */
         .main-content { width: 90%; max-width: 400px; margin-top: 40px; display: flex; flex-direction: column; gap: 20px; }
-        
-        .diary-card { background: white; padding: 30px 20px; border-radius: 20px; text-decoration: none; display: block; border-left: 8px solid #d32f2f; box-shadow: 0 10px 25px rgba(0,0,0,0.05); text-align: center; transition: transform 0.2s; }
-        .diary-card:active { transform: scale(0.98); }
-        
+        .diary-card { background: white; padding: 30px 20px; border-radius: 15px; text-decoration: none; display: block; border-left: 6px solid #d32f2f; box-shadow: 0 5px 15px rgba(0,0,0,0.05); text-align: center; }
         .diary-card h2 { color: #2c3e50; font-size: 19px; margin: 0; }
-        .diary-card p { color: #d32f2f; font-weight: bold; font-size: 13px; margin-top: 10px; }
-        
+        .diary-card p { color: #d32f2f; font-size: 13px; margin-top: 10px; font-weight: bold; }
         .footer { margin-top: auto; padding: 30px; color: #999; font-size: 12px; }
     </style>
 </head>
-<body>
+<body oncontextmenu="return false;">
 
     <div id="loadingScreen">
-        <div class="loader">
-            <img src="4870.png" alt="अधिराज">
-            <h2>अधिराज</h2>
-        </div>
+        <div class="loader-text">मनको भावना दस्ताबेज</div>
+        <div class="progress-bar"><div class="progress-fill"></div></div>
     </div>
 
-    <div class="header">
-        <img src="4870.png" alt="Logo">
-        <h1>मनको भावना</h1>
-    </div>
+    <div class="header"><h1>मनको भावना</h1></div>
 
     <div class="main-content">
-        <a href="message.html" class="diary-card">
-            <h2>एक मौन अनुष्ठान: 169 दिनको यात्रा</h2>
-            <p>पढ्नको लागि यहाँ ट्याप गर्नुहोस्</p>
+        <a href="message.html#anusthan" class="diary-card">
+            <h2>169 अनुष्ठान</h2>
+            <p>पढ्नको लागि ट्याप गर्नुहोस्</p>
         </a>
 
-        <a href="#" class="diary-card">
-            <h2>मेरो अधूरा शब्दहरू</h2>
+        <a href="message.html#adhura" class="diary-card">
+            <h2>मेरा अधुरा शब्दहरू</h2>
+            <p>पढ्नको लागि ट्याप गर्नुहोस्</p>
+        </a>
+
+        <a href="message.html#shayari" class="diary-card">
+            <h2>तिम्रा लागि "सायरीहरू"</h2>
             <p>क्रमशः आउँदैछ...</p>
         </a>
     </div>
 
-    <div class="footer"> 2026 अधिराज | सुजना श्रेष्ठको लागि</div>
+    <div class="footer">2026 अधिराज | सुजना श्रेष्ठको लागि</div>
 
     <script>
-        if ('serviceWorker' in navigator) {
-            window.addEventListener('load', () => {
-                navigator.serviceWorker.register('sw.js').then(reg => {
-                    reg.update();
-                });
-            });
-        }
-
         window.addEventListener('load', () => {
             setTimeout(() => {
-                document.getElementById('loadingScreen').style.opacity = '0';
-                setTimeout(() => {
-                    document.getElementById('loadingScreen').style.display = 'none';
-                    document.body.classList.add('visible');
-                }, 800);
-            }, 2000); 
+                document.getElementById('loadingScreen').style.display = 'none';
+                document.body.classList.add('visible');
+            }, 2000);
         });
     </script>
 </body>
