@@ -5,27 +5,39 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>दस्ताबेज - अधिराज</title>
     <style>
-        :root { --bg: #fcfbf7; --text: #333; --red: #d32f2f; }
-        body { background: var(--bg); color: var(--text); font-family: 'Georgia', serif; padding: 15px; margin: 0; -webkit-user-select: none; user-select: none; }
+        :root { --bg: #fcfbf7; --text: #333; --red: #d32f2f; --card-bg: #ffffff; }
+        .dark-mode { --bg: #121212; --text: #e0e0e0; --red: #ff5252; --card-bg: #1e1e1e; }
+
+        body { 
+            background: var(--bg); color: var(--text); font-family: 'Georgia', serif; 
+            padding: 15px; margin: 0; -webkit-user-select: none; user-select: none; 
+            transition: 0.4s; 
+        }
         
-        .toolbar { position: sticky; top: 0; background: var(--bg); padding: 10px; display: flex; justify-content: space-between; border-bottom: 1px solid #ddd; z-index: 100; }
-        .btn { padding: 8px 12px; border: 1px solid #ccc; background: #fff; cursor: pointer; border-radius: 5px; text-decoration: none; color: #000; font-size: 14px; }
-        
-        .section { display: none; max-width: 600px; margin: 20px auto; animation: fadeIn 0.5s ease; }
+        .toolbar { 
+            position: sticky; top: 0; background: var(--bg); padding: 10px 0; 
+            display: flex; justify-content: space-between; border-bottom: 1px solid #ccc; 
+            z-index: 100; margin-bottom: 20px;
+        }
+
+        .btn { 
+            padding: 6px 15px; border: 1px solid #999; 
+            background: var(--card-bg); cursor: pointer; border-radius: 4px; 
+            text-decoration: none; color: var(--text); font-size: 13px; font-weight: bold;
+        }
+
+        .section { display: none; max-width: 600px; margin: 0 auto; animation: fadeIn 0.4s; }
         .section:target { display: block; } 
 
-        /* शीर्षक डिजाइन */
-        .main-header-title { text-align: center; color: var(--red); font-size: 32px; font-weight: bold; margin-bottom: 30px; border-bottom: 2px solid var(--red); display: inline-block; width: 100%; padding-bottom: 10px; }
+        .title-anusthan { color: #d32f2f; text-align: center; font-size: 28px; font-weight: bold; margin: 20px 0; }
+        .title-adhura { color: #1a1a1a; text-align: center; font-size: 28px; font-weight: bold; margin: 20px 0; }
 
-        .intro-text { font-style: italic; line-height: 1.8; margin-bottom: 30px; font-size: 18px; color: #555; }
+        .day-box { background: var(--card-bg); border-left: 5px solid var(--red); padding: 15px; margin-bottom: 15px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
+        .day-title { color: var(--red); font-weight: normal; display: block; margin-bottom: 5px; font-size: 14px; }
+        .bold-name { font-weight: 900; font-size: 15px; } 
+        .day-content { font-size: 17px; line-height: 1.6; margin: 0; }
 
-        /* कार्ड २: अधुरा शब्दहरू (बोल्ड र बिना बक्स) */
-        .bold-feeling p { font-weight: 900; font-size: 21px; line-height: 1.8; margin-bottom: 30px; color: #000; }
-        
-        /* कार्ड १: १६९ अनुष्ठान (रेड बक्स सिस्टम) */
-        .day-box { background: #fff; border-left: 6px solid var(--red); padding: 20px; margin-bottom: 20px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); border-radius: 0 10px 10px 0; }
-        .day-title { color: var(--red); font-weight: bold; display: block; margin-bottom: 8px; font-size: 16px; border-bottom: 1px solid #f0f0f0; padding-bottom: 4px; }
-        .day-content { font-size: 18px; line-height: 1.7; margin: 0; color: #333; }
+        .bold-feeling p { font-weight: 900; font-size: 20px; line-height: 1.8; margin-bottom: 25px; }
 
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
     </style>
@@ -33,68 +45,64 @@
 <body oncontextmenu="return false;">
 
     <div class="toolbar">
-        <a href="index.html" class="btn">← गृहपृष्ठ</a>
-        <button class="btn" onclick="document.body.style.fontSize='22px'">अक्षर ठुलो</button>
+        <a href="index.html" class="btn">← पछाडि</a>
+        <button class="btn" onclick="toggleNightMode()" id="nightBtn">🌙 नाइट मोड</button>
     </div>
 
     <div id="anusthan" class="section">
-        <div class="main-header-title">१६९ अनुष्ठान लेख</div>
+        <div class="title-anusthan">१६९ अनुष्ठान लेख</div>
         
-        <div class="intro-text">
-            <p><strong>अन्तिम प्रतीक्षा:</strong> आज २५ January हो, घडीले रातको साढे ३ बजेको संकेत गर्दैछ। यदि यो सन्देश १३ जुलाईमा तिम्रो मोबाइलमा झल्कियो भने सम्झिनु म अझै जीवितै छु।</p>
-        </div>
-
-        <div class="day-box"><span class="day-title">Day 1. 25 January - सुजना श्रेष्ठ</span><p class="day-content">आजदेखि यो मौन अनुष्ठान सुरु गर्दैछु। रातको साढे ३ बजे म तिम्रो नामको पहिलो अक्षर कोर्दैछु।</p></div>
-        <div class="day-box"><span class="day-title">Day 2. 26 January - सुजना श्रेष्ठ</span><p class="day-content">तिम्रो फोटोले दिनभरिको थकान मेटाउँछ। म पागल जस्तै कहिले फोटो हेरेर हाँस्छु त कहिले आँसु झर्छ।</p></div>
-        <div class="day-box"><span class="day-title">Day 3. 27 January - सुजना श्रेष्ठ</span><p class="day-content">पुराना Tiktok हेर्दै थिएँ। उसको खुसीमा म खुसी हुनु नै मेरो प्रेम हो। 😔</p></div>
-        <div class="day-box"><span class="day-title">Day 4. 28 January - सुजना श्रेष्ठ</span><p class="day-content">तिम्रो संसारमा मेरो लागि कुनै झ्याल खुला छैन, तर मेरो संसारको त ढोका नै तिम्रो नाममा अडिएको छ।</p></div>
-        <div class="day-box"><span class="day-title">Day 5. 29 January - सुजना श्रेष्ठ</span><p class="day-content">शब्दहरू हराएका छन्। मन भारी छ, शरीर गल्दैछ। केवल तिम्रो नाम लेखेरै चित्त बुझाउँदैछु।</p></div>
-        <div class="day-box"><span class="day-title">Day 6. 30 January - सुजना श्रेष्ठ</span><p class="day-content">३:३७—फेरि त्यही समय। तिम्रो आधा मुस्कान सम्झिँदा मलाई मृत्युसँग डर लाग्न छोड्छ।</p></div>
-        <div class="day-box"><span class="day-title">Day 7. 31 January - सुजना श्रेष्ठ</span><p class="day-content">जनवरीको बिदाइ। ऐनामा हेरेँ—आँखा गाडिएका छन्, तर नानीमा तिम्रो तस्बिर उस्तै चमकका साथ कैद छ।</p></div>
-        <div class="day-box"><span class="day-title">Day 8. 01 February - सुजना श्रेष्ठ</span><p class="day-content">फेब्रुअरीको पहिलो किरण। मान्छेहरू भन्छन् यो प्रेमको महिना हो, मेरो लागि त हरेक महिना तिम्रै हो।</p></div>
-        <div class="day-box"><span class="day-title">Day 9. 02 February - सुजना श्रेष्ठ</span><p class="day-content">सास फेर्न गाह्रो हुँदा पनि तिम्रो नामको 'अनुष्ठान' छुटाउन सकिनँ। मेरो आयु तिमीलाई लागोस्।</p></div>
-        <div class="day-box"><span class="day-title">Day 10. 03 February - सुजना श्रेष्ठ</span><p class="day-content">आज मनले तिम्रो आवाज सुन्न निकै खोज्यो। तर मेरो कलले तिम्रो खुसीमा बाधा पुग्न सक्छ।</p></div>
-        <div class="day-box"><span class="day-title">Day 11. 04 February - सुजना श्रेष्ठ</span><p class="day-content">भोलि १२ औँ दिन—जसलाई म 'अनलकी' मान्छु। ए भगवान, मलाई अझै केही समय देऊ।</p></div>
-        <div class="day-box"><span class="day-title">Day 12. 05 February - सुजना श्रेष्ठ</span><p class="day-content">अन्ततः त्यही भयो। तिम्रो पोस्ट: "उसको मनमा म अटेन मेरो मनबाट उ हटेन 😣"। मुटु नै निकालिएको जस्तो भो।</p></div>
-        <div class="day-box"><span class="day-title">Day 13. 06 February - सुजना श्रेष्ठ</span><p class="day-content">तिम्रो आँखामा आँसु आउनु मेरो लागि मृत्युभन्दा कम छैन। तिमीलाई संसारको सारा खुसी मिलोस्।</p></div>
-        <div class="day-box"><span class="day-title">Day 14. 07 February (Rose Day)</span><p class="day-content">मेरो हरेक प्रार्थनाको थुँगामा तिम्रो नाम सधैँ ताजा रहनेछ।</p></div>
-        <div class="day-box"><span class="day-title">Day 15. 08 February (Propose Day)</span><p class="day-content">६ वर्षअघि नै सारा अस्तित्व सुम्पिसकेको थिएँ। तिम्रो मुस्कान कहिल्यै फिक्का नहोस्।</p></div>
-        <div class="day-box"><span class="day-title">Day 16. 09 February (Chocolate Day)</span><p class="day-content">जब तिम्रो त्यो '०३:३७ वाला मुस्कान' को याद आउँछ, सारा संसार गुलियो लाग्न थाल्छ।</p></div>
-        <div class="day-box"><span class="day-title">Day 17. 10 February (Teddy Day)</span><p class="day-content">कुनै गुनासो छैन, कुनै अपेक्षा छैन—बस, एउटा अबोध र निस्वार्थ समर्पण छ।</p></div>
-        <div class="day-box"><span class="day-title">Day 18. 11 February (Promise Day)</span><p class="day-content">म बाचा गर्छु—समयको अन्तिम विन्दुसम्म मेरो मनमा तिम्रो लागि एउटा पवित्र ठाउँ सुरक्षित रहनेछ।</p></div>
-        <div class="day-box"><span class="day-title">Day 19. 12 February (Hug Day)</span><p class="day-content">दूरी जतिसुकै होस्, मेरो विचारले तिमीलाई सधैँ एउटा न्यानो घेरामा राखिरहनेछ।</p></div>
-        <div class="day-box"><span class="day-title">Day 20. 13 February (Kiss Day)</span><p class="day-content">तिम्रो अनुहारको चमक नै मेरो हरेक बिहानीको सूर्योदय हो।</p></div>
-        <div class="day-box"><span class="day-title">Day 21. 14 February (Valentine's Day)</span><p class="day-content">आज २१ औँ दिन। मनोवैज्ञानिक भन्छन् २१ दिनमा बानी बन्छ। तिमी मेरो अस्तित्वको अनिवार्य बानी हौ।</p></div>
-        <div class="day-box"><span class="day-title">Day 22. 15 February - सुजना श्रेष्ठ</span><p class="day-content">बानी त बस्यो, तर तिम्रो यादको गहिराइ नाप्ने कुनै यन्त्र भइदिए हुन्थ्यो।</p></div>
-        <div class="day-box"><span class="day-title">Day 23. 16 February - सुजना श्रेष्ठ</span><p class="day-content">आज कोठाको शून्यताले मलाई जिस्काइरहेको छ। तिम्रो एउटा पुरानो हाँसोको क्लिप हेर्दै दिन बिताएँ।</p></div>
-        <div class="day-box"><span class="day-title">Day 24. 17 February - सुजना श्रेष्ठ</span><p class="day-content">सिगरेटको धुवाँले कोठा भरिएको छ, जस्तै मेरो मन तिम्रो यादले।</p></div>
-        <div class="day-box"><span class="day-title">Day 25. 18 February - सुजना श्रेष्ठ</span><p class="day-content">म तिमीलाई होइन, तिम्रो खुसीलाई प्रेम गर्छु। तिमी सुरक्षित रहनु सुजना।</p></div>
-        <div class="day-box"><span class="day-title">Day 26. 19 February - सुजना श्रेष्ठ</span><p class="day-content">आज शरीरमा ज्वरो अलि बढी नै छ। एकोहोरो प्रेमले मलाई हरेक दिन नयाँ जन्म दिइरहेको छ।</p></div>
-        <div class="day-box"><span class="day-title">Day 27. 20 February - सुजना श्रेष्ठ</span><p class="day-content">आज रातको सन्नाटामा तिम्रो आवाज कल्पिँदै छु। तिम्रो दुःख मलाई देउ र मेरो खुसी तिमी लैजाउ।</p></div>
-        <div class="day-box"><span class="day-title">Day 28. 21 February - सुजना श्रेष्ठ</span><p class="day-content">फोक्सोको समस्याले सताउन थाल्यो। लाग्छ, मेरो अन्तिम सास पनि तिम्रै नामको स्पन्दनमा रोकिनेछ।</p></div>
-        <div class="day-box"><span class="day-title">Day 29. 22 February - सुजना श्रेष्ठ</span><p class="day-content">आज फेरि त्यही ३:३७ मा आँखा खुल्यो। अन्धकार कोठामा म र तिम्रो याद मात्र बाँकी छौं।</p></div>
-        <div class="day-box"><span class="day-title">Day 30. 23 February - सुजना श्रेष्ठ</span><p class="day-content">३० दिन पूरा भए। महिना फेरियो, क्यालेन्डर फेरियो, तर मेरो मुटुमा तिम्रो स्थान कहिल्यै फेरिएन।</p></div>
-        <div class="day-box"><span class="day-title">Day 31. 24 February - सुजना श्रेष्ठ</span><p class="day-content">आजको रात निकै चिसो छ। मेरो प्रेम निस्वार्थ छ, जस्तै एउटा मन्दिरको दियो।</p></div>
-        <div class="day-box"><span class="day-title">Day 32. 25 February - सुजना श्रेष्ठ</span><p class="day-content">आज स्वास्थ्यले निकै दुःख दियो। मेरो बाँच्ने इच्छा शक्ति तिम्रो प्रेममा अडिएको छ।</p></div>
-        <div class="day-box"><span class="day-title">Day 33. 26 February - सुजना श्रेष्ठ</span><p class="day-content">आज मनले तिम्रो आवाज सुन्न निकै तिर्सना गर्यो। प्रेममा मौनता जति शक्तिशाली हुन्छ, शब्द फिक्का।</p></div>
-        <div class="day-box"><span class="day-title">Day 34. 28 February - सुजना श्रेष्ठ</span><p class="day-content">फेब्रुअरीको अन्तिम दिन। भोलिदेखि मार्च सुरु हुनेछ, उही पुरानो र अटल प्रेम। सुजना, तिमी सधैँ मेरो प्रार्थनामा हुनेछौ।</p></div>
+        <div class="day-box"><span class="day-title">Day 1. 25 January - <span class="bold-name">सुजना श्रेष्ठ</span></span><p class="day-content">आजदेखि यो मौन अनुष्ठान सुरु गर्दैछु। रातको साढे ३ बजे म तिम्रो नामको पहिलो अक्षर कोर्दैछु।</p></div>
+        <div class="day-box"><span class="day-title">Day 2. 26 January - <span class="bold-name">सुजना श्रेष्ठ</span></span><p class="day-content">तिम्रो फोटोले दिनभरिको काम र थकानको सबै मेटादिन्छ। म पागल जस्तै कहिले फोटो हेरेर हाँस्छु भने कहिले आँसु झर्छ।</p></div>
+        <div class="day-box"><span class="day-title">Day 3. 27 January - <span class="bold-name">सुजना श्रेष्ठ</span></span><p class="day-content">आज मनले नमानेर म तिम्रो पुराना Tiktok हेर्दै थिए। उसको खुसीमा म खुसी हुनु नै मेरो प्रेम हो। 😔</p></div>
+        <div class="day-box"><span class="day-title">Day 4. 28 January - <span class="bold-name">सुजना श्रेष्ठ</span></span><p class="day-content">तिम्रो संसारमा मेरो लागि कुनै झ्याल खुला छैन, तर मेरो संसारको त ढोका नै तिम्रो नाममा अडिएको छ।</p></div>
+        <div class="day-box"><span class="day-title">Day 5. 29 January - <span class="bold-name">सुजना श्रेष्ठ</span></span><p class="day-content">शब्दहरू हराएका छन्। मन भारी छ, शरीर गल्दैछ। केवल तिम्रो नाम लेखेरै चित्त बुझाउँदैछु।</p></div>
+        <div class="day-box"><span class="day-title">Day 6. 30 January - <span class="bold-name">सुजना श्रेष्ठ</span></span><p class="day-content">३:३७—फेरि त्यही समय। तिम्रो मुस्कान सम्झिँदा मलाई मृत्युसँग डर लाग्न छोड्छ।</p></div>
+        <div class="day-box"><span class="day-title">Day 7. 31 January - <span class="bold-name">सुजना श्रेष्ठ</span></span><p class="day-content">जनवरीको बिदाइ। ऐनामा हेरेँ—आँखा गाडिएका छन्, तर नानीमा अझै तिम्रो तस्बिर कैद छ।</p></div>
+        <div class="day-box"><span class="day-title">Day 8. 01 February - <span class="bold-name">सुजना श्रेष्ठ</span></span><p class="day-content">फेब्रुअरीको पहिलो किरण। मेरो लागि त हरेक महिना तिम्रै हो।</p></div>
+        <div class="day-box"><span class="day-title">Day 9. 02 February - <span class="bold-name">सुजना श्रेष्ठ</span></span><p class="day-content">आज स्वास्थ्यले अलि बढी नै परीक्षा लियो। सास फेर्न गाह्रो हुँदा पनि तिम्रो नाम लेख्न छुटाउन सकिनँ।</p></div>
+        <div class="day-box"><span class="day-title">Day 10. 03 February - <span class="bold-name">सुजना श्रेष्ठ</span></span><p class="day-content">दशौँ दिन। आज मनले तिम्रो आवाज सुन्न निकै खोज्यो।</p></div>
+        <div class="day-box"><span class="day-title">Day 11. 04 February - <span class="bold-name">सुजना श्रेष्ठ</span></span><p class="day-content">भोलि १२ औँ दिन—जसलाई म 'अनलकी' मान्छु। ए भगवान, मलाई अझै केही समय देऊ।</p></div>
+        <div class="day-box"><span class="day-title">Day 12. 05 February - <span class="bold-name">सुजना श्रेष्ठ</span></span><p class="day-content">अन्ततः त्यही भयो। तिम्रो पोस्ट: "उसको मनमा म अटेन मेरो मनबाट उ हटेन 😣"। मुटु नै निकालिएको जस्तो भो।</p></div>
+        <div class="day-box"><span class="day-title">Day 13. 06 February - <span class="bold-name">सुजना श्रेष्ठ</span></span><p class="day-content">तिम्रो आँखामा आँसु आउनु मेरो लागि मृत्युभन्दा कम छैन। तिमीलाई सारा खुसी मिलोस्।</p></div>
+        <div class="day-box"><span class="day-title">Day 14. 07 February (Rose Day) - <span class="bold-name">सुजना श्रेष्ठ</span></span><p class="day-content">मेरो हरेक प्रार्थनाको थुँगामा तिम्रो नाम सधैँ ताजा रहनेछ।</p></div>
+        <div class="day-box"><span class="day-title">Day 15. 08 February (Propose Day) - <span class="bold-name">सुजना श्रेष्ठ</span></span><p class="day-content">६ वर्षअघि नै मैले आफ्नो सारा अस्तित्व तिम्रो नाममा सुम्पिसकेको थिएँ।</p></div>
+        <div class="day-box"><span class="day-title">Day 16. 09 February (Chocolate Day) - <span class="bold-name">सुजना श्रेष्ठ</span></span><p class="day-content">जब तिम्रो त्यो '०३:३७ वाला मुस्कान' को याद आउँछ, सारा संसार गुलियो लाग्छ।</p></div>
+        <div class="day-box"><span class="day-title">Day 17. 10 February (Teddy Day) - <span class="bold-name">सुजना श्रेष्ठ</span></span><p class="day-content">कुनै गुनासो छैन, कुनै अपेक्षा छैन—बस, एउटा अबोध र निस्वार्थ समर्पण छ।</p></div>
+        <div class="day-box"><span class="day-title">Day 18. 11 February (Promise Day) - <span class="bold-name">सुजना श्रेष्ठ</span></span><p class="day-content">मैले तिम्रो लागि एउटा पवित्र ठाउँ सुरक्षित राख्ने बाचा गरेको छु।</p></div>
+        <div class="day-box"><span class="day-title">Day 19. 12 February (Hug Day) - <span class="bold-name">सुजना श्रेष्ठ</span></span><p class="day-content">दूरी जतिसुकै होस्, मेरो विचारले तिमीलाई सधैँ एउटा न्यानो घेरामा राखिरहनेछ।</p></div>
+        <div class="day-box"><span class="day-title">Day 20. 13 February (Kiss Day) - <span class="bold-name">सुजना श्रेष्ठ</span></span><p class="day-content">तिम्रो अनुहारको त्यो चमक नै मेरो लागि हरेक बिहानीको सूर्योदय हो।</p></div>
+        <div class="day-box"><span class="day-title">Day 21. 14 February (Valentine's Day) - <span class="bold-name">सुजना श्रेष्ठ</span></span><p class="day-content">आज २१ औँ दिन। तिमी मेरो अस्तित्वको अनिवार्य बानी हौ।</p></div>
+        <div class="day-box"><span class="day-title">Day 22. 15 February - <span class="bold-name">सुजना श्रेष्ठ</span></span><p class="day-content">बानी त बस्यो, तर तिम्रो यादको गहिराइ नाप्ने कुनै यन्त्र भइदिए हुन्थ्यो।</p></div>
+        <div class="day-box"><span class="day-title">Day 23. 16 February - <span class="bold-name">सुजना श्रेष्ठ</span></span><p class="day-content">आज कोठाको शून्यताले मलाई जिस्काइरहेको छ। तिम्रो पुरानो हाँसोको क्लिप हेर्दै दिन बिताएँ।</p></div>
+        <div class="day-box"><span class="day-title">Day 24. 17 February - <span class="bold-name">सुजना श्रेष्ठ</span></span><p class="day-content">आजदेखि चुरोट धेरै कम गरेको छु। तिम्रो लागि स्वस्थ हुने प्रयास। फोक्सोमा भारीपन छ।</p></div>
+        <div class="day-box"><span class="day-title">Day 25. 18 February - <span class="bold-name">सुजना श्रेष्ठ</span></span><p class="day-content">म तिमीलाई होइन, तिम्रो खुसीलाई प्रेम गर्छु। सुरक्षित रहनु सुजना।</p></div>
+        <div class="day-box"><span class="day-title">Day 26. 19 February - <span class="bold-name">सुजना श्रेष्ठ</span></span><p class="day-content">आज शरीरमा ज्वरो अलि बढी नै छ। मेरो मन तिम्रो यादले भरिएको छ।</p></div>
+        <div class="day-box"><span class="day-title">Day 27. 20 February - <span class="bold-name">सुजना श्रेष्ठ</span></span><p class="day-content">रातको सन्नाटामा तिम्रो आवाज कल्पिँदै छु। मेरो बाँकी खुसी तिमी लैजाउ।</p></div>
+        <div class="day-box"><span class="day-title">Day 28. 21 February - <span class="bold-name">सुजना श्रेष्ठ</span></span><p class="day-content">फोक्सोको समस्याले सताउन थाल्यो। अन्तिम सास पनि तिम्रै नाममा रोकिनेछ।</p></div>
+        <div class="day-box"><span class="day-title">Day 29. 22 February - <span class="bold-name">सुजना श्रेष्ठ</span></span><p class="day-content">एकोहोरो प्रेमले मलाई हरेक दिन नयाँ जन्म दिइरहेको छ। ३:३७ मा फेरि आँखा खुल्यो।</p></div>
+        <div class="day-box"><span class="day-title">Day 30. 23 February - <span class="bold-name">सुजना श्रेष्ठ</span></span><p class="day-content">३० दिन पूरा भए। क्यालेन्डर फेरियो, तर मुटुमा तिम्रो स्थान कहिल्यै फेरिएन।</p></div>
+        <div class="day-box"><span class="day-title">Day 31. 24 February - <span class="bold-name">सुजना श्रेष्ठ</span></span><p class="day-content">आजको रात निकै चिसो छ। मेरो प्रेम मन्दिरको दियो जस्तै निस्वार्थ छ।</p></div>
+        <div class="day-box"><span class="day-title">Day 32. 25 February - <span class="bold-name">सुजना श्रेष्ठ</span></span><p class="day-content">आज स्वास्थ्यले निकै दुःख दियो। बाँच्ने इच्छा शक्ति अनुष्ठान पूरा गर्नमा अडिएको छ।</p></div>
+        <div class="day-box"><span class="day-title">Day 33. 26 February - <span class="bold-name">सुजना श्रेष्ठ</span></span><p class="day-content">आज मनले तिम्रो आवाज सुन्न तिर्सना गर्यो। प्रेममा मौनता शक्तिशाली हुँदो रहेछ।</p></div>
+        <div class="day-box"><span class="day-title">Day 34. 28 February - <span class="bold-name">सुजना श्रेष्ठ</span></span><p class="day-content">फेब्रुअरी महिनाको अन्तिम दिन। भोलिदेखि मार्च, तर उही पुरानो र अटल प्रेम।</p></div>
     </div>
 
     <div id="adhura" class="section">
-        <div class="main-header-title">मेरा ती अधुरा शब्दहरू...!</div>
+        <div class="title-adhura">मेरा ती अधुरा शब्दहरू...!</div>
         <div class="bold-feeling">
-            <p>"मेरा ती अधुरा शब्दहरू....! जो सायद यो जुनीमा तिम्रो सामुन्ने कहिल्यै पोखिन पाउने छैनन्। म तिमीलाई कति माया गर्छु भन्ने कुरा सायद मेरो मौनतामै बिलाएर जानेछ। म अलमलमा छु— यो प्रेम हो कि पागलपन, या नाम दिन नसकिएको कुनै अनाम तिर्सना, म आफैँलाई थाहा छैन।"</p>
-            
-            <p>"केही शब्दहरू अधुरै रहनुमा सायद एउटा बेग्लै अर्थ लुकेको हुन्छ। यो जुनीमा तिमीसँग जुधेर तिमीलाई नै चाहेको कुरा सुनाउने साहस ममा कहिल्यै जुटेन। तिमीप्रतिको यो लगाव प्रेमको पराकाष्ठा हो या मेरो उन्माद, म शब्दमा व्यक्त गर्न असमर्थ छु।"</p>
-            
-            <p>"सायद समयले हाम्रो संवादको पानामा 'अपूर्णता' नै लेखिदिएको छ। तिमीलाई अगाडि उभ्याएर मनका कुरा खोल्ने सौभाग्य यो जुनीमा जुर्ने छैन। यो मेरो प्रेम हो, पागलपन हो, या एउटा कहिल्यै नसुल्झिने अल्झन— म आफैँ पनि यसको उत्तर खोजिरहेको छु।"</p>
+            <p>"मेरा ती अधुरा शब्दहरू....! जो सायद यो जुनीमा तिम्रो सामुन्ने कहिल्यै पोखिन पाउने छैनन्। म तिमीलाई कति माया गर्छु भन्ने कुरा सायद मेरो मौनतामै बिलाएर जानेछ।"</p>
+            <p>"केही शब्दहरू अधुरै रहनुमा सायद एउटा बेग्लै अर्थ लुकेको हुन्छ। तिमीप्रतिको यो लगाव प्रेमको पराकाष्ठा हो या मेरो उन्माद, म शब्दमा व्यक्त गर्न असमर्थ छु।"</p>
         </div>
     </div>
 
-    <div id="shayari" class="section">
-        <div class="main-header-title">तिम्रा लागि "सायरीहरू"</div>
-        <p style="text-align:center; font-style:italic; font-size: 20px; margin-top: 50px;">क्रमशः आउँदैछ...</p>
-    </div>
-
+    <script>
+        function toggleNightMode() {
+            const body = document.body;
+            const btn = document.getElementById('nightBtn');
+            body.classList.toggle('dark-mode');
+            btn.innerHTML = body.classList.contains('dark-mode') ? "☀️ डे मोड" : "🌙 नाइट मोड";
+        }
+    </script>
 </body>
 </html>
