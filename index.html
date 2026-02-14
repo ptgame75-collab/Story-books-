@@ -5,25 +5,32 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>अधिराज - मनको भावना</title>
     <style>
-        /* लोडिङ स्क्रिन */
+        /* लोडिङ स्क्रिन: कालो ब्याकग्राउन्ड र रातो धर्को */
         #loadingScreen { 
             position: fixed; top: 0; left: 0; right: 0; bottom: 0; 
             background: #000; display: flex; flex-direction: column; justify-content: center; align-items: center; z-index: 9999; 
         }
-        .loader-text { color: #fff; font-family: serif; font-size: 20px; margin-bottom: 20px; }
-        .progress-bar { width: 200px; height: 3px; background: #333; }
-        .progress-fill { width: 0%; height: 100%; background: #d32f2f; animation: fillBar 2s forwards; }
+        .loader-text { color: #fff; font-family: serif; font-size: 20px; margin-bottom: 20px; letter-spacing: 2px; }
+        .progress-bar { width: 200px; height: 3px; background: #333; border-radius: 10px; overflow: hidden; }
+        .progress-fill { width: 0%; height: 100%; background: #d32f2f; animation: fillBar 2.5s forwards; }
         @keyframes fillBar { 100% { width: 100%; } }
 
         body { background: #fcfbf7; font-family: 'Georgia', serif; margin: 0; display: flex; flex-direction: column; align-items: center; opacity: 0; transition: 1s; -webkit-user-select: none; user-select: none; }
         body.visible { opacity: 1; }
+
+        /* माथिल्लो गोलो फोटो र शीर्षक */
         .header { margin-top: 50px; text-align: center; }
-        .header h1 { color: #4a3728; font-size: 24px; }
+        .header img { width: 120px; height: 120px; border-radius: 50%; border: 3px solid #fff; box-shadow: 0 5px 15px rgba(0,0,0,0.1); object-fit: cover; }
+        .header h1 { color: #4a3728; font-size: 24px; margin-top: 15px; font-weight: bold; }
 
         .main-content { width: 90%; max-width: 400px; margin-top: 40px; display: flex; flex-direction: column; gap: 20px; }
-        .diary-card { background: white; padding: 30px 20px; border-radius: 15px; text-decoration: none; display: block; border-left: 6px solid #d32f2f; box-shadow: 0 5px 15px rgba(0,0,0,0.05); text-align: center; }
+        
+        /* कार्डहरूको डिजाइन */
+        .diary-card { background: white; padding: 30px 20px; border-radius: 15px; text-decoration: none; display: block; border-left: 8px solid #d32f2f; box-shadow: 0 10px 25px rgba(0,0,0,0.05); text-align: center; transition: 0.2s; }
+        .diary-card:active { transform: scale(0.98); }
         .diary-card h2 { color: #2c3e50; font-size: 19px; margin: 0; }
         .diary-card p { color: #d32f2f; font-size: 13px; margin-top: 10px; font-weight: bold; }
+
         .footer { margin-top: auto; padding: 30px; color: #999; font-size: 12px; }
     </style>
 </head>
@@ -34,22 +41,25 @@
         <div class="progress-bar"><div class="progress-fill"></div></div>
     </div>
 
-    <div class="header"><h1>मनको भावना</h1></div>
+    <div class="header">
+        <img src="4870.png" alt="Logo">
+        <h1>मनको भावना</h1>
+    </div>
 
     <div class="main-content">
         <a href="message.html#anusthan" class="diary-card">
-            <h2>169 अनुष्ठान</h2>
-            <p>पढ्नको लागि ट्याप गर्नुहोस्</p>
+            <h2>१६९ अनुष्ठान लेख</h2>
+            <p>पढ्नको लागि यहाँ ट्याप गर्नुहोस्</p>
         </a>
 
         <a href="message.html#adhura" class="diary-card">
-            <h2>मेरा अधुरा शब्दहरू</h2>
-            <p>पढ्नको लागि ट्याप गर्नुहोस्</p>
+            <h2>मेरो अधुरा शब्दहरू</h2>
+            <p>पढ्नको लागि यहाँ ट्याप गर्नुहोस्</p>
         </a>
 
         <a href="message.html#shayari" class="diary-card">
             <h2>तिम्रा लागि "सायरीहरू"</h2>
-            <p>क्रमशः आउँदैछ...</p>
+            <p>पढ्नको लागि यहाँ ट्याप गर्नुहोस्</p>
         </a>
     </div>
 
@@ -60,7 +70,7 @@
             setTimeout(() => {
                 document.getElementById('loadingScreen').style.display = 'none';
                 document.body.classList.add('visible');
-            }, 2000);
+            }, 2500);
         });
     </script>
 </body>
