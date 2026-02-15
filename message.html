@@ -4,57 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>दस्ताबेज - अधिराज</title>
-    <style>
-        :root { --bg: #fcfbf7; --text: #333; --red: #d32f2f; --card-bg: #ffffff; --line: #ccc; }
-        .dark-mode { --bg: #121212; --text: #e0e0e0; --red: #ff5252; --card-bg: #1e1e1e; --line: #444; }
-
-        body { 
-            background: var(--bg); color: var(--text); font-family: 'Georgia', serif; 
-            padding: 20px; margin: 0; -webkit-user-select: none; user-select: none; 
-            transition: opacity 1.2s ease, background 0.4s; line-height: 1.8;
-        }
-        
-        .fade-out { opacity: 0; }
-
-        .toolbar { 
-            position: sticky; top: 0; background: var(--bg); padding: 10px 0; 
-            display: flex; justify-content: space-between; border-bottom: 1px solid var(--line); 
-            z-index: 100; margin-bottom: 30px;
-        }
-
-        .btn { 
-            padding: 7px 18px; border: 1px solid var(--line); 
-            background: var(--card-bg); cursor: pointer; border-radius: 5px; 
-            text-decoration: none; color: var(--text); font-size: 14px; font-weight: bold;
-        }
-
-        .section { display: none; max-width: 650px; margin: 0 auto; animation: fadeIn 0.6s ease-out; }
-        .section:target { display: block; } 
-
-        .title-container { text-align: center; margin-bottom: 35px; }
-        .main-title { font-size: 32px; font-weight: 900; margin-bottom: 10px; display: block; }
-        .straight-line { width: 100%; height: 2px; background: var(--line); border: none; margin-bottom: 20px; }
-        .sub-title { font-size: 40px; font-weight: 900; color: var(--text); display: block; margin-bottom: 30px; }
-
-        .intro-text { 
-            font-size: 22px; margin-bottom: 50px; 
-            text-align: justify; font-weight: 900;
-            line-height: 1.9; color: var(--text);
-        }
-
-        .day-box { 
-            background: var(--card-bg); border-left: 6px solid var(--red); 
-            padding: 18px; margin-bottom: 20px; 
-            box-shadow: 0 4px 12px rgba(0,0,0,0.06); border-radius: 0 8px 8px 0;
-        }
-        .day-title { color: var(--red); display: block; margin-bottom: 8px; font-size: 16px; font-weight: 900; }
-        .bold-name { font-weight: 900; font-size: 17px; color: var(--text); } 
-        .day-content { font-size: 19px; margin: 0; font-weight: 900; line-height: 1.6; }
-
-        .bold-feeling p { font-weight: 900; font-size: 24px; line-height: 1.8; margin-bottom: 35px; }
-
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body oncontextmenu="return false;">
 
@@ -125,20 +75,33 @@
         </div>
         <div class="bold-feeling">
             <p>"मेरा ती अधुरा शब्दहरू....! जो सायद यो जुनीमा तिम्रो सामुन्ने कहिल्यै पोखिन पाउने छैनन्। म तिमीलाई कति माया गर्छु भन्ने कुरा सायद मेरो मौनतामै बिलाएर जानेछ।"</p>
+
             <div class="photo-wrapper">
-    <img src="5003.jpg" alt="Chat Screenshot" class="diary-image">
+                <img src="5003.jpg" alt="Memories" class="diary-image">
             </div>
-            
+
             <p>"केही शब्दहरू अधुरै रहनुमा सायद एउटा बेग्लै अर्थ लुकेको हुन्छ। यो मेरो प्रेम हो, पागलपन हो, या एउटा कहिल्यै नसुल्झिने अल्झन— म आफैँ पनि यसको उत्तर खोजिरहेको छु।"</p>
         </div>
     </div>
 
+    <div id="shayari" class="section">
+        <div class="title-container">
+            <span class="main-title" style="color: var(--red);">तिम्रा लागि "सायरीहरू"</span>
+            <hr class="straight-line">
+        </div>
+        <div class="bold-feeling">
+            <p>यहाँ तपाईँले आफ्ना सायरीहरू थप्न सक्नुहुन्छ...</p>
+        </div>
+    </div>
+
     <script>
+        // पछाडि जानको लागि फङ्सन
         function goBack() {
             document.body.classList.add('fade-out');
             setTimeout(function() { window.location.href = "index.html"; }, 1200); 
         }
 
+        // नाइट मोड परिवर्तन गर्ने फङ्सन
         function toggleNightMode() {
             const body = document.body;
             const btn = document.getElementById('nightBtn');
@@ -148,15 +111,3 @@
     </script>
 </body>
 </html>
-.photo-wrapper {
-    text-align: center;
-    margin: 25px 0;
-}
-.diary-image {
-    width: 90%;
-    max-width: 350px;
-    height: auto;
-    border-radius: 15px;
-    border: 2px solid var(--line);
-    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-}
