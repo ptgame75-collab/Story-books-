@@ -9,16 +9,25 @@
         /* फन्ट साइज २५% घटाउन र मोबाइल सन्तुलनका लागि CSS */
         body { font-family: 'Arial', sans-serif; line-height: 1.5; color: #333; transition: 0.3s; }
         .intro-text p, .day-content, .bold-feeling p { font-size: 16px; margin-bottom: 12px; }
-        .main-title { font-size: 20px; font-weight: bold; }
-        .sub-title { font-size: 14px; }
+        
+        /* शीर्षकहरू ठूलो बनाइएको */
+        .main-title { font-size: 28px; font-weight: bold; display: block; margin-top: 10px; }
+        .sub-title { font-size: 20px; font-weight: 600; display: block; margin-top: 5px; }
+        
         .day-title { font-size: 15px; font-weight: bold; display: block; margin-bottom: 5px; }
         .day-box { border: 1px solid #ddd; padding: 12px; margin-bottom: 10px; border-radius: 5px; }
         .diary-image { max-width: 90%; height: auto; display: block; margin: 15px auto; border-radius: 8px; }
         .special-note { color: #d9534f; font-size: 18px !important; font-weight: bold; margin-top: 15px; }
         
+        /* अडियो बटन डिजाइन */
+        .audio-controls { margin: 15px 0; text-align: center; }
+        .audio-btn { background: none; border: none; font-size: 32px; cursor: pointer; padding: 5px 15px; color: #d9534f; transition: 0.2s; }
+        .audio-btn:active { transform: scale(0.9); }
+
         /* नाइट मोड सेटिङ */
         .dark-mode { background-color: #1a1a1a; color: #f0f0f0; }
         .dark-mode .day-box { border-color: #444; background: #222; }
+        .dark-mode .audio-btn { color: #ff4d4d; }
     </style>
 </head>
 <body oncontextmenu="return false;">
@@ -29,13 +38,17 @@
     </div>
 
     <div id="anusthan" class="section">
-        <div class="title-container">
+        <div class="title-container" style="text-align: center;">
             <span class="main-title" style="color: #d9534f;">169 दिनको अनुष्ठान</span>
             <hr class="straight-line">
             <span class="sub-title">अन्तिम इच्छा</span>
+            
+            <div class="audio-controls">
+                <button onclick="toggleSpeech('intro-content', this)" class="audio-btn">▶</button>
+            </div>
         </div>
 
-        <div class="intro-text">
+        <div class="intro-text" id="intro-content">
             <p>थाहा छैन आज नै म यो सन्देश किन लेख्दैछु। आज २५ January हो, घडीले रातको साढे ३ बजेको संकेत गर्दैछ, कोठामा शान्ति यस्तो छ कि मलाई मेरै मुटुको धड्कन कुनै बाजा जस्तै सुनिरहेको छ। हिजोआज मेरो स्वास्थ्य धेरै नै खराब चल्दैछ, र थाहा छैन भोलिको सूर्य मेरो लागि कस्तो हुनेछ। त्यसैले नै लेख्दैछु।</p>
             <p>यदि मरे भने तिम्रो बारेमा अन्तिमचोटि लेख्न पाउँ। तर यदि यो सन्देश १३ जुलाईमा तिम्रो मोबाइलको स्क्रिनमा झल्कियो भने सम्झिनु म यो धर्तीमा कतै अझै जीवितै छु। तर, यदि यो सन्देश तिम्रो मोबाइलसम्म पुगेन र मेरो मोबाइलको diary मा मात्र कैद रह्यो भने—म यो संसारलाई अलविदा भनेर भगवानलाई प्यारो भइसकेको हुनेछु।</p>
             <p>यदि म बाँचिरहें भने, १३ जुलाईमा यो सन्देश तिम्रो मोबाइलमा एउटा याद बनेर आउनेछ। के गर्दै हौली आजभोलि? सायद आरामै हौली, र धेरै खुसी पनि। किनभने अचेल मैले तिमीलाई disturb गर्ने गरेको छैन। तर मेरो लागि यस्तो कुनै पल छैन, जुन तिमीलाई याद गरे बिना बितोस्। यस्तो कुनै बिहानी हुँदैन, जुन बिहानी म तिम्रो फोटो हेरेर good morning भन्दिनँ। र कुनै यस्तो रात हुँदैन, जुन रातमा मेरो छाती जलाउने सिगरेट च्यापेर तिम्रो फोटो मोबाइलमा zoom गर्दै तिम्रो त्यो हँसिलो अनुहारमा नहराऊँ।</p>
@@ -80,12 +93,16 @@
     </div>
 
     <div id="adhura" class="section">
-        <div class="title-container">
+        <div class="title-container" style="text-align: center;">
             <span class="main-title" style="color: #333;">मेरा ती अधुरा शब्दहरू...!</span>
             <hr class="straight-line">
+            
+            <div class="audio-controls">
+                <button onclick="toggleSpeech('adhura-content', this)" class="audio-btn">▶</button>
+            </div>
         </div>
         
-        <div class="bold-feeling">
+        <div class="bold-feeling" id="adhura-content">
             <p>"आज फेरि ती अधुरा शब्दहरू मनको कुनामा छटपटाइरहेका छन्, जुन सायद यो जुनीमा तिम्रो सामुन्ने कहिल्यै पोखिन पाउने छैनन्। तिमीलाई कति माया गर्छु भन्ने प्रश्नको उत्तर आज म आफैँसँग पनि छैन। समयको यो निस्पट्ट अँध्यारोमा, जब संसार निदाइरहेको हुन्छ, मेरो मनले मलाई नै शून्यतामा चिच्याई-चिच्याई सोध्ने गर्छ— 'के तेरो यो पागलपन, यो प्रतीक्षा र यो मौन व्यवहारलाई साँच्चै नै माया भनिन्छ?'"</p>
             <p>"साँच्चै, मायाको कुनै परिभाषा हुँदो हो त म तिमीलाई मेरो हृदयको पाना-पानामा देखाउने थिएँ। तर अफसोस, मेरो प्रेम त त्यो रित्तो आकाश जस्तै भएको छ, जहाँ बादलहरू त टम्म लाग्छन् तर तिमीसम्म बर्सिन पाउँदैनन्। म तिम्रो उपस्थितिको आभासमा बाँचेको छु, तर तिम्रो सामिप्यता मेरो भाग्यमा कतै कोरिएकै छैन।"</p>
             <p>"तिमीलाई भन्नु पर्ने कुराहरू पहाड बनेर उभिएका छन्, तर ओठसम्म आउँदा ती पत्थर बनिदिन्छन्। मेरो मन एउटा यस्तो किनार भएको छ, जहाँ तिम्रा यादहरू लहर बनेर आउँछन्, तर मलाई अझै एक्लो बनाएर फर्किन्छन्।"</p>
@@ -94,12 +111,16 @@
             <p>"अनि साँच्चै भन्नुपर्दा यो प्रश्नको उत्तर मलाई पनि थाहा छैन। के तिमी भन्न सक्छौ यो मेरो व्यवहार साँच्ची नै प्रेम हो। या फेरि त्यो झुटो शब्द, जसलाई मैले प्रेमको नाम दिएर कसैको हाँसोलाई आफ्नो जिन्दगी बनाएको छु।"</p>
         </div>
 
-        <div class="title-container" style="margin-top: 50px;">
+        <div class="title-container" style="margin-top: 50px; text-align: center;">
             <span class="main-title">प्रेमको अनाधार...!</span>
             <hr class="straight-line">
+            
+            <div class="audio-controls">
+                <button onclick="toggleSpeech('anadhar-content', this)" class="audio-btn">▶</button>
+            </div>
         </div>
 
-        <div class="bold-feeling">
+        <div class="bold-feeling" id="anadhar-content">
             <p>"प्रतिष्ठाको यो लामो प्रतीक्षामा मैले कति रातहरू तिम्रै यादको सिरानी हालेर बिताएँ, त्यसको कुनै हिसाब छैन। तिम्रो मौनताले मलाई हरेक पल कमजोर बनाउँछ, तर तिम्रो एउटा मुस्कानले फेरि बाँच्ने नयाँ आधार दिन्छ। सायद यो नै मेरो प्रेमको सबैभन्दा ठूलो कमजोरी हो।"</p>
             <div class="photo-wrapper">
                 <img src="5003.jpg" alt="Memories" class="diary-image">
@@ -109,6 +130,45 @@
     </div>
 
     <script>
+        // स्मार्ट भ्वाइस सिस्टम (स्मॉल लेटरमा लेखिएको)
+        let synth = window.speechSynthesis;
+        let speech = new SpeechSynthesisUtterance();
+        let isplaying = false;
+        let currentbutton = null;
+
+        function toggleSpeech(id, btn) {
+            if (isplaying && currentbutton === btn) {
+                // यदि पज थिचियो भने
+                synth.pause();
+                isplaying = false;
+                btn.innerHTML = "▶";
+            } else if (!isplaying && currentbutton === btn) {
+                // यदि पज पछि फेरि त्यही बटन थिचियो भने (Resume)
+                synth.resume();
+                isplaying = true;
+                btn.innerHTML = "▌▌";
+            } else {
+                // नयाँ खण्ड सुरु गर्दा
+                synth.cancel();
+                let content = document.getElementById(id).innerText;
+                speech.text = content;
+                speech.lang = 'ne-NP'; // नेपाली भाषा
+                speech.rate = 0.9;     // बोलीको गति
+                speech.pitch = 1.0;    // पिच
+                
+                speech.onend = function() {
+                    btn.innerHTML = "▶";
+                    isplaying = false;
+                };
+
+                synth.speak(speech);
+                if (currentbutton) currentbutton.innerHTML = "▶";
+                btn.innerHTML = "▌▌";
+                isplaying = true;
+                currentbutton = btn;
+            }
+        }
+
         function goBack() {
             document.body.classList.add('fade-out');
             setTimeout(function() { window.location.href = "index.html"; }, 1000); 
