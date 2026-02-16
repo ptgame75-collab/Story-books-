@@ -1,3 +1,11 @@
+/* style.css - अधिराज की डायरी 068 */
+
+/* Snickles फन्ट लोड गर्ने */
+@font-face {
+    font-family: 'Snickles';
+    src: url('Snickles.ttf');
+}
+
 /* root variables र basic styles */
 :root { 
     --bg: #fcfbf7; 
@@ -61,8 +69,17 @@ body {
 .straight-line { width: 100%; height: 2px; background: var(--line); border: none; margin-bottom: 20px; }
 .sub-title { font-size: 40px; font-weight: 900; color: var(--text); display: block; margin-bottom: 30px; }
 
+/* English अक्षरहरूका लागि Snickles फन्ट */
+.snickles-font {
+    font-family: 'Snickles', cursive;
+    font-size: 26px; /* फन्ट अलि सानो देखिने हुनाले यसलाई बढाइएको */
+    font-weight: normal;
+    text-transform: uppercase;
+}
+
+/* नेपाली अक्षरको साइज र बोल्ड प्रभाव परिवर्तन गरिएको */
 .intro-text { 
-    font-size: 22px; 
+    font-size: 22px; /* पहिले २२px नै थियो, यसलाई यथावत राख्दै बोल्ड गरिएको */
     margin-bottom: 50px; 
     text-align: justify; 
     font-weight: 900;
@@ -81,11 +98,13 @@ body {
 
 .day-title { color: var(--red); display: block; margin-bottom: 8px; font-size: 16px; font-weight: 900; }
 .bold-name { font-weight: 900; font-size: 17px; color: var(--text); } 
-.day-content { font-size: 19px; margin: 0; font-weight: 900; line-height: 1.6; }
+
+/* सामग्रीको अक्षर साइज १९px बाट बढाएर २२px बनाइएको ताकि पढ्न सजिलो होस् */
+.day-content { font-size: 22px; margin: 0; font-weight: 900; line-height: 1.6; }
 
 .bold-feeling p { font-weight: 900; font-size: 24px; line-height: 1.8; margin-bottom: 35px; }
 
-/* फोटोको लागि नयाँ डिजाइन */
+/* फोटोको डिजाइन यथावत */
 .photo-wrapper {
     text-align: center;
     margin: 30px 0;
