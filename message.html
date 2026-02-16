@@ -128,58 +128,6 @@
             <p>"केही शब्दहरू अधुरै रहनुमा सायद एउटा बेग्लै अर्थ लुकेको हुन्छ। यो मेरो प्रेम हो, पागलपन हो, या एउटा कहिल्यै नसुल्झिने अल्झन— म आफैँ पनि यसको उत्तर खोजिरहेको छु।"</p>
         </div>
     </div>
-
-    <script>
-        // स्मार्ट भ्वाइस सिस्टम (स्मॉल लेटरमा लेखिएको)
-        let synth = window.speechSynthesis;
-        let speech = new SpeechSynthesisUtterance();
-        let isplaying = false;
-        let currentbutton = null;
-
-        function toggleSpeech(id, btn) {
-            if (isplaying && currentbutton === btn) {
-                // यदि पज थिचियो भने
-                synth.pause();
-                isplaying = false;
-                btn.innerHTML = "▶";
-            } else if (!isplaying && currentbutton === btn) {
-                // यदि पज पछि फेरि त्यही बटन थिचियो भने (Resume)
-                synth.resume();
-                isplaying = true;
-                btn.innerHTML = "▌▌";
-            } else {
-                // नयाँ खण्ड सुरु गर्दा
-                synth.cancel();
-                let content = document.getElementById(id).innerText;
-                speech.text = content;
-                speech.lang = 'ne-NP'; // नेपाली भाषा
-                speech.rate = 0.9;     // बोलीको गति
-                speech.pitch = 1.0;    // पिच
-                
-                speech.onend = function() {
-                    btn.innerHTML = "▶";
-                    isplaying = false;
-                };
-
-                synth.speak(speech);
-                if (currentbutton) currentbutton.innerHTML = "▶";
-                btn.innerHTML = "▌▌";
-                isplaying = true;
-                currentbutton = btn;
-            }
-        }
-
-        function goBack() {
-            document.body.classList.add('fade-out');
-            setTimeout(function() { window.location.href = "index.html"; }, 1000); 
-        }
-
-        function toggleNightMode() {
-            const body = document.body;
-            const btn = document.getElementById('nightBtn');
-            body.classList.toggle('dark-mode');
-            btn.innerHTML = body.classList.contains('dark-mode') ? "☀️ डे मोड" : "🌙 नाइट मोड";
-        }
-    </script>
+    
 </body>
 </html>
