@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ne">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>अधुरा शब्दहरू - अधिराज</title>
+    <style>
+        body { font-family: 'Arial', sans-serif; line-height: 1.8; color: #333; background: #fcfbf7; padding: 80px 20px 20px 20px; transition: 0.3s; -webkit-user-select: none; user-select: none; }
+        .toolbar { position: fixed; top: 0; left: 0; right: 0; display: flex; justify-content: space-between; padding: 15px 20px; background: rgba(252, 251, 247, 0.95); border-bottom: 1px solid #ddd; z-index: 1000; backdrop-filter: blur(5px); }
+        .bold-feeling p { font-size: 19px; margin-bottom: 18px; font-weight: 900; text-align: justify; }
+        .main-title { font-size: 32px; font-weight: 900; display: block; margin-top: 10px; color: #5D4037; text-align: center; }
+        .straight-line { width: 100%; height: 1px; background: #ccc; border: none; margin-bottom: 20px; }
+        .diary-image { max-width: 95%; height: auto; display: block; margin: 25px auto; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+        .btn { text-decoration: none; color: #333; border: 1px solid #ccc; padding: 6px 15px; border-radius: 5px; font-weight: bold; background: #fff; cursor: pointer; }
+        .dark-mode { background-color: #121212; color: #e0e0e0; }
+        .dark-mode .toolbar { background: rgba(18, 18, 18, 0.95); border-color: #333; }
+        .dark-mode .btn { background: #1e1e1e; border-color: #333; color: #e0e0e0; }
+    </style>
+</head>
+<body oncontextmenu="return false;">
+    <div class="toolbar">
+        <a href="index.html" class="btn">← back</a>
+        <button class="btn" onclick="toggleNightMode()" id="nightBtn">🌙 नाइट मोड</button>
+    </div>
+
+    <div class="title-container">
+        <span class="main-title">मेरा ती अधुरा शब्दहरू...!</span>
+        <hr class="straight-line">
+    </div>
+
+    <div class="bold-feeling">
+        <p>"आज फेरि ती अधुरा शब्दहरू मनको कुनामा छटपटाइरहेका छन्, जुन सायद यो जुनीमा तिम्रो सामुन्ने कहिल्यै पोखिन पाउने छैनन्। तिमीलाई कति माया गर्छु भन्ने प्रश्नको उत्तर आज म आफैँसँग पनि छैन। समयको यो निस्पट्ट अँध्यारोमा, जब संसार निदाइरहेको हुन्छ, मेरो मनले मलाई नै शून्यतामा चिच्याई-चिच्याई सोध्ने गर्छ— 'के तेरो यो पागलपन, यो प्रतीक्षा र यो मौन व्यवहारलाई साँच्चै नै माया भनिन्छ?'"</p>
+        <p>"साँच्चै, मायाको कुनै परिभाषा हुँदो हो त म तिमीलाई मेरो हृदयको पाना-पानामा देखाउने थिएँ। तर अफसोस, मेरो प्रेम त त्यो रित्तो आकाश जस्तै भएको छ, जहाँ बादलहरू त टम्म लाग्छन् तर तिमीसम्म बर्सिन पाउँदैनन्। म तिम्रो उपस्थितिको आभासमा बाँचेको छु, तर तिम्रो सामिप्यता मेरो भाग्यमा कतै कोरिएकै छैन। एउटा यस्तो तृष्णा, जुन कहिल्यै तृप्त हुँदैन।"</p>
+        <p>"तिमीलाई भन्नु पर्ने कुराहरू पहाड बनेर उभिएका छन्, तर ओठसम्म आउँदा ती पत्थर बनिदिन्छन्। मेरो मन एउटा यस्तो किनार भएको छ, जहाँ तिम्रा यादहरू लहर बनेर आउँछन्, तर मलाई अझै एक्लो बनाएर फर्किन्छन्। मेरो मौनता नै मेरो प्रेमको सबैभन्दा ठूलो साक्षी हो।"</p>
+        <p>"सायद अर्को कुनै जन्म हुनेछ, जहाँ शब्दहरू अधुरा रहने छैनन्। जहाँ मेरो मौनताले तिम्रो हृदयलाई छुनेछ। अहिलेलाई भने, मेरा यी भावनाहरूलाई यही शून्यतामा विसर्जन गरिदिँदैछु। तिमीलाई टाढैबाट हेर्नु र तिम्रो खुसीमा आफ्नो अस्तित्व खोज्नु नै सायद मेरो प्रेमको अन्तिम गन्तव्य बन्यो।"</p>
+        <p>"जुन कथा कहिल्यै पूरा हुँदैन, त्यो नै सबैभन्दा सुन्दर र मर्मस्पर्शी हुने रहेछ। मेरो र तिम्रो यो आधा अधुरो कथा पनि मेरो लागि कुनै महाकाव्य भन्दा कम छैन।"</p>
+        <p>"अनि साँच्चै भन्नुपर्दा यो प्रश्नको उत्तर मलाई पनि थाहा छैन। के तिमी भन्न सक्छौ यो मेरो व्यवहार साँच्ची नै प्रेम हो। या फेरि त्यो झुटो शब्द, जसलाई मैले प्रेमको नाम दिएर कसैको हाँसोलाई आफ्नो जिन्दगी बनाएको छु।"</p>
+    </div>
+
+    <div class="title-container" style="margin-top: 50px;">
+        <span class="main-title">प्रेमको अनाधार...!</span>
+        <hr class="straight-line">
+    </div>
+
+    <div class="bold-feeling">
+        <p>"प्रतिष्ठाको यो लामो प्रतीक्षामा मैले कति रातहरू तिम्रै यादको सिरानी हालेर बिताएँ, त्यसको कुनै हिसाब छैन। तिम्रो मौनताले मलाई हरेक पल कमजोर बनाउँछ, तर तिम्रो एउटा मुस्कानले फेरि बाँच्ने नयाँ आधार दिन्छ। सायद यो नै मेरो प्रेमको सबैभन्दा ठूलो कमजोरी हो।"</p>
+        <div class="photo-wrapper">
+            <img src="5003.jpg" alt="Memories" class="diary-image">
+        </div>
+        <p>"केही शब्दहरू अधुरै रहनुमा सायद एउटा बेग्लै अर्थ लुकेको हुन्छ। यो मेरो प्रेम हो, पागलपन हो, या एउटा कहिल्यै नसुल्झिने अल्झन— म आफैँ पनि यसको उत्तर खोजिरहेको छु। यो अनाधार प्रेमको यात्रा कहाँ गएर ठोक्किने हो, त्यो त केवल समयलाई नै थाहा होला। मेरो यात्रा तिम्रै नामबाट सुरु भयो र तिम्रै नाममै विश्राम लिनेछ।"</p>
+    </div>
+
+    <script>
+        function toggleNightMode() {
+            const body = document.body;
+            body.classList.toggle('dark-mode');
+            const btn = document.getElementById('nightBtn');
+            btn.innerHTML = body.classList.contains('dark-mode') ? "☀️ डे मोड" : "🌙 नाइट मोड";
+        }
+    </script>
+</body>
+</html>
