@@ -107,8 +107,8 @@
 <body oncontextmenu="return false;">
 
     <div id="loadingScreen">
-        <video autoplay muted playsinline loop id="bgVideo">
-            <source src="intro.mp4" type="video/mp4">
+        <video autoplay muted playsinline loop preload="auto" id="bgVideo">
+            <source src="./intro.mp4" type="video/mp4">
         </video>
         <div class="loader-text">मनको भावना दस्ताबेज</div>
         <div class="progress-bar">
@@ -142,7 +142,13 @@
 
     <script>
         window.addEventListener('load', () => {
-            // समय बढाएर २०००ms (२ सेकेन्ड) राखिएको छ ताकि १.९ सेकेन्डको भिडियो स्पष्ट देखियोस्
+            // भिडियोलाई Play गर्न Force गर्ने एउटा सानो थप कोड
+            const video = document.getElementById('bgVideo');
+            if(video) {
+                video.play().catch(e => console.log("Play blocked"));
+            }
+
+            // १.९ सेकेन्डको भिडियोका लागि २ सेकेन्ड (२०००ms) को वेटिङ टाइम
             setTimeout(() => {
                 const loader = document.getElementById('loadingScreen');
                 if(loader) {
