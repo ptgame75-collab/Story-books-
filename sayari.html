@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>तिम्रा लागि शायरीहरू - अधिराज</title>
+    <title>तिम्रा लागि शायरी - अधिराज</title>
     <style>
         body { 
             font-family: 'Arial', sans-serif; 
@@ -59,35 +59,30 @@
             margin-bottom: 30px; 
         }
 
-        /* शायरी बक्स */
-        .shayari-container {
-            max-width: 500px;
+        /* एउटै मुख्य कन्टेनर */
+        .shayari-wrapper {
+            max-width: 600px;
             margin: 0 auto;
-            text-align: center;
-        }
-
-        .shayari-box {
             background: #fff;
-            padding: 25px;
+            padding: 30px;
             border-radius: 15px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-            margin-bottom: 25px;
-            border-left: 5px solid #5D4037;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+            border-left: 8px solid #5D4037;
         }
 
-        .shayari-content {
+        .shayari-text {
             font-size: 20px;
             font-weight: 900;
             color: #444;
-            white-space: pre-line; /* लाइन ब्रेक मिलाउन */
-            margin-bottom: 15px;
+            white-space: pre-line; /* यसले तपाईंको लाइन ब्रेकलाई सुरक्षित राख्छ */
+            text-align: justify;
         }
 
         /* Dark Mode Styles */
         .dark-mode { background-color: #121212; color: #e0e0e0; }
         .dark-mode .toolbar { background: rgba(18, 18, 18, 0.95); border-color: #333; }
-        .dark-mode .shayari-box, .dark-mode .btn { background: #1e1e1e; border-color: #333; color: #e0e0e0; }
-        .dark-mode .shayari-content { color: #dcdcdc; }
+        .dark-mode .shayari-wrapper, .dark-mode .btn { background: #1e1e1e; border-color: #333; color: #e0e0e0; }
+        .dark-mode .shayari-text { color: #dcdcdc; }
         .dark-mode .main-title { color: #D7CCC8; }
     </style>
 </head>
@@ -98,59 +93,45 @@
         <button class="btn" onclick="toggleNightMode()" id="nightBtn">🌙 नाइट मोड</button>
     </div>
 
-    <div class="shayari-container">
-        <span class="main-title">तिम्रा लागि "शायरीहरू"</span>
+    <div class="shayari-wrapper">
+        <span class="main-title">तिम्रा लागि "शायरी"</span>
         <hr class="straight-line">
 
-        <div class="shayari-box">
-            <p class="shayari-content">
-                तिमी बगैंचामा हाँस्दा फूलहरू पनि लजाउँछन्,
-                यदि खुदाले देख्यो भने ऊ पनि नरम भइहालोस्।
-            </p>
-        </div>
+        <p class="shayari-text">
+            तिमी बगैंचामा हाँस्दा फूलहरू पनि लजाउँछन्,
+            यदि खुदाले देख्यो भने ऊ पनि नरम भइहालोस्।
 
-        <div class="shayari-box">
-            <p class="shayari-content">
-                तिम्रो को भन्ने प्रशंसा कसरी गरूँ म,
-                सोच्छु भने तिमी नै विचार हौ,
-                बोल्छु भने तिमी नै शब्द हौ,
-                सुत्छु भने तिमी नै सपना हौ।
-                हेर्छु भने तिमी मनको शीतलता हौ,
-                लेख्छु भने तिमी नै शायरी हौ।
-                माग्छु भने तिमी नै दुआ हौ,
-                यदि म सोधूँ भने तिमी नै खुदा हौ।
-                हिँड्छु भने तिमी नै मेरो गन्तव्य हौ,
-                मेरो हरेक प्रश्नको उत्तर तिमी हौ।
-                रग–रगमा बग्ने आत्मा पनि तिमी हौ,
-                यदि एउटै शब्दमा भन्नुपर्‍यो भने — तिमी नै मेरो माया हौ।
-            </p>
-        </div>
+            तिम्रो को भन्ने प्रशंसा कसरी गरूँ म,
+            सोच्छु भने तिमी नै विचार हौ,
+            बोल्छु भने तिमी नै शब्द हौ,
+            सुत्छु भने तिमी नै सपना हौ।
+            हेर्छु भने तिमी मनको शीतलता हौ,
+            लेख्छु भने तिमी नै शायरी हौ।
+            माग्छु भने तिमी नै दुआ हौ,
+            यदि म सोधूँ भने तिमी नै खुदा हौ।
+            हिँड्छु भने तिमी नै मेरो गन्तव्य हौ,
+            मेरो हरेक प्रश्नको उत्तर तिमी हौ।
+            रग–रगमा बग्ने आत्मा पनि तिमी हौ,
+            यदि एउटै शब्दमा भन्नुपर्‍यो भने — तिमी नै मेरो माया हौ।
 
-        <div class="shayari-box">
-            <p class="shayari-content">
-                मभन्दा पहिला तिमीलाई केही नहोस् 
-                यही भगवानसँग माग्छु।
-                मान्छेहरू तिमीलाई चन्द्रमा भन्लान् 
-                तर हैन त्यसमा पनि एउटा दाग छ। 
-            </p>
-        </div>
+            मभन्दा पहिला तिमीलाई केही नहोस् 
+            यही भगवानसँग माग्छु।
+            मान्छेहरू तिमीलाई चन्द्रमा भन्लान् 
+            तर हैन त्यसमा पनि एउटा दाग छ। 
 
-        <div class="shayari-box">
-            <p class="shayari-content">
-                छैन तिमीमा कुनै दाह...छैन तिमीमा कुनै दाग, न त कुनै कमी छ,
-                तिम्रो मुस्कानमै लुकेको सारा खुसीको खानी छ।
-                बदलियोस् बरु यो संसार, तिम्रो रुप नबदलियोस्,
-                तिमी नै मेरो अधुरो जीवनको पूरा कहानी छ।
-                म मरुभूमि बनेर जलिरहूँ बरु यो घाममा,
-                तिमी बादल बनी बर्सिदिनु मेरो आँगनमा।
-                जसरी जून झुक्छ रातको शान्त काखमा,
-                त्यसरी नै सधैं रहिरहनु मेरो यो सानो सासमा।
-                पुज्छु तिमीलाई म, मन्दिरको त्यो दियो झैँ,
-                साँचेको छु मुटुमा, एउटा प्यारो धुन झैँ।
-                अब त जिन्दगीको हरेक मोडमा तिम्रै साथ होस्,
-                चाहे जस्तोसुकै कठिन दिन वा सुनसान रात होस्।
-            </p>
-        </div>
+            छैन तिमीमा कुनै दाह...छैन तिमीमा कुनै दाग, न त कुनै कमी छ,
+            तिम्रो मुस्कानमै लुकेको सारा खुसीको खानी छ।
+            बदलियोस् बरु यो संसार, तिम्रो रुप नबदलियोस्,
+            तिमी नै मेरो अधुरो जीवनको पूरा कहानी छ।
+            म मरुभूमि बनेर जलिरहूँ बरु यो घाममा,
+            तिमी बादल बनी बर्सिदिनु मेरो आँगनमा।
+            जसरी जून झुक्छ रातको शान्त काखमा,
+            त्यसरी नै सधैं रहिरहनु मेरो यो सानो सासमा।
+            पुज्छु तिमीलाई म, मन्दिरको त्यो दियो झैँ,
+            साँचेको छु मुटुमा, एउटा प्यारो धुन झैँ।
+            अब त जिन्दगीको हरेक मोडमा तिम्रै साथ होस्,
+            चाहे जस्तोसुकै कठिन दिन वा सुनसान रात होस्।
+        </p>
     </div>
 
     <script>
@@ -163,4 +144,3 @@
     </script>
 </body>
 </html>
-
