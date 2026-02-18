@@ -5,100 +5,59 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>अधिराज - मनको भावना</title>
     <style>
-        /* लोडिङ स्क्रिन र भिडियो सेटअप */
         #loadingScreen { 
-            position: fixed; 
-            top: 0; left: 0; right: 0; bottom: 0; 
-            background: #000; 
-            display: flex; 
-            flex-direction: column; 
-            justify-content: flex-end; 
-            align-items: center; 
-            z-index: 9999; 
-            overflow: hidden;
+            position: fixed; top: 0; left: 0; right: 0; bottom: 0; 
+            background: #000; display: flex; flex-direction: column; 
+            justify-content: flex-end; align-items: center; z-index: 9999; 
         }
 
         #bgVideo {
-            position: absolute;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            object-fit: cover; /* भिडियोलाई फोटो जस्तै पूर्ण स्क्रिनमा फिट गर्छ */
-            z-index: -1;
-            background: black;
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            object-fit: cover; z-index: -1;
         }
 
         .loader-text { 
-            color: #fff; 
-            font-family: serif; 
-            font-size: 18px; 
-            margin-bottom: 15px; 
-            letter-spacing: 2px; 
-            z-index: 10; 
-            text-shadow: 0 2px 4px rgba(0,0,0,0.8); 
+            color: #fff; font-family: serif; font-size: 18px; margin-bottom: 15px; 
+            z-index: 10; text-shadow: 0 2px 4px #000; 
         }
 
         .progress-bar { 
-            width: 80%; 
-            max-width: 300px; 
-            height: 4px; 
-            background: rgba(255,255,255,0.2); 
-            border-radius: 10px; 
-            overflow: hidden; 
-            z-index: 10; 
-            margin-bottom: 60px; 
+            width: 80%; max-width: 300px; height: 4px; 
+            background: rgba(255,255,255,0.2); border-radius: 10px; 
+            overflow: hidden; z-index: 10; margin-bottom: 60px; 
         }
 
         .progress-fill { 
-            width: 0%; 
-            height: 100%; 
-            background: #d32f2f; 
-            animation: fillBar 1.9s forwards; /* १.९ सेकेन्डको भिडियोसँग तालमेल */
+            width: 0%; height: 100%; background: #d32f2f; 
         }
 
-        @keyframes fillBar { 100% { width: 100%; } }
-
-        /* मुख्य सामग्री */
+        /* मुख्य सामग्रीको डिजाइन */
         body { 
-            background: #fcfbf7; 
-            font-family: 'Georgia', serif; 
-            margin: 0; 
-            display: flex; 
-            flex-direction: column; 
-            align-items: center; 
-            opacity: 0; 
-            transition: 1s; 
-            -webkit-user-select: none; 
-            user-select: none; 
+            background: #fcfbf7; font-family: 'Georgia', serif; margin: 0; 
+            display: flex; flex-direction: column; align-items: center; 
+            opacity: 0; transition: 1s; -webkit-user-select: none; user-select: none; 
         }
 
         body.visible { opacity: 1; }
-
         .header { margin-top: 50px; text-align: center; }
         .header img { width: 120px; height: 120px; border-radius: 50%; border: 3px solid #fff; box-shadow: 0 5px 15px rgba(0,0,0,0.1); object-fit: cover; }
         .header h1 { color: #4a3728; font-size: 24px; margin-top: 15px; font-weight: bold; }
-
         .main-content { width: 90%; max-width: 400px; margin-top: 40px; display: flex; flex-direction: column; gap: 20px; }
-        
-        .diary-card { 
-            background: white; padding: 30px 20px; border-radius: 15px; text-decoration: none; display: block; 
-            border-left: 8px solid #d32f2f; box-shadow: 0 10px 25px rgba(0,0,0,0.05); text-align: center; transition: 0.2s; 
-        }
-        .diary-card:active { transform: scale(0.98); }
+        .diary-card { background: white; padding: 30px 20px; border-radius: 15px; text-decoration: none; display: block; border-left: 8px solid #d32f2f; box-shadow: 0 10px 25px rgba(0,0,0,0.05); text-align: center; }
         .diary-card h2 { color: #2c3e50; font-size: 19px; margin: 0; }
         .diary-card p { color: #d32f2f; font-size: 13px; margin-top: 10px; font-weight: bold; }
-
         .footer { margin-top: auto; padding: 30px; color: #999; font-size: 12px; text-align: center; }
     </style>
 </head>
 <body oncontextmenu="return false;">
 
     <div id="loadingScreen">
-        <video autoplay muted playsinline loop preload="auto" id="bgVideo">
-            <source src="./intro.mp4" type="video/mp4">
+        <video muted playsinline id="bgVideo">
+            <source src="intro.mp4" type="video/mp4">
         </video>
         <div class="loader-text">मनको भावना दस्ताबेज</div>
         <div class="progress-bar">
-            <div class="progress-fill"></div>
+            <div id="pFill" class="progress-fill"></div>
         </div>
     </div>
 
@@ -125,28 +84,38 @@
     <div class="footer">2026 अधिराज | सुजना श्रेष्ठको लागि</div>
 
     <script>
-        window.addEventListener('load', () => {
-            // भिडियो चल्न थाल्यो कि नाइ भनेर पक्का गर्ने सानो चेक
-            const video = document.getElementById('bgVideo');
-            if(video) {
-                video.play().catch(error => {
-                    console.log("Autoplay blocked, showing main content anyway.");
-                });
-            }
+        const video = document.getElementById('bgVideo');
+        const fill = document.getElementById('pFill');
+        const loader = document.getElementById('loadingScreen');
 
-            // १.९ सेकेन्डको भिडियोका लागि २ सेकेन्डको वेटिङ टाइम
+        // जब भिडियो चल्न तयार हुन्छ (Can Play)
+        video.addEventListener('canplaythrough', () => {
+            video.play();
+            // लोडिङ बारलाई १.९ सेकेन्डमा भर्ने
+            fill.style.transition = '1.9s linear';
+            fill.style.width = '100%';
+
+            // १.९ सेकेन्ड पछि स्क्रिन हटाउने
             setTimeout(() => {
-                const loader = document.getElementById('loadingScreen');
-                if(loader) {
-                    loader.style.transition = '0.8s';
-                    loader.style.opacity = '0';
-                    setTimeout(() => {
-                        loader.style.display = 'none';
-                        document.body.classList.add('visible');
-                    }, 800);
-                }
-            }, 2000); 
+                loader.style.transition = '0.8s';
+                loader.style.opacity = '0';
+                setTimeout(() => {
+                    loader.style.display = 'none';
+                    document.body.classList.add('visible');
+                }, 800);
+            }, 1900);
         });
+
+        // यदि इन्टरनेट एकदमै ढिलो भयो भने पनि ५ सेकेन्डमा आफैं खुल्ने ब्याकअप
+        setTimeout(() => {
+            if (loader.style.display !== 'none') {
+                loader.style.opacity = '0';
+                setTimeout(() => {
+                    loader.style.display = 'none';
+                    document.body.classList.add('visible');
+                }, 800);
+            }
+        }, 5000);
     </script>
 </body>
 </html>
