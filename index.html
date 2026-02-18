@@ -5,110 +5,61 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>अधिराज - मनको भावना</title>
     <style>
-        /* लोडिङ स्क्रिन र भिडियो सेटअप */
+        /* लोडिङ स्क्रिन सेटअप */
         #loadingScreen { 
-            position: fixed; 
-            top: 0; left: 0; right: 0; bottom: 0; 
-            background: #000; 
-            display: flex; 
-            flex-direction: column; 
-            justify-content: flex-end; 
-            align-items: center; 
-            z-index: 9999; 
-            overflow: hidden;
+            position: fixed; top: 0; left: 0; right: 0; bottom: 0; 
+            background: #000; display: flex; flex-direction: column; 
+            justify-content: flex-end; align-items: center; z-index: 9999; overflow: hidden;
         }
 
         #bgVideo {
-            position: absolute;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            object-fit: cover; 
-            z-index: -1;
-            background: black;
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            object-fit: cover; z-index: -1; background: black;
         }
 
         .loader-text { 
-            color: #fff; 
-            font-family: serif; 
-            font-size: 18px; 
-            margin-bottom: 15px; 
-            letter-spacing: 2px; 
-            z-index: 10; 
-            text-shadow: 0 2px 4px rgba(0,0,0,0.8); 
+            color: #fff; font-family: serif; font-size: 18px; margin-bottom: 15px; 
+            letter-spacing: 2px; z-index: 10; text-shadow: 0 2px 4px rgba(0,0,0,0.8); 
         }
 
         .progress-bar { 
-            width: 80%; 
-            max-width: 300px; 
-            height: 4px; 
-            background: rgba(255,255,255,0.2); 
-            border-radius: 10px; 
-            overflow: hidden; 
-            z-index: 10; 
-            margin-bottom: 60px; 
+            width: 80%; max-width: 300px; height: 4px; 
+            background: rgba(255,255,255,0.2); border-radius: 10px; 
+            overflow: hidden; z-index: 10; margin-bottom: 60px; 
         }
 
-        /* १.९ सेकेन्डको भिडियोसँग तालमेल मिलाउन १.९s राखिएको छ */
         .progress-fill { 
-            width: 0%; 
-            height: 100%; 
-            background: #d32f2f; 
+            width: 0%; height: 100%; background: #d32f2f; 
             animation: fillBar 1.9s forwards; 
         }
 
         @keyframes fillBar { 100% { width: 100%; } }
 
-        /* मुख्य सामग्री सेटअप */
+        /* मुख्य सामग्री */
         body { 
-            background: #fcfbf7; 
-            font-family: 'Georgia', serif; 
-            margin: 0; 
-            display: flex; 
-            flex-direction: column; 
-            align-items: center; 
-            opacity: 0; 
-            transition: 1s; 
-            -webkit-user-select: none; 
-            user-select: none; 
+            background: #fcfbf7; font-family: 'Georgia', serif; margin: 0; 
+            display: flex; flex-direction: column; align-items: center; 
+            opacity: 0; transition: 1s; -webkit-user-select: none; user-select: none; 
         }
 
         body.visible { opacity: 1; }
-
         .header { margin-top: 50px; text-align: center; }
-        .header img { 
-            width: 120px; height: 120px; 
-            border-radius: 50%; 
-            border: 3px solid #fff; 
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1); 
-            object-fit: cover; 
-        }
+        .header img { width: 120px; height: 120px; border-radius: 50%; border: 3px solid #fff; box-shadow: 0 5px 15px rgba(0,0,0,0.1); object-fit: cover; }
         .header h1 { color: #4a3728; font-size: 24px; margin-top: 15px; font-weight: bold; }
-
         .main-content { width: 90%; max-width: 400px; margin-top: 40px; display: flex; flex-direction: column; gap: 20px; }
-        
-        .diary-card { 
-            background: white; 
-            padding: 30px 20px; 
-            border-radius: 15px; 
-            text-decoration: none; 
-            display: block; 
-            border-left: 8px solid #d32f2f; 
-            box-shadow: 0 10px 25px rgba(0,0,0,0.05); 
-            text-align: center; 
-            transition: 0.2s; 
-        }
+        .diary-card { background: white; padding: 30px 20px; border-radius: 15px; text-decoration: none; display: block; border-left: 8px solid #d32f2f; box-shadow: 0 10px 25px rgba(0,0,0,0.05); text-align: center; transition: 0.2s; }
         .diary-card:active { transform: scale(0.98); }
         .diary-card h2 { color: #2c3e50; font-size: 19px; margin: 0; }
         .diary-card p { color: #d32f2f; font-size: 13px; margin-top: 10px; font-weight: bold; }
-
         .footer { margin-top: auto; padding: 30px; color: #999; font-size: 12px; text-align: center; }
     </style>
 </head>
 <body oncontextmenu="return false;">
 
     <div id="loadingScreen">
-        <video autoplay muted playsinline loop preload="auto" id="bgVideo">
-            <source src="./intro.mp4" type="video/mp4">
+        <video autoplay muted playsinline loop id="bgVideo">
+            <source src="intro.mp4" type="video/mp4">
+            <source src="Intro.mp4" type="video/mp4">
         </video>
         <div class="loader-text">मनको भावना दस्ताबेज</div>
         <div class="progress-bar">
@@ -126,12 +77,10 @@
             <h2>१६९ अनुष्ठान लेख</h2>
             <p>पढ्नको लागि यहाँ ट्याप गर्नुहोस्</p>
         </a>
-
         <a href="adhura.html" class="diary-card">
             <h2>मेरो अधुरा शब्दहरू</h2>
             <p>पढ्नको लागि यहाँ ट्याप गर्नुहोस्</p>
         </a>
-
         <a href="sayari.html" class="diary-card">
             <h2>तिम्रा लागि "सायरीहरू"</h2>
             <p>पढ्नको लागि यहाँ ट्याप गर्नुहोस्</p>
@@ -142,13 +91,10 @@
 
     <script>
         window.addEventListener('load', () => {
-            // भिडियोलाई Play गर्न Force गर्ने एउटा सानो थप कोड
-            const video = document.getElementById('bgVideo');
-            if(video) {
-                video.play().catch(e => console.log("Play blocked"));
-            }
+            // भिडियो प्ले गराउन फोर्स गर्ने
+            const v = document.getElementById('bgVideo');
+            if(v) v.play().catch(e => console.log("Play error"));
 
-            // १.९ सेकेन्डको भिडियोका लागि २ सेकेन्ड (२०००ms) को वेटिङ टाइम
             setTimeout(() => {
                 const loader = document.getElementById('loadingScreen');
                 if(loader) {
