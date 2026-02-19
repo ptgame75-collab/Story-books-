@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ne">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>अधिराज - मनको भावना</title>
+    <style>
+        /* अब यहाँ भिडियो र लोडिङको कुनै झन्झटिलो कोड छैन */
+        body { 
+            background: #fcfbf7; 
+            font-family: 'Georgia', serif; 
+            margin: 0; 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            -webkit-user-select: none; 
+            user-select: none; 
+            animation: fadeInPage 0.8s ease-in; /* पेज खुल्दा बिस्तारै देखिने एनिमेसन */
+        }
+
+        @keyframes fadeInPage {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .header { margin-top: 50px; text-align: center; }
+        .header img { 
+            width: 120px; height: 120px; 
+            border-radius: 50%; 
+            border: 3px solid #fff; 
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1); 
+            object-fit: cover; 
+        }
+        .header h1 { color: #4a3728; font-size: 24px; margin-top: 15px; font-weight: bold; }
+
+        .main-content { width: 90%; max-width: 400px; margin-top: 40px; display: flex; flex-direction: column; gap: 20px; }
+        
+        .diary-card { 
+            background: white; 
+            padding: 30px 20px; 
+            border-radius: 15px; 
+            text-decoration: none; 
+            display: block; 
+            border-left: 8px solid #d32f2f; 
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05); 
+            text-align: center; 
+            transition: 0.2s; 
+        }
+        .diary-card:active { transform: scale(0.98); }
+        .diary-card h2 { color: #2c3e50; font-size: 19px; margin: 0; }
+        .diary-card p { color: #d32f2f; font-size: 13px; margin-top: 10px; font-weight: bold; }
+
+        .footer { margin-top: auto; padding: 30px; color: #999; font-size: 12px; text-align: center; }
+    </style>
+</head>
+<body oncontextmenu="return false;">
+
+    <div class="header">
+        <img src="4870.png" alt="Logo">
+        <h1>मनको भावना</h1>
+    </div>
+
+    <div class="main-content">
+        <a href="anusthan.html" class="diary-card">
+            <h2>१६९ अनुष्ठान लेख</h2>
+            <p>पढ्नको लागि यहाँ ट्याप गर्नुहोस्</p>
+        </a>
+
+        <a href="adhura.html" class="diary-card">
+            <h2>मेरो अधुरा शब्दहरू</h2>
+            <p>पढ्नको लागि यहाँ ट्याप गर्नुहोस्</p>
+        </a>
+
+        <a href="sayari.html" class="diary-card">
+            <h2>तिम्रा लागि "सायरीहरू"</h2>
+            <p>पढ्नको लागि यहाँ ट्याप गर्नुहोस्</p>
+        </a>
+    </div>
+
+    <div class="footer">2026 अधिराज | सुजना श्रेष्ठको लागि</div>
+
+</body>
+</html>
