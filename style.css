@@ -120,3 +120,33 @@ body {
 }
 
 @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+/* --- भिडियो र मिडिया सेटिङ्स (अधिराज की डायरी 068) --- */
+
+/* भिडियो प्लेयरलाई फोटो जस्तै आकर्षक बनाउन */
+video {
+    width: 95%; 
+    max-width: 450px; 
+    height: auto; 
+    display: block; 
+    margin: 25px auto; 
+    border-radius: 15px; 
+    background: #000; /* भिडियो लोड नहुँदा कालो देखिन्छ */
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2); 
+    border: 1px solid var(--line);
+    outline: none;
+}
+
+/* भिडियोको कोन्टेनर (यदि div प्रयोग गर्नुभएको छ भने) */
+.video-wrapper {
+    text-align: center;
+    padding: 10px;
+    margin-bottom: 30px;
+}
+
+/* मोबाइलमा भिडियो राम्रोसँग फिट होस् भनेर */
+@media (max-width: 480px) {
+    video {
+        width: 100%;
+        border-radius: 8px;
+    }
+}
