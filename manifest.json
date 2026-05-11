@@ -1,7 +1,7 @@
 {
-  "name": "अधिराजको डायरी",
-  "short_name": "अधिराज",
-  "start_url": "index.html?launcher=true",
+  "name": "अधिराजको खत",
+  "short_name": "अधिराजको खत",
+  "start_url": "index.html",
   "display": "standalone",
   "background_color": "#fcfbf7",
   "theme_color": "#d32f2f",
@@ -19,4 +19,3 @@
     }
   ]
 }
-
