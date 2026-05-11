@@ -3,7 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>अधिराज-Khat</title>
+    <title>अधिराजको खत</title>
+
+    <link rel="manifest" href="manifest.json">
+    <script>
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('sw.js');
+        }
+    </script>
+
     <style>
         body, html {
             margin: 0; padding: 0; width: 100%; height: 100%;
@@ -16,7 +24,7 @@
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: url('a.0063.jpg') no-repeat center center;
             background-size: cover;
-            filter: brightness(0.4) blur(2px); /* फोटोलाई अलि डार्क र मधुरो बनाइएको */
+            filter: brightness(0.4) blur(2px);
             opacity: 0;
             animation: fadeInBg 2s forwards;
         }
@@ -25,7 +33,6 @@
             to { opacity: 1; }
         }
 
-        /* टाइपिङ एनिमेसन कन्टेनर */
         #introContainer {
             position: relative; height: 100%;
             display: flex; flex-direction: column;
@@ -39,7 +46,6 @@
             text-shadow: 0 4px 10px rgba(0,0,0,0.5);
         }
 
-        /* लोडिङ बार */
         .progress-bar {
             width: 70%; max-width: 250px; height: 3px;
             background: rgba(255,255,255,0.2);
@@ -69,24 +75,20 @@
         const fill = document.getElementById('pFill');
         let index = 0;
 
-        // टाइपिङ फङ्गसन
         function typeWriter() {
             if (index < text.length) {
                 typewriterElement.innerHTML += text.charAt(index);
                 index++;
-                setTimeout(typeWriter, 120); // टाइपिङ गति (१२०ms)
+                setTimeout(typeWriter, 120);
             }
         }
 
-        // सबै कुरा लोड भएपछि सुरु गर्ने
         window.onload = () => {
-            // टाइपिङ र लोडिङ बार सँगै सुरु गर्ने
             setTimeout(() => {
                 typeWriter();
                 fill.style.width = '100%';
             }, 500);
 
-            // ४ सेकेन्ड पछि मुख्य पेज (home.html) मा लैजाने
             setTimeout(() => {
                 document.body.style.transition = '1s';
                 document.body.style.opacity = '0';
