@@ -83,20 +83,31 @@
             }
         }
 
-        window.onload = () => {
-            setTimeout(() => {
-                typeWriter();
-                fill.style.width = '100%';
-            }, 500);
+            // ८६ नम्बर लाइनबाट यो सुरु गर्नुहोस्
+    window.onload = () => {
+        // यदि यो सेसनमा एप लोड भइसकेको छ भने सिधै होममा पठाउने
+        if (sessionStorage.getItem('appLoaded')) {
+            window.location.replace("home.html");
+            return; // तलको बाँकी कोड चल्न दिँदैन
+        }
 
+        // पहिलो पटक आउँदा मात्र यो चल्छ
+        sessionStorage.setItem('appLoaded', 'true');
+
+        setTimeout(() => {
+            typeWriter();
+            fill.style.width = '100%';
+        }, 500);
+
+        setTimeout(() => {
+            document.body.style.transition = '1s';
+            document.body.style.opacity = '0';
             setTimeout(() => {
-                document.body.style.transition = '1s';
-                document.body.style.opacity = '0';
-                setTimeout(() => {
-                    window.location.href = "home.html";
-                }, 1000);
-            }, 4500);
-        };
+                // replace प्रयोग गर्दा ब्याक गर्दा फेरि यहाँ फर्किँदैन
+                window.location.replace("home.html");
+            }, 1000);
+        }, 4500);
+    };
     </script>
 </body>
 </html>
