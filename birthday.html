@@ -5,14 +5,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>जन्मदिनको शुभकामना - डल्ली</title>
     <style>
-        /* तिम्रो मुख्य डिजाइनसँग मेल खाने CSS */
+        /* root variables for colors */
+        :root {
+            --bg: #fcfbf7;
+            --text: #333;
+            --red: #d32f2f;
+            --card-bg: #ffffff;
+            --line: #ccc;
+        }
+
+        .dark-mode {
+            --bg: #121212;
+            --text: #e0e0e0;
+            --red: #ff5252;
+            --card-bg: #1e1e1e;
+            --line: #444;
+        }
+
         body { 
-            font-family: 'Arial', sans-serif; 
-            line-height: 1.8; 
-            color: #333; 
-            background: #fcfbf7; 
-            padding: 80px 20px 20px 20px; 
-            transition: 0.3s; 
+            font-family: 'Georgia', serif; /* अघिको अक्षरको बनावट */
+            line-height: 1.9; 
+            color: var(--text); 
+            background: var(--bg); 
+            padding: 90px 20px 40px 20px; 
+            transition: 0.4s; 
             -webkit-user-select: none; 
             user-select: none; 
         }
@@ -25,79 +41,81 @@
             display: flex; 
             justify-content: space-between; 
             padding: 15px 20px; 
-            background: rgba(252, 251, 247, 0.95); 
-            border-bottom: 1px solid #ddd; 
+            background: var(--bg); 
+            border-bottom: 1px solid var(--line); 
             z-index: 1000; 
             backdrop-filter: blur(5px); 
         }
 
-        .title-container { 
-            text-align: center; 
-            margin-bottom: 35px; 
+        .letter-content {
+            max-width: 650px;
+            margin: 0 auto;
+            animation: fadeIn 1s ease-out;
         }
 
         .main-title { 
             font-size: 28px; 
             font-weight: 900; 
             display: block; 
-            margin-top: 15px; 
-            color: #5D4037; 
+            margin-top: 10px; 
+            color: var(--red); 
             text-align: center; 
         }
 
         .straight-line { 
             width: 100%; 
-            height: 1px; 
-            background: #ccc; 
+            height: 2px; 
+            background: var(--red); 
             border: none; 
-            margin-bottom: 30px; 
+            margin-bottom: 40px; 
+            opacity: 0.3;
         }
 
-        .bold-feeling {
-            max-width: 650px;
-            margin: 0 auto;
-        }
-
-        .bold-feeling p { 
-            font-size: 20px; /* तिम्रो अनुरोध अनुसार अक्षराला बाक्लो र अलि ठूलो बनाइएको */
-            margin-bottom: 25px; 
-            font-weight: 900; 
+        p { 
+            font-size: 21px; /* पहिलेको जस्तै स्पष्ट साइज */
+            margin-bottom: 28px; 
+            font-weight: 900; /* बाक्लो अक्षर */
             text-align: justify; 
         }
 
-        /* तिम्रा अङ्ग्रेजी शब्दहरू र मुख्य कुरालाई रातो बनाइएको */
+        /* रातो हाइलाइट - जुन तिमीलाई मन परेको थियो */
         .highlight {
-            color: #d32f2f;
+            color: var(--red);
             font-weight: 900;
         }
 
         .btn { 
             text-decoration: none; 
-            color: #333; 
-            border: 1px solid #ccc; 
-            padding: 6px 15px; 
+            color: var(--text); 
+            border: 1px solid var(--line); 
+            padding: 8px 18px; 
             border-radius: 5px; 
             font-weight: bold; 
-            background: #fff; 
+            background: var(--card-bg); 
             cursor: pointer; 
+            font-size: 14px;
         }
 
         .signature {
-            margin-top: 50px;
+            margin-top: 60px;
             text-align: right;
             font-style: italic;
             font-weight: 900;
-            font-size: 18px;
-            border-top: 1px solid #ccc;
+            font-size: 19px;
+            color: var(--text);
+            border-top: 1px solid var(--line);
             padding-top: 20px;
         }
 
-        /* डार्क मोड सेटिङ्स */
-        .dark-mode { background-color: #121212; color: #e0e0e0; }
-        .dark-mode .toolbar { background: rgba(18, 18, 18, 0.95); border-color: #333; }
-        .dark-mode .btn { background: #1e1e1e; border-color: #333; color: #e0e0e0; }
-        .dark-mode .main-title { color: #d7ccc8; }
-        .dark-mode .highlight { color: #ff5252; }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (max-width: 480px) {
+            p { font-size: 19px; }
+            .main-title { font-size: 24px; }
+        }
     </style>
 </head>
 <body oncontextmenu="return false;">
@@ -107,12 +125,10 @@
         <button class="btn" onclick="toggleNightMode()" id="nightBtn">🌙 नाइट मोड</button>
     </div>
 
-    <div class="title-container">
+    <div class="letter-content">
         <span class="main-title">मेरो प्यारो मान्छे 'डल्ली' लाई</span>
         <hr class="straight-line">
-    </div>
 
-    <div class="bold-feeling">
         <p>फेरि समयको चक्र घुम्दै त्यही समय आएको छ, जुन वर्षको सबैभन्दा शुभ दिन हो। <span class="highlight">Yes..! today is your birthday.</span> पहिला नै जन्मदिनको शुभकामना। मेरो प्यारो मान्छे डल्लीलाई।</p>
 
         <p>सायद यो दोस्रो र अन्तिम जन्मदिन हो, जुन म तिमीलाई शुभकामना दिँदैछु। यसपछि न त हाम्रो कुराकानी हुन्छ, न म तिमीलाई <span class="highlight">disturb</span> गर्नेछु। आजसम्म मबाट जे जति भूल भएको छ, यसको लागि क्षमा पाउँ। साँच्ची नै तिमी धेरै प्यारी छौ। तिमीसँग माया यस कारणले भएको थिएन कि तिमी दुनियाको सबैभन्दा राम्रो थियौ; हुन त मेरो लागि तिमी सबैभन्दा राम्री छौ, तर राम्रो भएर माया हुने होइन माया भएकै मान्छे सबैभन्दा राम्री लाग्छ।</p>
