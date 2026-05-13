@@ -5,169 +5,121 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>जन्मदिनको शुभकामना - डल्ली</title>
     <style>
-        /* style.css का भ्यारिएबलहरू यहाँ एकीकृत गरिएको छ */
-        :root {
-            --bg: #fcfbf7;
-            --text: #333;
-            --red: #d32f2f;
-            --card-bg: #ffffff;
-            --line: #ccc;
+        /* तिम्रो मुख्य डिजाइनसँग मेल खाने CSS */
+        body { 
+            font-family: 'Arial', sans-serif; 
+            line-height: 1.8; 
+            color: #333; 
+            background: #fcfbf7; 
+            padding: 80px 20px 20px 20px; 
+            transition: 0.3s; 
+            -webkit-user-select: none; 
+            user-select: none; 
         }
 
-        /* Night Mode (Dark Mode) सेटिङ */
-        @media (prefers-color-scheme: dark) {
-            :root {
-                --bg: #121212;
-                --text: #e0e0e0;
-                --red: #ff5252;
-                --card-bg: #1e1e1e;
-                --line: #444;
-            }
+        .toolbar { 
+            position: fixed; 
+            top: 0; 
+            left: 0; 
+            right: 0; 
+            display: flex; 
+            justify-content: space-between; 
+            padding: 15px 20px; 
+            background: rgba(252, 251, 247, 0.95); 
+            border-bottom: 1px solid #ddd; 
+            z-index: 1000; 
+            backdrop-filter: blur(5px); 
         }
 
-        /* यदि प्रयोगकर्ताले बटन थिचेर डार्क मोड चाहन्छ भने यो क्लास प्रयोग हुन्छ */
-        .dark-mode {
-            --bg: #121212;
-            --text: #e0e0e0;
-            --red: #ff5252;
-            --card-bg: #1e1e1e;
-            --line: #444;
+        .title-container { 
+            text-align: center; 
+            margin-bottom: 35px; 
         }
 
-        body {
-            background: var(--bg);
-            color: var(--text);
-            font-family: 'Georgia', serif;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            line-height: 1.8;
-            -webkit-user-select: none;
-            user-select: none;
-            transition: background 0.4s, color 0.4s;
+        .main-title { 
+            font-size: 28px; 
+            font-weight: 900; 
+            display: block; 
+            margin-top: 15px; 
+            color: #5D4037; 
+            text-align: center; 
         }
 
-        /* डार्क मोड टोगल बटन */
-        .theme-toggle {
-            position: fixed;
-            top: 10px;
-            right: 10px;
-            padding: 8px 12px;
-            background: var(--card-bg);
-            border: 1px solid var(--line);
-            color: var(--text);
-            border-radius: 20px;
-            font-size: 12px;
-            cursor: pointer;
-            z-index: 1000;
-            font-weight: bold;
+        .straight-line { 
+            width: 100%; 
+            height: 1px; 
+            background: #ccc; 
+            border: none; 
+            margin-bottom: 30px; 
         }
 
-        .letter-container {
-            width: 90%;
-            max-width: 600px;
-            background: var(--card-bg);
-            margin: 40px 0;
-            padding: 35px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            border-radius: 8px;
-            position: relative;
-            border: 1px solid var(--line);
-            animation: fadeIn 1.2s ease-out;
+        .bold-feeling {
+            max-width: 650px;
+            margin: 0 auto;
         }
 
-        /* माथि रातो धर्को */
-        .letter-container::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 6px;
-            background: var(--red);
-            border-radius: 8px 8px 0 0;
+        .bold-feeling p { 
+            font-size: 20px; /* तिम्रो अनुरोध अनुसार अक्षराला बाक्लो र अलि ठूलो बनाइएको */
+            margin-bottom: 25px; 
+            font-weight: 900; 
+            text-align: justify; 
         }
 
-        h1 {
-            color: var(--red);
-            text-align: center;
-            font-size: 26px; /* अलि ठूलो र बाक्लो */
-            margin-bottom: 30px;
-            border-bottom: 2px solid var(--line);
-            padding-bottom: 15px;
-            font-weight: 900;
-        }
-
-        p {
-            font-size: 20px; /* १८px बाट बढाएर २०px बनाइएको */
-            margin-bottom: 25px;
-            text-align: justify;
-            white-space: pre-wrap;
-            font-weight: 700; /* अक्षरालाई बाक्लो बनाइएको */
-        }
-
-        /* इङ्ग्लिस र मुख्य शब्दहरूलाई रातो र बाक्लो बनाइएको */
+        /* तिम्रा अङ्ग्रेजी शब्दहरू र मुख्य कुरालाई रातो बनाइएको */
         .highlight {
-            color: var(--red);
+            color: #d32f2f;
             font-weight: 900;
+        }
+
+        .btn { 
+            text-decoration: none; 
+            color: #333; 
+            border: 1px solid #ccc; 
+            padding: 6px 15px; 
+            border-radius: 5px; 
+            font-weight: bold; 
+            background: #fff; 
+            cursor: pointer; 
         }
 
         .signature {
             margin-top: 50px;
             text-align: right;
             font-style: italic;
-            border-top: 1px solid var(--line);
-            padding-top: 20px;
+            font-weight: 900;
             font-size: 18px;
-            font-weight: 900;
+            border-top: 1px solid #ccc;
+            padding-top: 20px;
         }
 
-        .back-btn {
-            display: block;
-            width: fit-content;
-            margin: 30px auto 10px auto;
-            padding: 12px 30px;
-            background: var(--text);
-            color: var(--bg);
-            text-decoration: none;
-            border-radius: 30px;
-            font-size: 16px;
-            font-weight: 900;
-            transition: 0.3s;
-            border: none;
-        }
-
-        .back-btn:hover {
-            background: var(--red);
-            color: white;
-            transform: scale(1.05);
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        @media (max-width: 480px) {
-            .letter-container { padding: 20px; width: 95%; }
-            p { font-size: 18px; }
-            h1 { font-size: 22px; }
-        }
+        /* डार्क मोड सेटिङ्स */
+        .dark-mode { background-color: #121212; color: #e0e0e0; }
+        .dark-mode .toolbar { background: rgba(18, 18, 18, 0.95); border-color: #333; }
+        .dark-mode .btn { background: #1e1e1e; border-color: #333; color: #e0e0e0; }
+        .dark-mode .main-title { color: #d7ccc8; }
+        .dark-mode .highlight { color: #ff5252; }
     </style>
 </head>
 <body oncontextmenu="return false;">
 
-    <button class="theme-toggle" onclick="toggleMode()">Night Mode</button>
+    <div class="toolbar">
+        <a href="index.html" class="btn">← back</a>
+        <button class="btn" onclick="toggleNightMode()" id="nightBtn">🌙 नाइट मोड</button>
+    </div>
 
-    <div class="letter-container">
-        <h1>मेरो प्यारो मान्छे 'डल्ली' लाई</h1>
+    <div class="title-container">
+        <span class="main-title">मेरो प्यारो मान्छे 'डल्ली' लाई</span>
+        <hr class="straight-line">
+    </div>
 
+    <div class="bold-feeling">
         <p>फेरि समयको चक्र घुम्दै त्यही समय आएको छ, जुन वर्षको सबैभन्दा शुभ दिन हो। <span class="highlight">Yes..! today is your birthday.</span> पहिला नै जन्मदिनको शुभकामना। मेरो प्यारो मान्छे डल्लीलाई।</p>
 
         <p>सायद यो दोस्रो र अन्तिम जन्मदिन हो, जुन म तिमीलाई शुभकामना दिँदैछु। यसपछि न त हाम्रो कुराकानी हुन्छ, न म तिमीलाई <span class="highlight">disturb</span> गर्नेछु। आजसम्म मबाट जे जति भूल भएको छ, यसको लागि क्षमा पाउँ। साँच्ची नै तिमी धेरै प्यारी छौ। तिमीसँग माया यस कारणले भएको थिएन कि तिमी दुनियाको सबैभन्दा राम्रो थियौ; हुन त मेरो लागि तिमी सबैभन्दा राम्री छौ, तर राम्रो भएर माया हुने होइन माया भएकै मान्छे सबैभन्दा राम्री लाग्छ।</p>
 
-        <p>हाम्रो लामो समयदेखि राम्रो कुराकानी भएको छैन र मैले पनि पहिला जस्तरी तिमीलाई म्यासेज गरी <span class="highlight">disturb</span> गर्ने गरेको छैन। तर यसको मतलब यो होइन कि मेरो माया कम भएको छ। अब अहिले तिमी मलाई मन पर्दैन भन्ने पनि होइन। बस तिम्रो खुसीको लागि मात्रै कुराकानी गर्न छाडेको हुँ। तिमी खुसी छौ नि । बस मलाई तिम्रो खुसी चाहिएको हो। तिम्रै खुसीको लागि हो मैले बिर्सेको जस्तो गरेको । तर यो वास्तवमा सम्भव छैन—तबसम्म जबसम्म सासले मेरो शरीर छोड्दैन।</p>
+        <p>हाम्रो लामो समयदेखि राम्रो कुराकानी भएको छैन र मैले पनि पहिला जस्तरी तिमीलाई म्यासेज गरी <span class="highlight">disturb</span> गर्ने गरेको छैन। तर यसको मतलब यो होइन कि मेरो माया कम भएको छ। अब अहिले तिमी मलाई मन पर्दैन भन्ने पनि होइन। बस तिम्रो खुसीको लागि मात्रै कुराकानी गर्न छाडेको हुँ। तिमी खुसी छौ नि? बस मलाई तिम्रो खुसी चाहिएको हो। तिम्रै खुसीको लागि हो मैले बिर्सेको जस्तो गरेको। तर यो वास्तवमा सम्भव छैन—तबसम्म जबसम्म सासले मेरो शरीर छोड्दैन।</p>
 
-        <p>आज ठूला वाचाहरू गर्दिनँ, तर यो वाचा अवश्य गर्छु—जबसम्म मेरो शरीरमा सास हुनेछ, तबसम्म मेरो मनमा सुजना थियो ,हुन्छ र रहन्छ । सुजना मेरो जीवनमा यस्तो एउटा नाम हो, जुन नाम हनुमानले जसरी रामको नाम जप्थ्यो, त्यस्तै नै मेरो मनले जपिरहनेछ।</p>
+        <p>आज ठूला वाचाहरू गर्दिनँ, तर यो वाचा अवश्य गर्छु—जबसम्म मेरो शरीरमा सास हुनेछ, तबसम्म मेरो मनमा सुजना थियो, हुन्छ र रहन्छ। सुजना मेरो जीवनमा यस्तो एउटा नाम हो, जुन नाम हनुमानले जसरी रामको नाम जप्थ्यो, त्यस्तै नै मेरो मनले जपिरहनेछ।</p>
 
         <p><span class="highlight">I love you.</span> कति <span class="highlight">normal</span> लाग्छ है? तर यो वास्तवमा दुनियाको सबैभन्दा गाह्रो शब्द हो। यो तब झनै गाह्रो हुन्छ, जब जसलाई भन्न पर्ने हो उ मान्छे अघि हुन्छ। म कहिले भन्न पनि चाहन्न कि म तिमीलाई माया गर्छु भनेर। किनभने यो 'माया' शब्दको मेरो मनको भावनाको अघि केही पनि अस्तित्व छैन। जुन म तिमीलाई गर्छु, त्यसलाई 'माया' शब्दले सम्बोधन गर्दा मेरो भावनाको अपमान भएको अनुभव हुन्छ। मेरो लगाव त्यो शब्द भन्दा निकै गहिरो छ।</p>
 
@@ -185,29 +137,23 @@
 
         <p>अहिलेलाई <span class="highlight">back to the topic</span>—जन्मदिनको लाखौं लाख शुभकामना। तिमीले देखेको हरेक सपना पूरा होस्। मेरो आयु पनि तिमीलाई लागोस्। मेरो भागको खुसी तिमीलाई र तिम्रो भागको दुःख मेरो भागमा परोस्। तिमीसँग हाँस्ने सौभाग्य नभए पनि, तिमीलाई टाढाबाट सधैं हाँसेको देख्न पाऊँ। </p>
 
-        <p>मैले माथि भनेको <span class="highlight">section</span> कुरा नबुझेको भए । <span class="highlight">application</span> को <span class="highlight">Home page</span> को दोस्रो नम्बरमा छ नि <span class="highlight">{मेरा अधुरा शब्दहरू}</span> हो त्यसको  भित्र टन्ने अरु <span class="highlight">section</span> छन् त्यही कुरा गरेको । मैले यो लेखिरहँदा तिमीले पढ्छौ भन्ने मलाई 0% पनि आशा छैन तर पनि लेख्दैछु। </p>
+        <p>मैले माथि भनेको <span class="highlight">section</span> कुरा नबुझेको भए। <span class="highlight">application</span> को <span class="highlight">Home page</span> को दोस्रो नम्बरमा छ नि <span class="highlight">{मेरा अधुरा शब्दहरू}</span>, हो त्यसको भित्र टन्ने अरु <span class="highlight">section</span> छन् त्यही कुरा गरेको। मैले यो लेखिरहँदा तिमीले पढ्छौ भन्ने मलाई 0% पनि आशा छैन तर पनि लेख्दैछु। </p>
 
-        <p>यदि मेरो केही इच्छा पूरा हुन्थ्यो भने । सबैभन्दा पहिला तिम्रो खुसी माग्थे । अनि दोस्रो भनेको मलाई फेरि <b>2077 जेठको 13 गते 3:37</b> को समयमा जानुछ । तिमीलाई माया त हर कोहीले गर्छ तिमी प्यारो नै यति छौ । तर आफ्नो <span class="highlight">life decision</span> अलि सोचेर लेख्नु । र आफ्नो यो पागल र एकतर्फी प्रेमलाई कहिले पनि नभुल्नु। दिल र मस्तिष्कमा ठाउँ छैन छुट्टै कुरो। आफ्नो पाउमा भने पनि सजाउनु । </p>
+        <p>यदि मेरो केही इच्छा पूरा हुन्थ्यो भने, सबैभन्दा पहिला तिम्रो खुसी माग्थे। अनि दोस्रो भनेको मलाई फेरि <b>2077 जेठको 13 गते 3:37</b> को समयमा जानुछ। तिमीलाई माया त हर कोहीले गर्छ तिमी प्यारो नै यति छौ। तर आफ्नो <span class="highlight">life decision</span> अलि सोचेर लेख्नु। र आफ्नो यो पागल र एकतर्फी प्रेमलाई कहिले पनि नभुल्नु। दिल र मस्तिष्कमा ठाउँ छैन छुट्टै कुरो, आफ्नो पाउमा भने पनि सजाउनु। </p>
 
         <div class="signature">
             उही तिम्रो पागल प्रेमी <br>
             <b>अधिराज विश्वकर्मा</b>
         </div>
-
-        <a href="home.html" class="back-btn">फिर्ता जानुहोस्</a>
     </div>
 
     <script>
-        function toggleMode() {
-            document.body.classList.toggle('dark-mode');
-            const btn = document.querySelector('.theme-toggle');
-            if (document.body.classList.contains('dark-mode')) {
-                btn.innerText = "Day Mode";
-            } else {
-                btn.innerText = "Night Mode";
-            }
+        function toggleNightMode() {
+            const body = document.body;
+            body.classList.toggle('dark-mode');
+            const btn = document.getElementById('nightBtn');
+            btn.innerHTML = body.classList.contains('dark-mode') ? "☀️ डे मोड" : "🌙 नाइट मोड";
         }
     </script>
-
 </body>
 </html>
