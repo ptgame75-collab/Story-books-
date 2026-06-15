@@ -7,7 +7,12 @@
     <link href="https://fonts.googleapis.com/css2?family=Boogaloo&display=swap" rel="stylesheet">
     <style>
         body { font-family: 'Arial', sans-serif; line-height: 1.8; color: #333; background: #fcfbf7; padding: 80px 20px 20px 20px; transition: 0.3s; -webkit-user-select: none; user-select: none; }
-        .toolbar { position: fixed; top: 0; left: 0; right: 0; display: flex; justify-content: space-between; padding: 15px 20px; background: rgba(252, 251, 247, 0.95); border-bottom: 1px solid #ddd; z-index: 1000; backdrop-filter: blur(5px); }
+        .toolbar { position: fixed; top: 0; left: 0; right: 0; display: flex; justify-content: space-between; align-items: center; padding: 15px 20px; background: rgba(252, 251, 247, 0.95); border-bottom: 1px solid #ddd; z-index: 1000; backdrop-filter: blur(5px); }
+        
+        /* नयाँ सर्च कन्टेनर र इनपुटको लागि CSS */
+        .search-container { display: flex; gap: 5px; flex-grow: 1; max-width: 40%; margin: 0 10px; }
+        .search-input { width: 100%; padding: 6px 12px; border: 1px solid #ccc; border-radius: 5px; font-size: 15px; outline: none; }
+        
         .intro-text p, .day-content { font-size: 19px; margin-bottom: 18px; font-weight: 900; text-align: justify; }
         .main-title { font-size: 32px; font-weight: 900; display: block; margin-top: 10px; color: #5D4037; text-align: center; }
         .sub-title { font-size: 40px; font-weight: 900; display: block; margin-bottom: 30px; color: #5D4037; text-align: center; }
@@ -16,16 +21,26 @@
         .day-title { font-weight: 900; font-size: 17px; display: block; margin-bottom: 5px; color: #5D4037; }
         .day-box { border: 1px solid #ddd; padding: 18px; margin-bottom: 15px; border-radius: 8px; background: #fff; }
         .special-note { color: #5D4037; font-size: 21px !important; font-weight: 900; margin-top: 25px; border-top: 1px solid #ddd; padding-top: 15px; }
-        .btn { text-decoration: none; color: #333; border: 1px solid #ccc; padding: 6px 15px; border-radius: 5px; font-weight: bold; background: #fff; cursor: pointer; }
+        .btn { text-decoration: none; color: #333; border: 1px solid #ccc; padding: 6px 15px; border-radius: 5px; font-weight: bold; background: #fff; cursor: pointer; white-space: nowrap; }
+        
+        /* डार्क मोड सपोर्ट */
         .dark-mode { background-color: #121212; color: #e0e0e0; }
         .dark-mode .toolbar { background: rgba(18, 18, 18, 0.95); border-color: #333; }
         .dark-mode .day-box, .dark-mode .btn { background: #1e1e1e; border-color: #333; color: #e0e0e0; }
+        .dark-mode .search-input { background: #222; border-color: #444; color: #fff; }
         .dark-mode .main-title, .dark-mode .sub-title, .dark-mode .day-title, .dark-mode .special-note { color: #D7CCC8; }
     </style>
 </head>
 <body oncontextmenu="return false;">
+
     <div class="toolbar">
         <a href="index.html" class="btn">← back</a>
+        
+        <div class="search-container">
+            <input type="text" id="searchInput" class="search-input" placeholder="खोज्नुहोस्...">
+            <button class="btn" onclick="searchFunction()">🔍</button>
+        </div>
+        
         <button class="btn" onclick="toggleNightMode()" id="nightBtn">🌙 नाइट मोड</button>
     </div>
 
@@ -35,6 +50,38 @@
             <hr class="straight-line">
             <span class="sub-title">अन्तिम इच्छा</span>
         </div>
+        
+        </div>
+
+    <script>
+        // नाइट मोड फङ्सन
+        function toggleNightMode() {
+            document.body.classList.toggle('dark-mode');
+            var btn = document.getElementById('nightBtn');
+            if(document.body.classList.contains('dark-mode')){
+                btn.innerHTML = "☀️ लाइट मोड";
+            } else {
+                btn.innerHTML = "🌙 नाइट मोड";
+            }
+        }
+
+        // सर्च गर्ने सामान्य फङ्सन (यसलाई आफ्नो आवश्यकता अनुसार परिमार्जन गर्न सक्नुहुन्छ)
+        function searchFunction() {
+            var input = document.getElementById('searchInput').value.toLowerCase();
+            if(input === "") {
+                alert("कृपया केही लेख्नुहोस्!");
+                return;
+            }
+            // उदाहरणका लागि विन्डो भित्रै सर्च गर्ने:
+            var found = window.find(input);
+            if (!found) {
+                alert("तपाईंले खोज्नुभएको शब्द भेटिएन!");
+            }
+        }
+    </script>
+</body>
+</html>
+
 
         <div class="intro-text">
             <p>थाहा छैन आज नै म यो सन्देश किन लेखैछु। आज २५ <span class="boogaloo-font">January</span> हो, घडीले रातको साढे ३ बजेको संकेत गर्दैछ, कोठामा शान्ति यस्तो छ कि मलाई मेरै मुटुको धड्कन कुनै बाजा जस्तै सुनिरहेको छ। हिजोआज मेरो स्वास्थ्य धेरै नै खराब चल्दैछ, र थाहा छैन भोलिको सूर्य मेरो लागि कस्तो हुनेछ। त्यसैले नै लेख्दैछु। यो केवल अक्षर मात्र होइनन्, मेरो अस्तित्वको अन्तिम प्रमाण हुन्।</p>
