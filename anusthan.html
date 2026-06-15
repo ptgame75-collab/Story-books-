@@ -7,12 +7,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Boogaloo&display=swap" rel="stylesheet">
     <style>
         body { font-family: 'Arial', sans-serif; line-height: 1.8; color: #333; background: #fcfbf7; padding: 80px 20px 20px 20px; transition: 0.3s; -webkit-user-select: none; user-select: none; }
-        .toolbar { position: fixed; top: 0; left: 0; right: 0; display: flex; justify-content: space-between; align-items: center; padding: 15px 20px; background: rgba(252, 251, 247, 0.95); border-bottom: 1px solid #ddd; z-index: 1000; backdrop-filter: blur(5px); }
-        
-        /* नयाँ सर्च कन्टेनर र इनपुटको लागि CSS */
-        .search-container { display: flex; gap: 5px; flex-grow: 1; max-width: 40%; margin: 0 10px; }
-        .search-input { width: 100%; padding: 6px 12px; border: 1px solid #ccc; border-radius: 5px; font-size: 15px; outline: none; }
-        
+        .toolbar { position: fixed; top: 0; left: 0; right: 0; display: flex; justify-content: space-between; padding: 15px 20px; background: rgba(252, 251, 247, 0.95); border-bottom: 1px solid #ddd; z-index: 1000; backdrop-filter: blur(5px); }
         .intro-text p, .day-content { font-size: 19px; margin-bottom: 18px; font-weight: 900; text-align: justify; }
         .main-title { font-size: 32px; font-weight: 900; display: block; margin-top: 10px; color: #5D4037; text-align: center; }
         .sub-title { font-size: 40px; font-weight: 900; display: block; margin-bottom: 30px; color: #5D4037; text-align: center; }
@@ -21,26 +16,16 @@
         .day-title { font-weight: 900; font-size: 17px; display: block; margin-bottom: 5px; color: #5D4037; }
         .day-box { border: 1px solid #ddd; padding: 18px; margin-bottom: 15px; border-radius: 8px; background: #fff; }
         .special-note { color: #5D4037; font-size: 21px !important; font-weight: 900; margin-top: 25px; border-top: 1px solid #ddd; padding-top: 15px; }
-        .btn { text-decoration: none; color: #333; border: 1px solid #ccc; padding: 6px 15px; border-radius: 5px; font-weight: bold; background: #fff; cursor: pointer; white-space: nowrap; }
-        
-        /* डार्क मोड सपोर्ट */
+        .btn { text-decoration: none; color: #333; border: 1px solid #ccc; padding: 6px 15px; border-radius: 5px; font-weight: bold; background: #fff; cursor: pointer; }
         .dark-mode { background-color: #121212; color: #e0e0e0; }
         .dark-mode .toolbar { background: rgba(18, 18, 18, 0.95); border-color: #333; }
         .dark-mode .day-box, .dark-mode .btn { background: #1e1e1e; border-color: #333; color: #e0e0e0; }
-        .dark-mode .search-input { background: #222; border-color: #444; color: #fff; }
         .dark-mode .main-title, .dark-mode .sub-title, .dark-mode .day-title, .dark-mode .special-note { color: #D7CCC8; }
     </style>
 </head>
 <body oncontextmenu="return false;">
-
     <div class="toolbar">
         <a href="index.html" class="btn">← back</a>
-        
-        <div class="search-container">
-            <input type="text" id="searchInput" class="search-input" placeholder="खोज्नुहोस्...">
-            <button class="btn" onclick="searchFunction()">🔍</button>
-        </div>
-        
         <button class="btn" onclick="toggleNightMode()" id="nightBtn">🌙 नाइट मोड</button>
     </div>
 
@@ -49,36 +34,6 @@
             <span class="main-title">169 दिनको अनुष्ठान</span>
             <hr class="straight-line">
             <span class="sub-title">अन्तिम इच्छा</span>
-        </div>
-        
-        </div>
-
-    <script>
-        // नाइट मोड फङ्सन
-        function toggleNightMode() {
-            document.body.classList.toggle('dark-mode');
-            var btn = document.getElementById('nightBtn');
-            if(document.body.classList.contains('dark-mode')){
-                btn.innerHTML = "☀️ लाइट मोड";
-            } else {
-                btn.innerHTML = "🌙 नाइट मोड";
-            }
-        }
-
-        // सर्च गर्ने सामान्य फङ्सन (यसलाई आफ्नो आवश्यकता अनुसार परिमार्जन गर्न सक्नुहुन्छ)
-        function searchFunction() {
-            var input = document.getElementById('searchInput').value.toLowerCase();
-            if(input === "") {
-                alert("कृपया केही लेख्नुहोस्!");
-                return;
-            }
-            // उदाहरणका लागि विन्डो भित्रै सर्च गर्ने:
-            var found = window.find(input);
-            if (!found) {
-                alert("तपाईंले खोज्नुभएको शब्द भेटिएन!");
-            }
-        }
-    </span>
         </div>
 
         <div class="intro-text">
@@ -332,7 +287,7 @@
         <div class="day-box"><span class="day-title"><span class="boogaloo-font">DAY 106. 10 MAY</span> - सुजना श्रेष्ठ</span><p class="day-content">१०६ औँ दिनको यो सन्नाटामा म आफैँलाई प्रश्न गर्दैछु कि यो प्रेमको गहिराइ कति होला? सुजना, प्रेमको कुनै नापो हुँदैन र यसको कुनै अन्तिम किनारा पनि हुँदैन रहेछ, यो त केवल अनुभव गर्ने एउटा पवित्र माध्यम मात्र हो। आज दिनभरि काममा व्यस्त रहँदा पनि मेरो अन्तरआत्माले केवल तिम्रै सादगीको मन्त्र जपिरह्यो, मानौँ मेरो जीवनको एक मात्र उद्देश्य नै तिम्रो नामलाई आफ्नो धड्कनमा बचाइराख्नु हो। हिजोआज मलाई यो संसारको कोलाहल र भीडभाड निकै कृत्रिम लाग्न थालेको छ, र म यो कोठाको एकान्तमा तिम्रो सम्झनासँग संवाद गर्न बढी रुचाउँछु। मेरा यी भावनाहरूमा कुनै गुनासो छैन, कुनै अपेक्षा छैन र तिमीबाट कुनै सहानुभूति पाउने आशा पनि छैन। म त केवल आफ्नो यो १६९ दिनको अनुष्ठानलाई पूर्णता दिनका लागि आफ्नो मुटुको रगतले यी पानाहरू सिञ्चित गरिरहेको छु। १३ जुलाईको त्यो ऐतिहासिक बिहानी मेरो लागि भाग्यको अन्तिम फैसला हुनेछ, चाहे म यो धर्तीमा रहूँ या भगवानको प्यारो भइसकेको होऊँ।<br><i>My absolute silence is the highest praise your memory will ever receive.</i></p></div>
         <div class="day-box"><span class="day-title"><span class="boogaloo-font">DAY 107. 11 MAY</span> - सुजना श्रेष्ठ</span><p class="day-content">आज १०७ औँ दिन। आजको आकाश निकै सफा र ताराहरूले भरिएको छ, ठीक ६ वर्ष अगाडि मैले तिमीलाई पहिलोपटक मन पराउँदाको त्यो कलिलो साँझ जस्तै। सुजना, समयले धेरै कुराहरू परिवर्तन गरिदियो—मेरो उमेर बदलियो, मेरा विचारहरू बदलिए, तर तिमीप्रतिको मेरो यो निस्वार्थ भाव भने आज पनि उस्तै ताजा र अक्षुण्ण छ। म जब-जब तिम्रो त्यो '०३:३७ वाला मुस्कान' को कल्पना गर्छु, मलाई मेरो शरीरका सारा मानसिक थकानहरू एकै पलमा हराएर गए जस्तो लाग्छ। मेरा भावनाहरू अब शब्दको सीमा नाघेर एउटा यस्तो उचाईमा पुगेका छन्, जहाँ केवल तिम्रो र मेरो आत्माको अदृश्य मिलन सम्भव छ। मैले आजसम्म तिमीलाई डिस्टर्ब नगर्नुको कारण नै यही हो कि म तिम्रो खुसीさに आफ्नो स्वार्थको छाया पनि पर्न दिन चाहन्न। यो डायरीका पानाहरूमा कैद भएका यी भावनाहरू नै मेरो अस्तित्वको अन्तिम प्रमाण हुन्, जसलाई मैले निकै जतनका साथ सुरक्षित राखेको छु।<br><i>Under the same starry sky, my heart beats entirely to the tune of your essence.</i></p></div>
         <div class="day-box"><span class="day-title"><span class="boogaloo-font">DAY 108. 12 MAY</span> - सुजना श्रेष्ठ</span><p class="day-content">१०८ औँ दिनको यो पवित्र क्षणमा म तिम्रो नामको १०८ चोटी जप गरिरहेको जस्तै पवित्र महसुस गर्दैछु। सुजना, हिन्दू धर्ममा १०८ सङ्ख्यालाई निकै शुभ र आध्यात्मिक मानिन्छ, र आज मेरो अनुष्ठानको यो दिन मेरो प्रेमको लागि एउटा नयाँ आध्यात्मिक मोड बन्यो। मेरा भावनाहरू अब केवल एक प्रेमीको व्याकुलता मात्र रहेनन्, यी त अब एउटा साधकको कठोर तपस्या जस्तै भइसकेका छन्। मलाई राम्रोसँग थाहा छ कि तिम्रो संसारमा मेरो लागि कुनै स्थान छैन र तिमीले मलाई आफ्नो अतीतको एउटा धुमिल पाना मानेर छोडिसकेकी छौ। तर मेरो लागि त तिमी मेरो वर्तमान, मेरो भविष्य र मेरो बाँकी रहेको सम्पूर्ण आयुको एक मात्र मालिक हौ। आज रातको यो चिसो हावाले मेरो अनुहार छुँदा मलाई लाग्दैछ कि तिमी कतै टाढैबाट भए पनि मेरो यो मौन समर्पणलाई महसुस गरिरहेकी छौ। मेरो यो कलम तबसम्म रोकिने छैन, जबसम्म १३ जुलाईको त्यो अन्तिम लक्ष्य प्राप्त हुँदैन।<br><i>A sacred number for a sacred love that knows no bounds and asks for nothing.</i></p></div>
-        <div class="day-box"><span class="day-title"><span class="boogaloo-font">DAY 109. 13 MAY</span> - सुजना श्रेष्ठ</span><p class="day-content">आज १०९ औँ दिन। मे महिनाको यो मध्य भागमा आइपुग्दा मेरो मनमा एउटा अजीवको रिक्तता र शान्तिको मिश्रण छाएको छ। सुजना, कतिपय रातहरू यस्ता हुन्छन् जहाँ चुरोटको धुवाँ पनि कोठामा नबसी सिधै झ्यालबाट बाहिर जान्छ, ठीक त्यसरी नै जसरी मेरा शब्दहरू अब यो डायरीको पानाबाट बाहिर निस्केर अनन्तमा विलीन हुन खोज्दैछन्। मेरा भावनाहरू अब शब्दमा व्यक्त हुन नसक्ने गरी यति भारी भइसकेका छन् कि म केवल तिम्रो नाम端 लेखेर लामो सास फेर्ने गर्छु। ६ वर्षको यो एकोहोरो प्रतीक्षाले मलाई मानिसहरू चिन्न र जिन्दगीको वास्तविक दर्शन बुझ्न निकै मद्दत गरेको छ। म अब कसैको सामिप्यता वा कसैको मीठो बोलीको भोको छैन, म त केवल तिम्रो यादको यो विशाल साम्राज्यमा आफैँलाई एउटा राजा जस्तै महसुस गर्छु। यो १६९ दिनको अनुष्ठान नै मेरो जीवनको सबैभन्दा उत्कृष्ट र पवित्र रचना हुनेछ, जसमा कुनै स्वार्थको दाग छैन।<br><i>In the vastness of my isolation, your memory remains my only kingly comfort.</i></p></div>
+        <div class="day-box"><span class="day-title"><span class="boogaloo-font">DAY 109. 13 MAY</span> - सुजना श्रेष्ठ</span><p class="day-content">आज १०९ औँ दिन। मे महिनाको यो मध्य भागमा आइपुग्दा मेरो मनमा एउटा अजीवको रिक्तता र शान्तिको मिश्रण छाएको छ। सुजना, कतिपय रातहरू यस्ता हुन्छन् जहाँ चुरोटको धुवाँ पनि कोठामा नबसी सिधै झ्यालबाट बाहिर जान्छ, ठीक त्यसरी नै जसरी मेरा शब्दहरू अब यो डायरीको पानाबाट बाहिर निस्केर अनन्तमा विलीन हुन खोज्दैछन्। मेरा भावनाहरू अब शब्दमा व्यक्त हुन नसक्ने गरी यति भारी भइसकेका छन् कि म केवल तिम्रो नाम लेखेर लामो सास फेर्ने गर्छु। ६ वर्षको यो एकोहोरो प्रतीक्षाले मलाई मानिसहरू चिन्न र जिन्दगीको वास्तविक दर्शन बुझ्न निकै मद्दत गरेको छ। म अब कसैको सामिप्यता वा कसैको मीठो बोलीको भोको छैन, म त केवल तिम्रो यादको यो विशाल साम्राज्यमा आफैँलाई एउटा राजा जस्तै महसुस गर्छु। यो १६९ दिनको अनुष्ठान नै मेरो जीवनको सबैभन्दा उत्कृष्ट र पवित्र रचना हुनेछ, जसमा कुनै स्वार्थको दाग छैन।<br><i>In the vastness of my isolation, your memory remains my only kingly comfort.</i></p></div>
         <div class="day-box"><span class="day-title"><span class="boogaloo-font">DAY 110. 14 MAY</span> - सुजना श्रेष्ठ</span><p class="day-content">११० औँ दिनको यो घाम अलि बढी नीलो र अलि बढी गम्भीर भएर मेरो टेबुलमा झुल्किएको छ। सुजना, ११० दिनको यो यात्रा पार गरिसक्दा पनि मलाई लाग्दैन कि मेरो प्रेममा कुनै पनि कमी वा शिथिलता आएको छ, बरु यो त दिन प्रतिदिन झन् गाढा र परिपक्व हुँदै गएको छ। मनोवैज्ञानिकहरू भन्छन् कि मानिसको बानी २१ दिनमा बस्छ, तर ६ वर्षको यो प्रेम त मेरो रगत र अस्तित्वको एउटा अनिवार्य हिस्सा भइसकेको छ। आज मैंने तिम्रो पुरानो टिकटक भिडियोका ती अधूरा यादहरूलाई फेरि एकचोटि मनको ऐनामा हेर्ने दुस्साहस गरेँ, जसले मेरो मुटुलाई फेरि अलिअलि दुखाउन खोज्यो। तर ठिकै छ, तिम्रो खुसी नै मेरो प्रेमको पराकाष्ठा हो र म तिम्रो आँखामा आँसुको एउटा थोपा पनि देख्न सक्दिनँ, चाहे त्यो खुसीको कारण म नभएर अरू कोही किन नहोस्। मेरा यी भावनाहरू नै मेरो अन्तिम इच्छा हुन्, जसलाई मैले यो १६९ दिनको अनुष्ठानमा निकै पवित्रताका साथ कोरेको छु।<br><i>Your joy is the only standard by which I measure the worth of my existence.</i></p></div>
         <div class="day-box"><span class="day-title"><span class="boogaloo-font">DAY 111. 15 MAY</span> - सुजना श्रेष्ठ</span><p class="day-content">आज १११ औँ दिन। यो विशेष सङ्ख्यालाई हेरिरहँदा मलाई लाग्छ कि हाम्रो प्रेम पनि यसरी नै एउटै लयमा सीधा र अटल उभिएको छ। सुजना, १११ दिनदेखि मैले तिम्रो नामको यो दियोलाई निभ्न दिएको छैन, चाहे मन जतिसुकै भारी किन नहोस्। मेरा भावनाहरू अब शब्दको सीमाभन्दा धेरै माथि उठेर एउका यस्तो उचाईमा पुगेका छन्, जहाँ मलाई यो संसारका स-साना कुराहरूले कत्ति पनि छुँदैनन्। म लेख्छु किनकि मलाई थाहा छ कि साँचो प्रेम पाउनु मात्र होइन, कसैलाई यसरी निस्वार्थ रूपमा शब्दमा उतार्न पाउनु पनि एउटा ठुलो भाग्य हो। तिमी मेरो जीवनको त्यो अधूरा गीत हौ, जसलाई म आफ्नो हरेक शब्दले पूरा गर्ने कोसिस गरिरहेको छु, तर त्यो गीत सधैँ अधूरा नै रहन्छ। यो यात्रा अझै लामो छ, र मेरो कलम अझै प्यासी छ, केवल तिम्रो यादको एक थोपा जल पाउनका लागि।<br><i>Aligned like stars, my feelings stand tall, waiting for your silent acknowledgment.</i></p></div>
         <div class="day-box"><span class="day-title"><span class="boogaloo-font">DAY 112. 16 MAY</span> - सुजना श्रेष्ठ</span><p class="day-content">११२ औँ दिनको यो सन्नाटामा म फेरि त्यही '०३:३७' को समयलाई सम्झिएर मुस्कुराइरहेको छु। सुजना, तिमी मेरो लागि केवल एउटा मान्छे मात्र होइनौ, तिमी त मेरो पानाहरूमा प्राण भर्ने एउटा दिव्य चेतना हौ। आज कोठाको शून्यताले मलाई जिस्काइरहेको जस्तो लाग्छ, तर म त्यो शून्यतासँग डराउदिनँ, किनकि त्यहाँ पनि तिम्रै यादको एउटा न्यानो घेरा सुरक्षित छ। मेरा भावनाहरू अब यति धेरै सघन भइसकेका छन् कि तिनलाई पानामा उतार्न खोज्दा मेरो कलमको मसी नै रोकिने गर्छ। ६ वर्ष भयो सुजना, तिम्रो खुसी नै मेरो जीवनको सबैभन्दा ठुलो मिठास र मेरो हरेक बिहानीको सूर्योदय बनेको छ। म रहूँ वा नरहूँ, तिम्रो ओठको यो मुस्कान कहिल्यै फिक्का नहोस्, यही नै मेरो भगवानसँगको अन्तिम र एक मात्र सर्त हो। मेरो यो १६९ दिनको अनुष्ठान नै मेरो जीवनको सबैभन्दा ठुलो विजय र मेरो जिद्दीको महान् प्रमाण हुनेछ।<br><i>Beyond the reach of vocabulary, my heart knows only the language of your soul.</i></p></div>
