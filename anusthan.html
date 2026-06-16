@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>१६९ दिनको अनुष्ठान - अधिराज</title>
     <link href="https://fonts.googleapis.com/css2?family=Boogaloo&display=swap" rel="stylesheet">
-    <!-- सर्च आइकनको लागि FontAwesome थपिएको -->
+    <!-- सर्च आइकनको लागि FontAwesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         body { 
@@ -29,10 +29,10 @@
         .special-note { color: #5D4037; font-size: 21px !important; font-weight: 900; margin-top: 25px; border-top: 1px solid #ddd; padding-top: 15px; }
         .btn { text-decoration: none; color: #333; border: 1px solid #ccc; padding: 8px 18px; border-radius: 5px; font-weight: bold; background: #fff; cursor: pointer; }
         
-        /* सर्च बार फिक्स गरिएको डिजाइन (अब स्क्रिनको जुन भागमा भए पनि डबल ट्याप गर्दा माथि आउँछ) */
+        /* सर्च बार फिक्स गरिएको डिजाइन */
         .search-container {
             position: fixed;
-            top: -80px; /* सुरुमा स्क्रिनभन्दा माथि लुक्ने */
+            top: -80px; /* सुरुमा लुक्ने */
             left: 0;
             right: 0;
             display: flex;
@@ -46,10 +46,8 @@
             transition: top 0.4s ease;
         }
         .search-container.active {
-            top: 0; /* डबल ट्याप गर्दा सर्लक्क तल झर्ने */
+            top: 0; /* डबल ट्याप गर्दा देखिने */
         }
-        
-        /* सर्च बक्स र बटन मिलाइएको फ्रेम */
         .search-box-wrapper {
             position: relative;
             width: 90%;
@@ -77,7 +75,7 @@
             outline: none;
         }
 
-        /* खोजिएको दिन भेटिएपछि चम्किने इफेक्ट */
+        /* हाइलाइट इफेक्ट */
         .day-box.highlight {
             background-color: #FFF59D !important;
             border-color: #FBC02D;
@@ -114,7 +112,7 @@
 </head>
 <body oncontextmenu="return false;">
 
-    <!-- सर्च बार (अब fixed छ, स्क्रिन जहाँ भए पनि डबल ट्याप गर्दा माथिबाट देखा पर्छ) -->
+    <!-- सर्च बार (डबल ट्याप गर्दा माथिबाट आउने) -->
     <div class="search-container" id="searchWrapper">
         <div class="search-box-wrapper">
             <input type="text" class="search-bar" id="daySearchInput" placeholder="Search AB khat..." onkeydown="handleSearchKeyDown(event)">
@@ -123,12 +121,8 @@
     </div>
 
     <div id="anusthan">
-        <div class="title-container" style="text-align: center;">
-            <span class="main-title">169 दिनको अनुष्ठान</span>
-            <hr class="straight-line">
-            <span class="sub-title">अन्तिम इच्छा</span>
-        </div>
-
+        
+      
         <div class="intro-text">
             <p>थाहा छैन आज नै म यो सन्देश किन लेख्दैछु। आज २५ <span class="boogaloo-font">January</span> हो, घडीले रातको साढे ३ बजेको संकेत गर्दैछ, कोठामा शान्ति यस्तो छ कि मलाई मेरै मुटुको धड्कन कुनै बाजा जस्तै सुनिरहेको छ। हिजोआज मेरो स्वास्थ्य धेरै नै खराब चल्दैछ, र थाहा छैन भोलिको सूर्य मेरो लागि कस्तो हुनेछ। त्यसैले नै लेख्दैछु। यो केवल अक्षर मात्र होइनन्, मेरो अस्तित्वको अन्तिम प्रमाण हुन्।</p>
             <p>यदि मरे भने तिम्रो बारेमा अन्तिमचोटि लेख्न पाउँ। तर यदि यो सन्देश १३ जुलाईमा तिम्रो मोबाइलको स्क्रिनमा झल्कियो भने सम्झिनु म यो धर्तीमा कतै अझै जीवितै छु। तर, यदि यो सन्देश तिम्रो मोबाइलसम्म पुगेन र मेरो मोबाइलको diary मा मात्र कैद रह्यो भने—म यो संसारलाई अलविदा भनेर भगवानलाई प्यारो भइसकेको हुनेछु। मेरो शून्यताले तिमीलाई कहिल्यै नपोलोस्, यही कामना छ।</p>
@@ -443,12 +437,20 @@
         <div class="day-box"><span class="day-title"><span class="boogaloo-font">DAY 169. 12 JULY</span> - सुजना श्रेष्ठ</span><p class="day-content">१६९ औँ दिन! आज यो साहित्यिक अनुष्ठानको अन्तिम दिन, अन्तिम पाना, र मेरो ६ वर्षको प्रतीक्षाको सर्वोच्च शिखर हो। सुजना, आज १६९ औँ दिनको यो हरफ कोर्दै गर्दा मेरो कलम सधैँका लागि मौन हुँदैछ। मैले आफूले आफैँसँग र तिम्रो यादसँग गरेको प्रतिज्ञा आज पूर्ण रूपमा सफलतापूर्वक पुरा भएको छ। भोलि १३ जुलाईको बिहानी जब यो सन्देश तिम्रो संसारमा पुग्नेछ, तब सम्झिनु कि यो धर्तीमा कोही यस्तो अधिराज पनि थियो, जसले तिम्रो सादगीलाई आफ्नो जीवनको अन्तिम र सबैभन्दा पवित्र सत्य मान्यो। मेरो यो १६९ दिनको साधना अब इतिहासको पानामा सधैँका लागि सुरक्षित भएको छ।<br><i>The vow is complete, the pen is silent, and my love for you is now immortal. 13 July is yours.</i></p></div>
         </div>
 
-  <script>
+    </div>
+
+    <!-- बटम टोलबार -->
+    <div class="toolbar" id="myToolbar">
+        <a href="index.html" class="btn">← back</a>
+        <button class="btn" onclick="toggleNightMode(event)" id="nightBtn">🌙 नाइट मोड</button>
+    </div>
+
+    <script>
         const toolbar = document.getElementById('myToolbar');
         const searchWrapper = document.getElementById('searchWrapper');
         let hideTimeout;
 
-        // स्क्रिनको जुनसुकै ठाउँमा (बिचमा भए पनि) डबल ट्याप गर्दा बारहरू एक्टिभ हुने
+        // स्क्रिनको जुनसुकै भागमा डबल ट्याप गर्दा बारहरू एक्टिभ हुने फिक्स
         document.addEventListener('dblclick', function() {
             toolbar.classList.add('active');
             searchWrapper.classList.add('active');
@@ -458,28 +460,27 @@
         function resetHideTimeout() {
             clearTimeout(hideTimeout);
             hideTimeout = setTimeout(() => {
-                // यदि युजरले सर्च बारमा टाइप गर्दैछ भने ५ सेकेन्डमै अचानक बन्द नहोस्
                 if (document.activeElement !== document.getElementById('daySearchInput')) {
                     toolbar.classList.remove('active');
                     searchWrapper.classList.remove('active');
                 }
-            }, 5000);
+            }, 5000); // ५ सेकेन्डमा स्वतः लुक्ने
         }
 
         const searchInput = document.getElementById('daySearchInput');
         searchInput.addEventListener('focus', () => clearTimeout(hideTimeout));
         searchInput.addEventListener('blur', resetHideTimeout);
 
-        // की-बोर्डको 'Enter' की थिच्दा मात्र सर्च एक्जिक्युट हुने (टाइपिङकै भरमा स्क्रोल हुँदैन)
+        // 'Enter' की थिच्दा मात्र सर्च हुने
         function handleSearchKeyDown(event) {
             resetHideTimeout();
             if (event.key === 'Enter') {
                 searchContent();
-                searchInput.blur(); // कीबोर्ड लुकाउनका लागि फोकस हटाउने
+                searchInput.blur(); // कीबोर्ड लुकाउन फोकस हटाउने
             }
         }
 
-        // मुख्य सर्च फङ्सन
+        // मुख्य सर्च मेकानिजम (नम्बर र अक्षर दुवैको लागि)
         function searchContent() {
             const query = searchInput.value.trim().toLowerCase();
             if (!query) return;
