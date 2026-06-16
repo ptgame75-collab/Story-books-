@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>१६९ दिनको अनुष्ठान - अधिराज</title>
     <link href="https://fonts.googleapis.com/css2?family=Boogaloo&display=swap" rel="stylesheet">
+    <!-- सर्च आइकनको लागि FontAwesome थपिएको -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         body { 
             font-family: 'Arial', sans-serif; 
@@ -12,6 +14,7 @@
             color: #333; 
             background: #fcfbf7; 
             padding: 20px; 
+            padding-top: 80px; /* सर्च बारले कन्टेन्ट नखाओस् भनेर */
             transition: 0.3s; 
             -webkit-user-select: none; 
             user-select: none; 
@@ -26,36 +29,57 @@
         .special-note { color: #5D4037; font-size: 21px !important; font-weight: 900; margin-top: 25px; border-top: 1px solid #ddd; padding-top: 15px; }
         .btn { text-decoration: none; color: #333; border: 1px solid #ccc; padding: 8px 18px; border-radius: 5px; font-weight: bold; background: #fff; cursor: pointer; }
         
-        /* सर्च बार डिजाइन (सुरुमा लुकेको हुन्छ) */
+        /* सर्च बार फिक्स गरिएको डिजाइन (अब स्क्रिनको जुन भागमा भए पनि डबल ट्याप गर्दा माथि आउँछ) */
         .search-container {
-            max-width: 100%;
-            margin: -10px auto 20px auto;
-            text-align: center;
-            opacity: 0;
-            visibility: hidden;
-            transform: translateY(-20px);
-            transition: all 0.4s ease;
+            position: fixed;
+            top: -80px; /* सुरुमा स्क्रिनभन्दा माथि लुक्ने */
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 15px;
+            background: rgba(252, 251, 247, 0.98);
+            border-bottom: 1px solid #ddd;
+            z-index: 1001;
+            backdrop-filter: blur(5px);
+            transition: top 0.4s ease;
         }
         .search-container.active {
-            opacity: 1;
-            visibility: visible;
-            transform: translateY(0);
+            top: 0; /* डबल ट्याप गर्दा सर्लक्क तल झर्ने */
         }
-        .search-bar {
+        
+        /* सर्च बक्स र बटन मिलाइएको फ्रेम */
+        .search-box-wrapper {
+            position: relative;
             width: 90%;
             max-width: 400px;
-            padding: 10px 15px;
+            display: flex;
+            align-items: center;
+        }
+        .search-bar {
+            width: 100%;
+            padding: 11px 45px 11px 20px;
             font-size: 16px;
             border: 1px solid #ccc;
             border-radius: 25px;
             outline: none;
-            text-align: center;
             box-shadow: 0 2px 5px rgba(0,0,0,0.05);
         }
+        .search-icon-btn {
+            position: absolute;
+            right: 15px;
+            background: none;
+            border: none;
+            color: #777;
+            font-size: 16px;
+            cursor: pointer;
+            outline: none;
+        }
 
-        /* खोजिएको दिन भेटिएपछि चम्किने एनिमेसन (Highlight Effect) */
+        /* खोजिएको दिन भेटिएपछि चम्किने इफेक्ट */
         .day-box.highlight {
-            background-color: #FFF59D !important; /* हल्का पहेँलो रङ्ग */
+            background-color: #FFF59D !important;
             border-color: #FBC02D;
         }
         
@@ -78,9 +102,11 @@
         
         /* नाइट मोड स्टाइलिङ */
         .dark-mode { background-color: #121212; color: #e0e0e0; }
+        .dark-mode .search-container { background: rgba(12, 12, 12, 0.98); border-color: #333; }
         .dark-mode .toolbar { background: rgba(18, 18, 18, 0.98); border-color: #333; }
         .dark-mode .day-box, .dark-mode .btn { background: #1e1e1e; border-color: #333; color: #e0e0e0; }
         .dark-mode .search-bar { background: #222; border-color: #444; color: #fff; }
+        .dark-mode .search-icon-btn { color: #aaa; }
         .dark-mode .main-title, .dark-mode .sub-title, .dark-mode .day-title, .dark-mode .special-note { color: #D7CCC8; }
         .dark-mode .day-box.highlight { background-color: #FBC02D !important; color: #121212; }
         .dark-mode .day-box.highlight .day-title { color: #121212; }
@@ -88,9 +114,12 @@
 </head>
 <body oncontextmenu="return false;">
 
-    <!-- सर्च बार (भित्र Search AB khat... लेखिएको र अक्षर पनि सपोर्ट गर्ने) -->
+    <!-- सर्च बार (अब fixed छ, स्क्रिन जहाँ भए पनि डबल ट्याप गर्दा माथिबाट देखा पर्छ) -->
     <div class="search-container" id="searchWrapper">
-        <input type="text" class="search-bar" id="daySearchInput" placeholder="Search AB khat..." oninput="searchContent()">
+        <div class="search-box-wrapper">
+            <input type="text" class="search-bar" id="daySearchInput" placeholder="Search AB khat..." onkeydown="handleSearchKeyDown(event)">
+            <button class="search-icon-btn" onclick="searchContent()"><i class="fas fa-search"></i></button>
+        </div>
     </div>
 
     <div id="anusthan">
@@ -110,10 +139,10 @@
 
         <!-- दिनहरूको बक्सहरू -->
         <div class="day-box" id="day-1"><span class="day-title"><span class="boogaloo-font">DAY 1. 25 JANUARY</span> - सुजना श्रेष्ठ</span><p class="day-content">आजदेखि यो मौन अनुष्ठान सुरु गर्दैछु। रातको साढे ३ बजे म तिम्रो नामको पहिलो अक्षर कोर्दैछु। त्यो कापिरहेको हातमा केही राहत मिलेको अनुभव हुँदैछ। लाग्दैछ त्यो सुख बिरुवाले जल पाएको छ।</p></div>
-        <div class="day-box" id="day-2"><span class="day-title"><span class="boogaloo-font">DAY 2. 26 JANUARY</span> - सुजना श्रेष्ठ</span><p class="day-content">"तिम्रो त्यो एउटा तस्बिर मात्र के भन्नु, मेरो लागि त दिनभरिको कोलाहल, दौडधुप र मानसिक थकान मेटाउने एउटा अचुक औषधि हो। संसारको भीडभाडमा हराइरहँदा जब थाकेर म लखतरान हुन्छु, तब तिम्रो मुस्कानले मलाई पुनः जीवित तुल्याउँछ।"</p></div>
+        <div class="day-box" id="day-2"><span class="day-title"><span class="boogaloo-font">DAY 2. 26 JANUARY</span> - सुजना श्रेष्ठ</span><p class="day-content">"तिम्रो त्यो एउका तस्बिर मात्र के भन्नु, मेरो लागि त दिनभरिको कोलाहल, दौडधुप र मानसिक थकान मेटाउने एउटा अचुक औषधि हो। संसारको भीडभाडमा हराइरहँदा जब थाकेर म लखतरान हुन्छु, तब तिम्रो मुस्कानले मलाई पुनः जीवित तुल्याउँछ।"</p></div>
         <div class="day-box" id="day-3"><span class="day-title"><span class="boogaloo-font">DAY 3. 27 JANUARY</span> - सुजना श्रेष्ठ</span><p class="day-content">"समयको ऐनामा अझै पनि ती पुराना डिजिटल यादहरू (Tiktok) जीवितै रहेछन्। तिमीले अर्कै कसैको निमित्त शब्दहरू अर्पण गरेको देख्दा मेरो मुटु साह्रै दुख्दो रहेछ।"</p></div>
         <div class="day-box" id="day-4"><span class="day-title"><span class="boogaloo-font">DAY 4. 28 JANUARY</span> - सुजना श्रेष्ठ</span><p class="day-content">आज चौथो दिन। सदा झैँ म मेरो fake id बाट तिम्रो प्रोफाइल view गर्न गएको तर id private छ। Locked out of your world, but you are the queen of mine.</p></div>
-        <div class="day-box" id="day-5"><span class="day-title"><span class="boogaloo-font">DAY 5. 29 JANUARY</span> - सुजना श्रेष्ठ</span><p class="day-content">I can't explain my feelings... शब्दहरू हराएका छन्। मन भारी छ, शरीर गल्दैछ। आज केवल तिम्रो नाम लेखेरै चित्त बुझाउँदैछु। व्हेन वोर्ड्स फेल, माइ साइलेन्स स्पिक्स योर नेम।</p></div>
+        <div class="day-box" id="day-5"><span class="day-title"><span class="boogaloo-font">DAY 5. 29 JANUARY</span> - सुजना श्रेष्ठ</span><p class="day-content">I can't explain my feelings... शब्दहरू हराएका छन्। मन भारी छ, शरीर गल्दैछ। आज केवल तिम्रो नामलेखेरै चित्त बुझाउँदैछु। व्हेन वोर्ड्स फेल, माइ साइलेन्स स्पिक्स योर नेम।</p></div>
         <div class="day-box" id="day-22"><span class="day-title"><span class="boogaloo-font">DAY 22. 15 FEBRUARY</span> - सुजना श्रेष्ठ</span><p class="day-content">आज बाइसौँ दिन। मनोवैज्ञानिकहरू भन्छन् कुनै पनि काम लगातार २१ दिन गर्यो भने त्यो 'बानी' बन्छ रे। अब २२ औँ दिनमा म यो कुरा प्रस्ट भएँ कि तिमी मेरो अस्तित्वको अनिवार्य बानी हौ।</p></div>
     </div>
 
@@ -128,7 +157,7 @@
         const searchWrapper = document.getElementById('searchWrapper');
         let hideTimeout;
 
-        // डबल ट्याप गर्दा देखाउने र नलुकाउने व्यवस्था
+        // स्क्रिनको जुनसुकै ठाउँमा (बिचमा भए पनि) डबल ट्याप गर्दा बारहरू एक्टिभ हुने
         document.addEventListener('dblclick', function() {
             toolbar.classList.add('active');
             searchWrapper.classList.add('active');
@@ -138,6 +167,7 @@
         function resetHideTimeout() {
             clearTimeout(hideTimeout);
             hideTimeout = setTimeout(() => {
+                // यदि युजरले सर्च बारमा टाइप गर्दैछ भने ५ सेकेन्डमै अचानक बन्द नहोस्
                 if (document.activeElement !== document.getElementById('daySearchInput')) {
                     toolbar.classList.remove('active');
                     searchWrapper.classList.remove('active');
@@ -148,45 +178,56 @@
         const searchInput = document.getElementById('daySearchInput');
         searchInput.addEventListener('focus', () => clearTimeout(hideTimeout));
         searchInput.addEventListener('blur', resetHideTimeout);
-        searchInput.addEventListener('input', resetHideTimeout);
 
-        // स्मार्ट सर्च फङ्सन (नम्बर र अक्षर दुवै खोज्ने)
+        // की-बोर्डको 'Enter' की थिच्दा मात्र सर्च एक्जिक्युट हुने (टाइपिङकै भरमा स्क्रोल हुँदैन)
+        function handleSearchKeyDown(event) {
+            resetHideTimeout();
+            if (event.key === 'Enter') {
+                searchContent();
+                searchInput.blur(); // कीबोर्ड लुकाउनका लागि फोकस हटाउने
+            }
+        }
+
+        // मुख्य सर्च फङ्सन
         function searchContent() {
             const query = searchInput.value.trim().toLowerCase();
             if (!query) return;
 
             let targetBox = null;
 
-            // १. यदि प्रयोगकर्ताले सिधै नम्बर मात्र टाइप गरेको छ भने (जस्तै: 5 वा 22)
+            // नम्बर सर्च (उदा: 5 वा 22)
             if (!isNaN(query)) {
                 targetBox = document.getElementById(`day-${query}`);
             } 
-            // २. यदि प्रयोगकर्ताले अक्षर वा शब्द टाइप गरेको छ भने
+            // अक्षर वा शब्द सर्च
             else {
                 const dayBoxes = document.querySelectorAll('.day-box');
                 for (let box of dayBoxes) {
                     const textInside = box.textContent.toLowerCase();
                     if (textInside.includes(query)) {
                         targetBox = box;
-                        break; // पहिलो मिल्दो दिन भेटिएपछि रोकिने
+                        break; 
                     }
                 }
             }
             
-            // यदि दिन भेटियो भने त्यहाँ लैजाने र चम्काउने
+            // परिणाम भेटिएमा स्क्रोल र हाइलाइट गर्ने
             if (targetBox) {
                 document.querySelectorAll('.day-box').forEach(box => box.classList.remove('highlight'));
                 
                 targetBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
                 targetBox.classList.add('highlight');
 
+                // २ सेकेन्डपछि हाइलाइट रङ्ग हटने
                 setTimeout(() => {
                     targetBox.classList.remove('highlight');
                 }, 2000);
+            } else {
+                alert("खोजिएको दिन वा शब्द फेला परेन।");
             }
         }
 
-        // नाइट मोड
+        // नाइट मोड टगल
         function toggleNightMode(event) {
             event.stopPropagation();
             const body = document.body;
