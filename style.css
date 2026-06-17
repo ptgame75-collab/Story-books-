@@ -150,3 +150,8 @@ video {
         border-radius: 8px;
     }
 }
+/* थपिएको कोड - हाइलाइट फिचरका लागि */
+.bold-feeling p.highlighted {
+    background-color: rgba(255, 235, 59, 0.6) !important; 
+    color: #000 !important;
+}
