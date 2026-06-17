@@ -5,15 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>अधिराज की डायरी 068</title>
     <style>
-        /* स्मूथ स्क्रोलिङका लागि यो थपिएको छ */
-        html {
-            scroll-behavior: smooth;
-        }
+        /* स्मूथ स्क्रोलिङ र आधारभूत सेटिङ */
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Arial', sans-serif; line-height: 1.8; color: #333; background: #fcfbf7; padding: 80px 20px 100px 20px; transition: 0.3s; -webkit-user-select: none; user-select: none; }
+        .toolbar { position: fixed; top: 0; left: 0; right: 0; display: flex; justify-content: space-between; padding: 15px 20px; background: rgba(252, 251, 247, 0.95); border-bottom: 1px solid #ddd; z-index: 1000; backdrop-filter: blur(5px); height: 45px; }
+        .btn { text-decoration: none; color: #333; border: 1px solid #ccc; padding: 6px 15px; border-radius: 5px; font-weight: bold; background: #fff; cursor: pointer; }
 
-        body { font-family: 'Arial', sans-serif; line-height: 1.8; color: #333; background: #fcfbf7; padding: 80px 20px 20px 20px; transition: 0.3s; -webkit-user-select: none; user-select: none; }
-        .toolbar { position: fixed; top: 0; left: 0; right: 0; display: flex; justify-content: space-between; padding: 15px 20px; background: rgba(252, 251, 247, 0.95); border-bottom: 1px solid #ddd; z-index: 1000; backdrop-filter: blur(5px); height: 45px; /* टुलबारको निश्चित उचाइ */ }
-        
-        /* नयाँ अनुक्रमणिका (Table of Contents) को स्टाइल */
+        /* अनुक्रमणिका (Table of Contents) को स्टाइल */
         .toc-container { background: #f4ece1; padding: 20px; border-radius: 10px; border-left: 5px solid #5D4037; margin: 20px auto 40px auto; max-width: 600px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
         .toc-title { font-size: 20px; font-weight: bold; color: #5D4037; margin-bottom: 10px; display: block; text-align: center; }
         .toc-list { list-style: none; padding: 0; margin: 0; }
@@ -21,45 +19,74 @@
         .toc-list a { text-decoration: none; color: #795548; font-weight: bold; transition: 0.2s; display: block; }
         .toc-list a:hover { color: #5D4037; padding-left: 5px; }
 
-        .bold-feeling p { font-size: 19px; margin-bottom: 25px; font-weight: 900; text-align: justify; }
-        
-        /* मुख्य समाधान: यहाँ id वा क्लासमा टुलबारको उचाइ अनुसार मार्जिन दिइएको छ */
-        .title-container { 
-            scroll-margin-top: 95px; /* यसले गर्दा स्क्रोल हुँदा शीर्षक टुलबार भन्दा ठीक तल ट्याक्क रोकिन्छ */
+        /* डायरीका अनुच्छेदहरू र हाइलाइट स्टाइल */
+        .bold-feeling p { 
+            font-size: 19px; margin-bottom: 25px; font-weight: 900; text-align: justify; 
+            transition: background-color 0.3s; cursor: pointer; padding: 5px; border-radius: 4px;
+            scroll-margin-top: 100px; 
         }
-        
-        .main-title { font-size: 28px; font-weight: 900; display: block; margin-top: 25px; color: #5D4037; text-align: center; }
-        
-        /* सच्याइएको भाग: यहाँ line लाई पहिलेको जस्तै पातलो, लामो र शालीन बनाइएको छ */
-        .straight-line { 
-            width: 100%; 
-            max-width: 600px; 
-            height: 1px; 
-            background: #ddd; 
-            border: none; 
-            margin: 20px auto 30px auto; 
+        /* लाइट मोड हाइलाइट रङ */
+        .bold-feeling p.highlighted {
+            background-color: rgba(255, 235, 59, 0.5) !important; color: #000 !important;
         }
 
+        .title-container { scroll-margin-top: 95px; }
+        .main-title { font-size: 28px; font-weight: 900; display: block; margin-top: 25px; color: #5D4037; text-align: center; }
+        .straight-line { width: 100%; max-width: 600px; height: 1px; background: #ddd; border: none; margin: 20px auto 30px auto; }
         .diary-image { max-width: 95%; height: auto; display: block; margin: 30px auto; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
-        .btn { text-decoration: none; color: #333; border: 1px solid #ccc; padding: 6px 15px; border-radius: 5px; font-weight: bold; background: #fff; cursor: pointer; }
         
+        /* ✏️ फ्लोटिंग पेन्सिल र मेनु बार स्टाइल (डबल ट्याप गर्दा तलबाट आउने) */
+        .pencil-menu-bar {
+            position: fixed; bottom: -80px; right: 20px; display: flex; gap: 10px; align-items: center; z-index: 2000; transition: bottom 0.4s ease-in-out;
+        }
+        .pencil-menu-bar.show { bottom: 30px; }
+        .pencil-btn {
+            width: 55px; height: 55px; border-radius: 50%; background: #5D4037; color: white; font-size: 24px; border: none; box-shadow: 0 4px 10px rgba(0,0,0,0.3); cursor: pointer; display: flex; align-items: center; justify-content: center; transition: transform 0.2s, background 0.3s;
+        }
+        .pencil-btn.active { background: #2e7d32; transform: scale(1.1); }
+        .jump-btn {
+            background: #d84315; color: white; border: none; padding: 12px 20px; border-radius: 30px; font-weight: bold; box-shadow: 0 4px 10px rgba(0,0,0,0.2); cursor: pointer; display: none;
+        }
+
         /* डार्क मोड अपडेटहरू */
         .dark-mode { background-color: #121212; color: #e0e0e0; }
         .dark-mode .toolbar { background: rgba(18, 18, 18, 0.95); border-color: #333; }
         .dark-mode .btn { background: #1e1e1e; border-color: #333; color: #e0e0e0; }
         .dark-mode .main-title { color: #d7ccc8; }
-        .dark-mode .straight-line { background: #333; } /* डार्क मोडमा लाइनको रङ */
+        .dark-mode .straight-line { background: #333; }
         .dark-mode .toc-container { background: #1e1e1e; border-left-color: #d7ccc8; }
         .dark-mode .toc-title { color: #d7ccc8; }
         .dark-mode .toc-list a { color: #b0bec5; }
         .dark-mode .toc-list a:hover { color: #fff; }
+        .dark-mode .bold-feeling p.highlighted { background-color: rgba(255, 193, 7, 0.4) !important; color: #000 !important; }
     </style>
 </head>
 <body oncontextmenu="return false;">
+
     <div class="toolbar">
         <a href="index.html" class="btn">← back</a>
         <button class="btn" onclick="toggleNightMode()" id="nightBtn">🌙 नाइट मोड</button>
     </div>
+
+    <div class="pencil-menu-bar" id="pencilMenuBar">
+        <button class="jump-btn" id="jumpBtn" onclick="jumpToBookmark()">📍 पढेको ठाउँमा जाने</button>
+        <button class="pencil-btn" id="pencilBtn" onclick="toggleHighlightMode()">✏️</button>
+    </div>
+
+    <div class="toc-container">
+        <span class="toc-title">📖 डायरीका पानाहरू (Index)</span>
+        <ul class="toc-list">
+            <li><a href="#topic1">१. मेरा ती अधुरा शब्दहरू...!</a></li>
+            <li><a href="#topic2">२. प्रेमको अनाधार...!</a></li>
+            <li><a href="#topic3">३. शून्यताका शब्दहरू</a></li>
+            <li><a href="#topic4">४. म रावान</a></li>
+            <li><a href="#topic5">५. प्रेमको नजर र सुन्दरताको परिभाषा</a></li>
+            <li><a href="#topic6">६. Baishakh 02</a></li>
+            <li><a href="#topic7">७. सत्य</a></li>
+            <li><a href="#topic8">८. मेरो कथा (प्रतिज्ञा कि प्रतीक्षा?) </a></li>
+        </ul>
+    </div>
+
 
     <div class="toc-container">
         <span class="toc-title">📖 डायरीका पानाहरू (Index)</span>
@@ -308,13 +335,134 @@
         <p>भोलिपल्ट उनका केही हितैषीहरूले कोठामा उनको मृत शरीर र त्यो अधुरो डायरी फेला पारे। अधिराजले आफ्नो कथाको कुनै शीर्षक राखेका थिएनन्। तर त्यो अधुरो प्रेम र ६० वर्ष लामो धैर्यता पढेपछि, पढ्नेहरूले नै त्यसको शीर्षक राखिदिए— 'प्रतिज्ञा कि प्रतीक्षा?'</p>
     </div>
 
-    <script>
+        <script>
+        // १. नाइट मोड फङ्गसन
         function toggleNightMode() {
             const body = document.body;
             body.classList.toggle('dark-mode');
             const btn = document.getElementById('nightBtn');
             btn.innerHTML = body.classList.contains('dark-mode') ? "☀️ डे मोड" : "🌙 नाइट मोड";
         }
+
+        // २. चलकहरू (Variables)
+        let isHighlightMode = false;
+        let selectedParagraphId = null;
+        let lastTap = 0;
+
+        // पेज लोड हुँदा सुरु हुने प्रक्रियाहरू
+        window.addEventListener('DOMContentLoaded', () => {
+            autoAssignParagraphIDs(); // सबै हरफलाई आफैँ रोल नम्बर (ID) दिने फङ्गसन
+            loadSavedBookmark();
+            setupParagraphClicks();
+        });
+
+        // ३. सबै <p> ट्यागहरूलाई स्वचालित रूपमा data-id दिने (तपाईंको दुःख बचाउने भाग)
+        function autoAssignParagraphIDs() {
+            const paragraphs = document.querySelectorAll('.bold-feeling p');
+            paragraphs.forEach((p, index) => {
+                // यदि पहिले नै आईडी छैन भने मात्र नयाँ आईडी दिने (p1, p2, p3...)
+                if (!p.getAttribute('data-id')) {
+                    p.setAttribute('data-id', 'p' + (index + 1));
+                }
+            });
+        }
+
+        // ४. डबल ट्याप डिटेक्ट गर्ने (मेनु बार देखाउन/लुकाउन)
+        window.addEventListener('touchend', detectDoubleTap);
+        window.addEventListener('click', detectDoubleTap);
+
+        function detectDoubleTap(e) {
+            if (e.target.closest('.pencil-menu-bar') || e.target.closest('.toolbar')) return;
+
+            const currentTime = new Date().getTime();
+            const tapLength = currentTime - lastTap;
+            
+            if (tapLength < 300 && tapLength > 0) {
+                document.getElementById('pencilMenuBar').classList.toggle('show');
+                e.preventDefault();
+            }
+            lastTap = currentTime;
+        }
+
+        // ५. पेन्सिल/सेभ मोड टगल गर्ने
+        function toggleHighlightMode() {
+            const btn = document.getElementById('pencilBtn');
+            isHighlightMode = !isHighlightMode;
+
+            if (isHighlightMode) {
+                btn.innerHTML = '💾';
+                btn.classList.add('active');
+                alert("हाइलाइट मोड अन भयो! अब आफूले छाडेको हरफमा ट्याप गर्नुहोस्।");
+            } else {
+                btn.innerHTML = '✏️';
+                btn.classList.remove('active');
+                
+                // डेटा सुरक्षित गर्ने वा मेटाउने
+                if (selectedParagraphId) {
+                    localStorage.setItem('diary_bookmark_id', selectedParagraphId);
+                    alert("तपाईंको पढ्ने स्थान सुरक्षित गरियो!");
+                } else {
+                    localStorage.removeItem('diary_bookmark_id');
+                    alert("बुकमार्क हटाइयो!");
+                }
+                loadSavedBookmark(); // जम्प बटन अपडेट गर्न
+            }
+        }
+
+        // ६. हरफमा थिच्दा हाइलाइट गर्ने/हटाउने प्रक्रिया
+        function setupParagraphClicks() {
+            const paragraphs = document.querySelectorAll('.bold-feeling p');
+            paragraphs.forEach(p => {
+                p.addEventListener('click', () => {
+                    if (!isHighlightMode) return;
+                    const pId = p.getAttribute('data-id');
+
+                    if (p.classList.contains('highlighted')) {
+                        p.classList.remove('highlighted');
+                        selectedParagraphId = null;
+                    } else {
+                        // एक पटकमा एउटा मात्र हाइलाइट राख्न पुराना सबै सफा गर्ने
+                        document.querySelectorAll('.bold-feeling p').forEach(el => el.classList.remove('highlighted'));
+                        p.classList.add('highlighted');
+                        selectedParagraphId = pId;
+                    }
+                });
+            });
+        }
+
+        // ७. सेभ भएको बुकमार्क लोड गर्ने
+        function loadSavedBookmark() {
+            const savedId = localStorage.getItem('diary_bookmark_id');
+            const jumpBtn = document.getElementById('jumpBtn');
+            
+            document.querySelectorAll('.bold-feeling p').forEach(el => el.classList.remove('highlighted'));
+
+            if (savedId) {
+                const targetElement = document.querySelector(`.bold-feeling p[data-id="${savedId}"]`);
+                if (targetElement) {
+                    targetElement.classList.add('highlighted');
+                    selectedParagraphId = savedId;
+                    jumpBtn.style.display = 'block'; // डाटाहरू सुरक्षित छन् भने 'पढेको ठाउँमा जाने' बटन देखाउने
+                    return;
+                }
+            }
+            jumpBtn.style.display = 'none';
+        }
+
+        // ८. 'पढेको ठाउँमा जाने' बटनको कार्यप्रणाली
+        function jumpToBookmark() {
+            const savedId = localStorage.getItem('diary_bookmark_id');
+            if (savedId) {
+                const targetElement = document.querySelector(`.bold-feeling p[data-id="${savedId}"]`);
+                if (targetElement) {
+                    targetElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    // पाठकको ध्यान तान्न हरफलाई एकपल्ट हल्का ब्लिङ्क गराउने
+                    targetElement.style.opacity = '0.4';
+                    setTimeout(() => targetElement.style.opacity = '1', 400);
+                }
+            }
+        }
     </script>
 </body>
 </html>
+
