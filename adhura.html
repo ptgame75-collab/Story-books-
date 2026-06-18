@@ -170,7 +170,7 @@
             100% { transform: scale(1); }
         }
 
-        /* इन्डेक्स बक्स स्टाइलिङ - 15163.jpg को म्याचिङ र थोरै तल सारिएको */
+        /* इन्डेक्स बक्स स्टाइलिङ */
         .toc-container { 
             background: #f4ece1; 
             padding: 20px; 
@@ -186,7 +186,7 @@
         .toc-list a { text-decoration: none; color: #795548; font-weight: bold; transition: 0.2s; display: block; font-size: 18px; }
         .toc-list a:hover { color: #5D4037; padding-left: 5px; }
 
-        /* डायरी टेक्स्ट स्टाइलिङ */
+        /* डायरी टेक्स्ट स्टाइलिङ र डिफाल्ट टच व्यवधान फिक्स */
         .bold-feeling p { 
             font-size: 19px; 
             margin-bottom: 25px; 
@@ -197,7 +197,12 @@
             padding: 8px; 
             border-radius: 6px;
             scroll-margin-top: 120px; 
+            
+            /* मोबाइल र ब्राउजरको डिफाल्ट सलेक्सन र पपअप रोक्न */
+            -webkit-user-select: none;
+            user-select: none;
             -webkit-touch-callout: none;
+            touch-action: manipulation;
         }
         
         /* हाइलाइट रङ */
@@ -274,11 +279,11 @@
         <button class="float-btn" id="actionPencilBtn" onclick="toggleHighlightMode()">✏️</button>
     </div>
 
-    <!-- यहाँबाट पुरानो इन्डेक्स (TOC) सुरु हुन्छ -->
+    <!-- इन्डेक्स (TOC) -->
     <div class="toc-container">
         <span class="toc-title">📖 डायरीका पानाहरू (Index)</span>
         <ul class="toc-list">
-            <li><a href="#topic1">१. मेरा ती अधुरा शब्दहरू...!</a></li>
+            <li><a href="#topic1">१. मेरा ती adhura शब्दहरू...!</a></li>
             <li><a href="#topic2">२. प्रेमको अनाधार...!</a></li>
             <li><a href="#topic3">३. शून्यताका शब्दहरू</a></li>
             <li><a href="#topic4">४. म रावान</a></li>
@@ -295,7 +300,7 @@
     </div>
     <div class="bold-feeling">
         <p>"आज फेरि ती अधुरा शब्दहरू मनको कुनामा छटपटाइरहेका छन्, जुन सायद यो जुनीमा तिम्रो सामुन्ने कहिल्लै पोखिन पाउने छैनन्। तिमीलाई कति माया गर्छु भन्ने प्रश्नको उत्तर आज म आफैँसँग पनि छैन। समयको यो निस्पट्ट अँध्यारोमा, जब संसार निदाइरहेको हुन्छ, मेरो मनले मलाई नै शून्यतामा सोध्ने गर्छ— 'के तेरो यो पागलपन, यो अनन्त प्रतीक्षा र यो मौन व्यवहारलाई साँच्चै नै माया भनिन्छ?'"</p>
-        <p>"साँच्चै, मायाको कुनै स्पष्ट परिभाषा हुँदो हो त म तिमीलाई मेरो हृदयको पाना-पानामा आफ्नै रगतले लेखेर देखाउने थिएँ। तर अफसोस, मेरो प्रेम त त्यो रित्तो र विशाल आकाश जस्तै भएको छ, जहाँ भावनाका बादलहरू त टम्म लाग्छन् तर तिमीसम्म पुगेर बर्सिन पाउँदैनन्। म तिम्रो उपस्थितिको एउटा मधुर आभासमा मात्र बाँचिरहेको छु, किनकि तिम्रो वास्तविक सामिप्यता मेरो भाग्यको अक्षरमा कतै कोरिएकै छैन। यो एउटा यस्तो तृष्णा हो, जुन जति पिउँदा पनि कहिल्लै तृप्त हुँदैन।"</p>
+        <p>"साँच्चै, मायाको कुनै स्पष्ट परिभाषा हुँदो हो त म तिमीलाई मेरो हृदयको पाना-पानामा आफ्नै रगतले लेखेर देखाउने थिएँ। तर अफसोस, मेरो प्रेम त त्यो रित्तो र विशाल आकाश जस्तै भएको छ, जहाँ भावनाका बादलहरू त टम्म लाग्छन् तर तिमीसम्म पुगेर बर्सिन पाउँदैनन्। म तिम्रो उपस्थितिको एउटा मधुर आभासमा मात्र बाँचिरगेको छु, किनकि तिम्रो वास्तविक सामिप्यता मेरो भाग्यको अक्षरमा कतै कोरिएकै छैन। यो एउटा यस्तो तृष्णा हो, जुन जति पिउँदा पनि कहिल्लै तृप्त हुँदैन।"</p>
         <p>"तिमीलाई भन्नु पर्ने कुराहरू मनभित्र पहाड बनेर उभिएका छन्, तर ओठसम्म आइपुग्दा ती पत्थर बनिदिन्छन्। मेरो मन एउटा यस्तो एकान्त किनार भएको छ, जहाँ तिम्रा यादहरू लहर बनेर आउँछन् र मलाई अझै एक्लो बनाएर फर्किन्छन्। मानिसहरू प्रेममा आवाज खोज्छन्, तर मेरो त यो मौनता नै मेरो प्रेमको सबैभन्दा ठूलो र जीवित साक्षी हो। कतिपय कुराहरू नभनिनु नै उचित हुने रहेछ, किनकि शब्दले कहिलेकाहीँ भावनाको वजनलाई थाम्न सक्दैनन्।"</p>
         <p>"सायद अर्को कुनै जन्म हुनेछ, जहाँ समय र परिस्थितिले हामीलाई ठग्ने छैनन्। जहाँ शब्दहरू अधुरा रहने छैनन् र मेरो मौनताले सीधै तिम्रो हृदयलाई छुनेछ। तर अहिलेलाई भने, मेरा यी सम्पूर्ण भावनाहरूलाई म यहीँ शून्यतामा विसर्जन गरिदिँदैछु। तिमीलाई टाढैबाट हेर्नु, तिम्रो सफलतामा मुस्कुराउनु र तिम्रो खुसी कुनामा आफ्नो अस्तित्व खोज्नु नै सायद मेरो प्रेमको अन्तिम गन्तव्य बन्यो। जुन कथा कहिल्यै पूरा हुँदैन, त्यो नै सबैभन्दा सुन्दर र मर्मस्पर्शी हुने रहेछ। मेरो र तिम्रो यो आधा-अधुरो कथा पनि मेरो लागि संसारको कुनै पनि प्रसिद्ध महाकाव्य भन्दा कम छैन।"</p>
         <p>"मलाई थाहा छ, यो संसारले यसलाई पागलपन भन्न सक्छ। तर कसैका एउटा सानो हाँसोका लागि आफ्नो पूरा जिन्दगी दाउमा लगाउनु सानो कुरा होइन। प्रेम पाउनु मात्र होइन, प्रेम त कसैको खुसीका लागि आफूलाई मेटाउनु पनि हो। मेरो यो एकतर्फी यात्रामा म थाकेको छैन, बरु हरेक मोडमा तिम्रो यादको सहाराले अझ बलियो बन्दै गएको छु। तिमी मेरो छेउमा नभए पनि, मेरो हरेक सास र सोचमा तिम्रो अंश जीवित छ।"</p>
@@ -326,7 +331,6 @@
     <div class="bold-feeling">
         <p>कथाको सुरुवात हुन्छ वि.सं. २१२८, रातको सन्नाटाबाट। बाहिर गड्याङगुडुङ गर्दै चिसो हावा चलिरहेको थियो। झ्यालका ढोकाहरू हावाको सुसाइसँगै ठोकिरहेका थिए।</p>
         
-        <!-- कविता बक्स -->
         <div style="background: #fdf8f5; border-left: 4px solid #8d6e63; padding: 20px; margin: 30px auto; max-width: 550px; border-radius: 4px; box-shadow: 0 1px 4px rgba(0,0,0,0.05); text-align: center;">
             <p style="font-size: 20px; font-weight: 900; color: #5d4037; margin-bottom: 20px; letter-spacing: 1px;">✨ स्मृतिको अन्तिम सुस्केरा ✨</p>
             <p style="font-size: 18px; font-weight: bold; font-style: italic; color: #4e342e; line-height: 1.8; margin-bottom: 15px;">
@@ -337,14 +341,14 @@
         <p>अधिराजले आफ्नो कथाको कुनै शीर्षक राखेका थिएनन्। तर त्यो अधुरो प्रेम र ६० वर्ष लामो धैर्यता पढेपछि, पढ्नेहरूले नै त्यसको शीर्षक राखिदिए— 'प्रतिज्ञा कि प्रतीक्षा?'</p>
     </div>
 
-    <!-- यहाँबाट पुरानो सुरक्षित लजिक नयाँ परिमार्जन सहित सुरु हुन्छ -->
     <script>
         const searchGapWrapper = document.getElementById('searchGapWrapper');
         const floatingFooterMenu = document.getElementById('floatingFooterMenu');
         const actionPencilBtn = document.getElementById('actionPencilBtn');
         let hideTimeout;
+        let isHighlightMode = false;
+        let selectedParagraphId = null;
 
-        // कस्टम पपअप मेसेज फङ्सन
         function showCustomAlert(message) {
             const alertBox = document.getElementById('customAlert');
             alertBox.innerText = message;
@@ -354,7 +358,6 @@
             }, 3000);
         }
 
-        // डबल ट्याप गर्दा सर्च बार ग्याप र तल्लो कुनाको मेन्यु एक्टिभ/लुक्ने मेकानिजम
         document.addEventListener('dblclick', function(e) {
             if (e.target.closest('.sticky-header-container') || e.target.closest('.floating-footer-menu')) return;
             
@@ -367,12 +370,11 @@
         function resetHideTimeout() {
             clearTimeout(hideTimeout);
             hideTimeout = setTimeout(() => {
-                // यदि सर्च बारमा केही टाइप भइरहेको छैन भने मात्र स्वतः लुक्ने
                 if (document.activeElement !== document.getElementById('daySearchInput') && !isHighlightMode) {
                     searchGapWrapper.classList.remove('active');
                     floatingFooterMenu.classList.remove('active');
                 }
-            }, 8000); // लुक्नका लागि ८ सेकेन्डको समय
+            }, 8000);
         }
 
         const searchInput = document.getElementById('daySearchInput');
@@ -387,7 +389,6 @@
             }
         }
 
-        // सर्च संयन्त्र (यथावत्)
         function searchContent() {
             const query = searchInput.value.trim().toLowerCase();
             if (!query) return;
@@ -422,7 +423,6 @@
             }
         }
 
-        // नाइट मोड टगल
         function toggleNightMode(event) {
             if(event) event.stopPropagation();
             const body = document.body;
@@ -431,9 +431,6 @@
             btn.innerHTML = body.classList.contains('dark-mode') ? "☀️ डे मोड" : "🌙 नाइट मोड";
             resetHideTimeout();
         }
-
-        let isHighlightMode = false;
-        let selectedParagraphId = null;
 
         window.addEventListener('DOMContentLoaded', () => {
             autoAssignParagraphIDs();
@@ -450,34 +447,40 @@
             });
         }
 
-        // हाइलाइट मोड अन/अफ मेकानिजम
+        // मोड बटन कन्ट्रोलर फिक्स
         function toggleHighlightMode() {
-            isHighlightMode = !isHighlightMode;
-
-            if (isHighlightMode) {
-                actionPencilBtn.innerHTML = '✏️';
-                actionPencilBtn.classList.add('mode-active');
-                showCustomAlert("✏️ हाइलाइट मोड अन भयो! कुनै हरफमा २ सेकेन्ड थिचिराख्नुहोस्।");
-            } else {
-                // यदि सेभ क्लिक गरेर आएको हो भने
-                actionPencilBtn.innerHTML = '✏️';
-                actionPencilBtn.classList.remove('mode-active');
-                actionPencilBtn.classList.remove('save-ready');
-                
+            // यदि सेभ रेडी (💾) अवस्थामा छ भने यसले सेभ गर्नेछ
+            if (actionPencilBtn.classList.contains('save-ready')) {
                 if (selectedParagraphId) {
                     localStorage.setItem('diary_bookmark_id', selectedParagraphId);
                     showCustomAlert("📍 तपाईंले पढेको स्थान सुरक्षित गरियो!");
-                    
-                    // सेभ गरेपछि बटनहरू आफैँ गायब हुने (तपाईँको निर्देशन अनुसार)
-                    searchGapWrapper.classList.remove('active');
-                    floatingFooterMenu.classList.remove('active');
                 }
+                isHighlightMode = false;
+                actionPencilBtn.innerHTML = '✏️';
+                actionPencilBtn.classList.remove('mode-active', 'save-ready');
+                
+                // मेनु बन्द गर्ने
+                searchGapWrapper.classList.remove('active');
+                floatingFooterMenu.classList.remove('active');
+                loadSavedBookmark();
+                return;
+            }
+
+            // सामान्य अवस्थामा मोड परिवर्तन गर्ने
+            isHighlightMode = !isHighlightMode;
+            if (isHighlightMode) {
+                actionPencilBtn.innerHTML = '✏️';
+                actionPencilBtn.classList.add('mode-active');
+                showCustomAlert("✏️ हाइलाइट मोड अन भयो! हरफमा २ सेकेन्ड थिचिराख्नुहोस्।");
+            } else {
+                actionPencilBtn.innerHTML = '✏️';
+                actionPencilBtn.classList.remove('mode-active');
                 loadSavedBookmark();
             }
             resetHideTimeout();
         }
 
-        // प्याराग्राफमा लामो प्रेस (Long Press) र सेभ बटन ट्रान्सफर्मर लजिक
+        // मुख्य समस्या फिक्स: सुरक्षित टच इभेन्टहरू र रिसेट संयन्त्र
         function setupParagraphInteractions() {
             const paragraphs = document.querySelectorAll('.bold-feeling p');
             
@@ -485,51 +488,59 @@
                 let pressTimer;
 
                 const startPress = (e) => {
-                    // यदि हाइलाइट मोड अन छ भने मात्र २ सेकेन्डको लामो प्रेस काम गर्ने
+                    // डिफाल्ट सलेक्सन विन्डो पपअप हुन नदिन इभेन्ट रोक्ने
+                    if (isHighlightMode) {
+                        e.preventDefault();
+                    }
+
+                    clearTimeout(pressTimer);
+
+                    // १. हाइलाइट मोड बन्द हुँदा: सेभ भएको हरफ हटाउने लजिक
                     if (!isHighlightMode) {
-                        // हाइलाइट मोड नहुँदा बुकमार्क हटाउने पुरानो लजिक
                         pressTimer = setTimeout(() => {
                             if (p.classList.contains('highlighted')) {
-                                p.classList.remove('highlighted');
-                                localStorage.removeItem('diary_bookmark_id');
-                                selectedParagraphId = null;
-                                showCustomAlert("❌ बुकमार्क हटाइयो!");
-                                loadSavedBookmark();
+                                if (confirm("के तपाईं यो बुकमार्क हटाउन चाहनुहुन्छ?")) {
+                                    p.classList.remove('highlighted');
+                                    localStorage.removeItem('diary_bookmark_id');
+                                    selectedParagraphId = null;
+                                    showCustomAlert("❌ बुकमार्क हटाइयो!");
+                                    loadSavedBookmark();
+                                }
                             }
-                        }, 1500);
+                        }, 2000);
                         return;
                     }
 
-                    // हाइलाइट मोड अन भएको बेला २ सेकेन्ड थिच्दा सेभ बटन बन्ने
+                    // २. हाइलाइट मोड अन हुँदा: २ सेकेन्ड थिचेर सेभ बटन एक्टिभ गर्ने
                     pressTimer = setTimeout(() => {
                         const pId = p.getAttribute('data-id');
+                        
                         document.querySelectorAll('.bold-feeling p').forEach(el => el.classList.remove('highlighted'));
                         p.classList.add('highlighted');
                         selectedParagraphId = pId;
 
-                        // पेन्सिल आइकन स्वतः सेभ (💾) बटनमा परिणत हुन्छ
+                        // पेन्सिल आइकन स्वतः 💾 बन्छ
                         actionPencilBtn.innerHTML = '💾';
                         actionPencilBtn.classList.remove('mode-active');
                         actionPencilBtn.classList.add('save-ready');
                         
-                        // यो सेभ रेडी भएपछि त्यसमा थिच्दा स्वतः सेभ हुने ट्रिगर
-                        actionPencilBtn.onclick = function() {
-                            toggleHighlightMode(); // सेभ गर्छ र गायब बनाउँछ
-                            // पुनः क्लिक फङ्सन पुरानै बनाइदिने
-                            actionPencilBtn.onclick = toggleHighlightMode;
-                        };
-                        
-                        showCustomAlert("💾 हरफ छानियो! सेभ गर्न रातो बटन थिच्नुहोस्।");
-                    }, 2000); // ठ्याक्कै २ सेकेन्ड थिच्नुपर्ने
+                        showCustomAlert("💾 हरफ छानियो! सेभ गर्न तलको रातो फ्लपी बटन थिच्नुहोस्।");
+                    }, 2000); 
                 };
 
-                const cancelPress = () => clearTimeout(pressTimer);
+                const cancelPress = () => {
+                    clearTimeout(pressTimer);
+                };
 
-                p.addEventListener('touchstart', startPress);
+                // मोबाइल टच इभेन्टहरू
+                p.addEventListener('touchstart', startPress, { passive: false });
                 p.addEventListener('touchend', cancelPress);
                 p.addEventListener('touchmove', cancelPress);
+                
+                // डेस्कटप माउस इभेन्टहरू
                 p.addEventListener('mousedown', startPress);
                 p.addEventListener('mouseup', cancelPress);
+                p.addEventListener('mouseleave', cancelPress);
             });
         }
 
@@ -544,14 +555,13 @@
                 if (targetElement) {
                     targetElement.classList.add('highlighted');
                     selectedParagraphId = savedId;
-                    jumpBtn.style.display = 'flex'; // बुकमार्क छ भने 'कहाँ सम्म पौडे' बटन देखिने
+                    jumpBtn.style.display = 'flex';
                     return;
                 }
             }
             jumpBtn.style.display = 'none';
         }
 
-        // 'कहाँ सम्म पौडे' मा थिच्दा सीधै त्यही अनुहार/अनुच्छेदमा पुग्ने
         function jumpToBookmark() {
             const savedId = localStorage.getItem('diary_bookmark_id');
             if (savedId) {
