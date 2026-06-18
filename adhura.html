@@ -522,7 +522,7 @@
     </div>
 
    <!-- यहाँबाट पुरानो सुरक्षित लजिक नयाँ परिमार्जन सहित सुरु हुन्छ -->
-    <script>
+       <script>
         const searchGapWrapper = document.getElementById('searchGapWrapper');
         const floatingFooterMenu = document.getElementById('floatingFooterMenu');
         const actionPencilBtn = document.getElementById('actionPencilBtn');
@@ -551,12 +551,11 @@
         function resetHideTimeout() {
             clearTimeout(hideTimeout);
             hideTimeout = setTimeout(() => {
-                // यदि सर्च बारमा केही टाइप भइरहेको छैन भने मात्र स्वतः लुक्ने
                 if (document.activeElement !== document.getElementById('daySearchInput') && !isHighlightMode) {
                     searchGapWrapper.classList.remove('active');
                     floatingFooterMenu.classList.remove('active');
                 }
-            }, 8000); // लुक्नका लागि ८ सेकेन्डको समय
+            }, 8000); // ८ सेकेन्डको स्वतः लुक्ने समय
         }
 
         const searchInput = document.getElementById('daySearchInput');
@@ -571,7 +570,7 @@
             }
         }
 
-        // सर्च संयन्त्र (यथावत्)
+        // सर्च संयन्त्र
         function searchContent() {
             const query = searchInput.value.trim().toLowerCase();
             if (!query) return;
@@ -641,9 +640,8 @@
             if (isHighlightMode) {
                 actionPencilBtn.innerHTML = '✏️';
                 actionPencilBtn.classList.add('mode-active');
-                showCustomAlert("✏️ हाइलाइट मोड अन भयो! कुनै हरफमा २ सेकेन्ड थिचिराख्नुहोस्।");
+                showCustomAlert("✏️ हाइलाइट मोड अन भयो! हरफ सेभ गर्न २ सेकेन्ड थिच्नुहोस् वा हटाउन हाइलाइट भएकै हरफमा थिच्नुहोस्।");
             } else {
-                // यदि सेभ क्लिक गरेर आएको हो भने
                 actionPencilBtn.innerHTML = '✏️';
                 actionPencilBtn.classList.remove('mode-active');
                 actionPencilBtn.classList.remove('save-ready');
@@ -652,7 +650,6 @@
                     localStorage.setItem('diary_bookmark_id', selectedParagraphId);
                     showCustomAlert("📍 तपाईंले पढेको स्थान सुरक्षित गरियो!");
                     
-                    // सेभ गरेपछि बटनहरू आफैँ गायब हुने (तपाईँको निर्देशन अनुसार)
                     searchGapWrapper.classList.remove('active');
                     floatingFooterMenu.classList.remove('active');
                 }
@@ -661,7 +658,7 @@
             resetHideTimeout();
         }
 
-        // प्याराग्राफमा लामो प्रेस (Long Press) र सेभ बटन ट्रान्सफर्मर लजिक
+        // प्याराग्राफमा लामो प्रेस (Long Press) र डिलीट/सेभ गर्ने सुधारेको लजिक
         function setupParagraphInteractions() {
             const paragraphs = document.querySelectorAll('.bold-feeling p');
             
@@ -669,46 +666,55 @@
                 let pressTimer;
 
                 const startPress = (e) => {
-                    // यदि हाइलाइट मोड अन छ भने मात्र २ सेकेन्डको लामो प्रेस काम गर्ने
-                    if (!isHighlightMode) {
-                        // हाइलाइट मोड नहुँदा बुकमार्क हटाउने पुरानो लजिक
-                        pressTimer = setTimeout(() => {
-                            if (p.classList.contains('highlighted')) {
-                                p.classList.remove('highlighted');
-                                localStorage.removeItem('diary_bookmark_id');
-                                selectedParagraphId = null;
-                                showCustomAlert("❌ बुकमार्क हटाइयो!");
-                                loadSavedBookmark();
-                            }
-                        }, 1500);
-                        return;
-                    }
+                    // यदि हाइलाइट मोड अन छैन भने थिच्दा केही पनि हुँदैन
+                    if (!isHighlightMode) return;
 
-                    // हाइलाइट मोड अन भएको बेला २ सेकेन्ड थिच्दा सेभ बटन बन्ने
                     pressTimer = setTimeout(() => {
                         const pId = p.getAttribute('data-id');
+                        const savedId = localStorage.getItem('diary_bookmark_id');
+
+                        // यदि प्रयोगकर्ताले पहिले नै सेभ भइरहेको (हाईलाईटेड) हरफमै लामो प्रेस गरेमा डिलीट गर्ने विकल्प दिने
+                        if (pId === savedId && p.classList.contains('highlighted')) {
+                            if (confirm("❌ के तपाईं यो बुकमार्क (हाइलाइट) हटाउन चाहनुहुन्छ?")) {
+                                localStorage.removeItem('diary_bookmark_id');
+                                selectedParagraphId = null;
+                                p.classList.remove('highlighted');
+                                showCustomAlert("❌ बुकमार्क सफलतापुर्वक हटाइयो!");
+                                
+                                // पेन्सिल मोड सामान्य अवस्थामा फर्काउने
+                                isHighlightMode = false;
+                                actionPencilBtn.innerHTML = '✏️';
+                                actionPencilBtn.classList.remove('mode-active');
+                                actionPencilBtn.classList.remove('save-ready');
+                                actionPencilBtn.onclick = toggleHighlightMode;
+                                
+                                loadSavedBookmark();
+                            }
+                            return;
+                        }
+
+                        // नयाँ हरफ छनोट गर्दा
                         document.querySelectorAll('.bold-feeling p').forEach(el => el.classList.remove('highlighted'));
                         p.classList.add('highlighted');
                         selectedParagraphId = pId;
 
-                        // पेन्सिल आइकन स्वतः सेभ (💾) बटनमा परिणत हुन्छ
+                        // पेन्सिल आइकन सेभ (💾) बटनमा परिणत हुन्छ
                         actionPencilBtn.innerHTML = '💾';
                         actionPencilBtn.classList.remove('mode-active');
                         actionPencilBtn.classList.add('save-ready');
                         
-                        // यो सेभ रेडी भएपछि त्यसमा थिच्दा स्वतः सेभ हुने ट्रिगर
                         actionPencilBtn.onclick = function() {
-                            toggleHighlightMode(); // सेभ गर्छ र गायब बनाउँछ
-                            // पुनः क्लिक फङ्सन पुरानै बनाइदिने
+                            toggleHighlightMode();
                             actionPencilBtn.onclick = toggleHighlightMode;
                         };
                         
                         showCustomAlert("💾 हरफ छानियो! सेभ गर्न रातो बटन थिच्नुहोस्।");
-                    }, 2000); // ठ्याक्कै २ सेकेन्ड थिच्नुपर्ने
+                    }, 2000); // २ सेकेन्ड थिच्नुपर्ने
                 };
 
                 const cancelPress = () => clearTimeout(pressTimer);
 
+                // मोबाइल र डेस्कटप दुवैका लागि इभेन्टहरू
                 p.addEventListener('touchstart', startPress);
                 p.addEventListener('touchend', cancelPress);
                 p.addEventListener('touchmove', cancelPress);
@@ -728,14 +734,14 @@
                 if (targetElement) {
                     targetElement.classList.add('highlighted');
                     selectedParagraphId = savedId;
-                    jumpBtn.style.display = 'flex'; // बुकमार्क छ भने 'कहाँ सम्म पौडे' बटन देखिने
+                    jumpBtn.style.display = 'flex'; // बुकमार्क छ भने बटन देखिने
                     return;
                 }
             }
-            jumpBtn.style.display = 'none';
+            jumpBtn.style.display = 'none'; // बुकमार्क छैन भने बटन लुक्ने
         }
 
-        // 'कहाँ सम्म पौडे' मा थिच्दा सीधै त्यही अनुहार/अनुच्छेदमा पुग्ने
+        // 'कहाँ सम्म पौडे' बटन मेकानिजम
         function jumpToBookmark() {
             const savedId = localStorage.getItem('diary_bookmark_id');
             if (savedId) {
@@ -749,5 +755,3 @@
             resetHideTimeout();
         }
     </script>
-</body>
-</html>
