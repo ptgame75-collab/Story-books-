@@ -319,7 +319,7 @@
             if (isHighlightMode) {
                 btn.innerHTML = '✏️';
                 btn.classList.add('active');
-                showToast("हाइलाइट मोड अन भयो। अब हरफमा २ सेकेन्ड थिचेर छोड्नुहोस्।");
+                showToast("हाइलाइट मोड अन भयो। अब हरफमा 1 सेकेन्ड थिचेर छोड्नुहोस्।");
             } else {
                 btn.innerHTML = '✏️';
                 btn.classList.remove('active');
@@ -328,7 +328,7 @@
             }
         }
 
-        // २ सेकेन्ड लङ प्रेस गर्दा अटो-सेभ हुने र मेनु गायब हुने लोजिक
+        // 1 सेकेन्ड लङ प्रेस गर्दा अटो-सेभ हुने र मेनु गायब हुने लोजिक
         function setupParagraphInteractions() {
             const paragraphs = document.querySelectorAll('.bold-feeling p');
             
