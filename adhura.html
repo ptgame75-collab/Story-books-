@@ -12,13 +12,13 @@
             line-height: 1.9; 
             color: #333; 
             background: #fcfbf7; 
-            padding: 75px 20px 100px 20px; /* टुलबार फिक्स भएपछि टप प्याडिङ मिलाइएको */
+            padding: 75px 20px 140px 20px; /* तल्लो बटनका लागि पर्याप्त स्पेस */
             transition: 0.3s; 
             -webkit-user-select: none; 
             user-select: none; 
         }
         
-        /* शीर्ष बार (Sticky Toolbar) - केवल back र नाइट मोड */
+        /* शीर्ष बार (Sticky Toolbar) */
         .toolbar { 
             position: fixed; 
             top: 0; 
@@ -35,29 +35,6 @@
             height: 45px; 
         }
         .btn { text-decoration: none; color: #333; border: 1px solid #ccc; padding: 6px 15px; border-radius: 5px; font-weight: bold; background: #fff; cursor: pointer; font-family: 'Mukta', sans-serif; white-space: nowrap; }
-
-        /* नयाँ व्यवस्था: टुलबार र शीर्षकको बीचमा रहने सर्च बार */
-        .search-container {
-            margin: 20px auto 10px auto;
-            max-width: 500px;
-            width: 100%;
-        }
-        .search-bar {
-            width: 100%;
-            padding: 10px 18px;
-            border: 1px solid #ccc;
-            border-radius: 20px;
-            font-family: 'Mukta', sans-serif;
-            font-size: 16px;
-            outline: none;
-            box-sizing: border-box;
-            transition: 0.3s;
-            background: #fff;
-        }
-        .search-bar:focus {
-            border-color: #5D4037;
-            box-shadow: 0 0 5px rgba(93, 64, 55, 0.3);
-        }
 
         .toc-container { background: #f4ece1; padding: 20px; border-radius: 10px; border-left: 5px solid #5D4037; margin: 20px auto 40px auto; max-width: 600px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
         .toc-title { font-size: 22px; font-weight: bold; color: #5D4037; margin-bottom: 10px; display: block; text-align: center; }
@@ -87,26 +64,41 @@
         .straight-line { width: 100%; max-width: 600px; height: 1px; background: #ddd; border: none; margin: 20px auto 30px auto; }
         .diary-image { max-width: 95%; height: auto; display: block; margin: 30px auto; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
         
-        /* पेन्सिल मेनु बार - तल्लो दायाँ कुना */
-        .pencil-menu-bar {
-            position: fixed; bottom: -80px; right: 20px; display: flex; gap: 10px; align-items: center; z-index: 2000; transition: bottom 0.4s ease-in-out;
+        /* नयाँ व्यवस्थित एकीकृत मेनु कन्टेनर (No Overlapping) */
+        .bottom-action-container {
+            position: fixed;
+            bottom: -150px; /* सुरुमा लुकेको */
+            left: 50%;
+            transform: translateX(-50%);
+            width: 90%;
+            max-width: 450px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            align-items: flex-end;
+            z-index: 2000;
+            transition: bottom 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
-        .pencil-menu-bar.show { bottom: 30px; }
-        .pencil-btn {
-            width: 55px; height: 55px; border-radius: 50%; background: #5D4037; color: white; font-size: 24px; border: none; box-shadow: 0 4px 10px rgba(0,0,0,0.3); cursor: pointer; display: flex; align-items: center; justify-content: center; transition: transform 0.2s, background 0.3s;
-        }
-        .pencil-btn.active { background: #2e7d32; transform: scale(1.1); }
-        .jump-btn {
-            background: #d84315; color: white; border: none; padding: 12px 20px; border-radius: 30px; font-weight: bold; box-shadow: 0 4px 10px rgba(0,0,0,0.2); cursor: pointer; display: none; font-family: 'Mukta', sans-serif; font-size: 16px; white-space: nowrap;
-        }
+        .bottom-action-container.show { bottom: 25px; }
 
-        /* नयाँ थप: तल्लो बायाँ कुनामा रहने Clear/मार्क हटाउने बटन बार */
-        .clear-menu-bar {
-            position: fixed; bottom: -80px; left: 20px; z-index: 2000; transition: bottom 0.4s ease-in-out;
+        /* पेन्सिल बटन छुट्टै माथि बस्ने */
+        .pencil-btn {
+            width: 52px; height: 52px; border-radius: 50%; background: #5D4037; color: white; font-size: 22px; border: none; box-shadow: 0 4px 12px rgba(0,0,0,0.25); cursor: pointer; display: flex; align-items: center; justify-content: center; transition: transform 0.2s, background 0.3s;
         }
-        .clear-menu-bar.show { bottom: 30px; }
+        .pencil-btn.active { background: #2e7d32; transform: scale(1.05); }
+
+        /* एक्सन रो (Clear र पढेको ठाउँमा जाने बटनहरू) */
+        .action-row {
+            display: flex;
+            width: 100%;
+            gap: 10px;
+            justify-content: space-between;
+        }
         .clear-btn {
-            background: #c62828; color: white; border: none; padding: 12px 20px; border-radius: 30px; font-weight: bold; box-shadow: 0 4px 10px rgba(0,0,0,0.2); cursor: pointer; display: none; font-family: 'Mukta', sans-serif; font-size: 16px; white-space: nowrap;
+            flex: 1; background: #c62828; color: white; border: none; padding: 12px 15px; border-radius: 25px; font-weight: bold; box-shadow: 0 4px 10px rgba(0,0,0,0.2); cursor: pointer; display: none; font-family: 'Mukta', sans-serif; font-size: 15px; text-align: center; white-space: nowrap;
+        }
+        .jump-btn {
+            flex: 2; background: #d84315; color: white; border: none; padding: 12px 15px; border-radius: 25px; font-weight: bold; box-shadow: 0 4px 10px rgba(0,0,0,0.2); cursor: pointer; display: none; font-family: 'Mukta', sans-serif; font-size: 15px; text-align: center; white-space: nowrap;
         }
 
         /* Custom Toast */
@@ -116,14 +108,12 @@
             font-family: 'Mukta', sans-serif; font-size: 16px; z-index: 3000; box-shadow: 0 4px 12px rgba(0,0,0,0.3);
             transition: bottom 0.3s ease-in-out; text-align: center; pointer-events: none; max-width: 90%;
         }
-        .toast-notification.show { bottom: 30px; }
+        .toast-notification.show { bottom: 155px; }
 
         /* डार्क मोड स्टाइलहरू */
         .dark-mode { background-color: #121212; color: #e0e0e0; }
         .dark-mode .toolbar { background: rgba(18, 18, 18, 0.95); border-color: #333; }
         .dark-mode .btn { background: #1e1e1e; border-color: #333; color: #e0e0e0; }
-        .dark-mode .search-bar { background: #222; color: #fff; border-color: #444; }
-        .dark-mode .search-bar::placeholder { color: #888; }
         .dark-mode .main-title { color: #d7ccc8; }
         .dark-mode .straight-line { background: #333; }
         .dark-mode .toc-container { background: #1e1e1e; border-left-color: #d7ccc8; }
@@ -134,26 +124,24 @@
 </head>
 <body oncontextmenu="return false;">
 
+    <!-- शीर्ष बार -->
     <div class="toolbar">
         <a href="index.html" class="btn">← back</a>
-        <button class="btn" onclick="toggleNightMode()" id="nightBtn">🌙 नाइट मोड</button>
+        <button class="btn" onclick="toggleNightMode()" id="nightBtn">🌙 | नाइट मोड</button>
     </div>
 
-    <div class="search-container">
-        <input type="text" class="search-bar" id="searchBar" placeholder="Search Ab Khat" oninput="searchDiaryWords()">
-    </div>
-
-    <div class="clear-menu-bar" id="clearMenuBar">
-        <button class="clear-btn" id="clearBtn" onclick="clearBookmark()">🗑️ Clear</button>
-    </div>
-
-    <div class="pencil-menu-bar" id="pencilMenuBar">
-        <button class="jump-btn" id="jumpBtn" onclick="jumpToBookmark()">📍 पढेको ठाउँमा जाने</button>
+    <!-- एकीकृत सफा मेनु बार (गन्जागोल नहुने गरी मिलाइएको) -->
+    <div class="bottom-action-container" id="actionContainer">
         <button class="pencil-btn" id="pencilBtn" onclick="toggleHighlightMode()">✏️</button>
+        <div class="action-row">
+            <button class="clear-btn" id="clearBtn" onclick="clearBookmark()">🗑️ Clear</button>
+            <button class="jump-btn" id="jumpBtn" onclick="jumpToBookmark()">📍 पढेको ठाउँमा जाने</button>
+        </div>
     </div>
 
-    <div class="toast-notification" id="toastBox">नेमस्पेस सन्देश</div>
+    <div class="toast-notification" id="toastBox">सन्देश</div>
 
+    <!-- विषय सूची -->
     <div class="toc-container">
         <span class="toc-title">📖 डायरीका पानाहरू (Index)</span>
         <ul class="toc-list">
@@ -173,12 +161,8 @@
         <hr class="straight-line">
     </div>
     <div class="bold-feeling">
-        <p>"आज फेरि ती अधुरा शब्दहरू मनको कुनामा छटपटाइरहेका छन्, जुन सायद यो जुनीमा तिम्रो सामुन्ने कहिल्यै पोखिन पाउने छैनन्। तिमीलाई कति माया गर्छु भन्ने प्रश्नको उत्तर आज म आफैँसँग पनि छैन। समयको यो निस्पट्ट अँध्यारोमा, जब संसार निदाइरहेको हुन्छ, मेरो मनले मलाई नै शून्यतामा चिच्याई-चिच्याई सोध्ने गर्छ— 'के तेरो यो पागलपन, यो अनन्त प्रतीक्षा र यो मौन व्यवहारलाई साँच्चै नै माया भनिन्छ?'"</p>
+        <p>"आज फेरि ती अधुरा शब्दहरू मनको कुनामा छटपटाइरहेका छन्, जुन सायद यो जुनीमा तिम्रो सामुन्ने कहिल्ल्यै पोखिन पाउने छैनन्। तिमीलाई कति माया गर्छु भन्ने प्रश्नको उत्तर आज म आफैँसँग पनि छैन। समयको यो निस्पट्ट अँध्यारोमा, जब संसार निदाइरहेको हुन्छ, मेरो मनले मलाई नै शून्यतामा चिच्याई-चिच्याई सोध्ने गर्छ— 'के तेरो यो पागलपन, यो अनन्त प्रतीक्षा र यो मौन व्यवहारलाई साँच्चै नै माया भनिन्छ?'"</p>
         <p>"साँच्चै, मायाको कुनै स्पष्ट परिभाषा हुँदो हो त म तिमीलाई मेरो हृदयको पाना-पानामा आफ्नै रगतले लेखेर देखाउने थिएँ। तर अफसोस, मेरो प्रेम तो त्यो रित्तो र विशाल आकाश जस्तै भएको छ, जहाँ भावनाका बादलहरू त टम्म लाग्छन् तर तिमीसम्म पुगेर बर्सिन पाउँदैनन्। म तिम्रो उपस्थितिको एउटा मधुर आभासमा मात्र बाँचिरहेको छु, किनकि तिम्रो वास्तविक सामिप्यता मेरो भाग्यको अक्षरमा कतै कोरिएकै छैन। यो एउटा यस्तो तृष्णा हो, जुन जति पिउँदा पनि कहिल्यै तृप्त हुँदैन।"</p>
-        <p>"तिमीलाई भन्नु पर्ने कुराहरू मनभित्र पहाड बनेर उभिएका छन्, तर ओठसम्म आइपुग्दा ती पत्थर बनिदिन्छन्। मेरो मन एउटा यस्तो एकान्त किनार भएको छ, जहाँ तिम्रा यादहरू लहर बनेर आउँछन् र मलाई अझै एक्लो बनाएर फर्किन्छन्। मानिसहरू प्रेममा आवाज खोज्छन्, तर मेरो त यो मौनता नै मेरो प्रेमको सबैभन्दा ठूलो र जीवित साक्षी हो। कतिपय कुराहरू नभनिनु नै उचित हुने रहेछ, किनकि शब्दले कहिलेकाहीँ भावनाको वजनलाई थाम्न सक्दैनन्।"</p>
-        <p>"सायद अर्को कुनै जन्म हुनेछ, जहाँ समय और परिस्थितिले हामीलाई ठग्ने छैनन्। जहाँ शब्दहरू अधुरा रहने छैनन् र मेरो मौनताले सीधै तिम्रो हृदयलाई छुनेछ। तर अहिलेलाई भने, मेरा यी सम्पूर्ण भावनाहरूलाई म यहीँ शून्यतामा विसर्जन गरिदिँदैछु। तिमीलाई टाढैबाट हेर्नु, तिम्रो सफलतामा मुस्कुराउनु र तिम्रो खुसीकमा आफ्नो अस्तित्व खोज्नु नै सायद मेरो प्रेमको अन्तिम गन्तव्य बन्यो। जुन कथा कहिल्यै पूरा हुँदैन, त्यो नै सबैभन्दा सुन्दर र मर्मस्पर्शी हुने रहेछ। मेरो र तिम्रो यो आधा-अधुरो कथा पनि मेरो लागि संसारको कुनै पनि प्रसिद्ध महाकाव्य भन्दा कम छैन।"</p>
-        <p>"मलाई थाहा छ, यो संसारले यसलाई पागलपन भन्न सक्छ। तर कसैका एउटा स安 सानो हाँसोका लागि आफ्नो पूरा जिन्दगी दाउमा लगाउनु सानो कुरा होइन। प्रेम पाउनु मात्र होइन, प्रेम त कसैको खुसीका लागि आफूलाई मेटाउनु पनि हो। मेरो यो एकतर्फी यात्रामा म थाकेको छैन, बरु हरेक मोडमा तिम्रो यादको सहाराले अझ बलियो बन्दै गएको छु। तिमी मेरो छेउमा नभए पनि, मेरो हरेक सास र सोचमा तिम्रो अंश जीवित छ।"</p>
-        <p>"अन्तरमा, यो प्रश्नको उत्तर मलाई पनि थाहा छैन—के यो साँच्चै प्रेम हो? या फेरि त्यो एउटा झुटो शब्द, जसलाई मैले प्रेमको नाम दिएर कसैको निस्वार्थ हाँसोलाई आफ्नो जिन्दगीको बाँच्ने आधार बनाएको छु। यदि यो झुट हो भने पनि, मलाई यो झुटमे बाँचिरहन मन्जुर छ। किनकि तिम्रो याद बिनाको सत्य भन्दा, तिम्रो आभास सहितको यो अधुरोपन मेरो लागि धेरै प्यारो छ। म यो यात्रामा सधैँ एक्लै हिँड्न तयार छु, जबसम्म मेरो गन्तव्यको नाम तिम्रो खुसी रहनेछ। यो मौन समर्पण नै मेरो जीवनको सबैभन्दा ठूलो उपलब्धि हो, जुन मैले केवल तिम्रा लागि सुरक्षित राखेको छु।"</p>
     </div>
 
     <div class="title-container" id="topic2">
@@ -186,63 +170,12 @@
         <hr class="straight-line">
     </div>
     <div class="bold-feeling">
-        <p>"लामो समयदेखि म एउटा भ्रमको पर्दाभित्र बाँचिरहेको रहेछु। मलाई सधैँ लागेको थियो कि तिमी मलाई प्रेम गर्दैनौ, तर मेरो प्रेमलाई सम्मान भने पक्कै गर्छौ। मलाई विश्वास थियो कि मेरो समर्पणको कदर तिम्रो नजरमा कतै न कतै जीवित छ। तर सुजना (अमृता) सँगको यो च्याट हेरेपछि सबै कुरा ऐना झैँ छर्लङ्ग भयो। आज मेरो जीवनमा पहिलोपटक तिमीसँग यति धेरै चित्त दुखेको छ, जुन शब्दमा बयान गर्नै सकिँदैन। सायद मैले चित्त दुखाउनु पर्ने कुनै कारण वा अधिकार त थिएन, तर मान्छेको मन न हो, भावनाको लगानी गरेपछि चोट त लाग्दो नै रहेछ।"</p>
-        <p>"अहिले मलाई कस्तो महसुस भइरहेको छ भने— मानौँ एउटा किमानले महिनाौँसम्म दिनरात नभनी, घामपानी खपेर रगत-पसिना बगाउँदै धान उब्जाउँछ, तर ठ्याक्कै भित्र्याउने बेलामा असिना र पानीले सबै मेहनत क्षणभरमै बर्बाद पारिदिन्छ। मेरो हालत पनि त्यस्तै भएको छ। मैले वर्षौँसम्म तिमीलाई मेरो मनको मन्दिरमा एउटा पवित्र मूर्तिका रूपमा सजाएर राखेँ। आफ्नो हर खुसी, हर सपना र हर प्रार्थनामा केवल तिम्रो नाम समावेश गरेँ। तर आज आएर थाहा भयो, मैले जति नै सम्मान, माया र निस्वार्थ प्रेम अर्पण गरे पनि तिम्रो मनमा मेरो लागि एउटा सानो सम्मानको पनि ठाउँ बनेको रहेनछ।"</p>
+        <p>"लामो समयदेखि म एउटा भ्रमको पर्दाभित्र बाँचिरहेको रहेछु। मलाई सधैँ लागेको थियो कि तिमी मलाई प्रेम गर्दैनौ, तर मेरो प्रेमलाई सम्मान भने पक्कै गर्छौ। मलाई विश्वास थियो कि मेरो समर्पणको कदर तिम्रो नजरमा कतै न कतै जीवित छ। तर सुजना (अमृता) सँगको यो च्याट हेरेपछि सबै कुरा ऐना झैँ छर्लङ्ग भयो।"</p>
         <div class="photo-wrapper">
             <img src="5003.jpg" alt="Memories" class="diary-image">
         </div>
-        <p>"तिमीले धेरै पटक भनेकी थियौ— 'म तिम्रो प्रेमको कदर गर्छु।' मैले ती शब्दहरूलाई विश्वासको जग बनाएर आफ्नो प्रेमको महल उभ्याएको थिएँ। तर आज त्यो एउटा 'emoji' ले धेरै प्रष्ट बताइदियो कि तिमी मेरो प्रेमलाई कतिको इज्जत गर्दिरहिछौ। त्यो सानो चिन्हले मेरो वर्षौँको तपस्यालाई एउटा ठट्टामा परिणत गरिदिँयो। सायद तिमीलाई म गलत भन्न सक्दिनँ, किनकि प्रेम त कसैको इच्छामा लगाम लाग्ने चिज होइन। सायद मेरै मायामा केही खोट थियो होला, वा सायद म आफैँमा केही कमी थियो, जसले गर्दा मेरो अथाहा प्रेम तिम्रो लागि केवल एउटा one sided मजाक बन्यो।"</p>
-        <p>"ठिक छ, तिमी र म बीच कुनै औपचारिक नाता थिएन। म तिम्रो को हुँ भन्ने प्रश्नको उत्तर तिमीसँग नहुन सक्छ। तर यदि तिमीले कसैलाई मेरो बारेमा भन्दा— 'यो एउटा पागल हो, जसले मलाई अथाहा र निस्वार्थ प्रेम गर्छ; म कहिल्यै उसको प्रेम स्वीकार गर्न त सक्दिनँ, तर उसको यो साँचो भावनाको सम्मान भने हृदयदेखि नै गर्छु' भनिदिएको भए, म पराजित भएर पनि गर्वको साथ आफ्नो सफलता महसुस गर्ने थिएँ। मलाई लाग्ने थियो कि मैले एउटा यस्तो मान्छेलाई माया गरेँ, जो मेरो हुन नसके पनि मेरो भावना बुझ्न सक्ने महान् हृदयको छ।"</p>
-        <p>"तर विडम्बना, मेरो प्रेम तिम्रो लागि केवल एउटा उपहासको विषय बन्यो। कसैको पवित्र भावनालाई यसरी 'emoji' मा उडाउँदा कति पीडा हुन्छ भन्ने कुरा सायद तिमीले कहिल्यै बुझ्ने छैनौ। आज मलाई लाग्दैछ, मैले एउटा यस्तो ठाउँमा फूल रोपेछु जहाँको माटो नै ढुङ्गा जस्तो कठोर थियो। मैले आफ्नो सारा प्रेम खनाउँदा पनि तिम्रो मनमा एउटा 'मान्छे' सम्मको स्थान पाउन सकिनँ। आजदेखि म तिमीप्रतिको आफ्नो सबै गुनासो र अपेक्षाहरूलाई यहीँ अन्त्य गरिदिँन्छु। मलाई अब केही पाउनु छैन, किनकि मैले जुन सम्मानको आशा गरेको थिएँ, त्यो त धेरै अघि नै धुलोमा मिलिसकेको रहेछ।"</p>
-        <p>"अब म जे छु, जस्तो छु, त्यसमै हराउने कोसिस गर्नेछु। तिम्रो खुसी सधैँ अटल रहोस्, तर मेरो प्रेमलाई यसरी सस्तो नबनाइदिएको भए हुन्याथ्यो भन्ने एउटा अमिलो याद भने सधैँ मेरो मनको कुनामा रहिरहनेछ। जुन कथाको अन्त्य यति निर्मम हुन्छ भनेर थाहा पाएको भए, सायद मैले पहिलो शब्द नै लेख्ने आँट गर्ने थिइनँ होला। तर जे भयो, त्यसले मलाई एउटा ठुलो पाठ सिकाएको छ— प्रेममा समर्पण मात्र पर्याप्त हुँदैन, सम्मान पाउनका लागि भाग्य पनि बलियो हुनुपर्दो रहेछ।"</p>
-    </div>
-
-    <div class="title-container" id="topic3">
-        <span class="main-title">३. शून्यताका शब्दहरू</span>
-        <hr class="straight-line">
-    </div>
-    <div class="bold-feeling">
-        <p>"खै, के भनूँ? आजभोलि शब्दहरू ओठसम्म आउँछन् र अनायासै रोकिन्छन्..."</p>
-    </div>
-
-    <div class="title-container" id="topic4">
-        <span class="main-title">४. म रावण</span>
-        <hr class="straight-line">
-    </div>
-    <div class="bold-feeling">
-        <p>"हो, म रावण नै ठिक छु! मलाई बन्नु छैन..."</p>
-    </div>
-
-    <div class="title-container" id="topic5">
-        <span class="main-title">५. प्रेमको नजर र सुन्दरताको परिभाषा</span>
-        <hr class="straight-line">
-    </div>
-    <div class="bold-feeling">
-        <p>"वास्तवमा सुन्दरताको परिभाषा के हो...?"</p>
-    </div>
-
-    <div class="title-container" id="topic6">
-        <span class="main-title">६. Baishakh 02</span>
-        <hr class="straight-line">
-    </div>
-    <div class="bold-feeling">
-         <p>"आज वैशाख २, मेरो जन्मदिन..."</p>
-    </div>
-
-    <div class="title-container" id="topic7">
-        <span class="main-title">७. सत्य </span>
-        <hr class="straight-line">
-    </div>
-    <div class="bold-feeling">
-        <p>सुजु, के छ खबर? आरामै छौ होला...</p>
-    </div>
-
-    <div class="title-container" id="topic8">
-        <span class="main-title">८. प्रतिज्ञा कि प्रतीक्षा?</span>
-        <hr class="straight-line">
-    </div>
-    <div class="bold-feeling">
-        <p>कथाको सुरुवात हुन्छ वि.सं. २१२८...</p>
+        <p>"तिमीले धेरै पटक भनेकी थियौ— 'म तिम्रो प्रेमको कदर गर्छु।' मैले ती शब्दहरूलाई विश्वासको जग बनाएर आफ्नो प्रेमको महल उभ्याएको थिएँ। तर आज त्यो एउटा 'emoji' ले धेरै प्रष्ट बताइदियो कि तिमी मेरो प्रेमलाई कतिको इज्जत गर्दिरहिछौ।..."</p>
+        <p>"अब म जे छु, जस्तो छु, त्यसमै हराउने कोसिस गर्नेछु। तिम्रो खुसी सधैँ अटल रहोस्, तर मेरो प्रेमलाई यसरी सस्तो नबनाइदिएको भए हुन्याथ्यो भन्ने एउटा अमिलो याद भने सधैँ मेरो मनको कुनामा रहिरहनेछ।..."</p>
     </div>
 
     <script>
@@ -257,25 +190,7 @@
             const toast = document.getElementById('toastBox');
             toast.innerText = message;
             toast.classList.add('show');
-            setTimeout(() => { toast.classList.remove('show'); }, 3500);
-        }
-
-        function searchDiaryWords() {
-            const input = document.getElementById('searchBar').value.toLowerCase();
-            const paragraphs = document.querySelectorAll('.bold-feeling p');
-            
-            paragraphs.forEach(p => {
-                const text = p.innerText.toLowerCase();
-                if (input === "") {
-                    p.style.display = "";
-                    p.style.background = "";
-                } else if (text.includes(input)) {
-                    p.style.display = "";
-                    p.style.background = "rgba(255, 235, 59, 0.2)";
-                } else {
-                    p.style.display = "none";
-                }
-            });
+            setTimeout(() => { toast.classList.remove('show'); }, 3000);
         }
 
         let isHighlightMode = false;
@@ -297,16 +212,15 @@
             });
         }
 
-        // नियम: स्क्रिनमा २ पटक लगातार क्लिक (Double Tap) गर्दा मात्र दायाँ पेन्सिल मेनु र बायाँ Clear मेनु देखिने/लुक्ने
+        // डबल ट्याप गर्दा एकीकृत मेनु देखिने/लुक्ने प्रणाली
         window.addEventListener('click', function(e) {
-            if (e.target.closest('#pencilMenuBar') || e.target.closest('#clearMenuBar') || e.target.closest('.toolbar') || e.target.closest('.search-container')) return;
+            if (e.target.closest('#actionContainer') || e.target.closest('.toolbar')) return;
 
             const currentTime = new Date().getTime();
             const tapLength = currentTime - lastTapTime;
 
             if (tapLength < 300 && tapLength > 0) {
-                document.getElementById('pencilMenuBar').classList.toggle('show');
-                document.getElementById('clearMenuBar').classList.toggle('show');
+                document.getElementById('actionContainer').classList.toggle('show');
                 e.preventDefault();
             }
             lastTapTime = currentTime;
@@ -317,18 +231,15 @@
             isHighlightMode = !isHighlightMode;
 
             if (isHighlightMode) {
-                btn.innerHTML = '✏️';
                 btn.classList.add('active');
-                showToast("हाइलाइट मोड अन भयो। अब हरफमा 1 सेकेन्ड थिचेर छोड्नुहोस्।");
+                showToast("हाइलाइट अन भयो। हरफमा १ सेकेन्ड थिच्नुहोस्।");
             } else {
-                btn.innerHTML = '✏️';
                 btn.classList.remove('active');
-                document.getElementById('pencilMenuBar').classList.remove('show');
-                document.getElementById('clearMenuBar').classList.remove('show');
+                document.getElementById('actionContainer').classList.remove('show');
             }
         }
 
-        // 1 सेकेन्ड लङ प्रेस गर्दा अटो-सेभ हुने र मेनु गायब हुने लोजिक
+        // ठीक १ सेकेन्ड (1000ms) लङ प्रेस लोजिक
         function setupParagraphInteractions() {
             const paragraphs = document.querySelectorAll('.bold-feeling p');
             
@@ -351,18 +262,16 @@
                         setTimeout(() => {
                             if (selectedParagraphId) {
                                 localStorage.setItem('diary_bookmark_id', selectedParagraphId);
-                                showToast("तपाईंले पढेको स्थान सुरक्षित गरियो!");
+                                showToast("पढेको स्थान सुरक्षित गरियो!");
                             }
                             btn.innerHTML = '✏️';
                             btn.classList.remove('active');
                             isHighlightMode = false;
                             loadSavedBookmark();
-                            // सेभ भएपछि मेनु बारहरू स्वतः हराउने
-                            document.getElementById('pencilMenuBar').classList.remove('show');
-                            document.getElementById('clearMenuBar').classList.remove('show');
-                        }, 600);
+                            document.getElementById('actionContainer').classList.remove('show');
+                        }, 400);
 
-                    }, 2000); 
+                    }, 1000); /* १ सेकेन्डमा अटो सेभ हुने */
                 };
 
                 const cancelPress = () => { clearTimeout(pressTimer); };
@@ -388,8 +297,8 @@
                 if (targetElement) {
                     targetElement.classList.add('highlighted');
                     selectedParagraphId = savedId;
-                    jumpBtn.style.display = 'block';  // जम्प बटन देखाउने
-                    clearBtn.style.display = 'block'; // क्लियर बटन देखाउने
+                    jumpBtn.style.display = 'block';  
+                    clearBtn.style.display = 'block'; 
                     return;
                 }
             }
@@ -403,28 +312,22 @@
                 const targetElement = document.querySelector(`.bold-feeling p[data-id="${savedId}"]`);
                 if (targetElement) {
                     targetElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                    targetElement.style.opacity = '0.4';
-                    setTimeout(() => targetElement.style.opacity = '1', 400);
-                    
                     setTimeout(() => {
-                        document.getElementById('pencilMenuBar').classList.remove('show');
-                        document.getElementById('clearMenuBar').classList.remove('show');
-                    }, 500);
+                        document.getElementById('actionContainer').classList.remove('show');
+                    }, 400);
                 }
             }
         }
 
-        // नयाँ थपिएको फंक्शन: सुरक्षित गरिएको बुकमार्क पूर्ण रूपमा हटाउन (Clear गर्न)
         function clearBookmark() {
             localStorage.removeItem('diary_bookmark_id');
             selectedParagraphId = null;
             document.querySelectorAll('.bold-feeling p').forEach(el => el.classList.remove('highlighted'));
             loadSavedBookmark();
-            showToast("बुकमार्क सफलतापूर्वक हटाइयो!");
+            showToast("बुकमार्क हटाइयो!");
             setTimeout(() => {
-                document.getElementById('pencilMenuBar').classList.remove('show');
-                document.getElementById('clearMenuBar').classList.remove('show');
-            }, 500);
+                document.getElementById('actionContainer').classList.remove('show');
+            }, 400);
         }
     </script>
 </body>
