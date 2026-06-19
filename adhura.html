@@ -442,7 +442,7 @@
 
             if (isHighlightMode) {
                 btn.classList.add('active');
-                showToast("हाइलाइट अन भयो। हरफमा १ सेकेन्ड थिच्नुहोस्।");
+                showToast("bookmark on। Hold 1s to identify।");
             } else {
                 btn.classList.remove('active');
                 document.getElementById('actionContainer').classList.remove('show');
@@ -472,7 +472,7 @@
                         setTimeout(() => {
                             if (selectedParagraphId) {
                                 localStorage.setItem('diary_bookmark_id', selectedParagraphId);
-                                showToast("पढेको स्थान सुरक्षित गरियो!");
+                                showToast("successfully save!");
                             }
                             btn.innerHTML = '✏️';
                             btn.classList.remove('active');
