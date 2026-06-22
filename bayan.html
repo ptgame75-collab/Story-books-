@@ -7,328 +7,119 @@
     <link href="https://fonts.googleapis.com/css2?family=Mukta:wght@400;600;700;800&display=swap" rel="stylesheet">
     <style>
         html { scroll-behavior: smooth; }
-        body { 
-            font-family: 'Mukta', 'Arial', sans-serif; 
-            line-height: 1.9; 
-            color: #333; 
-            background: #fcfbf7; 
-            padding: 75px 20px 140px 20px; /* तल्लो बटनका लागि पर्याप्त स्पेस */
-            transition: 0.3s; 
-            -webkit-user-select: none; 
-            user-select: none; 
-        }
-        
-        /* शीर्ष बार (Sticky Toolbar) */
-        .toolbar { 
-            position: fixed; 
-            top: 0; 
-            left: 0; 
-            right: 0; 
-            display: flex; 
-            justify-content: space-between; 
-            align-items: center;
-            padding: 12px 20px; 
-            background: rgba(252, 251, 247, 0.95); 
-            border-bottom: 1px solid #ddd; 
-            z-index: 1000; 
-            backdrop-filter: blur(5px); 
-            height: 45px; 
-        }
+        body { font-family: 'Mukta', 'Arial', sans-serif; line-height: 1.9; color: #333; background: #fcfbf7; padding: 75px 20px 140px 20px; transition: 0.3s; -webkit-user-select: none; user-select: none; }
+        .toolbar { position: fixed; top: 0; left: 0; right: 0; display: flex; justify-content: space-between; align-items: center; padding: 12px 20px; background: rgba(252, 251, 247, 0.95); border-bottom: 1px solid #ddd; z-index: 1000; backdrop-filter: blur(5px); height: 45px; }
         .btn { text-decoration: none; color: #333; border: 1px solid #ccc; padding: 6px 15px; border-radius: 5px; font-weight: bold; background: #fff; cursor: pointer; font-family: 'Mukta', sans-serif; white-space: nowrap; }
-
-        .toc-container { background: #f4ece1; padding: 20px; border-radius: 10px; border-left: 5px solid #5D4037; margin: 20px auto 40px auto; max-width: 600px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
-        .toc-title { font-size: 22px; font-weight: bold; color: #5D4037; margin-bottom: 10px; display: block; text-align: center; }
-        .toc-list { list-style: none; padding: 0; margin: 0; }
-        .toc-list li { margin: 10px 0; }
-        .toc-list a { text-decoration: none; color: #795548; font-weight: bold; transition: 0.2s; display: block; font-size: 18px; }
-        .toc-list a:hover { color: #5D4037; padding-left: 5px; }
-
-        .bold-feeling p { 
-            font-size: 19px; 
-            margin-bottom: 25px; 
-            font-weight: 900; 
-            text-align: justify; 
-            transition: background-color 0.3s; 
-            cursor: pointer; 
-            padding: 8px; 
-            border-radius: 6px;
-            scroll-margin-top: 140px; 
-            -webkit-touch-callout: none;
-        }
-        .bold-feeling p.highlighted {
-            background-color: rgba(255, 235, 59, 0.6) !important; 
-            color: #000 !important;
-        }
-        .title-container { scroll-margin-top: 130px; }
-        .main-title { font-size: 30px; font-weight: 800; display: block; margin-top: 10px; color: #5D4037; text-align: center; }
-        .straight-line { width: 100%; max-width: 600px; height: 1px; background: #ddd; border: none; margin: 20px auto 30px auto; }
-        .diary-image { max-width: 95%; height: auto; display: block; margin: 30px auto; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+        .container { max-width: 600px; margin: 0 auto; }
+        .photo-frame { max-width: 95%; height: auto; display: block; margin: 30px auto; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+        .bayan-step p { font-size: 19px; margin-bottom: 25px; font-weight: 500; text-align: justify; cursor: pointer; padding: 8px; border-radius: 6px; scroll-margin-top: 140px; }
+        .bayan-step p.highlighted { background-color: rgba(255, 235, 59, 0.6) !important; color: #000 !important; }
         
-        /* नयाँ व्यवस्थित एकीकृत मेनु कन्टेनर (No Overlapping) */
-        .bottom-action-container {
-            position: fixed;
-            bottom: -150px; /* सुरुमा लुकेको */
-            left: 50%;
-            transform: translateX(-50%);
-            width: 90%;
-            max-width: 450px;
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-            align-items: flex-end;
-            z-index: 2000;
-            transition: bottom 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
+        .bottom-action-container { position: fixed; bottom: -150px; left: 50%; transform: translateX(-50%); width: 90%; max-width: 450px; display: flex; flex-direction: column; gap: 12px; z-index: 2000; transition: bottom 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
         .bottom-action-container.show { bottom: 25px; }
+        .pencil-btn { width: 52px; height: 52px; border-radius: 50%; background: #5D4037; color: white; border: none; align-self: center; cursor: pointer; }
+        .pencil-btn.active { background: #2e7d32; }
+        .action-row { display: flex; gap: 10px; width: 100%; }
+        .clear-btn, .jump-btn { flex: 1; padding: 12px; border-radius: 25px; border: none; font-weight: bold; cursor: pointer; display: none; }
+        .clear-btn { background: #c62828; color: white; }
+        .jump-btn { background: #d84315; color: white; }
 
-        /* पेन्सिल बटन छुट्टै माथि बस्ने */
-        .pencil-btn {
-            width: 52px; height: 52px; border-radius: 50%; background: #5D4037; color: white; font-size: 22px; border: none; box-shadow: 0 4px 12px rgba(0,0,0,0.25); cursor: pointer; display: flex; align-items: center; justify-content: center; transition: transform 0.2s, background 0.3s;
-        }
-        .pencil-btn.active { background: #2e7d32; transform: scale(1.05); }
-
-        /* एक्सन रो (Clear र पढेको ठाउँमा जाने बटनहरू) */
-        .action-row {
-            display: flex;
-            width: 100%;
-            gap: 10px;
-            justify-content: space-between;
-        }
-        .clear-btn {
-            flex: 1; background: #c62828; color: white; border: none; padding: 12px 15px; border-radius: 25px; font-weight: bold; box-shadow: 0 4px 10px rgba(0,0,0,0.2); cursor: pointer; display: none; font-family: 'Mukta', sans-serif; font-size: 15px; text-align: center; white-space: nowrap;
-        }
-        .jump-btn {
-            flex: 2; background: #d84315; color: white; border: none; padding: 12px 15px; border-radius: 25px; font-weight: bold; box-shadow: 0 4px 10px rgba(0,0,0,0.2); cursor: pointer; display: none; font-family: 'Mukta', sans-serif; font-size: 15px; text-align: center; white-space: nowrap;
-        }
-
-        /* Custom Toast */
-        .toast-notification {
-            position: fixed; bottom: -100px; left: 50%; transform: translateX(-50%);
-            background-color: #323232; color: #fff; padding: 12px 24px; border-radius: 25px;
-            font-family: 'Mukta', sans-serif; font-size: 16px; z-index: 3000; box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-            transition: bottom 0.3s ease-in-out; text-align: center; pointer-events: none; max-width: 90%;
-        }
-        .toast-notification.show { bottom: 155px; }
-
-        /* डार्क मोड स्टाइलहरू */
         .dark-mode { background-color: #121212; color: #e0e0e0; }
-        .dark-mode .toolbar { background: rgba(18, 18, 18, 0.95); border-color: #333; }
+        .dark-mode .toolbar { background: #121212; border-color: #333; }
         .dark-mode .btn { background: #1e1e1e; border-color: #333; color: #e0e0e0; }
-        .dark-mode .main-title { color: #d7ccc8; }
-        .dark-mode .straight-line { background: #333; }
-        .dark-mode .toc-container { background: #1e1e1e; border-left-color: #d7ccc8; }
-        .dark-mode .toc-title { color: #d7ccc8; }
-        .dark-mode .toc-list a { color: #b0bec5; }
-        .dark-mode .bold-feeling p.highlighted { background-color: rgba(255, 193, 7, 0.5) !important; color: #000 !important; }
+        .toast-notification { position: fixed; bottom: 155px; left: 50%; transform: translateX(-50%); background: #333; color: #fff; padding: 10px 20px; border-radius: 20px; display: none; z-index: 3000; }
     </style>
 </head>
-<body oncontextmenu="return false;">
+<body>
 
-    <!-- शीर्ष बार -->
     <div class="toolbar">
         <a href="index.html" class="btn">← back</a>
-        <button class="btn" onclick="toggleNightMode()" id="nightBtn">🌙 | नाइट मोड</button>
+        <button class="btn" onclick="toggleNightMode()" id="nightBtn">🌙 मोड</button>
     </div>
 
-    <!-- एकीकृत सफा मेनु बार (गन्जागोल नहुने गरी मिलाइएको) -->
+    <div class="container">
+        <img src="dolly.png" alt="मेरी डल्ली" class="photo-frame">
+        <div class="bayan-section">
+            <div class="bayan-step">
+                <p>Hello, मलाई थाहा छैन म कहाँबाट सुरु गरौँ...</p>
+                <p>मलाई थाहा छैन तिमी मलाई त्यति धेरै राम्री किन लाग्छ्यौ...</p>
+                <p>जब म तिम्रो अनुहारलाई नियालेर हेर्छु, म अवाक बन्छु...</p>
+                <p>अनि म अर्को एउटा निकै विशेष कुरा भन्न चाहन्छु...</p>
+                <p>यो प्रकृतिले संसारकै सबैभन्दा उत्कृष्ट...</p>
+                <p>रातको सुनसान समयमा...</p>
+                <p>जब लामो समयसम्म झरी परेर रोकिन्छ...</p>
+                <p>म यसै त शब्दहरूसँग खेल्ने...</p>
+            </div>
+        </div>
+    </div>
+
     <div class="bottom-action-container" id="actionContainer">
         <button class="pencil-btn" id="pencilBtn" onclick="toggleHighlightMode()">✏️</button>
         <div class="action-row">
             <button class="clear-btn" id="clearBtn" onclick="clearBookmark()">🗑️ Clear</button>
-            <button class="jump-btn" id="jumpBtn" onclick="jumpToBookmark()">📍 Continue Reading</button>
-        </div>
-
-    <div class="container">
-        <img src="dolly.png" alt="मेरी डल्ली" class="photo-frame">
-
-        <div class="intro-section">
-            <h2 class="intro-title">मेरी डल्लीको परिचय</h2>
-            <p>यहाँ उनको बारेमा केही छोटो र मिठो परिचय लेख्नुहोस् (जस्तै: नाम, तपाईंको जीवनमा उनको महत्व वा एउटा विशेष गुण)।</p>
-        </div>
-
-        <div class="bayan-section">
-            <div class="bayan-step">
-                <h3 class="bayan-title">चरण १: Description </h3>
-                  <p>Hello, मलाई थाहा छैन म कहाँबाट सुरु गरम... अब यसमा तिम्रो बयान भनेपछि राम्रोसँग बयान गर्नुपर्यो। म सोच्छु कहाँबाट सुरु गरौँ, तिम्रा ती आँखाबाट कि तिम्रो निश्चल मनबाट? तर वास्तवमै भन्नुपर्दा त तिम्रो बयान सम्भव नै छैन, किनभने नेपाली, इङ्लिस, चाइनिज या संसारको कुनै पनि भाषाको व्याकरण र साहित्यमा तिम्रो रूप, तिम्रो स्वभाव र तिम्रो सादगीको बयान गर्न सक्ने शब्दहरू अहिलेसम्म बनेकै छैनन्। संसारका दिग्गज कवि र लेखकहरूले प्रयोग गरेका शब्दकोषहरू पनि तिम्रो अगाडि निकै साना र अपूर्ण लाग्छन्।</p>
-            
-            <p>मलाई थाहा छैन तिमी मलाई त्यति धेरै राम्री किन लाग्छ्यौ, मेरो यो मन र यी आँखाले तिमीबाहेक अरू कसैको अस्तित्वलाई स्विकार्नै चाहँदैनन्। म कति सत्य बोल्दैछु भन्ने कुरा महसुस गर्न Please, एकपटक ऐनाको अगाडि उभिएर हेरन। अनि म तिमीलाई खुल्ला चुनौती दिन्छु, तिमी ऐनामा आफ्नै प्रतिबिम्बलाई नियालेर आफ्नो कुनै एउटा मात्र भए पनि कमजोरी निकाला, सायद धेरै खोज्दा भी केही फेला पर्ने छैन, किनकि विधाताले तिमीलाई कुनै खोट, कुनै त्रुटि नै नराखी फुर्सदको पलमा केवल प्रेम र सुन्दरताले मात्र बुनेर बनाएको छ।</p>
-            
-            <p>जब म तिम्रो अनुहारलाई नियालेर हेर्छु, म अवाक बन्छु। विधाताले तिम्रो अनुहारको हरेक चिजलाई कति फुर्सदमा सजाएको होला! तिम्रो त्यो कञ्चन र浅सफा निधार, जुन हेरिरहूँ जस्तो लाग्छ। तिम्रा ती गुलाबी ओठहरू, जसको बयान गर्न कुनै उपमा नै छैन। जब तिमी मुस्कुराउँछौ, तिम्रा मिलेका सेता दाँतहरू यसरी चम्किन्छन् मानौँ भर्खरै मोतीका दानाहरू लहरै सजाइएका हुन्। तिम्रो त्यो सानो र तीखो नाक, जसले तिम्रो रूपलाई अझ बढी निर्दोष र आकर्षक बनाउँछ। अनि सबैभन्दा विशेष त तिम्रो त्यो रेशमी कपाल! तिम्रो त्यो कालो, लामो र लहराउने कपाल जब हावाको एउटा झोक्कासँगै उडेर तिम्रो गाला र अनुहारमा आउँछ, तब लाग्छ संसारको सारा सुन्दरता त्यहीँ सजिएको छ। तिम्रो कपालका ती लटहरूले मेरो मनलाई बिनाकुनै बन्धन बाँधिदिएका छन्।</p>
-            
-            <p>अनि म अर्को एउटा निकै विशेष कुरा भन्न चाहन्छु, जुन मेरो मुटुमा सधैँका लागि कैद भइसकेको छ। जब मैले तिमीलाई पहिलो पटक देखेको थिएँ, म तिम्रो त्यो रूप हेरेको हेरै भएँ। तिम्रो हाइट अलिकति छोटो, एकदमै क्युट र डल्ली थियौ तिमी। तिम्रो त्यो डल्ली हाइटको बयान म कुन शब्दमा गरुँ? धेरैलाई लाग्ला हाइट लामो हुनु सुन्दरता हो, तर तिम्रो त्यो डल्ली हाइटको अगाडि संसारका सबै अप्सराहरू फिक्का लाग्छन्। तिम्रो त्यो डल्ली रूप र तिम्रो त्यो हाइट कति सुहाएको, कति मर्मस्पर्शी र कति प्यारो छ भने, त्यसको बयान गर्न मेरो यो संसारमा कुनै शब्द नै बनेको छैन। तिम्रो त्यो डल्ली रूप मेरो हृदयको सबैभन्दा सुन्दर तस्बिर हो।</p>
-            
-            <p>यो प्रकृतिले संसारकै सबैभन्दा उत्कृष्ट, पवित्र र सुन्दर चिजको प्रमाण दिनुपर्दा सायद तिम्रो निर्माण भएको हुनसक्छ। जब संसारले सुन्दरता के हो भनेर सोध्छ, तब प्रकृतिले तिम्रो नाम लिन्छ। एउटा विशाल र व्यवस्थित बगैँचामा लाखौं फूलहरू हुन्छन्; जस्तै गुलाफ, सयपत्री, सुनगाभा, गोदावरी जस्ता अनेकौँ मनमोहक, सुगन्धित र आकर्षक फूलहरू प्राकृतिक रूपमै ढकमक्क फुलेका हुन्छन्, जसलाई हेर्न संसार लालायित हुन्छ। तर जब तिमी त्यही बगैँचाको बीचमा गएर उभिन्छौ, ती लाखौँ फूलहरूको सामूहिक सुन्दरता र रङ पनि तिम्रो अघि एकदमै फिक्का, फिक्लो र रङ्गहीन लाग्छ। तिम्रो एउटै उपस्थितिले ती फूलहरूको घमण्ड तोडिदिन्छ।</p>
-            
-            <p>रातको सुनसान समयमा, when पूर्णिमाको चन्द्रमाको उज्यालो र शीतल छाया विशाल समुन्द्रको छातीमा पर्छ, तब त्यो पानीका लहरहरू टल्किएको दृश्य निकै लोभलाग्दो, जादुमयी र राम्रो हुन्छ। प्रकृतिप्रेमीहरू त्यसलाई संसारकै उत्कृष्ट दृश्य भन्छन्। तर मेरो लागि, संसारको त्यो अद्भुत प्राकृतिक दृश्य भन्दा पनि अझै कयौँ गुणा बढी सुन्दर, जीवन्त र मनमोहक दृश्य भनेको तिम्रो ओठको कुनामा सधैँ सजिरहने त्यो सानो मुस्कान हो। तिम्रो मुस्कानले ओइलाएको मनलाई पनि ब्युँताइदिन्छ।</p>
-            
-            <p>जब लामो समयसम्म झरी परेर रोकिन्छ, आकाश गर्जने र वर्षने क्रम सकिएर निलो र कञ्चन आकाश खुल्छ, अनि त्यो टाढाका डाँडाहरूमा टल्कने हिमालका सेता हिउँहरूको शुद्धता र चमक देखिन्छ, त्यसको बयान गर्ने शब्द सायदै कसैको डायरी वा कवितामा बनेको होला। तर म संसारको अगाडि दाबीका साथ भन्न सक्छु, त्यो कञ्चन हिमाल र खुल्ला आकाश भन्दा पनि माथि यदि कुनै पावन सुन्दरता यो धर्तीमा लुकेको छ भने, त्यो मात्र तिम्रो मुस्कान र तिम्रो हाउभाउमा लुकेको छ। तिमी हाँस्दा यस्तो महसुस हुन्छ, मानौँ यो सारा ब्रह्माण्डका चम्किला सीताराहरूलाई एक-एक गरी सिँगाटेर, समेटेर ईश्वरले तिम्रो त्यही ओठको मुस्कानभित्र लुकाइदिएको छ र जब तिमी मुस्कुराउँछौ, मेरो संसार उज्यालो हुन्छ।</p>
-            
-            <p>म यसै त शब्दहरूसँग खेल्ने, भावनाहरू कोर्ने, कविता र शायरीहरू कोरेर डायरीका पानाहरू भर्ने निकै शब्दहरू लेख्ने मान्छे हुँ। हरेक साना कुरामा भावना र उपमा भेट्ने मेरो पुरानो बानी हो। तर अचम्म लाग्छ, जब-जब म तिम्रो अगाडि आउँछु वा तिम्रो सुन्दरताको बयान गर्न बस्छु, मेरा ती हजारौँ शब्दहरू एकाएक हराउँछन्, मेरो सोच्ने शक्ति रोकिन्छ, मेरो कलम निसब्द बन्छ र मेरा आफ्नै शब्दहरूले मलाई साथ दिँदैनन्। तिम्रो अघि मेरो शब्दको विशाल संसार सधैँ मौन र अवाक बनिदिन्छ, किनकि तिम्रो सुन्दरता शब्दमा अटाउने चिज नै होइन।</p>
-            </div>
-
-            <div class="bayan-step">
-                <h3 class="bayan-title">चरण २: तिम्रो सुन्दरता</h3>
-                <p>यहाँ अनुहार, मुस्कान र त्यो डल्ली हाइटको बारेमा लेखिएको बयान राख्नुहोस्...</p>
-            </div>
-
-            <div class="bayan-step">
-                <h3 class="bayan-title">चरण ३: मेरो मनको कुरा</h3>
-                <p>यहाँ अन्तिम भावनात्मक कुराहरू र तिमी किन विशेष छ्यौ भन्ने कुरा राख्नुहोस्...</p>
-            </div>
+            <button class="jump-btn" id="jumpBtn" onclick="jumpToBookmark()">📍 Continue</button>
         </div>
     </div>
+    
+    <div id="toastBox" class="toast-notification">Saved!</div>
 
-<script>
+    <script>
         function toggleNightMode() {
-            const body = document.body;
-            body.classList.toggle('dark-mode');
-            const btn = document.getElementById('nightBtn');
-            btn.innerHTML = body.classList.contains('dark-mode') ? "☀️ डे मोड" : "🌙 नाइट मोड";
-        }
-
-        function showToast(message) {
-            const toast = document.getElementById('toastBox');
-            toast.innerText = message;
-            toast.classList.add('show');
-            setTimeout(() => { toast.classList.remove('show'); }, 3000);
+            document.body.classList.toggle('dark-mode');
+            document.getElementById('nightBtn').innerText = document.body.classList.contains('dark-mode') ? "☀️ डे मोड" : "🌙 नाइट मोड";
         }
 
         let isHighlightMode = false;
-        let selectedParagraphId = null;
         let lastTapTime = 0;
 
-        window.addEventListener('DOMContentLoaded', () => {
-            autoAssignParagraphIDs();
-            loadSavedBookmark(); 
-            setupParagraphInteractions();
-        });
-
-        function autoAssignParagraphIDs() {
-            const paragraphs = document.querySelectorAll('.bold-feeling p');
-            paragraphs.forEach((p, index) => {
-                if (!p.getAttribute('data-id')) {
-                    p.setAttribute('data-id', 'p_' + (index + 1));
-                }
-            });
-        }
-
-        // डबल ट्याप गर्दा एकीकृत मेनु देखिने/लुक्ने प्रणाली
-        window.addEventListener('click', function(e) {
+        window.onclick = (e) => {
             if (e.target.closest('#actionContainer') || e.target.closest('.toolbar')) return;
-
-            const currentTime = new Date().getTime();
-            const tapLength = currentTime - lastTapTime;
-
-            if (tapLength < 300 && tapLength > 0) {
-                document.getElementById('actionContainer').classList.toggle('show');
-                e.preventDefault();
-            }
-            lastTapTime = currentTime;
-        });
+            let now = new Date().getTime();
+            if (now - lastTapTime < 300) document.getElementById('actionContainer').classList.toggle('show');
+            lastTapTime = now;
+        };
 
         function toggleHighlightMode() {
-            const btn = document.getElementById('pencilBtn');
             isHighlightMode = !isHighlightMode;
-
-            if (isHighlightMode) {
-                btn.classList.add('active');
-                showToast("bookmark on। Hold 1s to identify।");
-            } else {
-                btn.classList.remove('active');
-                document.getElementById('actionContainer').classList.remove('show');
-            }
+            document.getElementById('pencilBtn').classList.toggle('active');
         }
 
-        // ठीक १ सेकेन्ड (1000ms) लङ प्रेस लोजिक
-        function setupParagraphInteractions() {
-            const paragraphs = document.querySelectorAll('.bold-feeling p');
-            
-            paragraphs.forEach(p => {
-                let pressTimer;
+        document.querySelectorAll('.bayan-step p').forEach((p, i) => {
+            p.setAttribute('data-id', 'p' + i);
+            let timer;
+            p.onmousedown = p.ontouchstart = () => { if(isHighlightMode) timer = setTimeout(() => save(p), 1000); };
+            p.onmouseup = p.ontouchend = () => clearTimeout(timer);
+        });
 
-                const startPress = (e) => {
-                    if (!isHighlightMode) return;
-
-                    pressTimer = setTimeout(() => {
-                        const pId = p.getAttribute('data-id');
-                        
-                        document.querySelectorAll('.bold-feeling p').forEach(el => el.classList.remove('highlighted'));
-                        p.classList.add('highlighted');
-                        selectedParagraphId = pId;
-
-                        const btn = document.getElementById('pencilBtn');
-                        btn.innerHTML = '💾';
-
-                        setTimeout(() => {
-                            if (selectedParagraphId) {
-                                localStorage.setItem('diary_bookmark_id', selectedParagraphId);
-                                showToast("successfully save!");
-                            }
-                            btn.innerHTML = '✏️';
-                            btn.classList.remove('active');
-                            isHighlightMode = false;
-                            loadSavedBookmark();
-                            document.getElementById('actionContainer').classList.remove('show');
-                        }, 400);
-
-                    }, 1000); /* १ सेकेन्डमा अटो सेभ हुने */
-                };
-
-                const cancelPress = () => { clearTimeout(pressTimer); };
-
-                p.addEventListener('touchstart', startPress);
-                p.addEventListener('touchend', cancelPress);
-                p.addEventListener('touchmove', cancelPress);
-                p.addEventListener('mousedown', startPress);
-                p.addEventListener('mouseup', cancelPress);
-                p.addEventListener('mouseleave', cancelPress);
-            });
+        function save(el) {
+            localStorage.setItem('bookmark', el.getAttribute('data-id'));
+            document.querySelectorAll('.highlighted').forEach(e => e.classList.remove('highlighted'));
+            el.classList.add('highlighted');
+            document.getElementById('toastBox').style.display = 'block';
+            setTimeout(() => document.getElementById('toastBox').style.display = 'none', 2000);
+            load();
         }
 
-        function loadSavedBookmark() {
-            const savedId = localStorage.getItem('diary_bookmark_id');
-            const jumpBtn = document.getElementById('jumpBtn');
-            const clearBtn = document.getElementById('clearBtn');
-            
-            document.querySelectorAll('.bold-feeling p').forEach(el => el.classList.remove('highlighted'));
-
-            if (savedId) {
-                const targetElement = document.querySelector(`.bold-feeling p[data-id="${savedId}"]`);
-                if (targetElement) {
-                    targetElement.classList.add('highlighted');
-                    selectedParagraphId = savedId;
-                    jumpBtn.style.display = 'block';  
-                    clearBtn.style.display = 'block'; 
-                    return;
-                }
+        function load() {
+            let id = localStorage.getItem('bookmark');
+            if(id) {
+                document.querySelectorAll(`[data-id="${id}"]`).forEach(e => e.classList.add('highlighted'));
+                document.getElementById('jumpBtn').style.display = 'block';
+                document.getElementById('clearBtn').style.display = 'block';
             }
-            jumpBtn.style.display = 'none';
-            clearBtn.style.display = 'none';
         }
 
         function jumpToBookmark() {
-            const savedId = localStorage.getItem('diary_bookmark_id');
-            if (savedId) {
-                const targetElement = document.querySelector(`.bold-feeling p[data-id="${savedId}"]`);
-                if (targetElement) {
-                    targetElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                    setTimeout(() => {
-                        document.getElementById('actionContainer').classList.remove('show');
-                    }, 400);
-                }
-            }
+            let el = document.querySelector('.highlighted');
+            if(el) el.scrollIntoView({behavior: 'smooth', block: 'center'});
         }
 
         function clearBookmark() {
-            localStorage.removeItem('diary_bookmark_id');
-            selectedParagraphId = null;
-            document.querySelectorAll('.bold-feeling p').forEach(el => el.classList.remove('highlighted'));
-            loadSavedBookmark();
-            showToast("remove bookmark!");
-            setTimeout(() => {
-                document.getElementById('actionContainer').classList.remove('show');
-            }, 400);
+            localStorage.removeItem('bookmark');
+            location.reload();
         }
+
+        load();
     </script>
 </body>
 </html>
