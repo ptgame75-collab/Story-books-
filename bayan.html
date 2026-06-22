@@ -2,127 +2,58 @@
 <html lang="ne">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>बयान - अधिराजको डायरी</title>
-    <link href="https://fonts.googleapis.com/css2?family=Mukta:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>अधिराजको डायरी</title>
     <style>
-        html { scroll-behavior: smooth; }
-        body { font-family: 'Mukta', sans-serif; line-height: 1.9; color: #333; background: #fcfbf7; padding: 75px 20px 140px 20px; transition: 0.3s; user-select: none; }
-        
-        .toolbar { position: fixed; top: 0; left: 0; right: 0; display: flex; justify-content: space-between; align-items: center; padding: 12px 20px; background: rgba(252, 251, 247, 0.95); border-bottom: 1px solid #ddd; z-index: 1000; backdrop-filter: blur(5px); }
-        .btn { text-decoration: none; color: #333; border: 1px solid #ccc; padding: 6px 15px; border-radius: 5px; font-weight: bold; background: #fff; cursor: pointer; }
-
-        .bayan-container { max-width: 600px; margin: 0 auto; }
-        .main-title { font-size: 28px; font-weight: 900; display: block; color: #5D4037; text-align: center; }
-        .straight-line { width: 100%; height: 1px; background: #ddd; border: none; margin: 20px auto 30px auto; }
-
-        .bold-feeling p { font-size: 19px; margin-bottom: 25px; font-weight: 900; text-align: justify; cursor: pointer; padding: 8px; border-radius: 6px; transition: 0.3s; }
-        .bold-feeling p.highlighted { background-color: rgba(255, 235, 59, 0.6) !important; color: #000 !important; }
-
-        /* मेनु कन्टेनर */
-        .bottom-action-container { position: fixed; bottom: -150px; left: 50%; transform: translateX(-50%); width: 90%; max-width: 450px; display: flex; flex-direction: column; gap: 12px; z-index: 2000; transition: 0.4s; }
-        .bottom-action-container.show { bottom: 25px; }
-        .pencil-btn { width: 52px; height: 52px; border-radius: 50%; background: #5D4037; color: white; border: none; font-size: 22px; cursor: pointer; align-self: flex-end; box-shadow: 0 4px 10px rgba(0,0,0,0.2); }
-        .pencil-btn.active { background: #2e7d32; }
-        .action-row { display: flex; gap: 10px; }
-        .btn-action { flex: 1; padding: 12px; border-radius: 25px; border: none; font-weight: bold; cursor: pointer; color: white; display: none; }
-        
-        .toast { position: fixed; bottom: -100px; left: 50%; transform: translateX(-50%); background: #333; color: #fff; padding: 10px 20px; border-radius: 20px; z-index: 3000; transition: 0.3s; }
-        .toast.show { bottom: 100px; }
-        
-        .dark-mode { background-color: #121212; color: #e0e0e0; }
-        .dark-mode .toolbar { background: #1a1a1a; border-color: #333; }
-        .dark-mode .btn { background: #1e1e1e; border-color: #333; color: #e0e0e0; }
-        .dark-mode .straight-line { background: #333; }
-        .dark-mode .bold-feeling p.highlighted { background-color: #fbc02d !important; }
+        body { font-family: sans-serif; padding: 20px; line-height: 1.6; background: #fcfbf7; }
+        .container { max-width: 600px; margin: auto; }
+        .photo-frame { width: 150px; height: 150px; border-radius: 50%; display: block; margin: 20px auto; border: 3px solid #5D4037; }
+        .p-item { padding: 10px; border-radius: 8px; cursor: pointer; transition: 0.3s; }
+        .highlight { background-color: #fff176 !important; }
+        .fixed-menu { position: fixed; bottom: 20px; right: 20px; display: none; gap: 10px; }
+        button { padding: 10px 20px; border-radius: 20px; border: none; cursor: pointer; background: #5D4037; color: white; }
     </style>
 </head>
 <body>
 
-    <div class="toolbar">
-        <a href="index.html" class="btn">← पछाडि</a>
-        <button class="btn" onclick="toggleNightMode()" id="nightBtn">🌙 नाइट मोड</button>
+<div class="container">
+    <img src="dolly.png" alt="डल्ली" class="photo-frame">
+    <div id="content">
+        <p class="p-item">हेलो, मलाई थाहा छैन म कहाँबाट सुरु गरम...</p>
+        <p class="p-item">जब म तिम्रो अनुहारलाई नियालेर हेर्छु, म अवाक बन्छु...</p>
+        <p class="p-item">तिमी हाँस्दा यस्तो महसुस हुन्छ, मानौँ यो सारा ब्रह्माण्ड...</p>
     </div>
+</div>
 
-    <div class="bayan-container">
-        <span class="main-title">बयान</span>
-        <hr class="straight-line">
-        
-        <div class="bold-feeling" id="content">
-            <p>Hello, मलाई थाहा छैन म कहाँबाट सुरु गरम... अब यसमा तिम्रो बयान भनेपछि राम्रोसँग बयान गर्नुपर्यो। म सोच्छु कहाँबाट सुरु गरौँ, तिम्रा ती आँखाबाट कि तिम्रो निश्चल मनबाट? तर वास्तवमै भन्नुपर्दा त तिम्रो बयान सम्भव नै छैन, किनभने नेपाली, इङ्लिस, चाइनिज या संसारको कुनै पनि भाषाको व्याकरण र साहित्यमा तिम्रो रूप, तिम्रो स्वभाव र तिम्रो सादगीको बयान गर्न सक्ने शब्दहरू अहिलेसम्म बनेकै छैनन्।</p>
-            <p>मलाई थाहा छैन तिमी मलाई त्यति धेरै राम्री किन लाग्छ्यौ, मेरो यो मन र यी आँखाले तिमीबाहेक अरू कसैको अस्तित्वलाई स्विकार्नै चाहँदैनन्। म कति सत्य बोल्दैछु भन्ने कुरा महसुस गर्न Please, एकपटक ऐनाको अगाडि उभिएर हेरन।</p>
-            <p>जब म तिम्रो अनुहारलाई नियालेर हेर्छु, म अवाक बन्छु। विधाताले तिम्रो अनुहारको हरेक चिजलाई कति फुर्सदमा सजाएको होला! तिम्रो त्यो कञ्चन र सफा निधार, जुन हेरिरहूँ जस्तो लाग्छ।</p>
-            <p>जब लामो समयसम्म झरी परेर रोकिन्छ, आकाश गर्जने र वर्षने क्रम सकिएर निलो र कञ्चन आकाश खुल्छ, त्यसको बयान गर्ने शब्द सायदै कसैको डायरी वा कवितामा बनेको होला। तर म संसारको अगाडि दाबीका साथ भन्न सक्छु, त्यो कञ्चन हिमाल र खुल्ला आकाश भन्दा पनि माथि यदि कुनै पावन सुन्दरता यो धर्तीमा लुकेको छ भने, त्यो मात्र तिम्रो मुस्कान र तिम्रो हाउभाउमा लुकेको छ।</p>
-        </div>
-    </div>
-
-    <div class="bottom-action-container" id="actionContainer">
-        <button class="pencil-btn" id="pencilBtn" onclick="toggleHighlightMode()">✏️</button>
-        <div class="action-row">
-            <button class="btn-action" id="clearBtn" style="background:#c62828;" onclick="clearBookmark()">🗑️ Clear</button>
-            <button class="btn-action" id="jumpBtn" style="background:#d84315;" onclick="jumpToBookmark()">📍 Continue</button>
-        </div>
-    </div>
-
-    <div id="toastBox" class="toast"></div>
+<div class="fixed-menu" id="menu">
+    <button onclick="clearAll()">🗑️ क्लियर</button>
+    <button onclick="save()">💾 सेभ</button>
+</div>
 
 <script>
-    function toggleNightMode() {
-        document.body.classList.toggle('dark-mode');
-        document.getElementById('nightBtn').innerText = document.body.classList.contains('dark-mode') ? "☀️ डे मोड" : "🌙 नाइट मोड";
-    }
-
-    // ID असाइन गर्ने
-    document.querySelectorAll('.bold-feeling p').forEach((p, i) => {
-        p.setAttribute('data-id', 'p_' + i);
-        let timer;
-        p.onmousedown = p.ontouchstart = () => { if(isHighlightMode) timer = setTimeout(() => saveBookmark(p), 1000); };
-        p.onmouseup = p.ontouchend = () => clearTimeout(timer);
+    let selected = null;
+    document.querySelectorAll('.p-item').forEach(p => {
+        p.oncontextmenu = (e) => e.preventDefault(); // राइट क्लिक रोक्न
+        p.addEventListener('mousedown', () => {
+            selected = p;
+            document.querySelectorAll('.p-item').forEach(el => el.classList.remove('highlight'));
+            p.classList.add('highlight');
+            document.getElementById('menu').style.display = 'flex';
+        });
     });
 
-    let isHighlightMode = false;
-    function toggleHighlightMode() {
-        isHighlightMode = !isHighlightMode;
-        document.getElementById('pencilBtn').classList.toggle('active');
-        document.getElementById('actionContainer').classList.add('show');
-    }
-
-    function saveBookmark(el) {
-        localStorage.setItem('diary_id', el.getAttribute('data-id'));
-        document.querySelectorAll('.bold-feeling p').forEach(p => p.classList.remove('highlighted'));
-        el.classList.add('highlighted');
-        showToast("बुकमार्क सुरक्षित भयो!");
-    }
-
-    function loadBookmark() {
-        const id = localStorage.getItem('diary_id');
-        if (id) {
-            const el = document.querySelector(`[data-id="${id}"]`);
-            if (el) {
-                el.classList.add('highlighted');
-                document.getElementById('jumpBtn').style.display = 'block';
-                document.getElementById('clearBtn').style.display = 'block';
-            }
+    function save() {
+        if(selected) {
+            localStorage.setItem('saved_id', selected.innerText.substring(0, 20));
+            alert("सेभ भयो!");
         }
     }
-
-    function jumpToBookmark() {
-        const id = localStorage.getItem('diary_id');
-        document.querySelector(`[data-id="${id}"]`).scrollIntoView({behavior: 'smooth', block: 'center'});
+    
+    function clearAll() {
+        localStorage.clear();
+        document.querySelectorAll('.p-item').forEach(el => el.classList.remove('highlight'));
+        document.getElementById('menu').style.display = 'none';
     }
-
-    function clearBookmark() {
-        localStorage.removeItem('diary_id');
-        location.reload();
-    }
-
-    function showToast(msg) {
-        const t = document.getElementById('toastBox');
-        t.innerText = msg; t.classList.add('show');
-        setTimeout(() => t.classList.remove('show'), 2000);
-    }
-
-    window.onload = loadBookmark;
 </script>
 </body>
 </html>
