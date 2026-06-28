@@ -3,54 +3,51 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Feb Album</title>
+    <title>My Fev Album</title>
     <link rel="stylesheet" href="style.css">
 </head>
-    
-<<h2 class="sub-title" style="text-align: center; font-size: 28px;">My Fev Album</h2>
-<div class="straight-line album-line"></div>
+<body>
 
+    <h2 class="sub-title" style="text-align: center; font-size: 28px; margin-top: 20px;">My Fev Album</h2>
+    <div class="straight-line album-line"></div>
 
-
-        <div class="album-scroll-container">
-            <div class="album-photo"><img src="1.png" alt="Photo 1"></div>
-            <div class="album-photo"><img src="2.png" alt="Photo 2"></div>
-            <div class="album-photo"><img src="3.jpg" alt="Photo 3"></div>
-            <div class="album-photo"><img src="4.jpg" alt="Photo 4"></div>
-            <div class="album-photo"><img src="5.png" alt="Photo 5"></div>
-            <div class="album-photo"><img src="6.jpg" alt="Photo 6"></div>
-            <div class="album-photo"><img src="7.jpg" alt="Photo 7"></div>
-            <div class="album-photo"><img src="8.jpg" alt="Photo 8"></div>
-            <div class="album-photo"><img src="9.jpg" alt="Photo 9"></div>
-            <div class="album-photo"><img src="10.jpg" alt="Photo 10"></div>
-            <div class="album-photo"><img src="11.jpg" alt="Photo 11"></div>
-            <div class="album-photo"><img src="12.jpg" alt="Photo 12"></div>
-            <div class="album-photo"><img src="13.jpg" alt="Photo 13"></div>
-            <div class="album-photo"><img src="14.jpg" alt="Photo 14"></div>
-            <div class="album-photo"><img src="15.jpg" alt="Photo 15"></div>
-            <div class="album-photo"><img src="16.jpg" alt="Photo 16"></div>
-            <div class="album-photo"><img src="17.jpg" alt="Photo 17"></div>
-            <div class="album-photo"><img src="18.jpg" alt="Photo 18"></div>
-            <div class="album-photo"><img src="19.jpg" alt="Photo 19"></div>
-            <div class="album-photo"><img src="20.jpg" alt="Photo 20"></div>
-            <div class="album-photo"><img src="21.jpg" alt="Photo 21"></div>
-        </div>
-
-        <div id="photo-counter">1 / 21</div>
+    <div class="album-scroll-container">
+        <div class="album-photo"><img src="1.png" alt="Photo 1"></div>
+        <div class="album-photo"><img src="2.png" alt="Photo 2"></div>
+        <div class="album-photo"><img src="3.jpg" alt="Photo 3"></div>
+        <div class="album-photo"><img src="4.jpg" alt="Photo 4"></div>
+        <div class="album-photo"><img src="5.png" alt="Photo 5"></div>
+        <div class="album-photo"><img src="6.jpg" alt="Photo 6"></div>
+        <div class="album-photo"><img src="7.jpg" alt="Photo 7"></div>
+        <div class="album-photo"><img src="8.jpg" alt="Photo 8"></div>
+        <div class="album-photo"><img src="9.jpg" alt="Photo 9"></div>
+        <div class="album-photo"><img src="10.jpg" alt="Photo 10"></div>
+        <div class="album-photo"><img src="11.jpg" alt="Photo 11"></div>
+        <div class="album-photo"><img src="12.jpg" alt="Photo 12"></div>
+        <div class="album-photo"><img src="13.jpg" alt="Photo 13"></div>
+        <div class="album-photo"><img src="14.jpg" alt="Photo 14"></div>
+        <div class="album-photo"><img src="15.jpg" alt="Photo 15"></div>
+        <div class="album-photo"><img src="16.jpg" alt="Photo 16"></div>
+        <div class="album-photo"><img src="17.jpg" alt="Photo 17"></div>
+        <div class="album-photo"><img src="18.jpg" alt="Photo 18"></div>
+        <div class="album-photo"><img src="19.jpg" alt="Photo 19"></div>
+        <div class="album-photo"><img src="20.jpg" alt="Photo 20"></div>
+        <div class="album-photo"><img src="21.jpg" alt="Photo 21"></div>
     </div>
+
+    <div id="photo-counter">1 / 21</div>
 
     <script>
         const container = document.querySelector('.album-scroll-container');
         const counter = document.getElementById('photo-counter');
 
         container.addEventListener('scroll', () => {
-            // प्रत्येक फोटोको चौडाइको आधारमा हिसाब गर्ने
-            const photoWidth = container.offsetWidth * 0.8 + 15; 
-            const photoIndex = Math.round(container.scrollLeft / photoWidth) + 1;
+            // स्क्रोल पोजिसनको आधारमा इन्डेक्स निकाल्ने
+            const scrollLeft = container.scrollLeft;
+            const itemWidth = container.querySelector('.album-photo').offsetWidth + 20; // 20 gap हो
+            const index = Math.round(scrollLeft / itemWidth);
             
-            if(photoIndex >= 1 && photoIndex <= 21) {
-                counter.innerText = `${photoIndex} / 21`;
-            }
+            counter.innerText = `${index + 1} / 21`;
         });
     </script>
 </body>
