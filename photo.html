@@ -3,65 +3,52 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>मेरो एल्बम</title>
-    <style>
-        body { background-color: #000; color: #fff; font-family: sans-serif; margin: 0; padding: 20px; }
-        .title-container { text-align: center; margin-bottom: 30px; }
-        .main-title { font-size: 24px; font-weight: bold; border-bottom: 2px solid #555; padding-bottom: 10px; }
-        
-        .album-scroll-container { 
-            display: flex; overflow-x: auto; scroll-snap-type: x mandatory; 
-            gap: 15px; padding: 10px 0; scrollbar-width: none; 
-        }
-        .album-scroll-container::-webkit-scrollbar { display: none; }
-        
-        .album-photo { flex: 0 0 80%; scroll-snap-align: center; }
-        .album-photo img { width: 100%; aspect-ratio: 4/5; object-fit: cover; border-radius: 15px; border: 1px solid #333; }
-        
-        #photo-counter { text-align: center; font-size: 16px; margin-top: 20px; color: #aaa; }
-    </style>
+    <title>My Feb Album</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <div class="title-container">
-        <h2 class="main-title">My Feb Album</h2>
-    </div>
+    <div class="album-container">
+        <h2 class="sub-title">My Feb Album</h2>
+        
+        <div class="album-scroll-container">
+            <div class="album-photo"><img src="1.png" alt="Photo 1"></div>
+            <div class="album-photo"><img src="2.jpg" alt="Photo 2"></div>
+            <div class="album-photo"><img src="3.jpg" alt="Photo 3"></div>
+            <div class="album-photo"><img src="4.jpg" alt="Photo 4"></div>
+            <div class="album-photo"><img src="5.png" alt="Photo 5"></div>
+            <div class="album-photo"><img src="6.jpg" alt="Photo 6"></div>
+            <div class="album-photo"><img src="7.jpg" alt="Photo 7"></div>
+            <div class="album-photo"><img src="8.jpg" alt="Photo 8"></div>
+            <div class="album-photo"><img src="9.jpg" alt="Photo 9"></div>
+            <div class="album-photo"><img src="10.jpg" alt="Photo 10"></div>
+            <div class="album-photo"><img src="11.jpg" alt="Photo 11"></div>
+            <div class="album-photo"><img src="12.jpg" alt="Photo 12"></div>
+            <div class="album-photo"><img src="13.jpg" alt="Photo 13"></div>
+            <div class="album-photo"><img src="14.jpg" alt="Photo 14"></div>
+            <div class="album-photo"><img src="15.jpg" alt="Photo 15"></div>
+            <div class="album-photo"><img src="16.jpg" alt="Photo 16"></div>
+            <div class="album-photo"><img src="17.jpg" alt="Photo 17"></div>
+            <div class="album-photo"><img src="18.jpg" alt="Photo 18"></div>
+            <div class="album-photo"><img src="19.jpg" alt="Photo 19"></div>
+            <div class="album-photo"><img src="20.jpg" alt="Photo 20"></div>
+            <div class="album-photo"><img src="21.jpg" alt="Photo 21"></div>
+        </div>
 
-    <div class="album-scroll-container">
-        <div class="album-photo"><img src="1.png" alt="फोटो 1"></div>
-        <div class="album-photo"><img src="2.jpg" alt="फोटो 2"></div>
-        <div class="album-photo"><img src="3.jpg" alt="फोटो 3"></div>
-        <div class="album-photo"><img src="4.jpg" alt="फोटो 4"></div>
-        <div class="album-photo"><img src="5.png" alt="फोटो 5"></div>
-        <div class="album-photo"><img src="6.jpg" alt="फोटो 6"></div>
-        <div class="album-photo"><img src="7.jpg" alt="फोटो 7"></div>
-        <div class="album-photo"><img src="8.jpg" alt="फोटो 8"></div>
-        <div class="album-photo"><img src="9.jpg" alt="फोटो 9"></div>
-        <div class="album-photo"><img src="10.jpg" alt="फोटो 10"></div>
-        <div class="album-photo"><img src="11.jpg" alt="फोटो 11"></div>
-        <div class="album-photo"><img src="12.jpg" alt="फोटो 12"></div>
-        <div class="album-photo"><img src="13.jpg" alt="फोटो 13"></div>
-        <div class="album-photo"><img src="14.jpg" alt="फोटो 14"></div>
-        <div class="album-photo"><img src="15.jpg" alt="फोटो 15"></div>
-        <div class="album-photo"><img src="16.jpg" alt="फोटो 16"></div>
-        <div class="album-photo"><img src="17.jpg" alt="फोटो 17"></div>
-        <div class="album-photo"><img src="18.jpg" alt="फोटो 18"></div>
-        <div class="album-photo"><img src="19.jpg" alt="फोटो 19"></div>
-        <div class="album-photo"><img src="20.jpg" alt="फोटो 20"></div>
-        <div class="album-photo"><img src="21.jpg" alt="फोटो 21"></div>
+        <div id="photo-counter">१ / २१</div>
     </div>
-
-    <div id="photo-counter">१ / २१</div>
 
     <script>
         const container = document.querySelector('.album-scroll-container');
         const counter = document.getElementById('photo-counter');
 
         container.addEventListener('scroll', () => {
+            // प्रत्येक फोटोको चौडाइको आधारमा हिसाब गर्ने
             const photoWidth = container.offsetWidth * 0.8 + 15; 
             const photoIndex = Math.round(container.scrollLeft / photoWidth) + 1;
+            
             if(photoIndex >= 1 && photoIndex <= 21) {
-                counter.innerText = `${photoIndex} / 21`;
+                counter.innerText = `${photoIndex} / २१`;
             }
         });
     </script>
