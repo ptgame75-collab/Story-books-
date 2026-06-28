@@ -201,3 +201,8 @@ video {
     color: var(--text);
     font-family: 'Georgia', serif;
 }
+/* एल्बमको लागि मात्र विशेष छोटो लाइन */
+.album-line {
+    width: 60px;
+    margin: 0 auto 30px auto;
+}
