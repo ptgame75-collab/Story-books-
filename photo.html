@@ -5,46 +5,59 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>मेरो फोटो एल्बम</title>
     <style>
-        .gallery {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-            gap: 10px;
-            padding: 10px;
+        body {
+            background-color: #f4f4f4;
+            font-family: sans-serif;
+            margin: 0;
+            padding: 20px;
         }
-        .gallery img {
+        h2 { text-align: center; color: #333; }
+        
+        /* स्क्रोलिङ कन्टेनर */
+        .gallery-container {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            align-items: center;
+        }
+        
+        /* ४:५ रेसियो मिलाउने स्टाइल */
+        .photo-item {
             width: 100%;
-            height: auto;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            max-width: 400px; /* फोटोको साइज नियन्त्रण */
+            aspect-ratio: 4 / 5;
+            object-fit: cover;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
         }
     </style>
 </head>
 <body>
 
-    <h2 style="text-align: center;">मेरो फोटोहरू</h2>
+    <h2>मेरो फोटो एल्बम</h2>
 
-    <div class="gallery">
-        <img src="1.jpg" alt="Photo 1">
-        <img src="2.jpg" alt="Photo 2">
-        <img src="3.jpg" alt="Photo 3">
-        <img src="4.jpg" alt="Photo 4">
-        <img src="5.jpg" alt="Photo 5">
-        <img src="6.jpg" alt="Photo 6">
-        <img src="7.jpg" alt="Photo 7">
-        <img src="8.jpg" alt="Photo 8">
-        <img src="9.jpg" alt="Photo 9">
-        <img src="10.jpg" alt="Photo 10">
-        <img src="11.jpg" alt="Photo 11">
-        <img src="12.jpg" alt="Photo 12">
-        <img src="13.jpg" alt="Photo 13">
-        <img src="14.jpg" alt="Photo 14">
-        <img src="15.jpg" alt="Photo 15">
-        <img src="16.jpg" alt="Photo 16">
-        <img src="17.jpg" alt="Photo 17">
-        <img src="18.jpg" alt="Photo 18">
-        <img src="19.jpg" alt="Photo 19">
-        <img src="20.jpg" alt="Photo 20">
-        <img src="21.png" alt="Photo 21">
+    <div class="gallery-container">
+        <img src="1.jpg" class="photo-item" alt="Photo 1">
+        <img src="2.jpg" class="photo-item" alt="Photo 2">
+        <img src="3.jpg" class="photo-item" alt="Photo 3">
+        <img src="4.jpg" class="photo-item" alt="Photo 4">
+        <img src="5.jpg" class="photo-item" alt="Photo 5">
+        <img src="6.jpg" class="photo-item" alt="Photo 6">
+        <img src="7.jpg" class="photo-item" alt="Photo 7">
+        <img src="8.jpg" class="photo-item" alt="Photo 8">
+        <img src="9.jpg" class="photo-item" alt="Photo 9">
+        <img src="10.jpg" class="photo-item" alt="Photo 10">
+        <img src="11.jpg" class="photo-item" alt="Photo 11">
+        <img src="12.jpg" class="photo-item" alt="Photo 12">
+        <img src="13.jpg" class="photo-item" alt="Photo 13">
+        <img src="14.jpg" class="photo-item" alt="Photo 14">
+        <img src="15.jpg" class="photo-item" alt="Photo 15">
+        <img src="16.jpg" class="photo-item" alt="Photo 16">
+        <img src="17.jpg" class="photo-item" alt="Photo 17">
+        <img src="18.jpg" class="photo-item" alt="Photo 18">
+        <img src="19.jpg" class="photo-item" alt="Photo 19">
+        <img src="20.jpg" class="photo-item" alt="Photo 20">
+        <img src="21.jpg" class="photo-item" alt="Photo 21">
     </div>
 
 </body>
