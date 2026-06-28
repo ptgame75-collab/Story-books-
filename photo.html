@@ -5,59 +5,64 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>मेरो फोटो एल्बम</title>
     <style>
-        body {
-            background-color: #f4f4f4;
-            font-family: sans-serif;
-            margin: 0;
-            padding: 20px;
-        }
-        h2 { text-align: center; color: #333; }
+        body { background-color: #000; color: #fff; margin: 0; padding: 20px; font-family: sans-serif; }
+        h2 { text-align: center; }
         
-        /* स्क्रोलिङ कन्टेनर */
-        .gallery-container {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-            align-items: center;
+        /* तेर्सो स्क्रोलिङ कन्टेनर */
+        .scroll-container { 
+            display: flex; 
+            overflow-x: auto; 
+            gap: 20px; 
+            padding: 20px 0; 
+            scroll-snap-type: x mandatory; 
+            scrollbar-width: none; /* स्क्रोलबार लुकाउने */
         }
         
-        /* ४:५ रेसियो मिलाउने स्टाइल */
-        .photo-item {
-            width: 100%;
-            max-width: 400px; /* फोटोको साइज नियन्त्रण */
-            aspect-ratio: 4 / 5;
-            object-fit: cover;
-            border-radius: 12px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        .scroll-container::-webkit-scrollbar { display: none; }
+        
+        .photo-wrapper { 
+            flex: 0 0 80%; 
+            max-width: 400px;
+            scroll-snap-align: center;
         }
+        
+        .photo-item { 
+            width: 100%; 
+            aspect-ratio: 4 / 5; 
+            object-fit: cover; 
+            border-radius: 15px; 
+            border: 2px solid #333;
+        }
+        
+        .photo-label { margin-top: 10px; text-align: center; font-size: 16px; color: #aaa; }
     </style>
 </head>
 <body>
 
-    <h2>मेरो फोटो एल्बम</h2>
+    <h2>मेरो विशेष सम्झनाहरू</h2>
 
-    <div class="gallery-container">
-        <img src="1.jpg" class="photo-item" alt="Photo 1">
-        <img src="2.jpg" class="photo-item" alt="Photo 2">
-        <img src="3.jpg" class="photo-item" alt="Photo 3">
-        <img src="4.jpg" class="photo-item" alt="Photo 4">
-        <img src="5.jpg" class="photo-item" alt="Photo 5">
-        <img src="6.jpg" class="photo-item" alt="Photo 6">
-        <img src="7.jpg" class="photo-item" alt="Photo 7">
-        <img src="8.jpg" class="photo-item" alt="Photo 8">
-        <img src="9.jpg" class="photo-item" alt="Photo 9">
-        <img src="10.jpg" class="photo-item" alt="Photo 10">
-        <img src="11.jpg" class="photo-item" alt="Photo 11">
-        <img src="12.jpg" class="photo-item" alt="Photo 12">
-        <img src="13.jpg" class="photo-item" alt="Photo 13">
-        <img src="14.jpg" class="photo-item" alt="Photo 14">
-        <img src="15.jpg" class="photo-item" alt="Photo 15">
-        <img src="16.jpg" class="photo-item" alt="Photo 16">
-        <img src="17.jpg" class="photo-item" alt="Photo 17">
-        <img src="18.jpg" class="photo-item" alt="Photo 18">
-        <img src="19.jpg" class="photo-item" alt="Photo 19">
-        <img src="20.jpg" class="photo-item" alt="Photo 20">
-        <img src="21.jpg" class="photo-item" alt="Photo 21">
+    <div class="scroll-container">
+        <div class="photo-wrapper"><img src="1.png" class="photo-item"><div class="photo-label">Photo 1 of 21</div></div>
+        <div class="photo-wrapper"><img src="2.jpg" class="photo-item"><div class="photo-label">Photo 2 of 21</div></div>
+        <div class="photo-wrapper"><img src="3.jpg" class="photo-item"><div class="photo-label">Photo 3 of 21</div></div>
+        <div class="photo-wrapper"><img src="4.jpg" class="photo-item"><div class="photo-label">Photo 4 of 21</div></div>
+        <div class="photo-wrapper"><img src="5.png" class="photo-item"><div class="photo-label">Photo 5 of 21</div></div>
+        <div class="photo-wrapper"><img src="6.jpg" class="photo-item"><div class="photo-label">Photo 6 of 21</div></div>
+        <div class="photo-wrapper"><img src="7.jpg" class="photo-item"><div class="photo-label">Photo 7 of 21</div></div>
+        <div class="photo-wrapper"><img src="8.jpg" class="photo-item"><div class="photo-label">Photo 8 of 21</div></div>
+        <div class="photo-wrapper"><img src="9.jpg" class="photo-item"><div class="photo-label">Photo 9 of 21</div></div>
+        <div class="photo-wrapper"><img src="10.jpg" class="photo-item"><div class="photo-label">Photo 10 of 21</div></div>
+        <div class="photo-wrapper"><img src="11.jpg" class="photo-item"><div class="photo-label">Photo 11 of 21</div></div>
+        <div class="photo-wrapper"><img src="12.jpg" class="photo-item"><div class="photo-label">Photo 12 of 21</div></div>
+        <div class="photo-wrapper"><img src="13.jpg" class="photo-item"><div class="photo-label">Photo 13 of 21</div></div>
+        <div class="photo-wrapper"><img src="14.jpg" class="photo-item"><div class="photo-label">Photo 14 of 21</div></div>
+        <div class="photo-wrapper"><img src="15.jpg" class="photo-item"><div class="photo-label">Photo 15 of 21</div></div>
+        <div class="photo-wrapper"><img src="16.jpg" class="photo-item"><div class="photo-label">Photo 16 of 21</div></div>
+        <div class="photo-wrapper"><img src="17.jpg" class="photo-item"><div class="photo-label">Photo 17 of 21</div></div>
+        <div class="photo-wrapper"><img src="18.jpg" class="photo-item"><div class="photo-label">Photo 18 of 21</div></div>
+        <div class="photo-wrapper"><img src="19.jpg" class="photo-item"><div class="photo-label">Photo 19 of 21</div></div>
+        <div class="photo-wrapper"><img src="20.jpg" class="photo-item"><div class="photo-label">Photo 20 of 21</div></div>
+        <div class="photo-wrapper"><img src="21.jpg" class="photo-item"><div class="photo-label">Photo 21 of 21</div></div>
     </div>
 
 </body>
