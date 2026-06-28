@@ -4,59 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>अधिराजको खत</title>
-
     <link rel="manifest" href="manifest.json">
-    <script>
-        if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register('sw.js');
-        }
-    </script>
-
-    <style>
-        body, html {
-            margin: 0; padding: 0; width: 100%; height: 100%;
-            background: #000; overflow: hidden;
-            font-family: 'Georgia', serif;
-        }
-
-        /* ब्याकग्राउन्ड फोटो सेटअप */
-        #bgPhoto {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: url('a.0063.jpg') no-repeat center center;
-            background-size: cover;
-            filter: brightness(0.4) blur(2px);
-            opacity: 0;
-            animation: fadeInBg 2s forwards;
-        }
-
-        @keyframes fadeInBg {
-            to { opacity: 1; }
-        }
-
-        #introContainer {
-            position: relative; height: 100%;
-            display: flex; flex-direction: column;
-            justify-content: center; align-items: center;
-            z-index: 10; padding: 20px; text-align: center;
-        }
-
-        .typing-text {
-            color: #fff; font-size: 24px; font-weight: bold;
-            letter-spacing: 2px; min-height: 1.5em;
-            text-shadow: 0 4px 10px rgba(0,0,0,0.5);
-        }
-
-        .progress-bar {
-            width: 70%; max-width: 250px; height: 3px;
-            background: rgba(255,255,255,0.2);
-            border-radius: 10px; margin-top: 30px; overflow: hidden;
-        }
-
-        .progress-fill {
-            width: 0%; height: 100%; background: #d32f2f;
-            transition: 3.5s linear;
-        }
-    </style>
 </head>
 <body oncontextmenu="return false;">
 
@@ -69,7 +17,31 @@
         </div>
     </div>
 
+    <style>
+        body, html { margin: 0; padding: 0; width: 100%; height: 100%; background: #000; overflow: hidden; font-family: 'Georgia', serif; }
+        #bgPhoto { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: url('a.0063.jpg') no-repeat center center; background-size: cover; filter: brightness(0.4) blur(2px); opacity: 0; animation: fadeInBg 2s forwards; }
+        @keyframes fadeInBg { to { opacity: 1; } }
+        #introContainer { position: relative; height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; z-index: 10; padding: 20px; text-align: center; }
+        .typing-text { color: #fff; font-size: 24px; font-weight: bold; letter-spacing: 2px; min-height: 1.5em; text-shadow: 0 4px 10px rgba(0,0,0,0.5); }
+        .progress-bar { width: 70%; max-width: 250px; height: 3px; background: rgba(255,255,255,0.2); border-radius: 10px; margin-top: 30px; overflow: hidden; }
+        .progress-fill { width: 0%; height: 100%; background: #d32f2f; transition: 3.5s linear; }
+    </style>
+
     <script>
+        // १. पुरानो सर्भिस वर्कर हटाउने (यदि समस्या छ भने)
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.getRegistrations().then(regs => {
+                for (let reg of regs) { reg.unregister(); }
+            });
+            // २. नयाँ दर्ता गर्ने
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('sw.js')
+                .then(() => console.log('SW Registered'))
+                .catch(err => console.log('SW Failed', err));
+            });
+        }
+
+        // टाइपराइटर लजिक
         const text = "अधुरा शब्दहरूको दस्ताबेज";
         const typewriterElement = document.getElementById('typewriter');
         const fill = document.getElementById('pFill');
@@ -83,39 +55,26 @@
             }
         }
 
-            // ८६ नम्बर लाइनबाट यो सुरु गर्नुहोस्
-    window.onload = () => {
-        // यदि यो सेसनमा एप लोड भइसकेको छ भने सिधै होममा पठाउने
-        if (sessionStorage.getItem('appLoaded')) {
-            window.location.replace("home.html");
-            return; // तलको बाँकी कोड चल्न दिँदैन
-        }
-
-        // पहिलो पटक आउँदा मात्र यो चल्छ
-        sessionStorage.setItem('appLoaded', 'true');
-
-        setTimeout(() => {
-            typeWriter();
-            fill.style.width = '100%';
-        }, 500);
-
-        setTimeout(() => {
-            document.body.style.transition = '1s';
-            document.body.style.opacity = '0';
-            setTimeout(() => {
-                // replace प्रयोग गर्दा ब्याक गर्दा फेरि यहाँ फर्किँदैन
+        window.onload = () => {
+            if (sessionStorage.getItem('appLoaded')) {
                 window.location.replace("home.html");
-            }, 1000);
-        }, 4500);
-    };
-        <script>
-    if ('serviceWorker' in navigator) {
-        window.addEventListener('load', () => {
-            navigator.serviceWorker.register('/sw.js')
-                .then(() => console.log('Service Worker Registered!'))
-                .catch((err) => console.log('Service Worker Failed:', err));
-        });
-    }
-</script>
+                return;
+            }
+            sessionStorage.setItem('appLoaded', 'true');
+
+            setTimeout(() => {
+                typeWriter();
+                fill.style.width = '100%';
+            }, 500);
+
+            setTimeout(() => {
+                document.body.style.transition = '1s';
+                document.body.style.opacity = '0';
+                setTimeout(() => {
+                    window.location.replace("home.html");
+                }, 1000);
+            }, 4500);
+        };
+    </script>
 </body>
 </html>
