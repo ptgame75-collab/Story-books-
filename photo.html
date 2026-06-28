@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ne">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>मेरो एल्बम</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="title-container">
+        <span class="main-title">फोटो एल्बम</span>
+    </div>
+
+    <div class="album-scroll-container">
+        <script>
+            // लुपले १ देखि २१ सम्मका फोटोहरू photos फोल्डरबाट तान्छ
+            for (let i = 1; i <= 21; i++) {
+                document.write(`
+                    <div class="album-photo">
+                        <img src="photos/${i}.jpg" alt="फोटो ${i}">
+                    </div>
+                `);
+            }
+        </script>
+    </div>
+
+    <div id="photo-counter" style="text-align: center; font-size: 16px; margin-top: 15px; font-weight: bold; color: var(--text);">
+        १ / २१
+    </div>
+
+    <script>
+        // स्क्रोल हुँदा नम्बर अपडेट गर्ने स्क्रिप्ट
+        const container = document.querySelector('.album-scroll-container');
+        const counter = document.getElementById('photo-counter');
+
+        container.addEventListener('scroll', () => {
+            const scrollPosition = container.scrollLeft;
+            // ८०% चौडाइ र १५px ग्याप (CSS अनुसार)
+            const photoWidth = container.offsetWidth * 0.8 + 15; 
+            const photoIndex = Math.round(scrollPosition / photoWidth) + 1;
+            
+            if(photoIndex <= 21) {
+                counter.innerText = `${photoIndex} / 21`;
+            }
+        });
+    </script>
+
+</body>
+</html>
