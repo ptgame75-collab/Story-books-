@@ -200,9 +200,18 @@ video {
     margin-top: 15px;
     color: var(--text);
     font-family: 'Georgia', serif;
+}/* एल्बम शीर्षकको मुनिको छोटो धर्का */
+.sub-title {
+    text-align: center;
+    font-size: 28px;
+    margin-bottom: 5px;
 }
-/* एल्बमको लागि मात्र विशेष लामो लाइन */
+
 .album-line {
-    width: 120px;
-    margin: 0 auto 30px auto;
+    width: 60px; /* धर्काको लम्बाई */
+    height: 3px; /* धर्काको मोटाई */
+    background-color: var(--red); /* वा तपाईंको डायरीको प्राथमिकता अनुसारको रङ */
+    margin: 0 auto 30px auto; /* यसले धर्कालाई बीचमा राख्छ र तल स्पेस दिन्छ */
+    border-radius: 2px;
 }
+
