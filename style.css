@@ -203,6 +203,6 @@ video {
 }
 /* एल्बमको लागि मात्र विशेष लामो लाइन */
 .album-line {
-    width: 90px;
+    width: 120px;
     margin: 0 auto 30px auto;
 }
