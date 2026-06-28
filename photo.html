@@ -36,7 +36,7 @@
             <div class="album-photo"><img src="21.jpg" alt="Photo 21"></div>
         </div>
 
-        <div id="photo-counter">१ / 21</div>
+        <div id="photo-counter">१ / २१</div>
     </div>
 
     <script>
@@ -49,7 +49,7 @@
             const photoIndex = Math.round(container.scrollLeft / photoWidth) + 1;
             
             if(photoIndex >= 1 && photoIndex <= 21) {
-                counter.innerText = `${photoIndex} / २१`;
+                counter.innerText = `${photoIndex} / 21`;
             }
         });
     </script>
