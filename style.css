@@ -155,16 +155,18 @@ video {
     background-color: rgba(255, 235, 59, 0.6) !important; 
     color: #000 !important;
 }
-/* --- थपिएको एल्बम सेक्सन (साइड स्क्रोलिङ र ४:५ फ्रेम) --- */
+/* --- एल्बम सेक्सन (Side Scrolling & Snap) --- */
 
 .album-scroll-container {
     display: flex;
     overflow-x: auto;
-    gap: 15px;
-    padding: 20px 0;
     scroll-snap-type: x mandatory;
-    -webkit-overflow-scrolling: touch;
+    gap: 20px;
+    padding: 10px 0;
     scrollbar-width: none;
+    scroll-behavior: smooth;
+    max-width: 650px;
+    margin: 20px auto;
 }
 
 .album-scroll-container::-webkit-scrollbar {
@@ -174,28 +176,28 @@ video {
 .album-photo {
     flex: 0 0 80%;
     scroll-snap-align: center;
-    aspect-ratio: 4 / 5;
-    border-radius: 15px;
-    overflow: hidden;
-    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+    scroll-snap-stop: always;
+    background: var(--card-bg);
+    padding: 8px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.06);
     border: 1px solid var(--line);
     flex-shrink: 0;
 }
 
 .album-photo img {
     width: 100%;
-    height: 100%;
+    aspect-ratio: 4 / 5;
     object-fit: cover;
+    border-radius: 8px;
     display: block;
 }
-/* एल्बमको लागि मात्र आवश्यक छोटो कोड */
-.album-scroll-container { 
-    display: flex; overflow-x: auto; scroll-snap-type: x mandatory; 
-    gap: 15px; padding: 20px 0; scrollbar-width: none; scroll-behavior: smooth;
+
+#photo-counter {
+    text-align: center;
+    font-size: 17px;
+    font-weight: 900;
+    margin-top: 15px;
+    color: var(--text);
+    font-family: 'Georgia', serif;
 }
-.album-photo { 
-    flex: 0 0 80%; scroll-snap-align: center; scroll-snap-stop: always; 
-    aspect-ratio: 4/5; border-radius: 12px; overflow: hidden; border: 1px solid var(--line); 
-}
-.album-photo img { width: 100%; height: 100%; object-fit: cover; }
-#photo-counter { text-align: center; font-weight: 900; margin: 10px 0; color: var(--text); }
