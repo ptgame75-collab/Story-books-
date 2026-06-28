@@ -1,69 +1,50 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ne">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>मेरो फोटो एल्बम</title>
-    <style>
-        body { background-color: #000; color: #fff; margin: 0; padding: 20px; font-family: sans-serif; }
-        h2 { text-align: center; }
-        
-        /* तेर्सो स्क्रोलिङ कन्टेनर */
-        .scroll-container { 
-            display: flex; 
-            overflow-x: auto; 
-            gap: 20px; 
-            padding: 20px 0; 
-            scroll-snap-type: x mandatory; 
-            scrollbar-width: none; /* स्क्रोलबार लुकाउने */
-        }
-        
-        .scroll-container::-webkit-scrollbar { display: none; }
-        
-        .photo-wrapper { 
-            flex: 0 0 80%; 
-            max-width: 400px;
-            scroll-snap-align: center;
-        }
-        
-        .photo-item { 
-            width: 100%; 
-            aspect-ratio: 4 / 5; 
-            object-fit: cover; 
-            border-radius: 15px; 
-            border: 2px solid #333;
-        }
-        
-        .photo-label { margin-top: 10px; text-align: center; font-size: 16px; color: #aaa; }
-    </style>
+    <title>मेरो एल्बम</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <h2>मेरो विशेष सम्झनाहरू</h2>
-
-    <div class="scroll-container">
-        <div class="photo-wrapper"><img src="1.png" class="photo-item"><div class="photo-label">Photo 1 of 21</div></div>
-        <div class="photo-wrapper"><img src="2.jpg" class="photo-item"><div class="photo-label">Photo 2 of 21</div></div>
-        <div class="photo-wrapper"><img src="3.jpg" class="photo-item"><div class="photo-label">Photo 3 of 21</div></div>
-        <div class="photo-wrapper"><img src="4.jpg" class="photo-item"><div class="photo-label">Photo 4 of 21</div></div>
-        <div class="photo-wrapper"><img src="5.png" class="photo-item"><div class="photo-label">Photo 5 of 21</div></div>
-        <div class="photo-wrapper"><img src="6.jpg" class="photo-item"><div class="photo-label">Photo 6 of 21</div></div>
-        <div class="photo-wrapper"><img src="7.jpg" class="photo-item"><div class="photo-label">Photo 7 of 21</div></div>
-        <div class="photo-wrapper"><img src="8.jpg" class="photo-item"><div class="photo-label">Photo 8 of 21</div></div>
-        <div class="photo-wrapper"><img src="9.jpg" class="photo-item"><div class="photo-label">Photo 9 of 21</div></div>
-        <div class="photo-wrapper"><img src="10.jpg" class="photo-item"><div class="photo-label">Photo 10 of 21</div></div>
-        <div class="photo-wrapper"><img src="11.jpg" class="photo-item"><div class="photo-label">Photo 11 of 21</div></div>
-        <div class="photo-wrapper"><img src="12.jpg" class="photo-item"><div class="photo-label">Photo 12 of 21</div></div>
-        <div class="photo-wrapper"><img src="13.jpg" class="photo-item"><div class="photo-label">Photo 13 of 21</div></div>
-        <div class="photo-wrapper"><img src="14.jpg" class="photo-item"><div class="photo-label">Photo 14 of 21</div></div>
-        <div class="photo-wrapper"><img src="15.jpg" class="photo-item"><div class="photo-label">Photo 15 of 21</div></div>
-        <div class="photo-wrapper"><img src="16.jpg" class="photo-item"><div class="photo-label">Photo 16 of 21</div></div>
-        <div class="photo-wrapper"><img src="17.jpg" class="photo-item"><div class="photo-label">Photo 17 of 21</div></div>
-        <div class="photo-wrapper"><img src="18.jpg" class="photo-item"><div class="photo-label">Photo 18 of 21</div></div>
-        <div class="photo-wrapper"><img src="19.jpg" class="photo-item"><div class="photo-label">Photo 19 of 21</div></div>
-        <div class="photo-wrapper"><img src="20.jpg" class="photo-item"><div class="photo-label">Photo 20 of 21</div></div>
-        <div class="photo-wrapper"><img src="21.jpg" class="photo-item"><div class="photo-label">Photo 21 of 21</div></div>
+    <div class="title-container">
+        <span class="main-title">फोटो एल्बम</span>
     </div>
+
+    <div class="album-scroll-container">
+        <script>
+            // लुपले १ देखि २१ सम्मका फोटोहरू photos फोल्डरबाट तान्छ
+            for (let i = 1; i <= 21; i++) {
+                document.write(`
+                    <div class="album-photo">
+                        <img src="photos/${i}.jpg" alt="फोटो ${i}">
+                    </div>
+                `);
+            }
+        </script>
+    </div>
+
+    <div id="photo-counter" style="text-align: center; font-size: 16px; margin-top: 15px; font-weight: bold; color: var(--text);">
+        १ / २१
+    </div>
+
+    <script>
+        // स्क्रोल हुँदा नम्बर अपडेट गर्ने स्क्रिप्ट
+        const container = document.querySelector('.album-scroll-container');
+        const counter = document.getElementById('photo-counter');
+
+        container.addEventListener('scroll', () => {
+            const scrollPosition = container.scrollLeft;
+            // ८०% चौडाइ र १५px ग्याप (CSS अनुसार)
+            const photoWidth = container.offsetWidth * 0.8 + 15; 
+            const photoIndex = Math.round(scrollPosition / photoWidth) + 1;
+            
+            if(photoIndex <= 21) {
+                counter.innerText = `${photoIndex} / 21`;
+            }
+        });
+    </script>
 
 </body>
 </html>
