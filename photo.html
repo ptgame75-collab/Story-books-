@@ -2,19 +2,9 @@
 <html lang="ne">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Fev Album</title>
     <link rel="stylesheet" href="style.css">
-    <style>
-        /* यहाँ मैले तपाईंको पुरानो CSS को साइजलाई असर नगर्ने गरी क्याप्सन मिलाएको छु */
-        .album-photo { display: flex; flex-direction: column; align-items: center; }
-        .caption-text { 
-            margin-top: 5px; 
-            font-size: 14px; 
-            color: #333; 
-            text-align: center; 
-            width: 100%; 
-        }
-    </style>
 </head>
 <body>
 
@@ -22,11 +12,28 @@
     <div class="straight-line album-line"></div>
 
     <div class="album-scroll-container">
-        <div class="album-photo">
-            <img src="1.png" alt="Photo 1">
-            <p class="caption-text">किन:-</p>
-        </div>
-        </div>
+        <div class="album-photo"><img src="1.png" alt="Photo 1"></div>
+        <div class="album-photo"><img src="2.png" alt="Photo 2"></div>
+        <div class="album-photo"><img src="3.jpg" alt="Photo 3"></div>
+        <div class="album-photo"><img src="4.jpg" alt="Photo 4"></div>
+        <div class="album-photo"><img src="5.png" alt="Photo 5"></div>
+        <div class="album-photo"><img src="6.jpg" alt="Photo 6"></div>
+        <div class="album-photo"><img src="7.jpg" alt="Photo 7"></div>
+        <div class="album-photo"><img src="8.jpg" alt="Photo 8"></div>
+        <div class="album-photo"><img src="9.jpg" alt="Photo 9"></div>
+        <div class="album-photo"><img src="10.jpg" alt="Photo 10"></div>
+        <div class="album-photo"><img src="11.jpg" alt="Photo 11"></div>
+        <div class="album-photo"><img src="12.jpg" alt="Photo 12"></div>
+        <div class="album-photo"><img src="13.jpg" alt="Photo 13"></div>
+        <div class="album-photo"><img src="14.jpg" alt="Photo 14"></div>
+        <div class="album-photo"><img src="15.jpg" alt="Photo 15"></div>
+        <div class="album-photo"><img src="16.jpg" alt="Photo 16"></div>
+        <div class="album-photo"><img src="17.jpg" alt="Photo 17"></div>
+        <div class="album-photo"><img src="18.jpg" alt="Photo 18"></div>
+        <div class="album-photo"><img src="19.jpg" alt="Photo 19"></div>
+        <div class="album-photo"><img src="20.jpg" alt="Photo 20"></div>
+        <div class="album-photo"><img src="21.jpg" alt="Photo 21"></div>
+    </div>
 
     <div id="photo-counter">1 / 21</div>
 
@@ -35,10 +42,11 @@
         const counter = document.getElementById('photo-counter');
 
         container.addEventListener('scroll', () => {
+            // स्क्रोल पोजिसनको आधारमा इन्डेक्स निकाल्ने
             const scrollLeft = container.scrollLeft;
-            // तपाईंको पुरानो logic अनुसार itemWidth निकाल्ने
-            const itemWidth = container.querySelector('.album-photo').offsetWidth + 20;
+            const itemWidth = container.querySelector('.album-photo').offsetWidth + 20; // 20 gap हो
             const index = Math.round(scrollLeft / itemWidth);
+            
             counter.innerText = `${index + 1} / 21`;
         });
     </script>
