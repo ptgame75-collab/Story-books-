@@ -3,52 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <title>My Fev Album</title>
+    <link rel="stylesheet" href="style.css">
     <style>
-        /* यो CSS ले फोटोको साइज र स्क्रोलिङलाई पहिलेकै जस्तो बनाउँछ */
-        .album-scroll-container {
-            display: flex;
-            overflow-x: auto;
-            scroll-snap-type: x mandatory;
-            width: 100%;
-        }
-        .album-item {
-            flex: 0 0 100%; /* प्रत्येक फोटोले स्क्रिनको पूरा चौडाई लिन्छ */
-            scroll-snap-align: start;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-        .album-photo img {
-            width: 90%; /* फोटो साइज */
-            height: auto;
-            border-radius: 15px;
-        }
-        .caption-text {
-            margin-top: 10px;
-            text-align: center;
-            font-size: 16px;
-            padding: 0 15px;
+        /* यहाँ मैले तपाईंको पुरानो CSS को साइजलाई असर नगर्ने गरी क्याप्सन मिलाएको छु */
+        .album-photo { display: flex; flex-direction: column; align-items: center; }
+        .caption-text { 
+            margin-top: 5px; 
+            font-size: 14px; 
+            color: #333; 
+            text-align: center; 
+            width: 100%; 
         }
     </style>
 </head>
 <body>
 
-    <h2 style="text-align: center;">My Fev Album</h2>
-    
+    <h2 class="sub-title" style="text-align: center; font-size: 28px; margin-top: 20px;">My Fev Album</h2>
+    <div class="straight-line album-line"></div>
+
     <div class="album-scroll-container">
-        <div class="album-item">
-            <div class="album-photo"><img src="1.png"></div>
-            <div id="photo-counter">1 / 21</div>
-            <p class="caption-text">"किन:- ..."</p>
+        <div class="album-photo">
+            <img src="1.png" alt="Photo 1">
+            <p class="caption-text">किन:-</p>
         </div>
-        <div class="album-scroll-container">
-        <div class="album-item">
-            <div class="album-photo"><img src="2.jpg"></div>
-            <div id="photo-counter">2 / 21</div>
-            <p class="caption-text">"किन:- ..."</p>
         </div>
-            
-        </div>
+
+    <div id="photo-counter">1 / 21</div>
 
     <script>
         const container = document.querySelector('.album-scroll-container');
@@ -56,7 +36,8 @@
 
         container.addEventListener('scroll', () => {
             const scrollLeft = container.scrollLeft;
-            const itemWidth = container.offsetWidth; 
+            // तपाईंको पुरानो logic अनुसार itemWidth निकाल्ने
+            const itemWidth = container.querySelector('.album-photo').offsetWidth + 20;
             const index = Math.round(scrollLeft / itemWidth);
             counter.innerText = `${index + 1} / 21`;
         });
