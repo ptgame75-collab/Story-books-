@@ -2,130 +2,62 @@
 <html lang="ne">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Fev Album</title>
-    <link rel="stylesheet" href="style.css">
     <style>
-        /* तपाईंको पुरानो डिजाइन नबिग्रिने गरी क्याप्सनको लागि थपिएको CSS */
+        /* यो CSS ले फोटोको साइज र स्क्रोलिङलाई पहिलेकै जस्तो बनाउँछ */
+        .album-scroll-container {
+            display: flex;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            width: 100%;
+        }
         .album-item {
+            flex: 0 0 100%; /* प्रत्येक फोटोले स्क्रिनको पूरा चौडाई लिन्छ */
+            scroll-snap-align: start;
             display: flex;
             flex-direction: column;
             align-items: center;
-            flex: 0 0 auto;
+        }
+        .album-photo img {
+            width: 90%; /* फोटो साइज */
+            height: auto;
+            border-radius: 15px;
         }
         .caption-text {
-            margin-top: 5px;
-            font-size: 16px;
-            color: #333;
+            margin-top: 10px;
             text-align: center;
-            font-weight: 500;
+            font-size: 16px;
+            padding: 0 15px;
         }
     </style>
 </head>
 <body>
 
-    <h2 class="sub-title" style="text-align: center; font-size: 28px; margin-top: 20px;">My Fev Album</h2>
-    <div class="straight-line album-line"></div>
-
+    <h2 style="text-align: center;">My Fev Album</h2>
+    
     <div class="album-scroll-container">
         <div class="album-item">
-            <div class="album-photo"><img src="1.png" alt="Photo 1"></div>
-            <p class="caption-text">किन:-</p>
+            <div class="album-photo"><img src="1.png"></div>
+            <div id="photo-counter">1 / 21</div>
+            <p class="caption-text">"किन:- ..."</p>
         </div>
+        <div class="album-scroll-container">
         <div class="album-item">
-            <div class="album-photo"><img src="2.png" alt="Photo 2"></div>
-            <p class="caption-text">किन:-</p>
+            <div class="album-photo"><img src="2.jpg"></div>
+            <div id="photo-counter">2 / 21</div>
+            <p class="caption-text">"किन:- ..."</p>
         </div>
-        <div class="album-item">
-            <div class="album-photo"><img src="3.jpg" alt="Photo 3"></div>
-            <p class="caption-text">किन:-</p>
+            
         </div>
-        <div class="album-item">
-            <div class="album-photo"><img src="4.jpg" alt="Photo 4"></div>
-            <p class="caption-text">किन:-</p>
-        </div>
-        <div class="album-item">
-            <div class="album-photo"><img src="5.png" alt="Photo 5"></div>
-            <p class="caption-text">किन:-</p>
-        </div>
-        <div class="album-item">
-            <div class="album-photo"><img src="6.jpg" alt="Photo 6"></div>
-            <p class="caption-text">किन:-</p>
-        </div>
-        <div class="album-item">
-            <div class="album-photo"><img src="7.jpg" alt="Photo 7"></div>
-            <p class="caption-text">किन:-</p>
-        </div>
-        <div class="album-item">
-            <div class="album-photo"><img src="8.jpg" alt="Photo 8"></div>
-            <p class="caption-text">किन:-</p>
-        </div>
-        <div class="album-item">
-            <div class="album-photo"><img src="9.jpg" alt="Photo 9"></div>
-            <p class="caption-text">किन:-</p>
-        </div>
-        <div class="album-item">
-            <div class="album-photo"><img src="10.jpg" alt="Photo 10"></div>
-            <p class="caption-text">किन:-</p>
-        </div>
-        <div class="album-item">
-            <div class="album-photo"><img src="11.jpg" alt="Photo 11"></div>
-            <p class="caption-text">किन:-</p>
-        </div>
-        <div class="album-item">
-            <div class="album-photo"><img src="12.jpg" alt="Photo 12"></div>
-            <p class="caption-text">किन:-</p>
-        </div>
-        <div class="album-item">
-            <div class="album-photo"><img src="13.jpg" alt="Photo 13"></div>
-            <p class="caption-text">किन:-</p>
-        </div>
-        <div class="album-item">
-            <div class="album-photo"><img src="14.jpg" alt="Photo 14"></div>
-            <p class="caption-text">किन:-</p>
-        </div>
-        <div class="album-item">
-            <div class="album-photo"><img src="15.jpg" alt="Photo 15"></div>
-            <p class="caption-text">किन:-</p>
-        </div>
-        <div class="album-item">
-            <div class="album-photo"><img src="16.jpg" alt="Photo 16"></div>
-            <p class="caption-text">किन:-</p>
-        </div>
-        <div class="album-item">
-            <div class="album-photo"><img src="17.jpg" alt="Photo 17"></div>
-            <p class="caption-text">किन:-</p>
-        </div>
-        <div class="album-item">
-            <div class="album-photo"><img src="18.jpg" alt="Photo 18"></div>
-            <p class="caption-text">किन:-</p>
-        </div>
-        <div class="album-item">
-            <div class="album-photo"><img src="19.jpg" alt="Photo 19"></div>
-            <p class="caption-text">किन:-</p>
-        </div>
-        <div class="album-item">
-            <div class="album-photo"><img src="20.jpg" alt="Photo 20"></div>
-            <p class="caption-text">किन:-</p>
-        </div>
-        <div class="album-item">
-            <div class="album-photo"><img src="21.jpg" alt="Photo 21"></div>
-            <p class="caption-text">किन:-</p>
-        </div>
-    </div>
-
-    <div id="photo-counter">1 / 21</div>
 
     <script>
         const container = document.querySelector('.album-scroll-container');
         const counter = document.getElementById('photo-counter');
 
         container.addEventListener('scroll', () => {
-            // यहाँ .album-item प्रयोग गरिएको छ, जसले क्याप्सन सहितको चौडाइ लिन्छ
             const scrollLeft = container.scrollLeft;
-            const itemWidth = container.querySelector('.album-item').offsetWidth + 20; 
+            const itemWidth = container.offsetWidth; 
             const index = Math.round(scrollLeft / itemWidth);
-            
             counter.innerText = `${index + 1} / 21`;
         });
     </script>
