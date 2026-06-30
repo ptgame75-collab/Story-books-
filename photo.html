@@ -4,51 +4,79 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Fev Album</title>
-    <link rel="stylesheet" href="style.css">
+    <style>
+        /* आधारभूत संरचना */
+        body { font-family: sans-serif; margin: 0; padding: 0; background-color: #fdfdfd; }
+        .sub-title { text-align: center; font-size: 28px; margin-top: 20px; }
+        .album-line { height: 2px; background: #ccc; margin: 15px auto; width: 80%; }
+        
+        /* कन्टेनर - जसले फोटोलाई एक-एक गरी स्क्रोल गराउँछ */
+        .album-scroll-container {
+            display: flex;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            width: 100%;
+            padding: 20px 0;
+            scrollbar-width: none; /* स्क्रोलबार लुकाउन */
+        }
+        .album-scroll-container::-webkit-scrollbar { display: none; }
+
+        /* प्रत्येक फोटोको स्लाइड */
+        .album-slide {
+            flex: 0 0 100%;
+            scroll-snap-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* ४:५ रेसियो फिक्स गर्ने ठाउँ */
+        .album-photo { width: 80%; max-width: 400px; }
+        .album-photo img {
+            width: 100%;
+            aspect-ratio: 4 / 5;
+            object-fit: cover;
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        /* काउन्टर र क्याप्सन */
+        .photo-counter { margin-top: 15px; font-weight: bold; font-size: 18px; }
+        .caption-text { margin-top: 10px; padding: 0 20px; text-align: center; font-size: 16px; color: #333; }
+    </style>
 </head>
 <body>
 
-    <h2 class="sub-title" style="text-align: center; font-size: 28px; margin-top: 20px;">My Fev Album</h2>
-    <div class="straight-line album-line"></div>
+    <h2 class="sub-title">My Fev Album</h2>
+    <div class="album-line"></div>
 
-    < <div class="album-scroll-container">
-        <div class="album-slide"><div class="album-photo"><img src="1.png" alt="Photo 1"></div><div class="photo-counter">1 / 21</div><p class="caption-text">किन:-</p></div>
-        <div class="album-slide"><div class="album-photo"><img src="2.png" alt="Photo 2"></div><div class="photo-counter">2 / 21</div><p class="caption-text">किन:-</p></div>
-        <div class="album-slide"><div class="album-photo"><img src="3.jpg" alt="Photo 3"></div><div class="photo-counter">3 / 21</div><p class="caption-text">किन:-</p></div>
-        <div class="album-slide"><div class="album-photo"><img src="4.jpg" alt="Photo 4"></div><div class="photo-counter">4 / 21</div><p class="caption-text">किन:-</p></div>
-        <div class="album-slide"><div class="album-photo"><img src="5.png" alt="Photo 5"></div><div class="photo-counter">5 / 21</div><p class="caption-text">किन:-</p></div>
-        <div class="album-slide"><div class="album-photo"><img src="6.jpg" alt="Photo 6"></div><div class="photo-counter">6 / 21</div><p class="caption-text">किन:-</p></div>
-        <div class="album-slide"><div class="album-photo"><img src="7.jpg" alt="Photo 7"></div><div class="photo-counter">7 / 21</div><p class="caption-text">किन:-</p></div>
-        <div class="album-slide"><div class="album-photo"><img src="8.jpg" alt="Photo 8"></div><div class="photo-counter">8 / 21</div><p class="caption-text">किन:-</p></div>
-        <div class="album-slide"><div class="album-photo"><img src="9.jpg" alt="Photo 9"></div><div class="photo-counter">9 / 21</div><p class="caption-text">किन:-</p></div>
-        <div class="album-slide"><div class="album-photo"><img src="10.jpg" alt="Photo 10"></div><div class="photo-counter">10 / 21</div><p class="caption-text">किन:-</p></div>
-        <div class="album-slide"><div class="album-photo"><img src="11.jpg" alt="Photo 11"></div><div class="photo-counter">11 / 21</div><p class="caption-text">किन:-</p></div>
-        <div class="album-slide"><div class="album-photo"><img src="12.jpg" alt="Photo 12"></div><div class="photo-counter">12 / 21</div><p class="caption-text">किन:-</p></div>
-        <div class="album-slide"><div class="album-photo"><img src="13.jpg" alt="Photo 13"></div><div class="photo-counter">13 / 21</div><p class="caption-text">किन:-</p></div>
-        <div class="album-slide"><div class="album-photo"><img src="14.jpg" alt="Photo 14"></div><div class="photo-counter">14 / 21</div><p class="caption-text">किन:-</p></div>
-        <div class="album-slide"><div class="album-photo"><img src="15.jpg" alt="Photo 15"></div><div class="photo-counter">15 / 21</div><p class="caption-text">किन:-</p></div>
-        <div class="album-slide"><div class="album-photo"><img src="16.jpg" alt="Photo 16"></div><div class="photo-counter">16 / 21</div><p class="caption-text">किन:-</p></div>
-        <div class="album-slide"><div class="album-photo"><img src="17.jpg" alt="Photo 17"></div><div class="photo-counter">17 / 21</div><p class="caption-text">किन:-</p></div>
-        <div class="album-slide"><div class="album-photo"><img src="18.jpg" alt="Photo 18"></div><div class="photo-counter">18 / 21</div><p class="caption-text">किन:-</p></div>
-        <div class="album-slide"><div class="album-photo"><img src="19.jpg" alt="Photo 19"></div><div class="photo-counter">19 / 21</div><p class="caption-text">किन:-</p></div>
-        <div class="album-slide"><div class="album-photo"><img src="20.jpg" alt="Photo 20"></div><div class="photo-counter">20 / 21</div><p class="caption-text">किन:-</p></div>
-        <div class="album-slide"><div class="album-photo"><img src="21.jpg" alt="Photo 21"></div><div class="photo-counter">21 / 21</div><p class="caption-text">किन:-</p></div>
+    <div class="album-scroll-container">
+        <div class="album-slide"><div class="album-photo"><img src="1.png"></div><div class="photo-counter">1 / 21</div><p class="caption-text">किन:-</p></div>
+        <div class="album-slide"><div class="album-photo"><img src="2.png"></div><div class="photo-counter">2 / 21</div><p class="caption-text">किन:-</p></div>
+        <div class="album-slide"><div class="album-photo"><img src="3.jpg"></div><div class="photo-counter">3 / 21</div><p class="caption-text">किन:-</p></div>
+        <div class="album-slide"><div class="album-photo"><img src="4.jpg"></div><div class="photo-counter">4 / 21</div><p class="caption-text">किन:-</p></div>
+        <div class="album-slide"><div class="album-photo"><img src="5.png"></div><div class="photo-counter">5 / 21</div><p class="caption-text">किन:-</p></div>
+        <div class="album-slide"><div class="album-photo"><img src="6.jpg"></div><div class="photo-counter">6 / 21</div><p class="caption-text">किन:-</p></div>
+        <div class="album-slide"><div class="album-photo"><img src="7.jpg"></div><div class="photo-counter">7 / 21</div><p class="caption-text">किन:-</p></div>
+        <div class="album-slide"><div class="album-photo"><img src="8.jpg"></div><div class="photo-counter">8 / 21</div><p class="caption-text">किन:-</p></div>
+        <div class="album-slide"><div class="album-photo"><img src="9.jpg"></div><div class="photo-counter">9 / 21</div><p class="caption-text">किन:-</p></div>
+        <div class="album-slide"><div class="album-photo"><img src="10.jpg"></div><div class="photo-counter">10 / 21</div><p class="caption-text">किन:-</p></div>
+        <div class="album-slide"><div class="album-photo"><img src="11.jpg"></div><div class="photo-counter">11 / 21</div><p class="caption-text">किन:-</p></div>
+        <div class="album-slide"><div class="album-photo"><img src="12.jpg"></div><div class="photo-counter">12 / 21</div><p class="caption-text">किन:-</p></div>
+        <div class="album-slide"><div class="album-photo"><img src="13.jpg"></div><div class="photo-counter">13 / 21</div><p class="caption-text">किन:-</p></div>
+        <div class="album-slide"><div class="album-photo"><img src="14.jpg"></div><div class="photo-counter">14 / 21</div><p class="caption-text">किन:-</p></div>
+        <div class="album-slide"><div class="album-photo"><img src="15.jpg"></div><div class="photo-counter">15 / 21</div><p class="caption-text">किन:-</p></div>
+        <div class="album-slide"><div class="album-photo"><img src="16.jpg"></div><div class="photo-counter">16 / 21</div><p class="caption-text">किन:-</p></div>
+        <div class="album-slide"><div class="album-photo"><img src="17.jpg"></div><div class="photo-counter">17 / 21</div><p class="caption-text">किन:-</p></div>
+        <div class="album-slide"><div class="album-photo"><img src="18.jpg"></div><div class="photo-counter">18 / 21</div><p class="caption-text">किन:-</p></div>
+        <div class="album-slide"><div class="album-photo"><img src="19.jpg"></div><div class="photo-counter">19 / 21</div><p class="caption-text">किन:-</p></div>
+        <div class="album-slide"><div class="album-photo"><img src="20.jpg"></div><div class="photo-counter">20 / 21</div><p class="caption-text">किन:-</p></div>
+        <div class="album-slide"><div class="album-photo"><img src="21.jpg"></div><div class="photo-counter">21 / 21</div><p class="caption-text">किन:-</p></div>
     </div>
 
-    <div id="photo-counter">1 / 21</div>
-
     <script>
-        const container = document.querySelector('.album-scroll-container');
-        const counter = document.getElementById('photo-counter');
-
-        container.addEventListener('scroll', () => {
-            // स्क्रोल पोजिसनको आधारमा इन्डेक्स निकाल्ने
-            const scrollLeft = container.scrollLeft;
-            const itemWidth = container.querySelector('.album-photo').offsetWidth + 20; // 20 gap हो
-            const index = Math.round(scrollLeft / itemWidth);
-            
-            counter.innerText = `${index + 1} / 21`;
-        });
+        // अब काउन्टर र स्क्रोलिङ स्लाइड भित्रै छ, त्यसैले यो एक्स्ट्रा स्क्रिप्ट चाहिदैन। 
+        // स्लाइडिङ अटोमेटिक CSS ले नै गर्नेछ।
     </script>
 </body>
 </html>
