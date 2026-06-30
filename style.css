@@ -214,4 +214,17 @@ video {
     margin: 0 auto 30px auto; /* यसले धर्कालाई बीचमा राख्छ र तल स्पेस दिन्छ */
     border-radius: 2px;
 }
+.album-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 0 0 auto; /* यसले पुरानो स्क्रोलिङ जस्तै राख्छ */
+}
+
+.caption-text {
+    margin-top: 5px; /* फोटो र क्याप्सन बिचको थोरै खाली ठाउँ */
+    font-size: 14px;
+    color: #333;
+    text-align: center;
+}
 
