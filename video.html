@@ -44,6 +44,25 @@
             display: block;
         }
 
+        /* युट्युब लिङ्कका लागि नयाँ स्टाइल */
+        .link-card {
+            background: #f9f9f9;
+            padding: 20px;
+            border-radius: 15px;
+            border: 2px dashed #4a3728;
+            text-align: center;
+        }
+        .link-card p { color: #555; font-size: 15px; margin-bottom: 15px; }
+        .youtube-btn {
+            display: inline-block;
+            background: #ff0000;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: bold;
+        }
+
         .footer { margin-top: auto; padding: 20px; color: #999; font-size: 12px; text-align: center; }
     </style>
 </head>
@@ -59,7 +78,6 @@
             <h2>पहिलो भावना</h2>
             <video controls playsinline preload="auto">
                 <source src="v1.mp4?fresh=true" type="video/mp4">
-                तपाईंको ब्राउजरले यो भिडियो सपोर्ट गरेन।
             </video>
         </div>
 
@@ -67,17 +85,14 @@
             <h2>one day</h2>
             <video controls playsinline preload="metadata">
                 <source src="v2.mp4" type="video/mp4">
-                तपाईंको ब्राउजरले यो भिडियो सपोर्ट गरेन।
             </video>
-            <p>यस्ता दिनहरू नआओस्</p>
+            <p style="margin-top:10px; font-size:14px; color:#666;">यस्ता दिनहरू नआओस्</p>
         </div>
 
-        <div class="video-card">
+        <div class="link-card">
             <h2>मेरो शब्द</h2>
-            <video controls playsinline preload="metadata">
-                <source src="v3.mp4" type="video/mp4">
-                तपाईंको ब्राउजरले यो भिडियो सपोर्ट गरेन।
-            </video>
+            <p>यो भिडियो लामो भएकोले एपमा राख्न मिलेन। तलको लिङ्कमा क्लिक गरेर हेर्नुहोला:</p>
+            <a href="https://youtu.be/92r884hfENw?si=jEq-pFd5wRdQN-2F" class="youtube-btn" target="_blank">युट्युबमा हेर्नुहोस्</a>
         </div>
     </div> 
 
