@@ -5,6 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>अधिराजको खत</title>
     <link rel="manifest" href="manifest.json">
+    
+    <!-- iPhone (iOS) को लागि थपिएको कोड -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="अधिराजको खत">
+    <link rel="apple-touch-icon" href="a.0063.jpg">
 </head>
 <body oncontextmenu="return false;">
 
@@ -28,12 +34,10 @@
     </style>
 
     <script>
-        // १. पुरानो सर्भिस वर्कर हटाउने (यदि समस्या छ भने)
         if ('serviceWorker' in navigator) {
             navigator.serviceWorker.getRegistrations().then(regs => {
                 for (let reg of regs) { reg.unregister(); }
             });
-            // २. नयाँ दर्ता गर्ने
             window.addEventListener('load', () => {
                 navigator.serviceWorker.register('sw.js')
                 .then(() => console.log('SW Registered'))
@@ -41,7 +45,6 @@
             });
         }
 
-        // टाइपराइटर लजिक
         const text = "अधुरा शब्दहरूको दस्ताबेज";
         const typewriterElement = document.getElementById('typewriter');
         const fill = document.getElementById('pFill');
