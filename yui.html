@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="ne">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>अधिराजको डायरी ०६८</title>
+    <link href="https://fonts.googleapis.com/css2?family=Mukta:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        html { scroll-behavior: smooth; }
+        body { 
+            font-family: 'Mukta', 'Arial', sans-serif; 
+            line-height: 1.9; 
+            color: #333; 
+            background: #fcfbf7; 
+            padding: 75px 20px 140px 20px; 
+            transition: 0.3s; 
+            -webkit-user-select: none; 
+            user-select: none; 
+        }
+        
+        .toolbar { 
+            position: fixed; top: 0; left: 0; right: 0; display: flex; justify-content: space-between; align-items: center;
+            padding: 12px 20px; background: rgba(252, 251, 247, 0.95); border-bottom: 1px solid #ddd; 
+            z-index: 1000; backdrop-filter: blur(5px); height: 45px; 
+        }
+        .btn { text-decoration: none; color: #333; border: 1px solid #ccc; padding: 6px 15px; border-radius: 5px; font-weight: bold; background: #fff; cursor: pointer; font-family: 'Mukta', sans-serif; white-space: nowrap; }
+
+        .bold-feeling p { 
+            font-size: 19px; margin-bottom: 25px; font-weight: 900; text-align: justify; 
+            transition: background-color 0.3s; cursor: pointer; padding: 8px; border-radius: 6px;
+            scroll-margin-top: 140px; -webkit-touch-callout: none;
+        }
+        .bold-feeling p.highlighted { background-color: rgba(255, 235, 59, 0.6) !important; color: #000 !important; }
+        
+        .main-title { font-size: 30px; font-weight: 800; display: block; margin-top: 10px; color: #5D4037; text-align: center; }
+        .straight-line { width: 100%; max-width: 600px; height: 1px; background: #ddd; border: none; margin: 20px auto 30px auto; }
+        
+        /* तस्बिरको लागि स्टाइल */
+        .diary-image { max-width: 95%; height: auto; display: block; margin: 30px auto; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+        
+        .bottom-action-container {
+            position: fixed; bottom: -150px; left: 50%; transform: translateX(-50%);
+            width: 90%; max-width: 450px; display: flex; flex-direction: column; gap: 12px; align-items: center;
+            z-index: 2000; transition: bottom 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .bottom-action-container.show { bottom: 25px; }
+
+        .pencil-btn {
+            width: 52px; height: 52px; border-radius: 50%; background: #5D4037; color: white; font-size: 22px; border: none; box-shadow: 0 4px 12px rgba(0,0,0,0.25); cursor: pointer; transition: transform 0.2s, background 0.3s;
+        }
+        .pencil-btn.active { background: #2e7d32; transform: scale(1.05); }
+
+        .action-row { display: flex; width: 100%; gap: 10px; }
+        .clear-btn, .jump-btn {
+            flex: 1; border: none; padding: 12px; border-radius: 25px; font-weight: bold; cursor: pointer; display: none; font-family: 'Mukta', sans-serif;
+        }
+        .clear-btn { background: #c62828; color: white; }
+        .jump-btn { background: #d84315; color: white; }
+
+        .toast-notification {
+            position: fixed; bottom: -100px; left: 50%; transform: translateX(-50%);
+            background-color: #323232; color: #fff; padding: 10px 20px; border-radius: 25px;
+            font-family: 'Mukta', sans-serif; z-index: 3000; transition: bottom 0.3s ease-in-out;
+        }
+        .toast-notification.show { bottom: 100px; }
+
+        .dark-mode { background-color: #121212; color: #e0e0e0; }
+        .dark-mode .toolbar { background: rgba(18, 18, 18, 0.95); border-color: #333; }
+        .dark-mode .btn { background: #1e1e1e; border-color: #333; color: #e0e0e0; }
+        .dark-mode .bold-feeling p.highlighted { background-color: rgba(255, 193, 7, 0.5) !important; color: #000 !important; }
+    </style>
+</head>
+<body oncontextmenu="return false;">
+
+    <div class="toolbar">
+        <a href="index.html" class="btn">← back</a>
+        <button class="btn" onclick="toggleNightMode()" id="nightBtn">🌙 | नाइट मोड</button>
+    </div>
+
+    <div id="toastBox" class="toast-notification"></div>
+
+    <div class="bottom-action-container" id="actionContainer">
+        <button class="pencil-btn" id="pencilBtn" onclick="toggleHighlightMode()">✏️</button>
+        <div class="action-row">
+            <button class="clear-btn" id="clearBtn" onclick="clearBookmark()">🗑️ Clear</button>
+            <button class="jump-btn" id="jumpBtn" onclick="jumpToBookmark()">📍 Continue</button>
+        </div>
+    </div>
+
+    <div class="bold-feeling">
+        <span class="main-title">१.happy monthiversary </span>
+        <hr class="straight-line">
+
+ <p> Happy monthiversary Suzu</p>
+
+ <p>आज १४ अगस्ट—अर्थात्, तिमी र मेरो संवाद थमिएको पनि ठ्याक्कै एक महिना बितिसकेछ। हाम्रो यो सम्पूर्ण इतिहासमा सायद पहिलोपटक हो, जहाँ मैले तिमीलाई यति कम याद गरेँ, वा भनौँ मेरो एकतर्फी मायाको त्यो तीव्र पर्खाइ अलि मत्थर भएको छ। सधैँ तिम्रै एउटा म्यासेज वा शब्दको प्रतीक्षामा रहने यो मन आजभोलि अलि शान्त र सम्हालिएको छ। अनौठो लाग्छ, जुन मायामा कहिल्यै तिम्रो साथ पाइने आश थिएन, त्यही अधुरोपनलाई स्विकार्दै जाँदा मनभित्र एउटा अद्भूत सहजता पलाएको छ। यस्तो लाग्दैछ, मानौँ मेरो तर्फबाट मात्रै बुनिएको यो प्रेमको यात्रा, तिम्रो प्रतिक्रियाबिना नै आफ्नो एउटा मौन र पूर्ण किनारामा पुगेको छ।</p>
+ <p>मेरो एकतर्फी मायाको यो कथा कहिल्यै दुईतर्फी बनेर पूरा हुन त सकेन, तर आज यही असफलताभित्रै मैले एउटा अनौठो सन्तुष्टि भेटेको छु। न त अब तिमीसँग कुनै अपेक्षा बाँकी छ, न त मेरो मायाको हिसाब खोज्ने हुटहुटी नै। केही प्रेमहरू कहिल्यै नभेटिने दुई किनाराजस्तै अधुरा रहँदा-रहँदै पनि आफैँमा पूर्ण भइदिँदा रहेछन्। तिमीबिनाका दिनहरू सहज बन्दै जाँदा मलाई महसुस हुँदैछ कि, तिमीलाई पाउने आश छोडेर केवल परैबाट माया गरिरहनु र यो अधुरोपनलाई नै सहर्ष स्वीकार्नु नै सायद मेरो एकतर्फी मायाको सबैभन्दा सुन्दर गन्तव्य थियो।</p>
+ <div class="bold-feeling">
+    <span class="main-title">2. Suggestion </span>
+    <hr class="straight-line">
+    <img src="dolly.png" alt="Dolly" class="diary-image">
+ <p>ए कुरा नभने पनि हुन्थ्यो तर भन्छु sorry ल।  हजुरको पहिला Instagram मा नाम SU_ZU पनि 🫶❤️ थियो जुनकी मलाई personally धेरै मन परेको थियो। तर अहिले हजुरले नाम परिवर्तन गरेरMaYa 🫶❤️ जुन राम्रो त धेरै राम्रो छ। तर यो नाम मेरो केही अधुरा कहानीहरुसँग मिल्छ त्यसैले त्यति राम्रो लागेन बाँकी माफी माग्न चाहन्छु। त्यो हर कुरालाई जुन कुरा लेतिमीलाई नराम्रो लाग्छ</p>
+ </div>
+</div>
+
+    </div>
+    <script>
+        function toggleNightMode() {
+            const body = document.body;
+            body.classList.toggle('dark-mode');
+            document.getElementById('nightBtn').innerHTML = body.classList.contains('dark-mode') ? "☀️ डे मोड" : "🌙 नाइट मोड";
+        }
+
+        function showToast(message) {
+            const toast = document.getElementById('toastBox');
+            toast.innerText = message;
+            toast.classList.add('show');
+            setTimeout(() => { toast.classList.remove('show'); }, 2000);
+        }
+
+        let isHighlightMode = false;
+        let lastTapTime = 0;
+
+        window.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('.bold-feeling p').forEach((p, i) => p.setAttribute('data-id', 'p_' + (i + 1)));
+            loadSavedBookmark();
+            setupInteractions();
+        });
+
+        window.addEventListener('click', (e) => {
+            if (e.target.closest('#actionContainer') || e.target.closest('.toolbar')) return;
+            let now = new Date().getTime();
+            if (now - lastTapTime < 300) document.getElementById('actionContainer').classList.toggle('show');
+            lastTapTime = now;
+        });
+
+        function toggleHighlightMode() {
+            isHighlightMode = !isHighlightMode;
+            document.getElementById('pencilBtn').classList.toggle('active');
+            if (isHighlightMode) showToast("बुकमार्क मोड अन। प्रेस गर्नुहोस्।");
+        }
+
+        function setupInteractions() {
+            document.querySelectorAll('.bold-feeling p').forEach(p => {
+                let timer;
+                const start = () => { if(isHighlightMode) timer = setTimeout(() => saveBookmark(p), 1000); };
+                p.addEventListener('touchstart', start);
+                p.addEventListener('mousedown', start);
+                p.addEventListener('touchend', () => clearTimeout(timer));
+                p.addEventListener('mouseup', () => clearTimeout(timer));
+            });
+        }
+
+        function saveBookmark(p) {
+            localStorage.setItem('diary_bookmark_id', p.getAttribute('data-id'));
+            isHighlightMode = false;
+            document.getElementById('pencilBtn').classList.remove('active');
+            loadSavedBookmark();
+            showToast("बुकमार्क सुरक्षित भयो!");
+        }
+
+        function loadSavedBookmark() {
+            const id = localStorage.getItem('diary_bookmark_id');
+            const btns = [document.getElementById('jumpBtn'), document.getElementById('clearBtn')];
+            document.querySelectorAll('.bold-feeling p').forEach(p => p.classList.toggle('highlighted', p.getAttribute('data-id') === id));
+            btns.forEach(b => b.style.display = id ? 'block' : 'none');
+        }
+
+        function jumpToBookmark() {
+            const id = localStorage.getItem('diary_bookmark_id');
+            document.querySelector(`p[data-id="${id}"]`)?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+
+        function clearBookmark() {
+            localStorage.removeItem('diary_bookmark_id');
+            loadSavedBookmark();
+            showToast("बुकमार्क हटाइयो!");
+        }
+    </script>
+</body>
+</html>
