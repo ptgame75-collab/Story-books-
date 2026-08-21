@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="ne">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>अधिराज की डायरी 068 - ग्यालरी</title>
+    
+    <!-- तपाईँको आफ्नै style.css लिङ्क गरिएको -->
+    <link rel="stylesheet" href="style.css">
+
+    <!-- फोटो जुम (Lightbox) का लागि आवश्यक CSS र JS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/css/lightbox.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/js/lightbox-plus-jquery.min.js"></script>
+
+    <style>
+        /* --- फोटो ग्यालरी र डाउनलोड बटनका लागि थप गरिएको CSS --- */
+        .photo-gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            max-width: 650px;
+            margin: 25px auto;
+        }
+
+        .gallery-card {
+            background: var(--card-bg);
+            border: 1px solid var(--line);
+            border-radius: 12px;
+            padding: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transition: transform 0.2s ease;
+        }
+
+        .gallery-card:hover {
+            transform: translateY(-3px);
+        }
+
+        /* फोटोको आफ्नै ओरिजिनल साइज/अनुपात जोगाउन */
+        .gallery-card img {
+            width: 100%;
+            height: auto; /* फोटो जत्रो छ त्यस्तै देखिनेछ */
+            object-fit: contain;
+            border-radius: 8px;
+            cursor: pointer;
+            display: block;
+        }
+
+        /* क्याप्सन र डाउनलोड सेक्सन */
+        .card-footer {
+            width: 100%;
+            margin-top: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 8px;
+            border-top: 1px dashed var(--line);
+        }
+
+        .photo-caption {
+            font-size: 14px;
+            color: var(--text);
+            font-weight: bold;
+        }
+
+        .download-btn {
+            padding: 6px 14px;
+            font-size: 13px;
+            background: var(--card-bg);
+            color: var(--text);
+            border: 1px solid var(--line);
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            transition: all 0.2s;
+        }
+
+        .download-btn:hover {
+            background: var(--red);
+            color: #ffffff;
+            border-color: var(--red);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- टुलबार (Toolbar) -->
+    <div class="toolbar">
+        <a href="index.html" class="btn">🏠 मुख्य पृष्ठ</a>
+        <button class="btn" onclick="toggleDarkMode()">🌙 / ☀️</button>
+    </div>
+
+    <!-- शीर्षक सेक्सन -->
+    <div class="title-container">
+        <span class="main-title snickles-font">MEMORIES & PHOTOS</span>
+        <hr class="straight-line">
+        <span class="sub-title">अधिराज की डायरी</span>
+        <div class="album-line"></div>
+    </div>
+
+    <!-- ३ वटा फोटोको ग्यालरी सेक्सन -->
+    <div class="photo-gallery-grid">
+        
+        <!-- फोटो १ -->
+        <div class="gallery-card">
+            <!-- फोटोमा थिच्दा जुम हुनेछ -->
+            <a href="photo1.jpg" data-lightbox="diary-gallery" data-title="पहिलो याद - फोटो १">
+                <img src="photo1.jpg" alt="फोटो १">
+            </a>
+            <div class="card-footer">
+                <span class="photo-caption">फोटो ०१</span>
+                <!-- डाउनलोड बटन -->
+                <a href="photo1.jpg" download="Diary_Photo_1.jpg" class="download-btn">
+                    📥 डाउनलोड
+                </a>
+            </div>
+        </div>
+
+        <!-- फोटो २ -->
+        <div class="gallery-card">
+            <a href="photo2.jpg" data-lightbox="diary-gallery" data-title="दोस्रो याद - फोटो २">
+                <img src="photo2.jpg" alt="फोटो २">
+            </a>
+            <div class="card-footer">
+                <span class="photo-caption">फोटो ०२</span>
+                <a href="photo2.jpg" download="Diary_Photo_2.jpg" class="download-btn">
+                    📥 डाउनलोड
+                </a>
+            </div>
+        </div>
+
+        <!-- फोटो ३ -->
+        <div class="gallery-card">
+            <a href="photo3.jpg" data-lightbox="diary-gallery" data-title="तेस्रो याद - फोटो ३">
+                <img src="photo3.jpg" alt="फोटो ३">
+            </a>
+            <div class="card-footer">
+                <span class="photo-caption">फोटो ०३</span>
+                <a href="photo3.jpg" download="Diary_Photo_3.jpg" class="download-btn">
+                    📥 डाउनलोड
+                </a>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- डार्क मोड टगल स्क्रिप्ट -->
+    <script>
+        function toggleDarkMode() {
+            document.body.classList.toggle('dark-mode');
+        }
+    </script>
+
+</body>
+</html>
