@@ -5,7 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>अधिराजको खत</title>
 
+    <!-- Manifest setup -->
     <link rel="manifest" href="manifest.json">
+
+    <!-- Mobile App Home Screen Icon (एपको बाहिर देखिने नयाँ लोगो) -->
+    <link rel="icon" type="image/png" sizes="192x192" href="app-logo.png">
+    <link rel="apple-touch-icon" href="app-logo.png">
 
     <style>
         body { 
@@ -40,20 +45,20 @@
         
         .diary-card { 
             background: white; 
-            padding: 15px 10px; /* साइज आधा गरियो */
+            padding: 15px 10px; 
             border-radius: 10px; 
             text-decoration: none; 
             display: block; 
-            border-left: 4px solid #d32f2f; /* बोर्डर पनि आधा गरियो */
+            border-left: 4px solid #d32f2f; 
             box-shadow: 0 5px 12px rgba(0,0,0,0.05); 
             text-align: center; 
             transition: 0.2s; 
         }
         .diary-card:active { transform: scale(0.98); }
-        .diary-card h2 { color: #2c3e50; font-size: 16px; margin: 0; } /* फन्ट साइज अलि घटाइयो */
+        .diary-card h2 { color: #2c3e50; font-size: 16px; margin: 0; } 
         .diary-card p { color: #d32f2f; font-size: 11px; margin-top: 5px; font-weight: bold; }
 
-        /* भिडियो बटनको लागि छुट्टै बोर्डर कलर */
+        /* भिडियो र फोटो बटनको लागि छुट्टै बोर्डर कलर */
         .video-btn {
             border-left: 4px solid #4a3728;
         }
@@ -67,9 +72,9 @@
 <body oncontextmenu="return false;">
 
     <div class="header">
+        <!-- एप भित्र देखिने प्रोफाइल फोटो (4870.png) -->
         <img src="4870.png" alt="Logo">
         <h1>मनको भावना</h1>
-        
     </div>
 
     <div class="main-content">
@@ -77,6 +82,7 @@
             <h2>169 अनुष्ठान लेख</h2>
             <p>Tap here to read.</p>
         </a>
+        
         <a href="youy.html" class="diary-card">
             <h2>new photo folder</h2>
             <p>YouTube thumbnail.</p>
@@ -86,10 +92,12 @@
             <h2>मेरो अधुरा शब्दहरू</h2>
             <p>Tap here to read.</p>
         </a>
-    <a href="yui.html" class="diary-card">
+
+        <a href="yui.html" class="diary-card">
             <h2>new folder</h2>
             <p>celebrate happy monthiversary.</p>
-    </a>
+        </a>
+
         <a href="bayan.html" class="diary-card">
             <h2>तिम्रो बयान</h2>
             <p>Tap here to read.</p>
@@ -104,6 +112,7 @@
             <h2>fav pic</h2>
             <p>Tap here to view.</p>
         </a>
+
         <a href="video.html" class="diary-card video-btn">
             <h2>नयाँ भिडियो आछ </h2>
             <p>Tap here to view.</p>
