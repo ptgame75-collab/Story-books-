@@ -8,9 +8,12 @@
     <!-- Manifest setup -->
     <link rel="manifest" href="manifest.json">
 
-    <!-- Mobile App Home Screen Icon (एपको बाहिर देखिने नयाँ लोगो) -->
+    <!-- Mobile App Home Screen Icon -->
     <link rel="icon" type="image/png" sizes="192x192" href="app-logo.png">
     <link rel="apple-touch-icon" href="app-logo.png">
+    
+    <!-- External Style -->
+    <link rel="stylesheet" href="style.css">
 
     <style>
         body { 
@@ -31,7 +34,6 @@
             to { opacity: 1; }
         }
 
-        /* Header लाई Sticky बनाउन थपिएको CSS */
         .header { 
             position: sticky;
             top: 0;
@@ -41,7 +43,7 @@
             padding-top: 20px;
             padding-bottom: 15px;
             text-align: center; 
-            box-shadow: 0 4px 10px rgba(0,0,0,0.03); /* Scroll गर्दा हल्का छाया देखिन */
+            box-shadow: 0 4px 10px rgba(0,0,0,0.03);
         }
         
         .header img { 
@@ -85,7 +87,6 @@
         .diary-card h2 { color: #2c3e50; font-size: 16px; margin: 0; } 
         .diary-card p { color: #d32f2f; font-size: 11px; margin-top: 5px; font-weight: bold; }
 
-        /* भिडियो र फोटो बटनको लागि छुट्टै बोर्डर कलर */
         .video-btn {
             border-left: 4px solid #4a3728;
         }
@@ -99,54 +100,97 @@
 <body oncontextmenu="return false;">
 
     <div class="header">
-        <!-- एप भित्र देखिने प्रोफाइल फोटो (4870.png) -->
         <img src="4870.png" alt="Logo">
         <h1>मनको भावना</h1>
     </div>
 
     <div class="main-content">
-        <a href="anusthan.html" class="diary-card">
-            <h2>169 अनुष्ठान लेख</h2>
+        <a href="anusthan.html" class="diary-card" onclick="markAsRead('anusthan')">
+            <div class="card-title-container">
+                <span class="new-update-badge" id="badge-anusthan">.NEW UPDATE</span>
+                <h2>169 अनुष्ठान लेख</h2>
+            </div>
             <p>Tap here to read.</p>
         </a>
         
-        <a href="youy.html" class="diary-card">
-            <h2>photo folder</h2>
+        <a href="youy.html" class="diary-card" onclick="markAsRead('youy')">
+            <div class="card-title-container">
+                <span class="new-update-badge" id="badge-youy">.NEW UPDATE</span>
+                <h2>photo folder</h2>
+            </div>
             <p>YouTube thumbnail.</p>
         </a>
 
-        <a href="adhura.html" class="diary-card">
-            <h2>मेरो अधुरा शब्दहरू</h2>
+        <a href="adhura.html" class="diary-card" onclick="markAsRead('adhura')">
+            <div class="card-title-container">
+                <span class="new-update-badge" id="badge-adhura">.NEW UPDATE</span>
+                <h2>मेरो अधुरा शब्दहरू</h2>
+            </div>
             <p>Tap here to read.</p>
         </a>
 
-        <a href="yui.html" class="diary-card">
-            <h2>folder</h2>
+        <a href="yui.html" class="diary-card" onclick="markAsRead('yui')">
+            <div class="card-title-container">
+                <span class="new-update-badge" id="badge-yui">.NEW UPDATE</span>
+                <h2>folder</h2>
+            </div>
             <p>celebrate happy monthiversary.</p>
         </a>
 
-        <a href="bayan.html" class="diary-card">
-            <h2>तिम्रो बयान</h2>
+        <a href="bayan.html" class="diary-card" onclick="markAsRead('bayan')">
+            <div class="card-title-container">
+                <span class="new-update-badge" id="badge-bayan">.NEW UPDATE</span>
+                <h2>तिम्रो बयान</h2>
+            </div>
             <p>Tap here to read.</p>
         </a>
         
-        <a href="birthday.html" class="diary-card">
-            <h2>Happy Birthday</h2>
+        <a href="birthday.html" class="diary-card" onclick="markAsRead('birthday')">
+            <div class="card-title-container">
+                <span class="new-update-badge" id="badge-birthday">.NEW UPDATE</span>
+                <h2>Happy Birthday</h2>
+            </div>
             <p>Tap here to read.</p>
         </a>
 
-        <a href="photo.html" class="diary-card video-btn">
-            <h2>fav pic</h2>
+        <a href="photo.html" class="diary-card video-btn" onclick="markAsRead('photo')">
+            <div class="card-title-container">
+                <span class="new-update-badge" id="badge-photo">.NEW UPDATE</span>
+                <h2>fav pic</h2>
+            </div>
             <p>Tap here to view.</p>
         </a>
 
-        <a href="video.html" class="diary-card video-btn">
-            <h2> video section </h2>
+        <a href="video.html" class="diary-card video-btn" onclick="markAsRead('video')">
+            <div class="card-title-container">
+                <span class="new-update-badge" id="badge-video">.NEW UPDATE</span>
+                <h2> video section </h2>
+            </div>
             <p>Tap here to view.</p>
         </a>
     </div> 
 
     <div class="footer">2026 अधिराज | सुजना श्रेष्ठको लागि</div>
 
+    <script>
+        const cards = ['anusthan', 'youy', 'adhura', 'yui', 'bayan', 'birthday', 'photo', 'video'];
+
+        // पेज लोड हुँदा पहिले नै हेरिसकेको फाइलको `.NEW UPDATE` लुकाउने
+        window.addEventListener('DOMContentLoaded', () => {
+            cards.forEach(cardId => {
+                if (localStorage.getItem('read_' + cardId) === 'true') {
+                    const badge = document.getElementById('badge-' + cardId);
+                    if (badge) {
+                        badge.style.display = 'none';
+                    }
+                }
+            });
+        });
+
+        // क्लिक गरेपछि LocalStorage मा सेभ गर्ने
+        function markAsRead(cardId) {
+            localStorage.setItem('read_' + cardId, 'true');
+        }
+    </script>
 </body>
 </html>
