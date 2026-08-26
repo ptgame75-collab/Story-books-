@@ -4,80 +4,179 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>अधिराजको खत</title>
+
+    <!-- Manifest setup -->
     <link rel="manifest" href="manifest.json">
-    
-    <!-- iPhone (iOS) को लागि थपिएको कोड -->
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="apple-mobile-web-app-title" content="अधिराजको खत">
-    <link rel="apple-touch-icon" href="a.0063.jpg">
+
+    <!-- Mobile App Home Screen Icon (एपको बाहिर देखिने नयाँ लोगो) -->
+    <link rel="icon" type="image/png" sizes="192x192" href="app-logo.png">
+    <link rel="apple-touch-icon" href="app-logo.png">
+
+    <style>
+        body { 
+            background: #fcfbf7; 
+            font-family: 'Georgia', serif; 
+            margin: 0; 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            min-height: 100vh; 
+            -webkit-user-select: none; 
+            user-select: none; 
+            animation: fadeInPage 0.8s ease-in; 
+        }
+
+        @keyframes fadeInPage {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* Header लाई Sticky बनाउन थपिएको CSS */
+        .header { 
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: #fcfbf7;
+            width: 100%;
+            padding-top: 20px;
+            padding-bottom: 15px;
+            text-align: center; 
+            box-shadow: 0 4px 10px rgba(0,0,0,0.03); /* Scroll गर्दा हल्का छाया देखिन */
+        }
+        
+        .header img { 
+            width: 120px; 
+            height: 120px; 
+            border-radius: 50%; 
+            border: 3px solid #fff; 
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1); 
+            object-fit: cover; 
+        }
+        
+        .header h1 { 
+            color: #4a3728; 
+            font-size: 24px; 
+            margin-top: 10px; 
+            margin-bottom: 0;
+            font-weight: bold; 
+        }
+
+        .main-content { 
+            width: 90%; 
+            max-width: 400px; 
+            margin-top: 20px; 
+            display: flex; 
+            flex-direction: column; 
+            gap: 15px; 
+        }
+        
+        .diary-card { 
+            background: white; 
+            padding: 15px 10px; 
+            border-radius: 10px; 
+            text-decoration: none; 
+            display: block; 
+            border-left: 4px solid #d32f2f; 
+            box-shadow: 0 5px 12px rgba(0,0,0,0.05); 
+            text-align: center; 
+            transition: 0.2s; 
+            position: relative; /* Badge align गर्न थपिएको */
+        }
+        .diary-card:active { transform: scale(0.98); }
+        .diary-card h2 { color: #2c3e50; font-size: 16px; margin: 0; } 
+        .diary-card p { color: #d32f2f; font-size: 11px; margin-top: 5px; font-weight: bold; }
+
+        /* भिडियो र फोटो बटनको लागि छुट्टै बोर्डर कलर */
+        .video-btn {
+            border-left: 4px solid #4a3728;
+        }
+        .video-btn p {
+            color: #4a3728;
+        }
+
+        /* UPDATE Badge को लागी थपिएको CSS */
+        .update-badge {
+            position: absolute;
+            left: 10px;
+            bottom: 8px;
+            font-size: 13px;
+            font-weight: bold;
+            color: #007bb5;
+        }
+
+        .footer { margin-top: auto; padding: 30px; color: #999; font-size: 12px; text-align: center; }
+    </style>
 </head>
 <body oncontextmenu="return false;">
 
-    <div id="bgPhoto"></div>
-
-    <div id="introContainer">
-        <div id="typewriter" class="typing-text"></div>
-        <div class="progress-bar">
-            <div id="pFill" class="progress-fill"></div>
-        </div>
+    <div class="header">
+        <!-- एप भित्र देखिने प्रोफाइल फोटो (4870.png) -->
+        <img src="4870.png" alt="Logo">
+        <h1>मनको भावना</h1>
     </div>
 
-    <style>
-        body, html { margin: 0; padding: 0; width: 100%; height: 100%; background: #000; overflow: hidden; font-family: 'Georgia', serif; }
-        #bgPhoto { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: url('a.0063.jpg') no-repeat center center; background-size: cover; filter: brightness(0.4) blur(2px); opacity: 0; animation: fadeInBg 2s forwards; }
-        @keyframes fadeInBg { to { opacity: 1; } }
-        #introContainer { position: relative; height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; z-index: 10; padding: 20px; text-align: center; }
-        .typing-text { color: #fff; font-size: 24px; font-weight: bold; letter-spacing: 2px; min-height: 1.5em; text-shadow: 0 4px 10px rgba(0,0,0,0.5); }
-        .progress-bar { width: 70%; max-width: 250px; height: 3px; background: rgba(255,255,255,0.2); border-radius: 10px; margin-top: 30px; overflow: hidden; }
-        .progress-fill { width: 0%; height: 100%; background: #d32f2f; transition: 3.5s linear; }
-    </style>
+    <div class="main-content">
+        <a href="anusthan.html" class="diary-card">
+            <h2>169 अनुष्ठान लेख</h2>
+            <p>Tap here to read.</p>
+        </a>
+        
+        <a href="youy.html" class="diary-card">
+            <h2>photo folder</h2>
+            <p>YouTube thumbnail.</p>
+        </a>
 
+        <a href="adhura.html" class="diary-card">
+            <h2>मेरो अधुरा शब्दहरू</h2>
+            <p>Tap here to read.</p>
+        </a>
+
+        <!-- UPDATE badge रहने folder कार्ड -->
+        <a href="yui.html" class="diary-card" id="monthiversaryCard" onclick="markAsRead()">
+            <span class="update-badge" id="updateBadge">.UPDATE</span>
+            <h2>folder</h2>
+            <p>मेहन्दी को रङ्ग</p>
+        </a>
+
+        <a href="bayan.html" class="diary-card">
+            <h2>तिम्रो बयान</h2>
+            <p>Tap here to read.</p>
+        </a>
+        
+        <a href="birthday.html" class="diary-card">
+            <h2>Happy Birthday</h2>
+            <p>Tap here to read.</p>
+        </a>
+
+        <a href="photo.html" class="diary-card video-btn">
+            <h2>fav pic</h2>
+            <p>Tap here to view.</p>
+        </a>
+
+        <a href="video.html" class="diary-card video-btn">
+            <h2> video section </h2>
+            <p>Tap here to view.</p>
+        </a>
+    </div> 
+
+    <div class="footer">2026 अधिराज | सुजना श्रेष्ठको लागि</div>
+
+    <!-- अटोमेटिक अपडेट हराउने सानो Script -->
     <script>
-        if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.getRegistrations().then(regs => {
-                for (let reg of regs) { reg.unregister(); }
-            });
-            window.addEventListener('load', () => {
-                navigator.serviceWorker.register('sw.js')
-                .then(() => console.log('SW Registered'))
-                .catch(err => console.log('SW Failed', err));
-            });
-        }
-
-        const text = "अधुरा शब्दहरूको दस्ताबेज";
-        const typewriterElement = document.getElementById('typewriter');
-        const fill = document.getElementById('pFill');
-        let index = 0;
-
-        function typeWriter() {
-            if (index < text.length) {
-                typewriterElement.innerHTML += text.charAt(index);
-                index++;
-                setTimeout(typeWriter, 120);
+        // पेज लोड हुँदा जाँच गर्ने (पहिले नै हेरिसकेको भए अपडेट लुकाउने)
+        window.addEventListener('DOMContentLoaded', () => {
+            if (localStorage.getItem('monthiversaryViewed') === 'true') {
+                const badge = document.getElementById('updateBadge');
+                if (badge) {
+                    badge.style.display = 'none';
+                }
             }
+        });
+
+        // क्लिक गरेपछि LocalStorage मा सेभ गर्ने र अटोमेटिक हराउने
+        function markAsRead() {
+            localStorage.setItem('monthiversaryViewed', 'true');
         }
-
-        window.onload = () => {
-            if (sessionStorage.getItem('appLoaded')) {
-                window.location.replace("home.html");
-                return;
-            }
-            sessionStorage.setItem('appLoaded', 'true');
-
-            setTimeout(() => {
-                typeWriter();
-                fill.style.width = '100%';
-            }, 500);
-
-            setTimeout(() => {
-                document.body.style.transition = '1s';
-                document.body.style.opacity = '0';
-                setTimeout(() => {
-                    window.location.replace("home.html");
-                }, 1000);
-            }, 4500);
-        };
     </script>
 </body>
 </html>
