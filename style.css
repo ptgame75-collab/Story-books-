@@ -294,3 +294,21 @@ video {
     color: var(--line);
     font-weight: bold;
 }
+/* --- New Update Badge Styling --- */
+.new-update-badge {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: bold;
+    color: #007bff; /* नीलो रङ (तपाईंको फोटो २ जस्तै) */
+    margin-right: 6px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* Card भित्र Badge र Title मिलाउन */
+.card-title-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+}
