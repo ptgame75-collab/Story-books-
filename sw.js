@@ -1,4 +1,4 @@
-const CACHE_NAME = 'diary-v8'; // भर्सन अपडेट
+const CACHE_NAME = 'diary-v9'; // भर्सन अपडेट
 
 // आफ्नो फोल्डर स्ट्रक्चर अनुसार पाथ मिलाइएको छ
 const ASSETS_TO_CACHE = [
