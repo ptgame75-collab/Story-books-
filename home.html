@@ -71,6 +71,7 @@
         }
         
         .diary-card { 
+            position: relative;
             background: white; 
             padding: 15px 10px; 
             border-radius: 10px; 
@@ -91,6 +92,27 @@
         }
         .video-btn p {
             color: #4a3728;
+        }
+
+        /* Update / NEW Badge को CSS */
+        .update-badge {
+            position: absolute;
+            top: -6px;
+            right: -6px;
+            background-color: #e74c3c;
+            color: white;
+            font-size: 10px;
+            font-weight: bold;
+            padding: 3px 8px;
+            border-radius: 12px;
+            box-shadow: 0 2px 6px rgba(231, 76, 60, 0.4);
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
         }
 
         .footer { margin-top: auto; padding: 30px; color: #999; font-size: 12px; text-align: center; }
@@ -120,7 +142,9 @@
             <p>Tap here to read.</p>
         </a>
 
-        <a href="yui.html" class="diary-card">
+        <!-- Sorry Suzu Folders with One-Time Badge -->
+        <a href="yui.html" class="diary-card" id="suzu-folder" onclick="markSuzuSeen()">
+            <span class="update-badge" id="suzu-badge" style="display: none;">NEW</span>
             <h2>folder</h2>
             <p>Sorry Suzu.</p>
         </a>
@@ -148,6 +172,18 @@
 
     <div class="footer">2026 अधिराज | सुजना श्रेष्ठको लागि</div>
 
+    <script>
+        // LocalStorage चेक गर्ने र One-Time Badge नियन्त्रण गर्ने JavaScript
+        document.addEventListener("DOMContentLoaded", function () {
+            const isSeen = localStorage.getItem("suzu_folder_seen");
+            if (!isSeen) {
+                document.getElementById("suzu-badge").style.display = "inline-block";
+            }
+        });
+
+        function markSuzuSeen() {
+            localStorage.setItem("suzu_folder_seen", "true");
+        }
+    </script>
 </body>
 </html>
-
