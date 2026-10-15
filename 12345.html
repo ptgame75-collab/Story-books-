@@ -183,7 +183,7 @@
 
   <div class="game-card">
     <div class="message-box" id="messageArea">
-      तिमीसँग मलाई रिस छ भने फोटोमा ट्याप गर
+      मसँग रिस छ भने फोटोमा डबल ट्याप गर
     </div>
 
     <div class="game-container" id="gameArea">
@@ -259,7 +259,7 @@
       hitSound.currentTime = 0;
       hitSound.play().catch(err => console.log("Audio play error:", err));
 
-      messageArea.textContent = "मलाई माफ गर्देउ sorry!";
+      messageArea.textContent = "SORRY SORRY SORRY!";
       messageArea.classList.remove('sorry-flash');
       void messageArea.offsetWidth;
       messageArea.classList.add('sorry-flash');
@@ -354,7 +354,7 @@
         attack.elements.forEach(el => el.remove());
       });
       attacks = [];
-      messageArea.textContent = "मसँग रिस छ भने फोटोमा ट्याप गर";
+      messageArea.textContent = "मसँग रिस छ भने फोटोमा डबल ट्याप गर";
       messageArea.classList.remove('sorry-flash');
     });
   </script>
