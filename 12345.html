@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="ne">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Battle Axe Throw Game</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: #000000;
+      color: #ffffff;
+      font-family: Arial, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 15px;
+    }
+
+    .game-card {
+      width: 100%;
+      max-width: 340px;
+      background-color: #000000;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .message-box {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      text-align: center;
+      font-size: 15px;
+      font-weight: bold;
+      color: #ffda79;
+      min-height: 40px;
+      transition: all 0.2s ease;
+    }
+
+    /* सरी म्यासेज फ्ल्यास हुने एनिमेशन */
+    .sorry-flash {
+      animation: flashAnim 0.3s ease;
+      color: #ff4757 !important;
+    }
+
+    @keyframes flashAnim {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.15); }
+      100% { transform: scale(1); }
+    }
+
+    .game-container {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      border-radius: 8px;
+      overflow: visible; 
+      background-color: #000000;
+    }
+
+    canvas {
+      width: 100%;
+      height: 100%;
+      display: block;
+      cursor: pointer;
+      border-radius: 8px;
+    }
+
+    /* बन्चरोको स्टाइल र इम्प्याक्ट एनिमेशन */
+    .stuck-knife {
+      position: absolute;
+      width: 130px;
+      height: auto;
+      pointer-events: none;
+      filter: drop-shadow(4px 6px 10px rgba(0,0,0,0.85));
+      z-index: 5;
+      animation: knifeImpact 0.15s ease-out forwards, knifeShake 0.1s 0.15s ease-in-out;
+    }
+
+    @keyframes knifeImpact {
+      0% {
+        transform: scale(1.8) rotate(-35deg);
+        opacity: 0.6;
+      }
+      100% {
+        transform: scale(1) rotate(-35deg);
+        opacity: 1;
+      }
+    }
+
+    @keyframes knifeShake {
+      0% { transform: rotate(-35deg) translateY(0); }
+      50% { transform: rotate(-32deg) translateY(-3px); }
+      100% { transform: rotate(-35deg) translateY(0); }
+    }
+
+    /* घाउको स्टाइल - बन्चरोको धारमा मात्र देखिने */
+    .wound-mark {
+      position: absolute;
+      width: 35px;
+      height: 12px;
+      background: radial-gradient(ellipse at center, #110000 0%, #4a0000 45%, #8b0000 70%, transparent 100%);
+      border-radius: 50%;
+      box-shadow: inset 0 0 6px #000000, 0 0 5px rgba(139, 0, 0, 0.8);
+      z-index: 4;
+      mix-blend-mode: multiply;
+      transform: translate(-50%, -50%) rotate(35deg);
+      animation: woundAppear 0.1s ease-out forwards;
+    }
+
+    @keyframes woundAppear {
+      0% { transform: translate(-50%, -50%) scale(0.1) rotate(35deg); opacity: 0; }
+      100% { transform: translate(-50%, -50%) scale(1) rotate(35deg); opacity: 1; }
+    }
+
+    /* रगतको बग्ने धारा */
+    .blood-drip-stream {
+      position: absolute;
+      width: 3px;
+      background: linear-gradient(180deg, #b30000 0%, #660000 50%, #330000 85%, #1a0000 100%);
+      border-radius: 3px;
+      box-shadow: 1px 0 2px rgba(0,0,0,0.8), inset -1px 0 1px rgba(255,255,255,0.3);
+      z-index: 3;
+      transform-origin: top center;
+      animation: dripFlow 2.2s cubic-bezier(0.22, 0.61, 0.36, 1) forwards;
+    }
+
+    .blood-node {
+      position: absolute;
+      background: radial-gradient(circle at 35% 35%, #ff3333 0%, #800000 60%, #330000 100%);
+      border-radius: 50%;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.7);
+      z-index: 4;
+      animation: nodeAppear 0.4s ease-out forwards;
+    }
+
+    @keyframes dripFlow {
+      0% { height: 0px; opacity: 1; }
+      100% { height: var(--drip-height, 120px); opacity: 0.9; }
+    }
+
+    @keyframes nodeAppear {
+      0% { transform: scale(0); }
+      100% { transform: scale(1); }
+    }
+
+    .blood-splatter-dot {
+      position: absolute;
+      background: radial-gradient(circle, #a00000 30%, #4a0000 80%, transparent 100%);
+      border-radius: 40% 60% 70% 30% / 50% 60% 40% 50%;
+      pointer-events: none;
+      z-index: 2;
+      animation: dotSpread 0.25s ease-out forwards;
+    }
+
+    @keyframes dotSpread {
+      0% { transform: scale(0) rotate(0deg); opacity: 0; }
+      100% { transform: scale(1) rotate(45deg); opacity: 0.9; }
+    }
+
+    .reset-btn {
+      margin-top: 15px;
+      width: 100%;
+      padding: 10px;
+      background-color: #ff4757;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-weight: bold;
+      font-size: 14px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="game-card">
+    <div class="message-box" id="messageArea">
+      म्यासेज लेख्न बाँकी छ...
+    </div>
+
+    <div class="game-container" id="gameArea">
+      <canvas id="photoCanvas"></canvas>
+    </div>
+
+    <button class="reset-btn" id="resetBtn">रिसेट गर्नुहोस् (Receive)</button>
+  </div>
+
+  <audio id="hitSound" src="khifehit.mp3" preload="auto"></audio>
+
+  <script>
+    const canvas = document.getElementById('photoCanvas');
+    const ctx = canvas.getContext('2d', { willReadFrequently: true });
+    const gameArea = document.getElementById('gameArea');
+    const messageArea = document.getElementById('messageArea');
+    const hitSound = document.getElementById('hitSound');
+    const resetBtn = document.getElementById('resetBtn');
+
+    let attacks = [];
+    const MAX_ATTACKS = 3;
+
+    const bgImg = new Image();
+    bgImg.src = 'parbat.png';
+
+    const personImg = new Image();
+    personImg.src = 'parbat01.png';
+
+    let imagesLoaded = 0;
+    function checkLoaded() {
+      imagesLoaded++;
+      if (imagesLoaded === 2) {
+        canvas.width = bgImg.naturalWidth || 500;
+        canvas.height = bgImg.naturalHeight || 500;
+
+        ctx.drawImage(bgImg, 0, 0, canvas.width, canvas.height);
+        ctx.drawImage(personImg, 0, 0, canvas.width, canvas.height);
+      }
+    }
+
+    bgImg.onload = checkLoaded;
+    personImg.onload = checkLoaded;
+
+    const offCanvas = document.createElement('canvas');
+    const offCtx = offCanvas.getContext('2d', { willReadFrequently: true });
+
+    personImg.onload = () => {
+      offCanvas.width = personImg.naturalWidth;
+      offCanvas.height = personImg.naturalHeight;
+      offCtx.drawImage(personImg, 0, 0);
+      checkLoaded();
+    };
+
+    canvas.addEventListener('click', function(event) {
+      const rect = canvas.getBoundingClientRect();
+      
+      const scaleX = offCanvas.width / rect.width;
+      const scaleY = offCanvas.height / rect.height;
+      
+      const canvasX = Math.floor((event.clientX - rect.left) * scaleX);
+      const canvasY = Math.floor((event.clientY - rect.top) * scaleY);
+
+      const pixel = offCtx.getImageData(canvasX, canvasY, 1, 1).data;
+      const alpha = pixel[3]; 
+
+      if (alpha < 20) {
+        return; 
+      }
+
+      const displayX = event.clientX - rect.left;
+      const displayY = event.clientY - rect.top;
+
+      hitSound.currentTime = 0;
+      hitSound.play().catch(err => console.log("Audio play error:", err));
+
+      messageArea.textContent = "सरी सरी सरी!";
+      messageArea.classList.remove('sorry-flash');
+      void messageArea.offsetWidth;
+      messageArea.classList.add('sorry-flash');
+
+      if (attacks.length >= MAX_ATTACKS) {
+        const oldestAttack = attacks.shift();
+        oldestAttack.elements.forEach(el => el.remove());
+      }
+
+      const currentAttackElements = [];
+
+      // १. पहिलो चरण: क्लिक गर्नेबित्तिकै बन्चरो (Knife) तुरुन्तै प्रहार भएर बस्नेछ
+      const knifeLeft = displayX - 45;
+      const knifeTop = displayY - 65;
+
+      const knife = document.createElement('img');
+      knife.src = 'knife.png';
+      knife.className = 'stuck-knife';
+      knife.style.left = knifeLeft + 'px';
+      knife.style.top = knifeTop + 'px';
+      gameArea.appendChild(knife);
+      currentAttackElements.push(knife);
+
+      // २. दोस्रो चरण: बन्चरो प्रहार भएको ठ्याक्कै २ मिलिसेकेन्ड (2ms) पछि,
+      // बन्चरोको इम्प्याक्ट बिन्दु (धार) लाई ठ्याक्कै आधार बनाएर घाउ र रगत देखाउने
+      setTimeout(() => {
+        const hitPointX = displayX;
+        const hitPointY = displayY;
+
+        // घाउको मार्कर
+        const wound = document.createElement('div');
+        wound.className = 'wound-mark';
+        wound.style.left = hitPointX + 'px';
+        wound.style.top = hitPointY + 'px';
+        gameArea.appendChild(wound);
+        currentAttackElements.push(wound);
+
+        // रगतको बग्ने धाराहरू
+        const streamCount = Math.floor(Math.random() * 2) + 4; 
+        for (let i = 0; i < streamCount; i++) {
+          const stream = document.createElement('div');
+          stream.className = 'blood-drip-stream';
+          
+          const offsetX = (Math.random() - 0.5) * 30; 
+          const dripHeight = Math.random() * 80 + 90; 
+          const streamWidth = Math.random() * 2 + 2; 
+          
+          stream.style.width = streamWidth + 'px';
+          stream.style.left = (hitPointX + offsetX) + 'px';
+          stream.style.top = hitPointY + 'px';
+          stream.style.setProperty('--drip-height', dripHeight + 'px');
+          stream.style.animationDelay = (i * 0.06) + 's';
+          gameArea.appendChild(stream);
+          currentAttackElements.push(stream);
+
+          const node = document.createElement('div');
+          node.className = 'blood-node';
+          const nodeSize = streamWidth * 2.2;
+          node.style.width = nodeSize + 'px';
+          node.style.height = nodeSize + 'px';
+          node.style.left = (hitPointX + offsetX - (nodeSize / 2) + (streamWidth / 2)) + 'px';
+          node.style.top = (hitPointY + dripHeight) + 'px';
+          node.style.animationDelay = (1.8 + (i * 0.05)) + 's';
+          gameArea.appendChild(node);
+          currentAttackElements.push(node);
+        }
+
+        // रगतका छिटाहरू
+        for (let i = 0; i < 6; i++) {
+          const dot = document.createElement('div');
+          dot.className = 'blood-splatter-dot';
+          const size = Math.random() * 5 + 3;
+          dot.style.width = size + 'px';
+          dot.style.height = size + 'px';
+          
+          const offsetX = (Math.random() - 0.5) * 40;
+          const offsetY = (Math.random() - 0.5) * 15;
+          
+          dot.style.left = (hitPointX + offsetX) + 'px';
+          dot.style.top = (hitPointY + offsetY) + 'px';
+          dot.style.animationDelay = (Math.random() * 0.1) + 's';
+          gameArea.appendChild(dot);
+          currentAttackElements.push(dot);
+        }
+      }, 2); // २ मिलिसेकेन्डको पर्फेक्ट ग्याप
+
+      attacks.push({ elements: currentAttackElements });
+    });
+
+    resetBtn.addEventListener('click', function() {
+      attacks.forEach(attack => {
+        attack.elements.forEach(el => el.remove());
+      });
+      attacks = [];
+      messageArea.textContent = "म्यासेज लेख्न बाँकी छ...";
+      messageArea.classList.remove('sorry-flash');
+    });
+  </script>
+
+</body>
+</html>
