@@ -129,44 +129,63 @@
         audio.volume = 0.5;
         let isAudioPlaying = false;
 
-        // ग्लोबल अडियो प्ले गर्ने फङ्क्सन
-        function playGlobalMusic() {
-            if (isAudioPlaying) return;
+        // अडियो सुरक्षित तरिकाले प्ले गराउने
+        function playAudio() {
             audio.play().then(() => {
                 isAudioPlaying = true;
-                removeAudioListeners();
-            }).catch(err => console.log("Waiting for user tap"));
+            }).catch(err => console.log("User interaction required"));
         }
 
-        function removeAudioListeners() {
-            document.removeEventListener("click", playGlobalMusic);
-            document.removeEventListener("touchstart", playGlobalMusic);
+        // अडियो रोक्ने
+        function stopAudio() {
+            audio.pause();
         }
 
-        // बाहिर क्लिक वा टच गर्दा अडियो प्ले गर्ने
-        document.addEventListener("click", playGlobalMusic);
-        document.addEventListener("touchstart", playGlobalMusic);
+        // स्क्रिन क्लिक/टच गर्दा बजाउने
+        function handleUserInteraction() {
+            playAudio();
+            document.removeEventListener("click", handleUserInteraction);
+            document.removeEventListener("touchstart", handleUserInteraction);
+        }
 
-        // iframe (home.html र अन्य फोल्डरहरू) भित्र पनि टच/क्लिक ट्रयाक गर्ने
+        document.addEventListener("click", handleUserInteraction);
+        document.addEventListener("touchstart", handleUserInteraction);
+
+        // iframe भित्रका टच/क्लिक ट्रयाक गर्ने
         const frame = document.getElementById('appFrame');
         frame.addEventListener('load', () => {
             try {
                 const iframeDoc = frame.contentWindow.document;
-                iframeDoc.addEventListener('click', playGlobalMusic);
-                iframeDoc.addEventListener('touchstart', playGlobalMusic);
-            } catch (e) {
-                console.log("Iframe listener added.");
+                iframeDoc.addEventListener('click', handleUserInteraction);
+                iframeDoc.addEventListener('touchstart', handleUserInteraction);
+            } catch (e) {}
+        });
+
+        // १. एप/ट्याब बन्द हुँदा वा ब्याकग्राउन्डमा जाँदा (Minimize/Close/Switch) अडियो १००% रोक्ने
+        function onAppHide() {
+            stopAudio();
+        }
+
+        // २. एप पुनः अगाडि आउँदा (Open/Focus) अडियो सुरु गर्ने
+        function onAppShow() {
+            if (isAudioPlaying) {
+                playAudio();
+            }
+        }
+
+        // मोबाइल र ब्राउजरका सबै लाइफसाइकल इभेन्टहरू ह्यान्डल गर्ने
+        document.addEventListener("visibilitychange", () => {
+            if (document.hidden) {
+                onAppHide();
+            } else {
+                onAppShow();
             }
         });
 
-        // एपबाट बाहिर जाँदा म्युजिक रोक्ने र फर्किँदा फेरि बजाउने
-        document.addEventListener("visibilitychange", () => {
-            if (document.hidden) {
-                audio.pause();
-            } else if (isAudioPlaying) {
-                audio.play().catch(err => console.log("Resume blocked"));
-            }
-        });
+        window.addEventListener("pagehide", onAppHide);
+        window.addEventListener("blur", onAppHide);
+        window.addEventListener("pageshow", onAppShow);
+        window.addEventListener("focus", onAppShow);
 
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
