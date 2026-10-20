@@ -70,6 +70,11 @@
 </head>
 <body oncontextmenu="return false;">
 
+    <!-- यो पेज (dashain.html) मा मात्र बज्ने ब्याकग्राउन्ड अडियो -->
+    <audio id="dashain-audio" loop preload="auto">
+        <source src="dasai.mp3" type="audio/mpeg">
+    </audio>
+
     <div class="toolbar">
         <a href="home.html" class="btn">← back</a>
         <button class="btn" onclick="toggleNightMode()" id="nightBtn">🌙 | नाइट मोड</button>
@@ -104,7 +109,7 @@
 
         <p>अनि अर्को कुरो, यो मलाई WhatsApp मा Yes वा No मा answer गर्नु है! म सोचिरहेको थिएँ— यो फोल्डरहरूमा धेरै मेसेज छ, तिमीलाई पढ्न गाह्रो वा अप्ठ्यारो भएको होला। त्यसैले म यसमा audio listening सुविधा जोड्ने सोचिरहेको थें। यसमा के हुन्छ भने तिमीले मेसेजहरू पढ्न मात्रै होइन, सुन्न पनि सक्छौ।</p>
 
-        <p>तर यसको फिक्का कुरो के छ भने, जुन 'फिल' (Feeling) हुनुपर्ने हो, त्यो अडियो सुन्दा हुँदैन; यसरी त औपचारिक रूपमा सुनेको जस्तो मात्र हुन्छ। त्यसैले राम्रो त पढ्नु नै हुन्छ। तर यदि तिमी चाहन्छौ भने म audio listening सुविधा जोड्नेछु। तर मेरो विचारमा, सन्देशहरूलाई पढ्नुको सרט (सट्टा) सुन्नु भनेको 'भिडियो कलमा दशैँको टीका लगाउनु' जस्तै हो!</p>
+        <p>तर यसको फिक्का कुरो के छ भने, जुन 'फिल' (Feeling) हुनुपर्ने हो, त्यो अडियो सुन्दा हुँदैन; यसरी त औपचारिक रूपमा सुनेको Jasto मात्र हुन्छ। त्यसैले राम्रो त पढ्नु नै हुन्छ। तर यदि तिमी चाहन्छौ भने म audio listening सुविधा जोड्नेछु। तर मेरो विचारमा, सन्देशहरूलाई पढ्नुको सट्टा सुन्नु भनेको 'भिडियो कलमा दशैँको टीका लगाउनु' जस्तै हो!</p>
     </div>
 
     <script>
@@ -125,6 +130,22 @@
         let lastTapTime = 0;
 
         window.addEventListener('DOMContentLoaded', () => {
+            // ब्याकग्राउन्ड म्युजिक अटो प्ले र ३०% मधुरो भोल्युम सेट गर्ने
+            const audio = document.getElementById("dashain-audio");
+            audio.volume = 0.3;
+
+            function playAudio() {
+                audio.play().catch(error => {
+                    console.log("Autoplay restricted by browser.");
+                });
+                document.removeEventListener("click", playAudio);
+                document.removeEventListener("touchstart", playAudio);
+            }
+
+            document.addEventListener("click", playAudio);
+            document.addEventListener("touchstart", playAudio);
+
+            // Bookmark setup
             document.querySelectorAll('.bold-feeling p').forEach((p, i) => p.setAttribute('data-id', 'p_' + (i + 1)));
             loadSavedBookmark();
             setupInteractions();
