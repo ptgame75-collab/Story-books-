@@ -192,11 +192,6 @@
 </head>
 <body oncontextmenu="return false;">
 
-    <!-- ब्याकग्राउन्ड म्युजिक (dasai.mp3 लगातार loop मा बज्ने) -->
-    <audio id="bg-audio" loop preload="auto">
-        <source src="dasai.mp3" type="audio/mpeg">
-    </audio>
-
     <!-- स्टिकी हुने भाग -->
     <div class="sticky-wrapper">
         <div class="header">
@@ -256,7 +251,7 @@
                 <p>Tap here to read.</p>
             </a>
 
-            <!-- बाँकी पुराना तीन वटा फोल्डरहरू तल सारिएका छन् -->
+            <!-- बाँकी पुराना तीन वटा फोल्डरहरू -->
             <a href="yui.html" class="diary-card" id="suzu-folder" onclick="markSuzuSeen()">
                 <span class="update-badge" id="suzu-badge" style="display: none;">NEW</span>
                 <h2>फेरि अर्को new update आको छ</h2>
@@ -306,26 +301,12 @@
             }
         });
 
-        // अडियो प्ले र भोल्युम नियन्त्रण (मधुरो स्वरमा ३०% भोल्युम)
         document.addEventListener("DOMContentLoaded", function () {
-            const audio = document.getElementById("bg-audio");
-            audio.volume = 0.3; 
-
-            function playAudio() {
-                audio.play().catch(error => {
-                    console.log("Autoplay restricted.");
-                });
-                document.removeEventListener("click", playAudio);
-                document.removeEventListener("touchstart", playAudio);
-            }
-
-            document.addEventListener("click", playAudio);
-            document.addEventListener("touchstart", playAudio);
-
             // Badge check
             const isSeen = localStorage.getItem("suzu_folder_seen");
             if (!isSeen) {
-                document.getElementById("suzu-badge").style.display = "inline-block";
+                const badge = document.getElementById("suzu-badge");
+                if (badge) badge.style.display = "inline-block";
             }
         });
 
