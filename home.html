@@ -14,7 +14,7 @@
 
     <style>
         body { 
-            background: #fcfbf7; /* पहिलेकै जस्तो सादा र सफा ब्याकग्राउन्ड टोन */
+            background: #fcfbf7; 
             font-family: 'Georgia', serif; 
             margin: 0; 
             display: flex; 
@@ -45,7 +45,7 @@
             box-shadow: 0 4px 10px rgba(0,0,0,0.03);
         }
 
-        /* Header CSS - पहिलेकै सादा रूप */
+        /* Header CSS */
         .header { 
             width: 100%;
             padding-top: 15px;
@@ -249,6 +249,14 @@
 
         <!-- B-Side (नयाँ फोल्डरहरू) -->
         <div class="side-panel" id="panel-b">
+            <!-- नयाँ थपिएको फोल्डर (सबैभन्दा माथि) -->
+            <a href="dashain.html" class="diary-card">
+                <span class="update-badge">NEW</span>
+                <h2>दशैँको शुभकामना</h2>
+                <p>Tap here to read.</p>
+            </a>
+
+            <!-- बाँकी पुराना तीन वटा फोल्डरहरू तल सारिएका छन् -->
             <a href="yui.html" class="diary-card" id="suzu-folder" onclick="markSuzuSeen()">
                 <span class="update-badge" id="suzu-badge" style="display: none;">NEW</span>
                 <h2>फेरि अर्को new update आको छ</h2>
