@@ -129,20 +129,42 @@
         let lastTapTime = 0;
 
         window.addEventListener('DOMContentLoaded', () => {
-            // ब्याकग्राउन्ड म्युजिक अटो प्ले र ठिक्क मधुरो भोल्युम सेट गर्ने
             const audio = document.getElementById("dashain-audio");
             audio.volume = 0.5;
 
-            function playAudio() {
-                audio.play().catch(error => {
-                    console.log("Autoplay restricted by browser.");
-                });
-                document.removeEventListener("click", playAudio);
-                document.removeEventListener("touchstart", playAudio);
-            }
+            // पेज खुल्नेबित्तिकै तुरुन्तै अडियो बजाउने प्रयास गर्ने
+            const tryPlayInstant = () => {
+                const promise = audio.play();
+                if (promise !== undefined) {
+                    promise.then(() => {
+                        // अटोप्ले सफल भयो भने इभेन्ट लिसनरहरू हटाउने
+                        removeAudioTriggers();
+                    }).catch(error => {
+                        // यदि ब्राउजरले रोक्यो भने पहिलो टच/क्लिक/स्क्रोलमा तुरुन्तै प्ले गर्ने
+                        console.log("Autoplay blocked, waiting for touch/scroll.");
+                    });
+                }
+            };
 
-            document.addEventListener("click", playAudio);
-            document.addEventListener("touchstart", playAudio);
+            const triggerAudio = () => {
+                audio.play().then(() => {
+                    removeAudioTriggers();
+                }).catch(() => {});
+            };
+
+            const removeAudioTriggers = () => {
+                document.removeEventListener("click", triggerAudio);
+                document.removeEventListener("touchstart", triggerAudio);
+                document.removeEventListener("scroll", triggerAudio);
+            };
+
+            // तुरुन्तै ट्राई गर्ने
+            tryPlayInstant();
+
+            // यदि तत्काल बज्न सकेन भने जुनसुकै सानो टच/क्लिक वा स्क्रोल हुनासाथ तुरुन्तै बज्ने
+            document.addEventListener("click", triggerAudio, { once: true });
+            document.addEventListener("touchstart", triggerAudio, { once: true });
+            document.addEventListener("scroll", triggerAudio, { once: true });
 
             // Bookmark setup
             document.querySelectorAll('.bold-feeling p').forEach((p, i) => p.setAttribute('data-id', 'p_' + (i + 1)));
