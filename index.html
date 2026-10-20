@@ -159,6 +159,15 @@
             }
         });
 
+        // एपबाट बाहिर जाँदा म्युजिक रोक्ने र फर्किँदा फेरि बजाउने
+        document.addEventListener("visibilitychange", () => {
+            if (document.hidden) {
+                audio.pause();
+            } else if (isAudioPlaying) {
+                audio.play().catch(err => console.log("Resume blocked"));
+            }
+        });
+
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
                 navigator.serviceWorker.getRegistrations().then(regs => {
