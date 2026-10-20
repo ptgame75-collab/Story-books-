@@ -8,19 +8,20 @@
     <!-- Manifest setup -->
     <link rel="manifest" href="manifest.json">
 
-    <!-- Mobile App Home Screen Icon (एपको बाहिर देखिने नयाँ लोगो) -->
+    <!-- Mobile App Home Screen Icon -->
     <link rel="icon" type="image/png" sizes="192x192" href="app-logo.png">
     <link rel="apple-touch-icon" href="app-logo.png">
 
     <style>
         body { 
-            background: #fcfbf7; 
+            background: #fcfbf7; /* पहिलेकै जस्तो सादा र सफा ब्याकग्राउन्ड टोन */
             font-family: 'Georgia', serif; 
             margin: 0; 
             display: flex; 
             flex-direction: column; 
             align-items: center; 
             min-height: 100vh; 
+            overflow-x: hidden;
             -webkit-user-select: none; 
             user-select: none; 
             animation: fadeInPage 0.8s ease-in; 
@@ -31,22 +32,30 @@
             to { opacity: 1; }
         }
 
-        /* Header लाई Sticky बनाउन थपिएको CSS */
-        .header { 
+        /* स्टिकी कन्टेनर */
+        .sticky-wrapper {
             position: sticky;
             top: 0;
-            z-index: 100;
+            z-index: 1000;
             background: #fcfbf7;
             width: 100%;
-            padding-top: 20px;
-            padding-bottom: 15px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.03);
+        }
+
+        /* Header CSS - पहिलेकै सादा रूप */
+        .header { 
+            width: 100%;
+            padding-top: 15px;
+            padding-bottom: 5px;
             text-align: center; 
-            box-shadow: 0 4px 10px rgba(0,0,0,0.03); /* Scroll गर्दा हल्का छाया देखिन */
         }
         
         .header img { 
-            width: 120px; 
-            height: 120px; 
+            width: 105px; 
+            height: 105px; 
             border-radius: 50%; 
             border: 3px solid #fff; 
             box-shadow: 0 5px 15px rgba(0,0,0,0.1); 
@@ -55,21 +64,92 @@
         
         .header h1 { 
             color: #4a3728; 
-            font-size: 24px; 
-            margin-top: 10px; 
-            margin-bottom: 0;
+            font-size: 21px; 
+            margin-top: 6px; 
+            margin-bottom: 2px;
             font-weight: bold; 
         }
 
-        .main-content { 
-            width: 90%; 
-            max-width: 400px; 
-            margin-top: 20px; 
-            display: flex; 
-            flex-direction: column; 
-            gap: 15px; 
+        /* सानो अक्षरमा दशैँको शुभकामना म्यासेज */
+        .dashain-wish {
+            font-size: 11px;
+            color: #d32f2f;
+            margin-bottom: 5px;
+            font-weight: bold;
+            letter-spacing: 0.5px;
         }
-        
+
+        /* ट्याब स्विच गर्ने सेक्सन */
+        .tab-container {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            width: 100%;
+            max-width: 400px;
+            margin-top: 5px;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 8px;
+            background: #fcfbf7;
+        }
+
+        .tab-btn {
+            background: none;
+            border: none;
+            font-size: 15px;
+            font-weight: bold;
+            font-family: 'Georgia', serif;
+            color: #888;
+            cursor: pointer;
+            padding: 5px 10px;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        .tab-btn.active {
+            color: #d32f2f;
+        }
+
+        .tab-btn.active::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background-color: #d32f2f;
+            border-radius: 2px;
+        }
+
+        /* तेर्सो स्वाइप कन्टेनर */
+        .swipe-container {
+            display: flex;
+            width: 100%;
+            max-width: 400px;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            scroll-behavior: smooth;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+            margin-top: 15px;
+            padding-bottom: 20px;
+        }
+
+        .swipe-container::-webkit-scrollbar {
+            display: none;
+        }
+
+        /* प्यानल */
+        .side-panel {
+            flex: 0 0 100%;
+            width: 100%;
+            box-sizing: border-box;
+            padding: 0 5%;
+            scroll-snap-align: start;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
         .diary-card { 
             position: relative;
             background: white; 
@@ -86,7 +166,6 @@
         .diary-card h2 { color: #2c3e50; font-size: 16px; margin: 0; } 
         .diary-card p { color: #d32f2f; font-size: 11px; margin-top: 5px; font-weight: bold; }
 
-        /* भिडियो र फोटो बटनको लागि छुट्टै बोर्डर कलर */
         .video-btn {
             border-left: 4px solid #4a3728;
         }
@@ -94,7 +173,7 @@
             color: #4a3728;
         }
 
-        /* Update / NEW Badge को CSS */
+        /* Update / NEW Badge CSS */
         .update-badge {
             position: absolute;
             top: -6px;
@@ -106,81 +185,136 @@
             padding: 3px 8px;
             border-radius: 12px;
             box-shadow: 0 2px 6px rgba(231, 76, 60, 0.4);
-            animation: pulse 1.5s infinite;
         }
 
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.1); }
-            100% { transform: scale(1); }
-        }
-
-        .footer { margin-top: auto; padding: 30px; color: #999; font-size: 12px; text-align: center; }
+        .footer { margin-top: auto; padding: 20px; color: #999; font-size: 12px; text-align: center; }
     </style>
 </head>
 <body oncontextmenu="return false;">
 
-    <div class="header">
-        <!-- एप भित्र देखिने प्रोफाइल फोटो (4870.png) -->
-        <img src="4870.png" alt="Logo">
-        <h1>मनको भावना</h1>
+    <!-- ब्याकग्राउन्ड म्युजिक (dasai.mp3 लगातार loop मा बज्ने) -->
+    <audio id="bg-audio" loop preload="auto">
+        <source src="dasai.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- स्टिकी हुने भाग -->
+    <div class="sticky-wrapper">
+        <div class="header">
+            <img src="4870.png" alt="Logo">
+            <h1>मनको भावना</h1>
+            <div class="dashain-wish">विजया दशैँको हार्दिक मङ्गलमय शुभकामना!</div>
+        </div>
+
+        <div class="tab-container">
+            <button class="tab-btn active" id="btn-a" onclick="scrollToPanel(0)">A-Side (पुरानो)</button>
+            <button class="tab-btn" id="btn-b" onclick="scrollToPanel(1)">B-Side (नयाँ)</button>
+        </div>
     </div>
 
-    <div class="main-content">
-        <a href="anusthan.html" class="diary-card">
-            <h2>169 अनुष्ठान लेख</h2>
-            <p>Tap here to read.</p>
-        </a>
+    <!-- स्वाइप कन्टेनर -->
+    <div class="swipe-container" id="swipeContainer">
         
-        <a href="youy.html" class="diary-card">
-            <h2>photo folder</h2>
-            <p>YouTube thumbnail.</p>
-        </a>
+        <!-- A-Side (पुराना फोल्डरहरू) -->
+        <div class="side-panel" id="panel-a">
+            <a href="anusthan.html" class="diary-card">
+                <h2>169 अनुष्ठान लेख</h2>
+                <p>Tap here to read.</p>
+            </a>
 
-        <a href="adhura.html" class="diary-card">
-            <h2>मेरो अधुरा शब्दहरू</h2>
-            <p>Tap here to read.</p>
-        </a>
+            <a href="adhura.html" class="diary-card">
+                <h2>मेरो अधुरा शब्दहरू</h2>
+                <p>Tap here to read.</p>
+            </a>
 
-        <!-- Sorry Suzu Folders with One-Time Badge -->
-        <a href="yui.html" class="diary-card" id="suzu-folder" onclick="markSuzuSeen()">
-            <span class="update-badge" id="suzu-badge" style="display: none;">NEW</span>
-            <h2> फेरि अर्को new update आको छ</h2>
-            <p>new updated</p>
-        </a>
+            <a href="bayan.html" class="diary-card">
+                <h2>तिम्रो बयान</h2>
+                <p>Tap here to read.</p>
+            </a>
+            
+            <a href="birthday.html" class="diary-card">
+                <h2>Happy Birthday</h2>
+                <p>Tap here to read.</p>
+            </a>
 
-        <a href="bayan.html" class="diary-card">
-            <h2>तिम्रो बयान</h2>
-            <p>Tap here to read.</p>
-        </a>
-        
-        <a href="birthday.html" class="diary-card">
-            <h2>Happy Birthday</h2>
-            <p>Tap here to read.</p>
-        </a>
+            <a href="photo.html" class="diary-card video-btn">
+                <h2>fav pic</h2>
+                <p>Tap here to view.</p>
+            </a>
 
-        <a href="photo.html" class="diary-card video-btn">
-            <h2>fav pic</h2>
-            <p>Tap here to view.</p>
-        </a>
+            <a href="video.html" class="diary-card video-btn">
+                <h2>video section</h2>
+                <p>Tap here to view.</p>
+            </a>
+        </div>
 
-        <a href="video.html" class="diary-card video-btn">
-            <h2> video section </h2>
-            <p>Tap here to view.</p>
-        </a>
-        <!-- नयाँ गेम सेक्सन थपियो -->
-        <a href="12345.html" class="diary-card video-btn">
-            <span class="update-badge">NEW</span>
-            <h2>चक्कु गेम</h2>
-            <p>Tap here to play.</p>
-        </a>
+        <!-- B-Side (नयाँ फोल्डरहरू) -->
+        <div class="side-panel" id="panel-b">
+            <a href="yui.html" class="diary-card" id="suzu-folder" onclick="markSuzuSeen()">
+                <span class="update-badge" id="suzu-badge" style="display: none;">NEW</span>
+                <h2>फेरि अर्को new update आको छ</h2>
+                <p>new updated</p>
+            </a>
+
+            <a href="youy.html" class="diary-card">
+                <h2>photo folder</h2>
+                <p>YouTube thumbnail.</p>
+            </a>
+
+            <a href="12345.html" class="diary-card video-btn">
+                <span class="update-badge">NEW</span>
+                <h2>चक्कु गेम</h2>
+                <p>Tap here to play.</p>
+            </a>
+        </div>
+
     </div> 
 
     <div class="footer">2026 अधिराज | सुजना श्रेष्ठको लागि</div>
 
     <script>
-        // LocalStorage चेक गर्ने र One-Time Badge नियन्त्रण गर्ने JavaScript
+        const container = document.getElementById('swipeContainer');
+        const btnA = document.getElementById('btn-a');
+        const btnB = document.getElementById('btn-b');
+
+        function scrollToPanel(index) {
+            const panelWidth = container.clientWidth;
+            container.scrollTo({
+                left: index * panelWidth,
+                behavior: 'smooth'
+            });
+        }
+
+        container.addEventListener('scroll', () => {
+            const scrollPosition = container.scrollLeft;
+            const panelWidth = container.clientWidth;
+            const currentIndex = Math.round(scrollPosition / panelWidth);
+
+            if (currentIndex === 0) {
+                btnA.classList.add('active');
+                btnB.classList.remove('active');
+            } else {
+                btnB.classList.add('active');
+                btnA.classList.remove('active');
+            }
+        });
+
+        // अडियो प्ले र भोल्युम नियन्त्रण (मधुरो स्वरमा ३०% भोल्युम)
         document.addEventListener("DOMContentLoaded", function () {
+            const audio = document.getElementById("bg-audio");
+            audio.volume = 0.3; 
+
+            function playAudio() {
+                audio.play().catch(error => {
+                    console.log("Autoplay restricted.");
+                });
+                document.removeEventListener("click", playAudio);
+                document.removeEventListener("touchstart", playAudio);
+            }
+
+            document.addEventListener("click", playAudio);
+            document.addEventListener("touchstart", playAudio);
+
+            // Badge check
             const isSeen = localStorage.getItem("suzu_folder_seen");
             if (!isSeen) {
                 document.getElementById("suzu-badge").style.display = "inline-block";
