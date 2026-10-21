@@ -279,12 +279,14 @@
         const btnA = document.getElementById('btn-a');
         const btnB = document.getElementById('btn-b');
 
-        function scrollToPanel(index) {
+        function scrollToPanel(index, smooth = true) {
             const panelWidth = container.clientWidth;
             container.scrollTo({
                 left: index * panelWidth,
-                behavior: 'smooth'
+                behavior: smooth ? 'smooth' : 'auto'
             });
+            // कुन प्यानलमा थियौ, सेभ गरेर राख्ने
+            localStorage.setItem('active_side_index', index);
         }
 
         container.addEventListener('scroll', () => {
@@ -295,13 +297,23 @@
             if (currentIndex === 0) {
                 btnA.classList.add('active');
                 btnB.classList.remove('active');
+                localStorage.setItem('active_side_index', 0);
             } else {
                 btnB.classList.add('active');
                 btnA.classList.remove('active');
+                localStorage.setItem('active_side_index', 1);
             }
         });
 
-        document.addEventListener("DOMContentLoaded", function () {
+        // पेज लोड हुँदा पहिलेकै साइडमा (A वा B) फर्काउने
+        window.addEventListener('DOMContentLoaded', () => {
+            const savedIndex = localStorage.getItem('active_side_index');
+            if (savedIndex !== null) {
+                setTimeout(() => {
+                    scrollToPanel(parseInt(savedIndex), false);
+                }, 50);
+            }
+
             // Badge check
             const isSeen = localStorage.getItem("suzu_folder_seen");
             if (!isSeen) {
