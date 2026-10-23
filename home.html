@@ -25,6 +25,7 @@
             -webkit-user-select: none; 
             user-select: none; 
             animation: fadeInPage 0.8s ease-in; 
+            overscroll-behavior-y: contain;
         }
 
         @keyframes fadeInPage {
@@ -285,7 +286,6 @@
                 left: index * panelWidth,
                 behavior: smooth ? 'smooth' : 'auto'
             });
-            // कुन प्यानलमा थियौ, सेभ गरेर राख्ने
             localStorage.setItem('active_side_index', index);
         }
 
@@ -305,7 +305,6 @@
             }
         });
 
-        // पेज लोड हुँदा पहिलेकै साइडमा (A वा B) फर्काउने
         window.addEventListener('DOMContentLoaded', () => {
             const savedIndex = localStorage.getItem('active_side_index');
             if (savedIndex !== null) {
@@ -314,7 +313,6 @@
                 }, 50);
             }
 
-            // Badge check
             const isSeen = localStorage.getItem("suzu_folder_seen");
             if (!isSeen) {
                 const badge = document.getElementById("suzu-badge");
