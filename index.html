@@ -14,7 +14,16 @@
 
     <style>
         * { box-sizing: border-box; }
-        body, html { margin: 0; padding: 0; width: 100%; height: 100%; background: #000; overflow: hidden; font-family: 'Georgia', serif; }
+        body, html { 
+            margin: 0; 
+            padding: 0; 
+            width: 100%; 
+            height: 100%; 
+            background: #000; 
+            overflow: hidden; 
+            font-family: 'Georgia', serif; 
+            overscroll-behavior-y: contain; /* Pull down refresh रोक्न */
+        }
         
         #bgPhoto { 
             position: fixed; 
@@ -122,26 +131,23 @@
     </div>
 
     <!-- मुख्य एप चल्ने फ्रेम -->
-    <iframe src="home.html" id="appFrame"></iframe>
+    <iframe id="appFrame" name="appFrame"></iframe>
 
     <script>
         const audio = document.getElementById("global-audio");
         audio.volume = 0.5;
         let isAudioPlaying = false;
 
-        // अडियो सुरक्षित तरिकाले प्ले गराउने
         function playAudio() {
             audio.play().then(() => {
                 isAudioPlaying = true;
             }).catch(err => console.log("User interaction required"));
         }
 
-        // अडियो रोक्ने
         function stopAudio() {
             audio.pause();
         }
 
-        // स्क्रिन क्लिक/टच गर्दा बजाउने
         function handleUserInteraction() {
             playAudio();
             document.removeEventListener("click", handleUserInteraction);
@@ -151,29 +157,34 @@
         document.addEventListener("click", handleUserInteraction);
         document.addEventListener("touchstart", handleUserInteraction);
 
-        // iframe भित्रका टच/क्लिक ट्रयाक गर्ने
         const frame = document.getElementById('appFrame');
+
+        // iframe भित्र नयाँ पेज खुल्दा त्यसको ठेगाना सेभ गर्ने
         frame.addEventListener('load', () => {
             try {
-                const iframeDoc = frame.contentWindow.document;
+                const iframeWin = frame.contentWindow;
+                const iframeDoc = iframeWin.document;
+                
+                const currentPath = iframeWin.location.pathname.split('/').pop();
+                if (currentPath && currentPath !== 'index.html') {
+                    sessionStorage.setItem('active_pwa_page', currentPath);
+                }
+
                 iframeDoc.addEventListener('click', handleUserInteraction);
                 iframeDoc.addEventListener('touchstart', handleUserInteraction);
             } catch (e) {}
         });
 
-        // १. एप/ट्याब बन्द हुँदा वा ब्याकग्राउन्डमा जाँदा (Minimize/Close/Switch) अडियो १००% रोक्ने
         function onAppHide() {
             stopAudio();
         }
 
-        // २. एप पुनः अगाडि आउँदा (Open/Focus) अडियो सुरु गर्ने
         function onAppShow() {
             if (isAudioPlaying) {
                 playAudio();
             }
         }
 
-        // मोबाइल र ब्राउजरका सबै लाइफसाइकल इभेन्टहरू ह्यान्डल गर्ने
         document.addEventListener("visibilitychange", () => {
             if (document.hidden) {
                 onAppHide();
@@ -217,6 +228,10 @@
 
         window.onload = () => {
             const intro = document.getElementById('introContainer');
+
+            // अन्तिम पटक खोलिएको फोल्डर/पेज तानेर iframe मा लोड गर्ने
+            const savedPage = sessionStorage.getItem('active_pwa_page') || 'home.html';
+            frame.src = savedPage;
 
             if (sessionStorage.getItem('appLoaded')) {
                 intro.style.display = 'none';
