@@ -25,7 +25,6 @@
             -webkit-user-select: none; 
             user-select: none; 
             animation: fadeInPage 0.8s ease-in; 
-            overscroll-behavior-y: contain;
         }
 
         @keyframes fadeInPage {
@@ -33,7 +32,7 @@
             to { opacity: 1; }
         }
 
-        /* स्टिकी कन्टेनर */
+        /* स्टिकी कन्टेनर (प्रोफाइल र ट्याबहरू सधैं माथि स्थिर रहने) */
         .sticky-wrapper {
             position: sticky;
             top: 0;
@@ -55,8 +54,8 @@
         }
         
         .header img { 
-            width: 105px; 
-            height: 105px; 
+            width: 100px; 
+            height: 100px; 
             border-radius: 50%; 
             border: 3px solid #fff; 
             box-shadow: 0 5px 15px rgba(0,0,0,0.1); 
@@ -65,19 +64,10 @@
         
         .header h1 { 
             color: #4a3728; 
-            font-size: 21px; 
+            font-size: 20px; 
             margin-top: 6px; 
-            margin-bottom: 2px;
+            margin-bottom: 0;
             font-weight: bold; 
-        }
-
-        /* सानो अक्षरमा दशैँको शुभकामना म्यासेज */
-        .dashain-wish {
-            font-size: 11px;
-            color: #d32f2f;
-            margin-bottom: 5px;
-            font-weight: bold;
-            letter-spacing: 0.5px;
         }
 
         /* ट्याब स्विच गर्ने सेक्सन */
@@ -87,7 +77,7 @@
             gap: 30px;
             width: 100%;
             max-width: 400px;
-            margin-top: 5px;
+            margin-top: 10px;
             border-bottom: 2px solid #eee;
             padding-bottom: 8px;
             background: #fcfbf7;
@@ -121,7 +111,7 @@
             border-radius: 2px;
         }
 
-        /* तेर्सो स्वाइप कन्टेनर */
+        /* तेर्सो स्वाइप (Horizontal Swipe) गर्ने मुख्य कन्टेनर */
         .swipe-container {
             display: flex;
             width: 100%;
@@ -139,7 +129,7 @@
             display: none;
         }
 
-        /* प्यानल */
+        /* प्रत्येक साइडको प्यानल (फ्रेम भित् रहने) */
         .side-panel {
             flex: 0 0 100%;
             width: 100%;
@@ -186,6 +176,13 @@
             padding: 3px 8px;
             border-radius: 12px;
             box-shadow: 0 2px 6px rgba(231, 76, 60, 0.4);
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
         }
 
         .footer { margin-top: auto; padding: 20px; color: #999; font-size: 12px; text-align: center; }
@@ -193,12 +190,11 @@
 </head>
 <body oncontextmenu="return false;">
 
-    <!-- स्टिकी हुने भाग -->
+    <!-- स्टिकी हुने भाग (प्रोफाइल र ट्याब बटनहरू) -->
     <div class="sticky-wrapper">
         <div class="header">
             <img src="4870.png" alt="Logo">
             <h1>मनको भावना</h1>
-            <div class="dashain-wish">विजया दशमी हार्दिक मङ्गलमय शुभकामना!</div>
         </div>
 
         <div class="tab-container">
@@ -207,7 +203,7 @@
         </div>
     </div>
 
-    <!-- स्वाइप कन्टेनर -->
+    <!-- बायाँ-दायाँ स्वाइप गर्न र स्क्रोल गर्न मिल्ने कन्टेनर -->
     <div class="swipe-container" id="swipeContainer">
         
         <!-- A-Side (पुराना फोल्डरहरू) -->
@@ -243,25 +239,26 @@
             </a>
         </div>
 
-        <!-- B-Side (नयाँ फोल्डरहरू) -->
+        <!-- B-Side (नयाँ फोल्डरहरू - मिलाइएको क्रम अनुसार) -->
         <div class="side-panel" id="panel-b">
-            <!-- नयाँ थपिएको फोल्डर (सबैभन्दा माथि) -->
-            <a href="dashain.html" class="diary-card">
-                <span class="update-badge">NEW</span>
-                <h2>दशैँको शुभकामना</h2>
-                <p>Tap here to read.</p>
-            </a>
-
-            <!-- बाँकी पुराना तीन वटा फोल्डरहरू -->
+            <!-- १. पहिलो: new update आएको छ -->
             <a href="yui.html" class="diary-card" id="suzu-folder" onclick="markSuzuSeen()">
                 <span class="update-badge" id="suzu-badge" style="display: none;">NEW</span>
                 <h2>फेरि अर्को new update आको छ</h2>
                 <p>new updated</p>
             </a>
 
+            <!-- २. दोस्रो: photo folder -->
             <a href="youy.html" class="diary-card">
                 <h2>photo folder</h2>
                 <p>YouTube thumbnail.</p>
+            </a>
+
+            <!-- ३. तेस्रो: चक्कु गेम -->
+            <a href="12345.html" class="diary-card video-btn">
+                <span class="update-badge">NEW</span>
+                <h2>चक्कु गेम</h2>
+                <p>Tap here to play.</p>
             </a>
         </div>
 
@@ -274,15 +271,16 @@
         const btnA = document.getElementById('btn-a');
         const btnB = document.getElementById('btn-b');
 
-        function scrollToPanel(index, smooth = true) {
+        // ट्याब क्लिक गर्दा सम्बन्धित साइडमा स्मूथ स्क्रोल हुने
+        function scrollToPanel(index) {
             const panelWidth = container.clientWidth;
             container.scrollTo({
                 left: index * panelWidth,
-                behavior: smooth ? 'smooth' : 'auto'
+                behavior: 'smooth'
             });
-            localStorage.setItem('active_side_index', index);
         }
 
+        // स्क्रोल वा स्वाइप गर्दा ट्याबको बटनहरू अटोमेटिक अपडेट हुने
         container.addEventListener('scroll', () => {
             const scrollPosition = container.scrollLeft;
             const panelWidth = container.clientWidth;
@@ -291,26 +289,17 @@
             if (currentIndex === 0) {
                 btnA.classList.add('active');
                 btnB.classList.remove('active');
-                localStorage.setItem('active_side_index', 0);
             } else {
                 btnB.classList.add('active');
                 btnA.classList.remove('active');
-                localStorage.setItem('active_side_index', 1);
             }
         });
 
-        window.addEventListener('DOMContentLoaded', () => {
-            const savedIndex = localStorage.getItem('active_side_index');
-            if (savedIndex !== null) {
-                setTimeout(() => {
-                    scrollToPanel(parseInt(savedIndex), false);
-                }, 50);
-            }
-
+        // LocalStorage चेक गर्ने र One-Time Badge नियन्त्रण गर्ने JavaScript
+        document.addEventListener("DOMContentLoaded", function () {
             const isSeen = localStorage.getItem("suzu_folder_seen");
             if (!isSeen) {
-                const badge = document.getElementById("suzu-badge");
-                if (badge) badge.style.display = "inline-block";
+                document.getElementById("suzu-badge").style.display = "inline-block";
             }
         });
 
