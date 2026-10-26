@@ -14,16 +14,7 @@
 
     <style>
         * { box-sizing: border-box; }
-        body, html { 
-            margin: 0; 
-            padding: 0; 
-            width: 100%; 
-            height: 100%; 
-            background: #000; 
-            overflow: hidden; 
-            font-family: 'Georgia', serif; 
-            overscroll-behavior-y: contain; /* Pull down refresh रोक्न */
-        }
+        body, html { margin: 0; padding: 0; width: 100%; height: 100%; background: #000; overflow: hidden; font-family: 'Georgia', serif; }
         
         #bgPhoto { 
             position: fixed; 
@@ -41,20 +32,15 @@
         @keyframes fadeInBg { to { opacity: 1; } }
 
         #introContainer { 
-            position: fixed; 
-            top: 0;
-            left: 0;
-            width: 100%;
+            position: relative; 
             height: 100%; 
             display: flex; 
             flex-direction: column; 
             justify-content: center; 
             align-items: center; 
-            z-index: 10000; 
+            z-index: 10; 
             padding: 20px; 
             text-align: center; 
-            background: #000;
-            transition: opacity 1s ease;
         }
 
         .typing-text { 
@@ -98,106 +84,22 @@
             background: #d32f2f; 
             transition: width 3.5s linear; 
         }
-
-        /* निरन्तर बजिरहने एप फ्रेम */
-        #appFrame {
-            width: 100%;
-            height: 100%;
-            border: none;
-            position: absolute;
-            top: 0;
-            left: 0;
-            z-index: 1;
-            display: none;
-        }
     </style>
 </head>
 <body oncontextmenu="return false;">
 
-    <!-- लगातार ब्याकग्राउन्डमा बज्ने म्युजिक -->
-    <audio id="global-audio" loop preload="auto">
-        <source src="dasai.mp3" type="audio/mpeg">
-    </audio>
+    <div id="bgPhoto"></div>
 
-    <!-- इन्ट्रो स्क्रिन -->
     <div id="introContainer">
-        <div id="bgPhoto"></div>
-        <div style="position: relative; z-index: 20;">
+        <div>
             <span id="typewriter" class="typing-text"></span><span id="cursor" class="cursor"></span>
         </div>
-        <div class="progress-bar" style="position: relative; z-index: 20;">
+        <div class="progress-bar">
             <div id="pFill" class="progress-fill"></div>
         </div>
     </div>
 
-    <!-- मुख्य एप चल्ने फ्रेम -->
-    <iframe id="appFrame" name="appFrame"></iframe>
-
     <script>
-        const audio = document.getElementById("global-audio");
-        audio.volume = 0.5;
-        let isAudioPlaying = false;
-
-        function playAudio() {
-            audio.play().then(() => {
-                isAudioPlaying = true;
-            }).catch(err => console.log("User interaction required"));
-        }
-
-        function stopAudio() {
-            audio.pause();
-        }
-
-        function handleUserInteraction() {
-            playAudio();
-            document.removeEventListener("click", handleUserInteraction);
-            document.removeEventListener("touchstart", handleUserInteraction);
-        }
-
-        document.addEventListener("click", handleUserInteraction);
-        document.addEventListener("touchstart", handleUserInteraction);
-
-        const frame = document.getElementById('appFrame');
-
-        // iframe भित्र नयाँ पेज खुल्दा त्यसको ठेगाना सेभ गर्ने
-        frame.addEventListener('load', () => {
-            try {
-                const iframeWin = frame.contentWindow;
-                const iframeDoc = iframeWin.document;
-                
-                const currentPath = iframeWin.location.pathname.split('/').pop();
-                if (currentPath && currentPath !== 'index.html') {
-                    sessionStorage.setItem('active_pwa_page', currentPath);
-                }
-
-                iframeDoc.addEventListener('click', handleUserInteraction);
-                iframeDoc.addEventListener('touchstart', handleUserInteraction);
-            } catch (e) {}
-        });
-
-        function onAppHide() {
-            stopAudio();
-        }
-
-        function onAppShow() {
-            if (isAudioPlaying) {
-                playAudio();
-            }
-        }
-
-        document.addEventListener("visibilitychange", () => {
-            if (document.hidden) {
-                onAppHide();
-            } else {
-                onAppShow();
-            }
-        });
-
-        window.addEventListener("pagehide", onAppHide);
-        window.addEventListener("blur", onAppHide);
-        window.addEventListener("pageshow", onAppShow);
-        window.addEventListener("focus", onAppShow);
-
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
                 navigator.serviceWorker.getRegistrations().then(regs => {
@@ -206,7 +108,7 @@
                 }).then(() => {
                     return navigator.serviceWorker.register('sw.js');
                 }).then(() => console.log('SW Registered'))
-                .catch(err => console.log('SW Registration error:', err));
+                .catch(err => console.log('SW Registration process error:', err));
             });
         }
 
@@ -227,15 +129,8 @@
         }
 
         window.onload = () => {
-            const intro = document.getElementById('introContainer');
-
-            // अन्तिम पटक खोलिएको फोल्डर/पेज तानेर iframe मा लोड गर्ने
-            const savedPage = sessionStorage.getItem('active_pwa_page') || 'home.html';
-            frame.src = savedPage;
-
             if (sessionStorage.getItem('appLoaded')) {
-                intro.style.display = 'none';
-                frame.style.display = 'block';
+                window.location.replace("home.html");
                 return;
             }
             sessionStorage.setItem('appLoaded', 'true');
@@ -246,10 +141,10 @@
             }, 500);
 
             setTimeout(() => {
-                intro.style.opacity = '0';
-                frame.style.display = 'block';
+                document.body.style.transition = 'opacity 1s ease';
+                document.body.style.opacity = '0';
                 setTimeout(() => {
-                    intro.style.display = 'none';
+                    window.location.replace("home.html");
                 }, 1000);
             }, 4500);
         };
