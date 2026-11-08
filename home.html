@@ -164,27 +164,6 @@
             color: #4a3728;
         }
 
-        /* Update / NEW Badge CSS */
-        .update-badge {
-            position: absolute;
-            top: -6px;
-            right: -6px;
-            background-color: #e74c3c;
-            color: white;
-            font-size: 10px;
-            font-weight: bold;
-            padding: 3px 8px;
-            border-radius: 12px;
-            box-shadow: 0 2px 6px rgba(231, 76, 60, 0.4);
-            animation: pulse 1.5s infinite;
-        }
-
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.1); }
-            100% { transform: scale(1); }
-        }
-
         .footer { margin-top: auto; padding: 20px; color: #999; font-size: 12px; text-align: center; }
     </style>
 </head>
@@ -239,28 +218,28 @@
             </a>
         </div>
 
-        <!-- B-Side (नयाँ फोल्डरहरू - मिलाइएको क्रम अनुसार) -->
+        <!-- B-Side (नयाँ फोल्डरहरू) -->
         <div class="side-panel" id="panel-b">
-            <!-- १. पहिलो: new update आएको छ -->
-            <a href="yui.html" class="diary-card" id="suzu-folder" onclick="markSuzuSeen()">
-                <span class="update-badge" id="suzu-badge" style="display: none;">NEW</span>
-                <h2></h2>happy
-
-monthiversary</h2>
-                <p>tap to rate</p>
+            <a href="Jimal.html" class="diary-card">
+                <h2> अधुरो प्रत्यक्ष वाचा र कसम </h2>
+                <p>new update</p>
             </a>
 
-            <!-- २. दोस्रो: photo folder -->
-            <a href="youy.html" class="diary-card">
-                <h2>photo folder</h2>
-                <p>YouTube thumbnail.</p>
+            <a href="tihar.html" class="diary-card">
+                <h2>Sorry, thanks, congratulation</h2>
+                <p>New update</p>
             </a>
-                        <a href="dashain.html" class="diary-card">
+            
+            <a href="dashain.html" class="diary-card">
                 <h2>दशैंको शुभकामना</h2>
-                <p>type to read.</p>
-                        </a>
-
-        </div>
+                <p>old Update.</p>
+            </a>
+    
+            <a href="yui.html" class="diary-card">
+                <h2>happy monthiversary</h2>
+                <p>Old update</p>
+            </a>
+        </div> 
 
     </div> 
 
@@ -294,18 +273,6 @@ monthiversary</h2>
                 btnA.classList.remove('active');
             }
         });
-
-        // LocalStorage चेक गर्ने र One-Time Badge नियन्त्रण गर्ने JavaScript
-        document.addEventListener("DOMContentLoaded", function () {
-            const isSeen = localStorage.getItem("suzu_folder_seen");
-            if (!isSeen) {
-                document.getElementById("suzu-badge").style.display = "inline-block";
-            }
-        });
-
-        function markSuzuSeen() {
-            localStorage.setItem("suzu_folder_seen", "true");
-        }
     </script>
 </body>
 </html>
